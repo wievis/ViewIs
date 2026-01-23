@@ -7,13 +7,16 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 async function initViewer(container) {
     const { model, hdr, texture, roughness, metalness, alpha } = container.dataset;
+    if (!model) return;
+
     const scene = new THREE.Scene();
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(container.clientWidth, container.clientHeight);
+    
+    container.innerHTML = '';
     container.appendChild(renderer.domElement);
 
-    const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 100);
-    camera.position.z = 3;
+    const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
     const controls = new OrbitControls(camera, renderer.domElement);
 
     if (hdr) {
@@ -37,16 +40,34 @@ async function initViewer(container) {
                     roughnessMap: roughness ? tL.load(roughness) : null,
                     metalnessMap: metalness ? tL.load(metalness) : null,
                     alphaMap: alpha ? tL.load(alpha) : null,
-                    transparent: !!alpha, side: THREE.DoubleSide
+                    transparent: !!alpha, 
+                    side: THREE.DoubleSide
                 });
             });
         }
+        
         const box = new THREE.Box3().setFromObject(obj);
-        obj.position.sub(box.getCenter(new THREE.Vector3()));
+        const center = box.getCenter(new THREE.Vector3());
+        const size = box.getSize(new THREE.Vector3());
+        obj.position.sub(center);
         scene.add(obj);
+
+        const maxDim = Math.max(size.x, size.y, size.z);
+        const fov = camera.fov * (Math.PI / 180);
+        let cameraZ = Math.abs(maxDim / 2 / Math.tan(fov / 2)) * 1.5;
+        
+        camera.position.z = cameraZ;
+        camera.updateProjectionMatrix();
+        controls.update();
     });
 
-    const anim = () => { requestAnimationFrame(anim); controls.update(); renderer.render(scene, camera); };
+    const anim = () => { 
+        requestAnimationFrame(anim); 
+        controls.update(); 
+        renderer.render(scene, camera); 
+    };
     anim();
 }
+
+window.initSingleModelViewer = initViewer;
 document.querySelectorAll('.model-viewer').forEach(initViewer);
