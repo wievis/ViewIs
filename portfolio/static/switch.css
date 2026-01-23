@@ -1,0 +1,148 @@
+/* switch.css */
+
+.checkbox {
+  height: 20px;
+  width: 40px;
+  background: #222;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border-radius: 20px;
+  box-shadow: inset 0 2px 15px rgba(0,0,0,0.1),
+              inset 0 2px 2px rgba(0,0,0,0.1),
+              inset 0 -1px 1px rgba(0,0,0,0.1);
+  position: relative;
+  outline: none;
+  cursor: pointer;
+  transition: 0.5s;
+  border: none;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.checkbox:hover {
+  transform: scale(1.04);
+}
+
+.checkbox::before {
+  height: 20px;
+  width: 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "";
+  background: linear-gradient(to bottom, #444, #222);
+  border-radius: 20px;
+  transform: scale(0.9);
+  transition: 0.5s;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.5),
+              inset 1px 1px rgba(255,255,255,0.2),
+              inset -1px 1px rgba(255,255,255,0.2);
+  z-index: 2;
+}
+
+.checkbox::after {
+  content: "";
+  position: absolute;
+  right: 4px;
+  top: 5px;
+  width: 10px;
+  height: 10px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='none' stroke='%23ffffff' stroke-width='2' stroke-miterlimit='10' d='M6,52c14.359,0,26-11.641,26-26c0-9.994-6.729-18.648-15-23c3.396-1.277,8.158-2,12-2c17.121,0,31,13.879,31,31S46.121,63,29,63c-9.505,0-18.313-4.265-24-11C5.23,52.006,5.768,52,6,52z'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 3;
+  transition: 0.5s;
+}
+
+.checkbox:checked {
+  background: #fff;
+  box-shadow: inset 0 0.5px 15px rgba(0,0,0,0.1),
+              inset 0 0.5px 2px rgba(0,0,0,0.1),
+              inset 0 -1px 1px rgba(0,0,0,0.05);
+}
+
+.checkbox:checked::before {
+  left: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1),
+              inset 1px 1px rgba(255,255,255,1),
+              inset -1px 1px rgba(255,255,255,1);
+  background: linear-gradient(to bottom, #eaeaea, #f9f9f9);
+}
+
+.checkbox:checked::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Ccircle style='fill:none;stroke:%23000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;' cx='24' cy='24' r='15'/%3E%3Cline style='fill:none;stroke:%23000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;' x1='24' y1='1' x2='24' y2='5'/%3E%3Cline style='fill:none;stroke:%23000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;' x1='1' y1='24' x2='5' y2='24'/%3E%3Cline style='fill:none;stroke:%23000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;' x1='7.737' y1='40.263' x2='10.565' y2='37.435'/%3E%3Cline style='fill:none;stroke:%23000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;' x1='7.737' y1='7.737' x2='10.565' y2='10.565'/%3E%3Cline style='fill:none;stroke:%23000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;' x1='40.263' y1='7.737' x2='37.435' y2='10.565'/%3E%3Cline style='fill:none;stroke:%23000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;' x1='47' y1='24' x2='43' y2='24'/%3E%3Cline style='fill:none;stroke:%23000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;' x1='40.263' y1='40.263' x2='37.435' y2='37.435'/%3E%3Cline style='fill:none;stroke:%23000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;' x1='24' y1='47' x2='24' y2='43'/%3E%3C/svg%3E");
+  right: auto;
+  left: 4px;
+}
+
+.checkbox.lang-toggle {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 30'%3E%3CclipPath id='t'%3E%3Cpath d='M25,15h25v15zv15h-25zh-25v-15zv-15h25z'/%3E%3C/clipPath%3E%3Cpath d='M0,0v30h50v-30z' fill='%23012169'/%3E%3Cpath d='M0,0 50,30M50,0 0,30' stroke='%23fff' stroke-width='6'/%3E%3Cpath d='M0,0 50,30M50,0 0,30' clip-path='url(%23t)' stroke='%23C8102E' stroke-width='4'/%3E%3Cpath d='M-1 11h22v-12h8v12h22v8h-22v12h-8v-12h-22z' fill='%23C8102E' stroke='%23FFF' stroke-width='2'/%3E%3C/svg%3E");
+  background-size: cover;
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.checkbox.lang-toggle:checked {
+  background: linear-gradient(to bottom, #fff 0%, #fff 50%, #DC143C 50%, #DC143C 100%);
+}
+
+.checkbox.lang-toggle::before {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 30'%3E%3CclipPath id='t'%3E%3Cpath d='M25,15h25v15zv15h-25zh-25v-15zv-15h25z'/%3E%3C/clipPath%3E%3Cpath d='M0,0v30h50v-30z' fill='%23012169'/%3E%3Cpath d='M0,0 50,30M50,0 0,30' stroke='%23fff' stroke-width='6'/%3E%3Cpath d='M0,0 50,30M50,0 0,30' clip-path='url(%23t)' stroke='%23C8102E' stroke-width='4'/%3E%3Cpath d='M-1 11h22v-12h8v12h22v8h-22v12h-8v-12h-22z' fill='%23C8102E' stroke='%23FFF' stroke-width='2'/%3E%3C/svg%3E");
+  background-size: cover;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3),
+              inset 1px 1px 2px rgba(255,255,255,0.3),
+              inset -1px -1px 2px rgba(0,0,0,0.2);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.checkbox.lang-toggle:checked::before {
+  background: linear-gradient(to bottom, #fff 0%, #fff 50%, #DC143C 50%, #DC143C 100%);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3),
+              inset 1px 1px 2px rgba(255,255,255,0.5),
+              inset -1px -1px 2px rgba(0,0,0,0.15);
+}
+
+.checkbox.lang-toggle::after {
+  display: none;
+}
+
+body {
+  transition: background-color 0.5s, color 0.5s;
+}
+
+body.light-mode {
+  background: #f8f8f8;
+  color: #222;
+}
+
+body.light-mode .menu {
+  background: rgba(255,255,255,0.95);
+  border-right: 1px solid rgba(0,0,0,0.1);
+}
+
+body.light-mode .logo-name a {
+  color: #222;
+}
+
+body.light-mode .logo-title {
+  color: #666;
+}
+
+body.light-mode nav a {
+  color: #222;
+  opacity: 0.6;
+}
+
+body.light-mode nav a:hover,
+body.light-mode nav a.active {
+  opacity: 1;
+}
+
+body.light-mode .lightbox {
+  background: rgba(255,255,255,0.98);
+}
+
+body.light-mode .close,
+body.light-mode .nav-btn {
+  color: #222;
+}

@@ -1,0 +1,49 @@
+{% comment %} nav.html {% endcomment %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'nav.css' %}">
+<link rel="stylesheet" href="{% static 'lightbox.css' %}">
+
+<div class="menu">
+    <div class="menu-top">
+        <div class="logo">
+            <div class="logo-name">
+                <a href="{% if lang == 'en' %}/en/{% else %}/{% endif %}" class="logo-person">x <br> y</a>
+                <div class="logo-title">COMPUTER DESIGNER</div>
+            </div>
+            <nav>
+                {% if lang == 'en' %}
+                    <a href="/en/">PRESENTATION</a>
+                    <a href="/en/gallery">GALLERY</a>
+                    <a href="/en/contact/">CONTACT</a>
+                {% else %}
+                    <a href="/">PREZENTACJA</a>
+                    <a href="/galeria">GALERIA</a>
+                    <a href="/kontakt/">KONTAKT</a>
+                {% endif %}
+                <div class="menu-bottom">
+                    <div>
+                        <input type="checkbox" class="checkbox lang-toggle" role="switch" id="lang-toggle" {% if lang == 'pl' %}checked{% endif %} />
+                        <input type="checkbox" class="checkbox" role="switch" id="theme-toggle" />
+                    </div>
+                </div>
+            </nav>
+            <div class="lang-switch">
+                <a href="{% if request.path == '/kontakt/' or request.path == '/en/contact/' %}/kontakt/{% else %}/{% endif %}" {% if lang == 'pl' %}class="active"{% endif %}></a>
+                <a href="{% if request.path == '/kontakt/' or request.path == '/en/contact/' %}/en/contact/{% else %}/en/{% endif %}" {% if lang == 'en' %}class="active"{% endif %}></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="lightbox" id="lightbox">
+    <span class="close" onclick="closeLightbox()">&times;</span>
+    <span class="nav-btn prev" onclick="changePhoto(-1)">&#8249;</span>
+    <div class="lightbox-content">
+        <img id="lightbox-img" src="" alt="">
+    </div>
+    <span class="nav-btn next" onclick="changePhoto(1)">&#8250;</span>
+</div>
+
+<script src="{% static 'theme-lang.js' %}"></script>
+<script src="{% static 'lightbox.js' %}"></script>

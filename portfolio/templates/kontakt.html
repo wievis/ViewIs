@@ -1,0 +1,30 @@
+{% comment %} kontakt.html {% endcomment %}
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontakt</title>
+    <link rel="stylesheet" href="{% static 'base.css' %}">
+    <link rel="stylesheet" href="{% static 'switch.css' %}">
+    <style>
+        .content {
+            margin-top: 150px;
+            padding: 2rem;
+        }
+    </style>
+</head>
+<body>
+    {% include 'nav.html' %}
+    
+    <div class="content">
+        {% if lang == 'en' %}
+            To fill in...
+        {% else %} 
+            Pozostaje wypełnić...            
+        {% endif %}
+    </div>
+</body>
+</html>

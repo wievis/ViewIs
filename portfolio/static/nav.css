@@ -1,0 +1,220 @@
+/* nav.css */
+
+.menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 280px;
+    background: rgba(0,0,0,0.95);
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+    z-index: 1001;
+    border-right: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.menu-top {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.logo {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+}
+
+.logo-person br {
+    display: inline;
+}
+
+.logo-name {
+    font-size: 1.3rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.3rem;
+}
+
+.logo-name a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.logo-title {
+    font-size: 0.6rem;
+    font-weight: 500;
+    color: #888;
+    letter-spacing: 0.15em;
+}
+
+nav {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 100;
+    letter-spacing: 0.2em;
+    opacity: 0.6;
+    transition: opacity 0.3s;
+}
+
+nav a:hover, nav a.active {
+    opacity: 1;
+}
+
+.lang-switch {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.lang-switch a {
+    font-size: 0.9rem;
+    opacity: 0.4;
+}
+
+.lang-switch a.active {
+    opacity: 1;
+}
+
+.menu-bottom {
+    padding-top: 2rem;
+}
+
+.menu-bottom > div {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+body.light-mode .logo-name a {
+    color: #222;
+}
+
+body.light-mode .logo-title {
+    color: #666;
+}
+
+body.light-mode .menu {
+    background: rgba(255,255,255,0.95);
+    border-right: 1px solid rgba(0,0,0,0.1);
+}
+
+body.light-mode nav a {
+    color: #222;
+}
+
+@media (max-width: 768px) {
+    .menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: auto;
+        width: auto;
+        padding: 1.5rem 0.2rem 0.2rem 1.5rem;
+        border-right: none;
+        border-bottom: 0.4px solid rgba(255,255,255,0.1);
+        z-index: 1002;
+    }
+    
+    .menu-top {
+        gap: 1.5rem;
+    }
+
+    .logo {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .logo-name {
+        font-size: 2.1rem;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .logo-person {
+        display: inline-flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    
+    .logo-person br {
+        display: none;
+    }
+
+    .logo-title {
+        letter-spacing: 1.1em;
+        margin-top: 1.45rem;
+    }
+    
+    nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        align-items: center;
+    }
+    
+    nav a {
+        font-size: 1rem;
+        display: flex;
+        flex-direction: row;
+    }
+    
+    .menu-bottom {
+        padding-top: 0;
+        margin-top: 0;
+    }
+    
+    .menu-bottom > div {
+        flex-direction: row;
+        gap: 0.6rem;
+    }
+    
+    .menu-bottom .checkbox {
+        height: 20px;
+        width: 40px;
+        border-radius: 20px;
+    }
+    
+    .menu-bottom .checkbox::before {
+        height: 20px;
+        width: 20px;
+        border-radius: 20px;
+    }
+    
+    .menu-bottom .checkbox:checked::before {
+        left: 20px;
+    }
+    
+    .menu-bottom .checkbox::after {
+        width: 10px;
+        height: 10px;
+        top: 5px;
+        right: 4px;
+    }
+    
+    .menu-bottom .checkbox.lang-toggle:checked::after {
+        left: 4px;
+    }
+
+    body.light-mode .menu {
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+}
+
+@media (max-width: 360px) {
+    .logo-person br {
+        display: inline;
+    }
+}

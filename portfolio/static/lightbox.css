@@ -1,0 +1,119 @@
+/* lightbox.css */
+
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 280px;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.98);
+    z-index: 1000;
+}
+
+.lightbox.active {
+    display: block;
+}
+
+.lightbox-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 95%;
+    height: 95%;
+    pointer-events: auto;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox-content img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    pointer-events: none;
+}
+
+.lightbox-content video {
+    max-width: 100%;
+    max-height: 100%;
+    pointer-events: auto;
+}
+
+.lightbox-content .model-viewer {
+    pointer-events: auto;
+}
+
+.close {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    color: #fff;
+    font-size: 3rem;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.3s;
+    line-height: 1;
+    user-select: none;
+    z-index: 3;
+}
+
+.close:hover {
+    opacity: 1;
+}
+
+.nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 3rem;
+    color: #fff;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.3s;
+    user-select: none;
+    line-height: 1;
+    z-index: 3;
+}
+
+.nav-btn:hover {
+    opacity: 1;
+}
+
+.prev { left: 2rem; }
+.next { right: 2rem; }
+
+body.light-mode .close,
+body.light-mode .nav-btn {
+    color: #222;
+}
+
+body.light-mode .lightbox {
+    background: rgba(255,255,255,0.98);
+}
+
+@media (max-width: 768px) {
+    .nav-btn {
+        font-size: 1rem;
+    }
+    
+    .prev { left: 1rem; }
+    .next { right: 1rem; }
+
+    .lightbox {
+        left: 0;
+        top: 0;
+    }
+    
+    .lightbox-content {
+        width: 95%;
+        height: calc(100vh - var(--menu-height, 120px));
+        top: calc(50% + var(--menu-height, 120px) / 2);
+        transform: translate(-50%, -50%);
+    }
+}
