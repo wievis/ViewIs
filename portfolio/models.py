@@ -1,5 +1,11 @@
-# models
 from django.db import models
+
+class HDRSetting(models.Model):
+    name = models.CharField(max_length=100)
+    file = models.FileField(upload_to='hdr/')
+
+    def __str__(self):
+        return self.name
 
 class Media(models.Model):
     MEDIA_TYPES = [
@@ -9,13 +15,7 @@ class Media(models.Model):
     ]
     
     file = models.FileField(upload_to='media/')
-    mtl_file = models.FileField(upload_to='media/', blank=True, null=True)
-    texture_file = models.ImageField(upload_to='textures/', blank=True, null=True)
-    
-    roughness_map = models.ImageField(upload_to='textures/', blank=True, null=True)
-    metalness_map = models.ImageField(upload_to='textures/', blank=True, null=True)
-    alpha_map = models.ImageField(upload_to='textures/', blank=True, null=True)
-    
+    hdr_setting = models.ForeignKey(HDRSetting, on_delete=models.SET_NULL, blank=True, null=True)
     media_type = models.CharField(max_length=10, choices=MEDIA_TYPES, editable=False)
     thumbnail = models.ImageField(upload_to='thumbnails/', blank=True, null=True)
     order = models.IntegerField(default=0)
@@ -31,9 +31,9 @@ class Media(models.Model):
                 self.media_type = 'image'
             elif ext in ['mp4', 'webm', 'mov']:
                 self.media_type = 'video'
-            elif ext in ['obj', 'glb', 'gltf']:
+            elif ext in ['glb', 'gltf']:
                 self.media_type = 'model3d'
         super().save(*args, **kwargs)
-    
+
     def __str__(self):
         return f"{self.media_type} {self.id}"

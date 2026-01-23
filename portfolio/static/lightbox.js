@@ -1,5 +1,3 @@
-// lightbox.js
-
 let currentIndex = 0;
 
 function updateMenuHeight() {
@@ -25,23 +23,19 @@ function createMediaElement(item) {
         video.src = item.url;
         video.controls = true;
         video.autoplay = true;
-        video.style.maxWidth = '100%';
-        video.style.maxHeight = '100%';
         content.appendChild(video);
     } else if (item.type === 'model3d') {
         const viewer = document.createElement('div');
         viewer.className = 'model-viewer';
         viewer.dataset.model = item.url;
-        viewer.dataset.mtl = item.mtl || '';
-        viewer.dataset.texture = item.texture || '';
-        viewer.dataset.autoRotate = 'false'; // Wyłącz automatyczne obracanie
+        viewer.dataset.hdr = item.hdr || '';
         viewer.style.width = '100%';
         viewer.style.height = '100%';
         content.appendChild(viewer);
         
         setTimeout(() => {
-            initSingleModelViewer(viewer);
-        }, 100);
+            if (window.initSingleModelViewer) window.initSingleModelViewer(viewer);
+        }, 50);
     }
 }
 
@@ -63,26 +57,11 @@ function closeLightbox() {
     document.getElementById('lightbox').classList.remove('active');
 }
 
-document.addEventListener('keydown', function(e) {
-    if (document.getElementById('lightbox').classList.contains('active')) {
-        if (e.key === 'Escape') closeLightbox();
-        if (e.key === 'ArrowLeft') changePhoto(-1);
-        if (e.key === 'ArrowRight') changePhoto(1);
-    }
-});
-
-window.addEventListener('DOMContentLoaded', function() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const lightboxIndex = urlParams.get('lightbox');
-    const scrollPosition = urlParams.get('scroll');
-    
-    if (lightboxIndex !== null) {
-        openLightbox(parseInt(lightboxIndex));
-        window.history.replaceState({}, '', window.location.pathname);
-    } else if (scrollPosition !== null) {
-        window.scrollTo(0, parseInt(scrollPosition));
-        window.history.replaceState({}, '', window.location.pathname);
-    }
+document.addEventListener('keydown', e => {
+    if (!document.getElementById('lightbox').classList.contains('active')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') changePhoto(-1);
+    if (e.key === 'ArrowRight') changePhoto(1);
 });
 
 window.addEventListener('resize', updateMenuHeight);

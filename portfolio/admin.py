@@ -1,6 +1,9 @@
-# admin
 from django.contrib import admin
-from .models import Media
+from .models import Media, HDRSetting
+
+@admin.register(HDRSetting)
+class HDRSettingAdmin(admin.ModelAdmin):
+    list_display = ['name', 'id']
 
 @admin.register(Media)
 class MediaAdmin(admin.ModelAdmin):
@@ -9,7 +12,6 @@ class MediaAdmin(admin.ModelAdmin):
     readonly_fields = ['created', 'media_type'] 
     
     fieldsets = (
-        ('Główne (OBJ/GLB)', {'fields': ('file', 'media_type', 'thumbnail')}),
-        ('Mapy PBR (Tylko OBJ)', {'fields': ('mtl_file', 'texture_file', 'roughness_map', 'metalness_map', 'alpha_map')}),
+        ('Media', {'fields': ('file', 'media_type', 'thumbnail', 'hdr_setting')}),
         ('Ustawienia', {'fields': ('order', 'created')}),
     )
