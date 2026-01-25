@@ -1,52 +1,33 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galeria</title>
-    <link rel="stylesheet" href="{% static 'base.css' %}">
-    <link rel="stylesheet" href="{% static 'switch.css' %}">
-    <style>
-        .gallery-grid { padding: 3rem; columns: 4; column-gap: 1rem; max-width: 1400px; margin: 0 auto; }
-        .media-thumb { cursor: pointer; overflow: hidden; transition: transform 0.3s ease, opacity 0.3s ease; break-inside: avoid; margin-bottom: 1rem; position: relative; }
-        .media-thumb:hover { transform: scale(1.008); opacity: 0.9; }
-        .media-thumb img, .media-thumb video { width: 100%; height: auto; display: block; }
-        .model-viewer { width: 100%; aspect-ratio: 4/3; display: block; }
-        body.light-mode .model-viewer { background: #f0f0f0; }
-        @media (max-width: 1200px) { .gallery-grid { columns: 3; } }
-        @media (max-width: 768px) { .gallery-grid { padding: 1.5rem; columns: 2; column-gap: 0.75rem; } .media-thumb { margin-bottom: 0.75rem; } }
-        @media (max-width: 480px) { .gallery-grid { columns: 1; } }
-    </style>
-</head>
-<body>
-    <script>
-        window.mediaItems = [
-            {% for item in media_items %}
-            {
-                url: "{{ item.file.url }}",
-                type: "{{ item.media_type }}",
-                hdr: "{% if item.hdr_setting %}{{ item.hdr_setting.file.url }}{% endif %}"
-            }{% if not forloop.last %},{% endif %}
-            {% endfor %}
-        ];
-    </script>
-    {% include 'nav.html' %}
-    <div class="gallery-grid">
-        {% for item in media_items %}
-        <div class="media-thumb" onclick="openLightbox({{ forloop.counter0 }})">
-            {% if item.media_type == 'image' %}
-                <img src="{{ item.file.url }}" alt="" loading="lazy">
-            {% elif item.media_type == 'video' %}
-                <video src="{{ item.file.url }}" preload="metadata"></video>
-            {% elif item.media_type == 'model3d' %}
-                <div class="model-viewer" data-model="{{ item.file.url }}" data-hdr="{% if item.hdr_setting %}{{ item.hdr_setting.file.url }}{% endif %}" data-index="{{ forloop.counter0 }}"></div>
-            {% endif %}
-        </div>
-        {% endfor %}
+{% block title %}Galeria | Computer Designer{% endblock %}
+
+{% block extra_head %}
+<style>
+    .gallery-grid { padding: 3rem; columns: 4; column-gap: 1rem; max-width: 1400px; margin: 0 auto; }
+    .media-thumb { cursor: pointer; overflow: hidden; transition: transform 0.3s ease, opacity 0.3s ease; break-inside: avoid; margin-bottom: 1rem; position: relative; }
+    .media-thumb:hover { transform: scale(1.008); opacity: 0.9; }
+    .media-thumb img, .media-thumb video { width: 100%; height: auto; display: block; }
+    .model-viewer { width: 100%; aspect-ratio: 4/3; display: block; }
+    body.light-mode .model-viewer { background: #f0f0f0; }
+    @media (max-width: 1200px) { .gallery-grid { columns: 3; } }
+    @media (max-width: 768px) { .gallery-grid { padding: 1.5rem; columns: 2; column-gap: 0.75rem; } .media-thumb { margin-bottom: 0.75rem; } }
+    @media (max-width: 480px) { .gallery-grid { columns: 1; } }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="gallery-grid">
+    {% for item in media_items %}
+    <div class="media-thumb" onclick="openLightbox({{ forloop.counter0 }})">
+        {% if item.media_type == 'image' %}
+            <img src="{{ item.file.url }}" alt="Projekt {{ forloop.counter }}" loading="lazy">
+        {% elif item.media_type == 'video' %}
+            <video src="{{ item.file.url }}" preload="metadata"></video>
+        {% elif item.media_type == 'model3d' %}
+            <div class="model-viewer" data-model="{{ item.file.url }}" data-hdr="{% if item.hdr_setting %}{{ item.hdr_setting.file.url }}{% endif %}" data-index="{{ forloop.counter0 }}"></div>
+        {% endif %}
     </div>
-    <script type="importmap"> { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/" } } </script>
-    <script type="module" src="{% static 'model-viewer.js' %}"></script>
-    <script src="{% static 'lightbox.js' %}"></script>
-</body>
-</html>
+    {% endfor %}
+</div>
+{% endblock %}

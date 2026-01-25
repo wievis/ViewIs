@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="{{ lang|default:'pl' }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Portfolio{% endblock %}</title>
+    <meta name="description" content="Portfolio Computer Designer - projekty 3D, wizualizacje i design.">
+    <link rel="stylesheet" href="{% static 'base.css' %}">
+    <link rel="stylesheet" href="{% static 'nav.css' %}">
+    <link rel="stylesheet" href="{% static 'switch.css' %}">
+    <link rel="stylesheet" href="{% static 'lightbox.css' %}">
+    <script type="importmap"> { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/" } } </script>
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <script>
+        window.mediaItems = [
+            {% for item in media_items %}
+            {
+                url: "{{ item.file.url }}",
+                type: "{{ item.media_type }}",
+                hdr: "{% if item.hdr_setting %}{{ item.hdr_setting.file.url }}{% endif %}"
+            }{% if not forloop.last %},{% endif %}
+            {% endfor %}
+        ];
+    </script>
+    
+    {% include 'nav.html' %}
+    
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <script src="{% static 'theme-lang.js' %}"></script>
+    <script src="{% static 'lightbox.js' %}"></script>
+    <script type="module" src="{% static 'model-viewer.js' %}"></script>
+</body>
+</html>
