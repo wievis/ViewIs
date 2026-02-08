@@ -1,10 +1,14 @@
 let currentIndex = 0;
+let lbTouchStartX = 0;
+let lbTouchStartY = 0;
 
 function updateMenuHeight() {
     if (window.innerWidth <= 768) {
         const menu = document.querySelector('.menu');
-        const menuHeight = menu.offsetHeight;
-        document.documentElement.style.setProperty('--menu-height', menuHeight + 'px');
+        if (menu) {
+            const menuHeight = menu.offsetHeight;
+            document.documentElement.style.setProperty('--menu-height', menuHeight + 'px');
+        }
     } else {
         document.documentElement.style.removeProperty('--menu-height');
     }
@@ -57,8 +61,34 @@ function closeLightbox() {
     document.getElementById('lightbox').classList.remove('active');
 }
 
+const lb = document.getElementById('lightbox');
+
+lb.addEventListener('touchstart', e => {
+    lbTouchStartX = e.changedTouches[0].screenX;
+    lbTouchStartY = e.changedTouches[0].screenY;
+}, { passive: true });
+
+lb.addEventListener('touchend', e => {
+    const endX = e.changedTouches[0].screenX;
+    const endY = e.changedTouches[0].screenY;
+    
+    const diffX = lbTouchStartX - endX;
+    const diffY = lbTouchStartY - endY;
+    const threshold = 50;
+
+    if (Math.abs(diffX) > Math.abs(diffY)) {
+        if (Math.abs(diffX) > threshold) {
+            diffX > 0 ? changePhoto(1) : changePhoto(-1);
+        }
+    } else {
+        if (diffY > threshold && Math.abs(diffY) > 70) {
+            closeLightbox();
+        }
+    }
+}, { passive: true });
+
 document.addEventListener('keydown', e => {
-    if (!document.getElementById('lightbox').classList.contains('active')) return;
+    if (!lb.classList.contains('active')) return;
     if (e.key === 'Escape') closeLightbox();
     if (e.key === 'ArrowLeft') changePhoto(-1);
     if (e.key === 'ArrowRight') changePhoto(1);
