@@ -9,7 +9,8 @@
     .stack-item { 
         position: absolute; width: 80%; max-width: 900px; 
         transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1), z-index 0.1s; 
-        cursor: pointer; top: 0; touch-action: none;
+        cursor: pointer; top: 0; 
+        touch-action: pan-y;
     }
     .stack-item img { 
         width: 100%; 
@@ -38,7 +39,8 @@
             <div class="stack-item" 
                  onclick="handleStackClick(event, this, '{{ child.file.url }}')" 
                  onmouseenter="throttledReorder(this)"
-                 ontouchstart="handleTouch(event, this)">
+                 ontouchstart="handleTouchStart(event)"
+                 ontouchend="handleTouchEnd(event, this, '{{ child.file.url }}')">
                 <img src="{{ child.file.url }}">
             </div>
             {% endif %}
@@ -62,6 +64,8 @@
 <script>
     let lastReorderTime = 0;
     const REORDER_DELAY = 700;
+    let touchStartY = 0;
+    let isScrolling = false;
 
     function throttledReorder(item) {
         const now = Date.now();
@@ -86,23 +90,30 @@
         });
     }
 
-    function handleTouch(event, el) {
-        if (el.getAttribute('data-is-top') !== 'true') {
-            const now = Date.now();
-            if (now - lastReorderTime >= REORDER_DELAY) {
-                reorderStack(el);
-                lastReorderTime = now;
+    function handleTouchStart(e) {
+        touchStartY = e.touches[0].clientY;
+        isScrolling = false;
+    }
+
+    function handleTouchEnd(e, el, url) {
+        const touchEndY = e.changedTouches[0].clientY;
+        if (Math.abs(touchStartY - touchEndY) > 10) {
+            isScrolling = true;
+            return;
+        }
+
+        if (window.innerWidth <= 768) {
+            e.preventDefault();
+            if (el.getAttribute('data-is-top') === 'true') {
+                openLightboxByUrl(url);
+            } else {
+                throttledReorder(el);
             }
-            event.preventDefault();
         }
     }
 
     function handleStackClick(event, el, url) {
-        if (window.innerWidth <= 768) {
-            if (el.getAttribute('data-is-top') === 'true') {
-                openLightboxByUrl(url);
-            }
-        } else {
+        if (window.innerWidth > 768) {
             openLightboxByUrl(url);
         }
     }
