@@ -10,15 +10,23 @@
     .media-thumb img, .media-thumb video { width: 100%; height: auto; display: block; }
     .model-viewer { width: 100%; aspect-ratio: 4/3; display: block; }
     body.light-mode .model-viewer { background: #f0f0f0; }
+
     @media (max-width: 1200px) { .gallery-grid { columns: 3; } }
-    @media (max-width: 768px) { .gallery-grid { padding: 1.5rem; columns: 2; column-gap: 0.75rem; } .media-thumb { margin-bottom: 0.75rem; } }
-    @media (max-width: 480px) { .gallery-grid { columns: 1; } }
+    @media (max-width: 768px) { 
+        .gallery-grid { padding: 1rem; columns: 3; column-gap: 0.5rem; } 
+        .media-thumb { margin-bottom: 0.5rem; } 
+    }
+    @media (max-width: 480px) { 
+        .gallery-grid { padding: 0.5rem; columns: 3; column-gap: 0.4rem; } 
+        .media-thumb { margin-bottom: 0.4rem; } 
+    }
 </style>
 {% endblock %}
 
 {% block content %}
 <div class="gallery-grid">
     {% for item in media_items %}
+    {% if item.file %}
     <div class="media-thumb" onclick="openLightboxByUrl('{{ item.file.url }}')">
         {% if item.media_type == 'image' %}
             <img src="{{ item.file.url }}" alt="Projekt {{ forloop.counter }}" loading="lazy">
@@ -28,18 +36,19 @@
             <div class="model-viewer" data-model="{{ item.file.url }}" data-hdr="{% if item.hdr_setting %}{{ item.hdr_setting.file.url }}{% endif %}"></div>
         {% endif %}
     </div>
+    {% endif %}
     {% endfor %}
 </div>
 
 <script>
     window.mediaItems = [
-        {% for item in media_items %}
+        {% for item in media_items %}{% if item.file %}
         { 
             url: "{{ item.file.url }}", 
             type: "{{ item.media_type }}", 
             hdr: "{% if item.hdr_setting %}{{ item.hdr_setting.file.url }}{% endif %}" 
         }{% if not forloop.last %},{% endif %}
-        {% endfor %}
+        {% endif %}{% endfor %}
     ];
 
     function openLightboxByUrl(url) {
