@@ -8,11 +8,23 @@
     .stack-group { position: relative; width: 100%; height: 600px; margin-bottom: 10rem; }
     .stack-item { 
         position: absolute; width: 80%; max-width: 900px; 
-        transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), z-index 0.1s; 
+        transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1), z-index 0.1s; 
         cursor: pointer; top: 0; touch-action: none;
     }
-    .stack-item img { width: 100%; height: auto; display: block; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-radius: 4px; pointer-events: none; }
-    @media (max-width: 768px) { .stack-group { height: 400px; } .stack-item { width: 90%; } }
+    .stack-item img { 
+        width: 100%; 
+        height: 600px; 
+        object-fit: cover; 
+        display: block; 
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
+        border-radius: 4px; 
+        pointer-events: none; 
+    }
+    @media (max-width: 768px) { 
+        .stack-group { height: 400px; } 
+        .stack-item { width: 90%; } 
+        .stack-item img { height: 400px; }
+    }
 </style>
 {% endblock %}
 
@@ -23,7 +35,7 @@
         {% for item in album.media_items.all %}
         <div class="stack-item" 
              onclick="handleStackClick(event, this, '{{ item.file.url }}')" 
-             onmouseenter="reorderStack(this)"
+             onmouseenter="throttledReorder(this)"
              ontouchstart="handleTouch(event, this)">
             <img src="{{ item.file.url }}">
         </div>
@@ -34,9 +46,9 @@
     {% for item in standalone_media %}
     <div class="media-item" onclick="openLightboxByUrl('{{ item.file.url }}')">
         <div class="media-content">
-            {% if item.media_type == 'image' %}<img src="{{ item.file.url }}">
-            {% elif item.media_type == 'video' %}<video src="{{ item.file.url }}" autoplay loop muted playsinline></video>
-            {% elif item.media_type == 'model3d' %}<div class="model-viewer" data-model="{{ item.file.url }}" data-hdr="{% if item.hdr_setting %}{{ item.hdr_setting.file.url }}{% endif %}"></div>
+            {% if item.media_type == 'image' %}<img src="{{ item.file.url }}" style="height: 600px; object-fit: cover; width: 100%;">
+            {% elif item.media_type == 'video' %}<video src="{{ item.file.url }}" autoplay loop muted playsinline style="height: 600px; object-fit: cover; width: 100%;"></video>
+            {% elif item.media_type == 'model3d' %}<div class="model-viewer" data-model="{{ item.file.url }}" data-hdr="{% if item.hdr_setting %}{{ item.hdr_setting.file.url }}{% endif %}" style="height: 600px;"></div>
             {% endif %}
         </div>
     </div>
@@ -44,6 +56,17 @@
 </div>
 
 <script>
+    let lastReorderTime = 0;
+    const REORDER_DELAY = 700;
+
+    function throttledReorder(item) {
+        const now = Date.now();
+        if (now - lastReorderTime >= REORDER_DELAY) {
+            reorderStack(item);
+            lastReorderTime = now;
+        }
+    }
+
     function reorderStack(hoveredItem) {
         const container = hoveredItem.parentElement;
         const items = Array.from(container.querySelectorAll('.stack-item'));
@@ -61,7 +84,11 @@
 
     function handleTouch(event, el) {
         if (el.getAttribute('data-is-top') !== 'true') {
-            reorderStack(el);
+            const now = Date.now();
+            if (now - lastReorderTime >= REORDER_DELAY) {
+                reorderStack(el);
+                lastReorderTime = now;
+            }
             event.preventDefault();
         }
     }
