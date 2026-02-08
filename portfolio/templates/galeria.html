@@ -19,15 +19,32 @@
 {% block content %}
 <div class="gallery-grid">
     {% for item in media_items %}
-    <div class="media-thumb" onclick="openLightbox({{ forloop.counter0 }})">
+    <div class="media-thumb" onclick="openLightboxByUrl('{{ item.file.url }}')">
         {% if item.media_type == 'image' %}
             <img src="{{ item.file.url }}" alt="Projekt {{ forloop.counter }}" loading="lazy">
         {% elif item.media_type == 'video' %}
             <video src="{{ item.file.url }}" preload="metadata"></video>
         {% elif item.media_type == 'model3d' %}
-            <div class="model-viewer" data-model="{{ item.file.url }}" data-hdr="{% if item.hdr_setting %}{{ item.hdr_setting.file.url }}{% endif %}" data-index="{{ forloop.counter0 }}"></div>
+            <div class="model-viewer" data-model="{{ item.file.url }}" data-hdr="{% if item.hdr_setting %}{{ item.hdr_setting.file.url }}{% endif %}"></div>
         {% endif %}
     </div>
     {% endfor %}
 </div>
+
+<script>
+    window.mediaItems = [
+        {% for item in media_items %}
+        { 
+            url: "{{ item.file.url }}", 
+            type: "{{ item.media_type }}", 
+            hdr: "{% if item.hdr_setting %}{{ item.hdr_setting.file.url }}{% endif %}" 
+        }{% if not forloop.last %},{% endif %}
+        {% endfor %}
+    ];
+
+    function openLightboxByUrl(url) {
+        const idx = window.mediaItems.findIndex(i => i.url === url);
+        if (idx !== -1) openLightbox(idx);
+    }
+</script>
 {% endblock %}

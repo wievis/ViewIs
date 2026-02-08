@@ -7,15 +7,11 @@
     .gallery { padding: 1rem; max-width: 1400px; margin: 0 auto; }
     .stack-group { position: relative; width: 100%; height: 600px; margin-bottom: 10rem; }
     .stack-item { 
-        position: absolute; 
-        width: 80%; 
-        max-width: 900px; 
+        position: absolute; width: 80%; max-width: 900px; 
         transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), z-index 0.1s; 
-        cursor: pointer;
-        top: 0; /* Blokada góra-dół */
+        cursor: pointer; top: 0; touch-action: none;
     }
-    .stack-item img { width: 100%; height: auto; display: block; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-radius: 4px; }
-    
+    .stack-item img { width: 100%; height: auto; display: block; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-radius: 4px; pointer-events: none; }
     @media (max-width: 768px) { .stack-group { height: 400px; } .stack-item { width: 90%; } }
 </style>
 {% endblock %}
@@ -23,11 +19,12 @@
 {% block content %}
 <div class="gallery">
     {% for album in albums %}
-    <div class="stack-group" data-album-id="{{ album.id }}">
+    <div class="stack-group">
         {% for item in album.media_items.all %}
         <div class="stack-item" 
-             onclick="openLightboxByUrl('{{ item.file.url }}')" 
-             onmouseenter="reorderStack(this)">
+             onclick="handleStackClick(event, this, '{{ item.file.url }}')" 
+             onmouseenter="reorderStack(this)"
+             ontouchstart="handleTouch(event, this)">
             <img src="{{ item.file.url }}">
         </div>
         {% endfor %}
@@ -37,12 +34,9 @@
     {% for item in standalone_media %}
     <div class="media-item" onclick="openLightboxByUrl('{{ item.file.url }}')">
         <div class="media-content">
-            {% if item.media_type == 'image' %}
-                <img src="{{ item.file.url }}">
-            {% elif item.media_type == 'video' %}
-                <video src="{{ item.file.url }}" autoplay loop muted playsinline></video>
-            {% elif item.media_type == 'model3d' %}
-                <div class="model-viewer" data-model="{{ item.file.url }}" data-hdr="{% if item.hdr_setting %}{{ item.hdr_setting.file.url }}{% endif %}"></div>
+            {% if item.media_type == 'image' %}<img src="{{ item.file.url }}">
+            {% elif item.media_type == 'video' %}<video src="{{ item.file.url }}" autoplay loop muted playsinline></video>
+            {% elif item.media_type == 'model3d' %}<div class="model-viewer" data-model="{{ item.file.url }}" data-hdr="{% if item.hdr_setting %}{{ item.hdr_setting.file.url }}{% endif %}"></div>
             {% endif %}
         </div>
     </div>
@@ -59,17 +53,28 @@
         items.forEach((item, i) => {
             let relativeIndex = (i - hoveredIdx + total) % total;
             let zIndex = total - relativeIndex;
-            let shift = relativeIndex * 60; // Tylko przesunięcie w prawo o 60px
-
             item.style.zIndex = zIndex;
-            item.style.transform = `translateX(${shift}px)`;
+            item.style.transform = `translateX(${relativeIndex * 40}px)`;
+            item.setAttribute('data-is-top', zIndex === total ? 'true' : 'false');
         });
     }
 
-    document.querySelectorAll('.stack-group').forEach(group => {
-        const firstItem = group.querySelector('.stack-item');
-        if (firstItem) reorderStack(firstItem);
-    });
+    function handleTouch(event, el) {
+        if (el.getAttribute('data-is-top') !== 'true') {
+            reorderStack(el);
+            event.preventDefault();
+        }
+    }
+
+    function handleStackClick(event, el, url) {
+        if (window.innerWidth <= 768) {
+            if (el.getAttribute('data-is-top') === 'true') {
+                openLightboxByUrl(url);
+            }
+        } else {
+            openLightboxByUrl(url);
+        }
+    }
 
     window.mediaItems = [
         {% for item in media_items %}
@@ -81,5 +86,10 @@
         const idx = window.mediaItems.findIndex(i => i.url === url);
         if (idx !== -1) openLightbox(idx);
     }
+
+    document.querySelectorAll('.stack-group').forEach(group => {
+        const first = group.querySelector('.stack-item');
+        if (first) reorderStack(first);
+    });
 </script>
 {% endblock %}
