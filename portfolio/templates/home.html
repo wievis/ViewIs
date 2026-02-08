@@ -30,28 +30,32 @@
 
 {% block content %}
 <div class="gallery">
-    {% for album in albums %}
-    <div class="stack-group">
-        {% for item in album.media_items.all %}
-        <div class="stack-item" 
-             onclick="handleStackClick(event, this, '{{ item.file.url }}')" 
-             onmouseenter="throttledReorder(this)"
-             ontouchstart="handleTouch(event, this)">
-            <img src="{{ item.file.url }}">
-        </div>
-        {% endfor %}
-    </div>
-    {% endfor %}
-
-    {% for item in standalone_media %}
-    <div class="media-item" onclick="openLightboxByUrl('{{ item.file.url }}')">
-        <div class="media-content">
-            {% if item.media_type == 'image' %}<img src="{{ item.file.url }}" style="height: 600px; object-fit: cover; width: 100%;">
-            {% elif item.media_type == 'video' %}<video src="{{ item.file.url }}" autoplay loop muted playsinline style="height: 600px; object-fit: cover; width: 100%;"></video>
-            {% elif item.media_type == 'model3d' %}<div class="model-viewer" data-model="{{ item.file.url }}" data-hdr="{% if item.hdr_setting %}{{ item.hdr_setting.file.url }}{% endif %}" style="height: 600px;"></div>
+    {% for item in top_level_media %}
+        {% if item.media_type == 'album' %}
+        <div class="stack-group">
+            {% for child in item.children.all %}
+            {% if child.file %}
+            <div class="stack-item" 
+                 onclick="handleStackClick(event, this, '{{ child.file.url }}')" 
+                 onmouseenter="throttledReorder(this)"
+                 ontouchstart="handleTouch(event, this)">
+                <img src="{{ child.file.url }}">
+            </div>
             {% endif %}
+            {% endfor %}
         </div>
-    </div>
+        {% else %}
+        {% if item.file %}
+        <div class="media-item" onclick="openLightboxByUrl('{{ item.file.url }}')">
+            <div class="media-content">
+                {% if item.media_type == 'image' %}<img src="{{ item.file.url }}" style="height: 600px; object-fit: cover; width: 100%;">
+                {% elif item.media_type == 'video' %}<video src="{{ item.file.url }}" autoplay loop muted playsinline style="height: 600px; object-fit: cover; width: 100%;"></video>
+                {% elif item.media_type == 'model3d' %}<div class="model-viewer" data-model="{{ item.file.url }}" data-hdr="{% if item.hdr_setting %}{{ item.hdr_setting.file.url }}{% endif %}" style="height: 600px;"></div>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+        {% endif %}
     {% endfor %}
 </div>
 
@@ -104,9 +108,9 @@
     }
 
     window.mediaItems = [
-        {% for item in media_items %}
-        { url: "{{ item.file.url }}", type: "{{ item.media_type }}", hdr: "{% if item.hdr_setting %}{{ item.hdr_setting.file.url }}{% endif %}" }
-        {% if not forloop.last %},{% endif %}{% endfor %}
+        {% for item in media_items %}{% if item.file %}
+        { url: "{{ item.file.url }}", type: "{{ item.media_type }}", hdr: "{% if item.hdr_setting %}{{ item.hdr_setting.file.url }}{% endif %}" }{% if not forloop.last %},{% endif %}
+        {% endif %}{% endfor %}
     ];
 
     function openLightboxByUrl(url) {

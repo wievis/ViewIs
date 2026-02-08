@@ -1,17 +1,11 @@
 from django.contrib import admin
-from .models import Media, HDRSetting, Album
+from .models import Media, HDRSetting
 
 class MediaInline(admin.TabularInline):
     model = Media
-    extra = 1
-    fields = ['file', 'order', 'media_type']
-    readonly_fields = ['media_type']
-
-@admin.register(Album)
-class AlbumAdmin(admin.ModelAdmin):
-    list_display = ['name', 'order', 'created']
-    list_editable = ['order']
-    inlines = [MediaInline]
+    extra = 0
+    fields = ['file', 'order', 'media_type', 'hdr_setting']
+    fk_name = 'parent_album'
 
 @admin.register(HDRSetting)
 class HDRSettingAdmin(admin.ModelAdmin):
@@ -19,11 +13,13 @@ class HDRSettingAdmin(admin.ModelAdmin):
 
 @admin.register(Media)
 class MediaAdmin(admin.ModelAdmin):
-    list_display = ['id', 'media_type', 'album', 'order', 'created']
-    list_editable = ['order', 'album']
-    readonly_fields = ['created', 'media_type'] 
-    
-    fieldsets = (
-        ('Media', {'fields': ('file', 'album', 'media_type', 'thumbnail', 'hdr_setting')}),
-        ('Ustawienia', {'fields': ('order', 'created')}),
-    )
+    list_display = ['display_name', 'media_type', 'order', 'created']
+    list_editable = ['order']
+    inlines = [MediaInline]
+
+    def display_name(self, obj):
+        return f"📁 {obj.name}" if obj.media_type == 'album' else f"📄 {obj.file.name.split('/')[-1] if obj.file else obj.id}"
+    display_name.short_description = 'Element'
+
+    def get_queryset(self, request):
+        return super().get_queryset(request).filter(parent_album__isnull=True)
