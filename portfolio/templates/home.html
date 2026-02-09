@@ -10,7 +10,7 @@
         position: absolute; width: 80%; max-width: 900px; 
         transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1), z-index 0.1s; 
         cursor: pointer; top: 0; 
-        touch-action: pan-y;
+        touch-action: auto;
     }
     .stack-item img { 
         width: 100%; 
@@ -65,7 +65,7 @@
     let lastReorderTime = 0;
     const REORDER_DELAY = 700;
     let touchStartY = 0;
-    let isScrolling = false;
+    let touchStartX = 0;
 
     function throttledReorder(item) {
         const now = Date.now();
@@ -92,20 +92,18 @@
 
     function handleTouchStart(e) {
         touchStartY = e.touches[0].clientY;
-        isScrolling = false;
+        touchStartX = e.touches[0].clientX;
     }
 
     function handleTouchEnd(e, el, url) {
         const touchEndY = e.changedTouches[0].clientY;
-        if (Math.abs(touchStartY - touchEndY) > 10) {
-            isScrolling = true;
-            return;
-        }
+        const touchEndX = e.changedTouches[0].clientX;
+        
+        if (Math.abs(touchStartY - touchEndY) > 10 || Math.abs(touchStartX - touchEndX) > 10) return;
 
         if (window.innerWidth <= 768) {
-            e.preventDefault();
             if (el.getAttribute('data-is-top') === 'true') {
-                openLightboxByUrl(url);
+                openLightbox(window.mediaItems.findIndex(i => i.url === url));
             } else {
                 throttledReorder(el);
             }
@@ -114,7 +112,7 @@
 
     function handleStackClick(event, el, url) {
         if (window.innerWidth > 768) {
-            openLightboxByUrl(url);
+            openLightbox(window.mediaItems.findIndex(i => i.url === url));
         }
     }
 
