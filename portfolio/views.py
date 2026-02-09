@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.core.mail import send_mail
+from django.http import JsonResponse
 from .models import Media
 
 def home(request, lang='pl'):
@@ -15,4 +17,21 @@ def galeria(request, lang='pl'):
     return render(request, 'galeria.html', {'media_items': media_items, 'lang': lang})
 
 def kontakt(request, lang='pl'):
+    if request.method == 'POST':
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
+
+        full_message = f"Od: {first_name} {last_name} <{email}>\n\nTreść:\n{message}"
+        
+        send_mail(
+            f"Nowa wiadomość od {first_name} {last_name}",
+            full_message,
+            email,
+            ['wielgoszviz@gmail.com'],
+            fail_silently=False,
+        )
+        return JsonResponse({'status': 'success'})
+
     return render(request, 'kontakt.html', {'lang': lang})

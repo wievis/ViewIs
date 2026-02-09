@@ -1,22 +1,44 @@
 {% extends 'base.html' %}
 {% load static %}
+
 {% block title %}{% if lang == 'en' %}Contact{% else %}Kontakt{% endif %} | Computer Designer{% endblock %}
 
 {% block extra_head %}
-<style>
-    .content {
-        margin-top: 150px;
-        padding: 2rem;
-    }
-</style>
+<link rel="stylesheet" href="{% static 'kontakt.css' %}">
 {% endblock %}
 
 {% block content %}
-<div class="content">
-    {% if lang == 'en' %}
-        To fill in...
-    {% else %} 
-        Pozostaje wypełnić...            
-    {% endif %}
+<div class="contact-container">
+    <section class="contact-header">
+        <img src="{% static 'contact-hero.jpg' %}" alt="Contact" class="contact-img">
+        <div class="contact-info">
+            <h1>{% if lang == 'en' %}Contact Us{% else %}Napisz do nas{% endif %}</h1>
+            <p>{% if lang == 'en' %}I am available for new projects and collaborations.{% else %}Jestem dostępny dla nowych projektów i współpracy.{% endif %}</p>
+            <p class="phone-number">+48 123 456 789</p>
+        </div>
+    </section>
+
+    <form id="contact-form" class="contact-form">
+        {% csrf_token %}
+        <input type="text" name="first_name" placeholder="{% if lang == 'en' %}First Name{% else %}Imię{% endif %}">
+        <input type="text" name="last_name" placeholder="{% if lang == 'en' %}Last Name{% else %}Nazwisko{% endif %}">
+        <input type="email" name="email" placeholder="{% if lang == 'en' %}E-mail address{% else %}Adres e-mail{% endif %}" required>
+        <textarea name="message" rows="10" placeholder="{% if lang == 'en' %}Enter message content{% else %}Wpisz treść wiadomości{% endif %}" required></textarea>
+        
+        <div class="consent-wrapper">
+            <input type="checkbox" id="consent" required>
+            <label for="consent">
+                {% if lang == 'en' %}
+                    I consent to the processing of my personal data for the purpose of correspondence.
+                {% else %}
+                    Wyrażam zgodę na przetwarzanie moich danych osobowych w celu prowadzenia korespondencji.
+                {% endif %}
+            </label>
+        </div>
+
+        <button type="submit" class="submit-btn">{% if lang == 'en' %}Send{% else %}Wyślij{% endif %}</button>
+    </form>
 </div>
+
+<script src="{% static 'kontakt.js' %}"></script>
 {% endblock %}
