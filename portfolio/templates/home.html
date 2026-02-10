@@ -4,107 +4,91 @@
 
 {% block extra_head %}
 <style>
-    .gallery { padding: 1rem; max-width: 1400px; margin: 0 auto; }
-    .stack-group { position: relative; width: 100%; height: 600px; margin-bottom: 10rem; }
-    .stack-item { 
-        position: absolute; width: 80%; max-width: 900px; 
-        transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), z-index 0.1s; 
-        cursor: pointer; top: 0; 
-        touch-action: manipulation;
-    }
-    .stack-item img { 
-        width: 100%; 
-        height: 600px; 
-        object-fit: cover; 
-        display: block; 
-        box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
-        border-radius: 4px; 
-        pointer-events: none;
-        transition: transform 0.3s ease;
-    }
-    .stack-item[data-is-top="true"]:hover img {
-        transform: scale(1.04);
-    }
-    .media-item { margin-bottom: 4rem; cursor: pointer; }
-    .media-item:hover img, .media-item:hover video {
-        transform: scale(1.04);
-        transition: transform 0.3s ease;
-    }
-    @media (max-width: 768px) { 
-        .stack-group { height: 400px; margin-bottom: 6rem; } 
-        .stack-item { width: 85%; } 
-        .stack-item img { height: 400px; }
-    }
+.gallery{padding:1rem;max-width:1400px;margin:0 auto}
+.stack-group{position:relative;width:100%;height:600px;margin-bottom:15rem}
+.stack-item,.media-item{position:absolute;width:80%;max-width:900px;top:0;display:flex;justify-content:center;cursor:pointer;transition:transform 1.2s cubic-bezier(.23,1,.32,1),z-index .1s}
+.media-item{position:relative;margin-bottom:4rem;width:100%}
+.media-frame{width:100%;height:600px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.media-frame img,.media-frame video{width:100%;height:100%;object-fit:contain;transform:scale(1.25);transition:transform 1.2s cubic-bezier(.23,1,.32,1);box-shadow:0 10px 30px rgba(0,0,0,.5);border-radius:4px;pointer-events:none}
+.stack-item[data-is-top="true"]:hover,.media-item:hover{z-index:99!important}
+.stack-item[data-is-top="true"]:hover .media-frame img,
+.media-item:hover .media-frame img,
+.media-item:hover .media-frame video{transform:scale(1)}
+@media(max-width:768px){
+.stack-group{height:400px;margin-bottom:8rem}
+.stack-item{width:85%}
+.media-frame{height:400px}
+}
 </style>
 {% endblock %}
 
 {% block content %}
 <div class="gallery">
-    {% for item in top_level_media %}
-        {% if item.media_type == 'album' %}
-        <div class="stack-group">
-            {% for child in item.children.all %}
-            {% if child.file %}
-            <div class="stack-item" 
-                 onclick="handleItemInteraction(this, '{{ child.file.url }}')">
-                <img src="{{ child.file.url }}">
-            </div>
-            {% endif %}
-            {% endfor %}
-        </div>
-        {% else %}
-        {% if item.file %}
-        <div class="media-item" onclick="openLightboxByUrl('{{ item.file.url }}')">
-            <div class="media-content">
-                {% if item.media_type == 'image' %}<img src="{{ item.file.url }}" style="height: 600px; object-fit: cover; width: 100%;">
-                {% elif item.media_type == 'video' %}<video src="{{ item.file.url }}" autoplay loop muted playsinline style="height: 600px; object-fit: cover; width: 100%;"></video>
-                {% elif item.media_type == 'model3d' %}<div class="model-viewer" data-model="{{ item.file.url }}" data-hdr="{% if item.hdr_setting %}{{ item.hdr_setting.file.url }}{% endif %}" style="height: 600px;"></div>
-                {% endif %}
-            </div>
-        </div>
-        {% endif %}
-        {% endif %}
-    {% endfor %}
+{% for item in top_level_media %}
+{% if item.media_type == 'album' %}
+<div class="stack-group">
+{% for child in item.children.all %}
+{% if child.file %}
+<div class="stack-item" onclick="handleItemInteraction(this,'{{ child.file.url }}')">
+<div class="media-frame">
+<img src="{{ child.file.url }}">
+</div>
+</div>
+{% endif %}
+{% endfor %}
+</div>
+{% else %}
+{% if item.file %}
+<div class="media-item" onclick="openLightboxByUrl('{{ item.file.url }}')">
+<div class="media-frame">
+{% if item.media_type == 'image' %}
+<img src="{{ item.file.url }}">
+{% elif item.media_type == 'video' %}
+<video src="{{ item.file.url }}" autoplay loop muted playsinline></video>
+{% elif item.media_type == 'model3d' %}
+<div class="model-viewer" data-model="{{ item.file.url }}" data-hdr="{% if item.hdr_setting %}{{ item.hdr_setting.file.url }}{% endif %}" style="height:600px;width:100%"></div>
+{% endif %}
+</div>
+</div>
+{% endif %}
+{% endif %}
+{% endfor %}
 </div>
 
 <script>
-    window.mediaItems = [
-        {% for item in media_items %}{% if item.file %}
-        { url: "{{ item.file.url }}", type: "{{ item.media_type }}", hdr: "{% if item.hdr_setting %}{{ item.hdr_setting.file.url }}{% endif %}" }{% if not forloop.last %},{% endif %}
-        {% endif %}{% endfor %}
-    ];
+window.mediaItems=[
+{% for item in media_items %}{% if item.file %}
+{url:"{{ item.file.url }}",type:"{{ item.media_type }}",hdr:"{% if item.hdr_setting %}{{ item.hdr_setting.file.url }}{% endif %}"}{% if not forloop.last %},{% endif %}
+{% endif %}{% endfor %}
+]
 
-    function reorderStack(clickedItem) {
-        const container = clickedItem.parentElement;
-        const items = Array.from(container.querySelectorAll('.stack-item'));
-        const total = items.length;
-        const clickedIdx = items.indexOf(clickedItem);
+function reorderStack(clickedItem){
+const container=clickedItem.parentElement
+const items=Array.from(container.querySelectorAll('.stack-item'))
+const total=items.length
+const clickedIdx=items.indexOf(clickedItem)
+items.forEach((item,i)=>{
+let relativeIndex=(i-clickedIdx+total)%total
+let zIndex=total-relativeIndex
+item.style.zIndex=zIndex
+item.style.transform=`translateX(${relativeIndex*30}px) scale(${1-relativeIndex*.025})`
+item.setAttribute('data-is-top',zIndex===total?'true':'false')
+})
+}
 
-        items.forEach((item, i) => {
-            let relativeIndex = (i - clickedIdx + total) % total;
-            let zIndex = total - relativeIndex;
-            item.style.zIndex = zIndex;
-            item.style.transform = `translateX(${relativeIndex * 30}px) scale(${1 - relativeIndex * 0.025})`;
-            item.setAttribute('data-is-top', zIndex === total ? 'true' : 'false');
-        });
-    }
+function handleItemInteraction(el,url){
+if(el.getAttribute('data-is-top')==='true'){openLightboxByUrl(url)}
+else{reorderStack(el)}
+}
 
-    function handleItemInteraction(el, url) {
-        if (el.getAttribute('data-is-top') === 'true') {
-            openLightboxByUrl(url);
-        } else {
-            reorderStack(el);
-        }
-    }
+function openLightboxByUrl(url){
+const idx=window.mediaItems.findIndex(i=>i.url===url)
+if(idx!==-1)openLightbox(idx)
+}
 
-    function openLightboxByUrl(url) {
-        const idx = window.mediaItems.findIndex(i => i.url === url);
-        if (idx !== -1) openLightbox(idx);
-    }
-
-    document.querySelectorAll('.stack-group').forEach(group => {
-        const first = group.querySelector('.stack-item');
-        if (first) reorderStack(first);
-    });
+document.querySelectorAll('.stack-group').forEach(group=>{
+const first=group.querySelector('.stack-item')
+if(first)reorderStack(first)
+})
 </script>
 {% endblock %}

@@ -75,7 +75,7 @@
     color: #fff;
     cursor: pointer;
     opacity: 0.8;
-    transition: opacity 0.3s;
+    transition: font-size 0.7s ease-in-out, opacity 0.3s ease;
     user-select: none;
     line-height: 1;
     z-index: 3;
