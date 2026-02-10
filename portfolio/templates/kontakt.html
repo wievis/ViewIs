@@ -9,21 +9,53 @@
 
 {% block content %}
 <div class="contact-container">
-    <section class="contact-header">
-        <img src="{% static 'contact-hero.jpg' %}" alt="Contact" class="contact-img">
-        <div class="contact-info">
-            <h1>{% if lang == 'en' %}Contact Us{% else %}Napisz do nas{% endif %}</h1>
-            <p>{% if lang == 'en' %}I am available for new projects and collaborations.{% else %}Jestem dostępny dla nowych projektów i współpracy.{% endif %}</p>
-            <p class="phone-number">+48 123 456 789</p>
+    <section class="intro-section">
+        <p class="lead-text">Zapraszam do nawiązania współpracy.</p>
+        <p class="description">
+            Zajmuję się projektowaniem wizualnym i technicznym w obszarze architektury, grafiki 3D oraz narzędzi cyfrowych.
+            Projektuję wizualizacje, tworzę narzędzia i automatyzuję procesy.
+        </p>
+    </section>
+
+    <section class="competencies-grid">
+        <div class="category">
+            <h2>Archviz</h2>
+            <p>Wizualizacje wnętrz, zewnętrz i obiektów</p>
+            <span class="tech-stack">Unreal Engine · 3ds Max · Blender</span>
         </div>
+
+        <div class="category">
+            <h2>Techniczne 2D</h2>
+            <p>Inwentaryzacja, kreślenie, dokumentacja</p>
+            <span class="tech-stack">AutoCAD · FreeCAD</span>
+        </div>
+
+        <div class="category">
+            <h2>Grafika 2D</h2>
+            <p>Grafika rastrowa i wektorowa do prezentacji projektów</p>
+            <span class="tech-stack">Photoshop · Illustrator · Krita</span>
+        </div>
+
+        <div class="category wide">
+            <h2>Optymalizacja i narzędzia</h2>
+            <p>Automatyzacja procesów, skrypty, dedykowane rozwiązania workflow</p>
+            <span class="tech-stack">MaxScript · Python · PySide6 · AutoLISP · JavaScript · Blueprint</span>
+        </div>
+    </section>
+
+    <section class="manifesto">
+        <p>Na końcu stawiam funkcjonalność, czytelność i realną wartość projektu.</p>
+        <strong>Każdy projekt to narzędzie.</strong>
     </section>
 
     <form id="contact-form" class="contact-form">
         {% csrf_token %}
-        <input type="text" name="first_name" placeholder="{% if lang == 'en' %}First Name{% else %}Imię{% endif %}">
-        <input type="text" name="last_name" placeholder="{% if lang == 'en' %}Last Name{% else %}Nazwisko{% endif %}">
+        <div class="form-row">
+            <input type="text" name="first_name" placeholder="{% if lang == 'en' %}First Name{% else %}Imię{% endif %}">
+            <input type="text" name="last_name" placeholder="{% if lang == 'en' %}Last Name{% else %}Nazwisko{% endif %}">
+        </div>
         <input type="email" name="email" placeholder="{% if lang == 'en' %}E-mail address{% else %}Adres e-mail{% endif %}" required>
-        <textarea name="message" rows="10" placeholder="{% if lang == 'en' %}Enter message content{% else %}Wpisz treść wiadomości{% endif %}" required></textarea>
+        <textarea name="message" rows="6" placeholder="{% if lang == 'en' %}Enter message content{% else %}Wpisz treść wiadomości{% endif %}" required></textarea>
         
         <div class="consent-wrapper">
             <input type="checkbox" id="consent" required>
