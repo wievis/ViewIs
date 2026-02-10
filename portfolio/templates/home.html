@@ -8,9 +8,9 @@
     .stack-group { position: relative; width: 100%; height: 600px; margin-bottom: 10rem; }
     .stack-item { 
         position: absolute; width: 80%; max-width: 900px; 
-        transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1), z-index 0.1s; 
+        transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), z-index 0.1s; 
         cursor: pointer; top: 0; 
-        touch-action: auto;
+        touch-action: manipulation;
     }
     .stack-item img { 
         width: 100%; 
@@ -21,9 +21,10 @@
         border-radius: 4px; 
         pointer-events: none; 
     }
+    .media-item { margin-bottom: 4rem; cursor: pointer; }
     @media (max-width: 768px) { 
-        .stack-group { height: 400px; } 
-        .stack-item { width: 90%; } 
+        .stack-group { height: 400px; margin-bottom: 6rem; } 
+        .stack-item { width: 85%; } 
         .stack-item img { height: 400px; }
     }
 </style>
@@ -37,10 +38,7 @@
             {% for child in item.children.all %}
             {% if child.file %}
             <div class="stack-item" 
-                 onclick="handleStackClick(event, this, '{{ child.file.url }}')" 
-                 onmouseenter="throttledReorder(this)"
-                 ontouchstart="handleTouchStart(event)"
-                 ontouchend="handleTouchEnd(event, this, '{{ child.file.url }}')">
+                 onclick="handleItemInteraction(this, '{{ child.file.url }}')">
                 <img src="{{ child.file.url }}">
             </div>
             {% endif %}
@@ -62,65 +60,35 @@
 </div>
 
 <script>
-    let lastReorderTime = 0;
-    const REORDER_DELAY = 700;
-    let touchStartY = 0;
-    let touchStartX = 0;
-
-    function throttledReorder(item) {
-        const now = Date.now();
-        if (now - lastReorderTime >= REORDER_DELAY) {
-            reorderStack(item);
-            lastReorderTime = now;
-        }
-    }
-
-    function reorderStack(hoveredItem) {
-        const container = hoveredItem.parentElement;
-        const items = Array.from(container.querySelectorAll('.stack-item'));
-        const total = items.length;
-        const hoveredIdx = items.indexOf(hoveredItem);
-
-        items.forEach((item, i) => {
-            let relativeIndex = (i - hoveredIdx + total) % total;
-            let zIndex = total - relativeIndex;
-            item.style.zIndex = zIndex;
-            item.style.transform = `translateX(${relativeIndex * 40}px)`;
-            item.setAttribute('data-is-top', zIndex === total ? 'true' : 'false');
-        });
-    }
-
-    function handleTouchStart(e) {
-        touchStartY = e.touches[0].clientY;
-        touchStartX = e.touches[0].clientX;
-    }
-
-    function handleTouchEnd(e, el, url) {
-        const touchEndY = e.changedTouches[0].clientY;
-        const touchEndX = e.changedTouches[0].clientX;
-        
-        if (Math.abs(touchStartY - touchEndY) > 10 || Math.abs(touchStartX - touchEndX) > 10) return;
-
-        if (window.innerWidth <= 768) {
-            if (el.getAttribute('data-is-top') === 'true') {
-                openLightbox(window.mediaItems.findIndex(i => i.url === url));
-            } else {
-                throttledReorder(el);
-            }
-        }
-    }
-
-    function handleStackClick(event, el, url) {
-        if (window.innerWidth > 768) {
-            openLightbox(window.mediaItems.findIndex(i => i.url === url));
-        }
-    }
-
     window.mediaItems = [
         {% for item in media_items %}{% if item.file %}
         { url: "{{ item.file.url }}", type: "{{ item.media_type }}", hdr: "{% if item.hdr_setting %}{{ item.hdr_setting.file.url }}{% endif %}" }{% if not forloop.last %},{% endif %}
         {% endif %}{% endfor %}
     ];
+
+    function reorderStack(clickedItem) {
+        const container = clickedItem.parentElement;
+        const items = Array.from(container.querySelectorAll('.stack-item'));
+        const total = items.length;
+        const clickedIdx = items.indexOf(clickedItem);
+
+        items.forEach((item, i) => {
+            let relativeIndex = (i - clickedIdx + total) % total;
+            let zIndex = total - relativeIndex;
+            
+            item.style.zIndex = zIndex;
+            item.style.transform = `translateX(${relativeIndex * 30}px) scale(${1 - relativeIndex * 0.025})`;
+            item.setAttribute('data-is-top', zIndex === total ? 'true' : 'false');
+        });
+    }
+
+    function handleItemInteraction(el, url) {
+        if (el.getAttribute('data-is-top') === 'true') {
+            openLightboxByUrl(url);
+        } else {
+            reorderStack(el);
+        }
+    }
 
     function openLightboxByUrl(url) {
         const idx = window.mediaItems.findIndex(i => i.url === url);
