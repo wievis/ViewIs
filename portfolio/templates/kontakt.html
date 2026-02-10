@@ -10,42 +10,47 @@
 {% block content %}
 <div class="contact-container">
     <section class="intro-section">
-        <p class="lead-text">Zapraszam do nawiązania współpracy.</p>
+        <p class="lead-text">
+            {% if lang == 'en' %}II invite you to collaborate.{% else %}Zapraszam do nawiązania współpracy.{% endif %}
+        </p>
         <p class="description">
-            Zajmuję się projektowaniem wizualnym i technicznym w obszarze architektury, grafiki 3D oraz narzędzi cyfrowych.
-            Projektuję wizualizacje, tworzę narzędzia i automatyzuję procesy.
+            {% if lang == 'en' %}
+                I specialize in visual and technical design within architecture, 3D graphics, and digital tools. I design visualizations, create tools, and automate processes.
+            {% else %}
+                Zajmuję się projektowaniem wizualnym i technicznym w obszarze architektury, grafiki 3D oraz narzędzi cyfrowych. Projektuję wizualizacje, tworzę narzędzia i automatyzuję procesy.
+            {% endif %}
         </p>
     </section>
 
     <section class="competencies-grid">
         <div class="category">
             <h2>Archviz</h2>
-            <p>Wizualizacje wnętrz, zewnętrz i obiektów</p>
+            <p>{% if lang == 'en' %}Interior, exterior and object visualizations{% else %}Wizualizacje wnętrz, zewnętrz i obiektów{% endif %}</p>
             <span class="tech-stack">Unreal Engine · 3ds Max · Blender</span>
         </div>
 
         <div class="category">
-            <h2>Techniczne 2D</h2>
-            <p>Inwentaryzacja, kreślenie, dokumentacja</p>
+            <h2>{% if lang == 'en' %}Technical 2D{% else %}Techniczne 2D{% endif %}</h2>
+            <p>{% if lang == 'en' %}Stocktaking, drafting, documentation{% else %}Inwentaryzacja, kreślenie, dokumentacja{% endif %}</p>
             <span class="tech-stack">AutoCAD · FreeCAD</span>
         </div>
 
         <div class="category">
-            <h2>Grafika 2D</h2>
-            <p>Grafika rastrowa i wektorowa do prezentacji projektów</p>
+            <h2>{% if lang == 'en' %}2D Graphics{% else %}Grafika 2D{% endif %}</h2>
+            <p>{% if lang == 'en' %}Raster and vector graphics for project presentations{% else %}Grafika rastrowa i wektorowa do prezentacji projektów{% endif %}</p>
             <span class="tech-stack">Photoshop · Illustrator · Krita</span>
         </div>
 
-        <div class="category wide">
-            <h2>Optymalizacja i narzędzia</h2>
-            <p>Automatyzacja procesów, skrypty, dedykowane rozwiązania workflow</p>
+        <div class="category">
+            <h2>{% if lang == 'en' %}Optimization & Tools{% else %}Optymalizacja i narzędzia{% endif %}</h2>
+            <p>{% if lang == 'en' %}Process automation, scripts, dedicated workflow solutions{% else %}Automatyzacja procesów, skrypty, dedykowane rozwiązania workflow{% endif %}</p>
             <span class="tech-stack">MaxScript · Python · PySide6 · AutoLISP · JavaScript · Blueprint</span>
         </div>
     </section>
 
     <section class="manifesto">
-        <p>Na końcu stawiam funkcjonalność, czytelność i realną wartość projektu.</p>
-        <strong>Każdy projekt to narzędzie.</strong>
+        <p>{% if lang == 'en' %}Ultimately, I focus on functionality, clarity, and real project value.{% else %}Na końcu stawiam funkcjonalność, czytelność i realną wartość projektu.{% endif %}</p>
+        <strong>{% if lang == 'en' %}EVERY PROJECT IS A TOOL.{% else %}KAŻDY PROJEKT TO NARZĘDZIE.{% endif %}</strong>
     </section>
 
     <form id="contact-form" class="contact-form">
@@ -71,6 +76,5 @@
         <button type="submit" class="submit-btn">{% if lang == 'en' %}Send{% else %}Wyślij{% endif %}</button>
     </form>
 </div>
-
 <script src="{% static 'kontakt.js' %}"></script>
 {% endblock %}
