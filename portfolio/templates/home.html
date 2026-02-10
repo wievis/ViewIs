@@ -19,9 +19,17 @@
         display: block; 
         box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
         border-radius: 4px; 
-        pointer-events: none; 
+        pointer-events: none;
+        transition: transform 0.3s ease;
+    }
+    .stack-item[data-is-top="true"]:hover img {
+        transform: scale(1.04);
     }
     .media-item { margin-bottom: 4rem; cursor: pointer; }
+    .media-item:hover img, .media-item:hover video {
+        transform: scale(1.04);
+        transition: transform 0.3s ease;
+    }
     @media (max-width: 768px) { 
         .stack-group { height: 400px; margin-bottom: 6rem; } 
         .stack-item { width: 85%; } 
@@ -75,7 +83,6 @@
         items.forEach((item, i) => {
             let relativeIndex = (i - clickedIdx + total) % total;
             let zIndex = total - relativeIndex;
-            
             item.style.zIndex = zIndex;
             item.style.transform = `translateX(${relativeIndex * 30}px) scale(${1 - relativeIndex * 0.025})`;
             item.setAttribute('data-is-top', zIndex === total ? 'true' : 'false');

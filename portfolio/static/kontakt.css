@@ -51,10 +51,9 @@ body.light-mode .contact-container {
     font-family: 'Courier New', monospace;
     font-size: 1.2rem;
     padding-top: 4px;
-    opacity: 0.3;
     display: block;
     margin-top: -4px;
-    color: #bbb;
+    color: #888;
 }
 
 .manifesto {
@@ -149,4 +148,15 @@ body.light-mode .submit-btn {
     color: #fff;
 }
 
-body.light-mode .tech-stac
+body.light-mode .tech-stack {
+    color: #444;
+}
+
+@media (max-width: 768px) {
+    .contact-container {
+        padding-top: 20px;
+    }
+    .intro-section {
+        margin-top: 0;
+    }
+}

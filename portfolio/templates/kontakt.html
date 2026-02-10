@@ -5,6 +5,14 @@
 
 {% block extra_head %}
 <link rel="stylesheet" href="{% static 'kontakt.css' %}">
+<style>
+    .contact-form input, .contact-form textarea, .submit-btn {
+        transition: transform 0.2s ease-in-out;
+    }
+    .contact-form input:hover, .contact-form textarea:hover, .submit-btn:hover {
+        transform: scale(1.04);
+    }
+</style>
 {% endblock %}
 
 {% block content %}
@@ -31,7 +39,7 @@
 
         <div class="category">
             <h2>{% if lang == 'en' %}Technical 2D{% else %}Techniczne 2D{% endif %}</h2>
-            <p>{% if lang == 'en' %}Stocktaking, drafting, documentation{% else %}Inwentaryzacja, kreślenie, dokumentacja{% endif %}</p>
+            <p>{% if lang == 'en' %}Inventory, drafting, documentation{% else %}Inwentaryzacja, kreślenie, dokumentacja{% endif %}</p>
             <span class="tech-stack">AutoCAD · FreeCAD</span>
         </div>
 
@@ -76,5 +84,4 @@
         <button type="submit" class="submit-btn">{% if lang == 'en' %}Send{% else %}Wyślij{% endif %}</button>
     </form>
 </div>
-<script src="{% static 'kontakt.js' %}"></script>
-{% endblock %
+{% endblock %}
