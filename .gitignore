@@ -17,3 +17,6 @@ Thumbs.db
 .env
 venv/
 env/
+
+credentials.json
+token.json
