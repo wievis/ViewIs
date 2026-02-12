@@ -14,17 +14,22 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: url("kontakt_background.png");
+    background-image: url("kontakt_background_dark.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    opacity: 0.3;
+    opacity: 1;
     z-index: 0;
 }
 
 body.light-mode .contact-container {
     color: #111;
+}
+
+body.light-mode .contact-container::before {
+    background-image: url("kontakt_background.png");
+    opacity: 1;
 }
 
 .intro-section, .competencies-grid, .manifesto, .contact-form {
