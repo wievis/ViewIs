@@ -2,6 +2,22 @@ document.getElementById('contact-form').addEventListener('submit', async functio
     e.preventDefault();
     const formData = new FormData(this);
     const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+    const messages = {
+        pl: {
+            success: 'Wiadomość została wysłana!',
+            error: 'Błąd serwera.',
+            connection: 'Błąd połączenia.'
+        },
+        en: {
+            success: 'Message has been sent!',
+            error: 'Server error.',
+            connection: 'Connection error.'
+        }
+    };
+
+    const msg = currentLang === 'en' ? messages.en : messages.pl;
+
     try {
         const response = await fetch('/kontakt/', {
             method: 'POST',
@@ -12,12 +28,12 @@ document.getElementById('contact-form').addEventListener('submit', async functio
             }
         });
         if (response.ok) {
-            alert('Wiadomość została wysłana!');
+            alert(msg.success);
             this.reset();
         } else {
-            alert('Błąd serwera.');
+            alert(msg.error);
         }
     } catch (error) {
-        alert('Błąd połączenia.');
+        alert(msg.connection);
     }
 });
