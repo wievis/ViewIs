@@ -5,9 +5,9 @@
 {% block extra_head %}
 <style>
 .gallery{padding:1rem;max-width:1400px;margin:0 auto}
-.stack-group{position:relative;width:100%;height:600px;margin-bottom:15rem}
+.stack-group{position:relative;width:100%;height:600px;margin-bottom:1.5rem}
 .stack-item,.media-item{position:absolute;width:80%;max-width:900px;top:0;display:flex;justify-content:center;cursor:pointer;transition:transform 1.2s cubic-bezier(.23,1,.32,1),z-index .1s}
-.media-item{position:relative;margin-bottom:4rem;width:100%}
+.media-item{position:relative;margin-bottom:1.5rem;width:100%}
 .media-frame{width:100%;height:600px;overflow:hidden;display:flex;align-items:center;justify-content:center}
 .media-frame img,.media-frame video{width:100%;height:100%;object-fit:contain;transform:scale(1.25);transition:transform 1.2s cubic-bezier(.23,1,.32,1);box-shadow:0 10px 30px rgba(0,0,0,.5);border-radius:4px;pointer-events:none}
 .stack-item[data-is-top="true"]:hover,.media-item:hover{z-index:99!important}
@@ -15,7 +15,7 @@
 .media-item:hover .media-frame img,
 .media-item:hover .media-frame video{transform:scale(1)}
 @media(max-width:768px){
-.stack-group{height:400px;margin-bottom:8rem}
+.stack-group{height:400px;margin-bottom:1.5rem}
 .stack-item{width:85%}
 .media-frame{height:400px}
 }
