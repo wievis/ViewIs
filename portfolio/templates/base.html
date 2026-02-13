@@ -19,6 +19,9 @@
     <main>
         {% block content %}{% endblock %}
     </main>
+    <footer>
+        {% if lang == 'en' %}Designed & Developed by Maciej Wielgosz{% else %}Projekt i realizacja: Maciej Wielgosz{% endif %}
+    </footer>
     <script src="{% static 'theme-lang.js' %}"></script>
     <script src="{% static 'lightbox.js' %}"></script>
     <script type="module" src="{% static 'model-viewer.js' %}"></script>
