@@ -1,28 +1,25 @@
+{% comment %} nav.html {% endcomment %}
 {% load static %}
 <div class="menu">
     <div class="menu-top">
         <div class="logo">
             <div class="logo-name">
-                <a href="{% if lang == 'en' %}{% url 'home_en' %}{% else %}{% url 'home' %}{% endif %}" class="logo-person">View Is</a>
+                <div class="logo-mobile-row">
+                    <a href="{% if lang == 'en' %}{% url 'home_en' %}{% else %}{% url 'home' %}{% endif %}" class="logo-person">View Is</a>
+                    <input type="checkbox" class="checkbox lang-toggle mobile-only-switch" role="switch" id="lang-toggle-mob" {% if lang == 'pl' or not lang %}checked{% endif %} />
+                    <input type="checkbox" class="checkbox theme-toggle mobile-only-switch" role="switch" id="theme-toggle-mob" />
+                </div>
                 <div class="logo-title">COMPUTER DESIGNER</div>
             </div>
             <nav>
-                <a href="{% if lang == 'en' %}{% url 'home_en' %}{% else %}{% url 'home' %}{% endif %}">
-                    {% if lang == 'en' %}PRESENTATION{% else %}PREZENTACJA{% endif %}
-                </a>
-                <a href="{% if lang == 'en' %}{% url 'galeria_en' %}{% else %}{% url 'galeria' %}{% endif %}">
-                    {% if lang == 'en' %}GALLERY{% else %}GALERIA{% endif %}
-                </a>
-                <a href="{% if lang == 'en' %}{% url 'kontakt_en' %}{% else %}{% url 'kontakt' %}{% endif %}">
-                    {% if lang == 'en' %}ABOUT ME{% else %}O MNIE{% endif %}
-                </a>
-                <a href="{% if lang == 'en' %}{% url 'kontakt_en' %}{% else %}{% url 'kontakt' %}{% endif %}#contact-form">
-                    {% if lang == 'en' %}CONTACT{% else %}KONTAKT{% endif %}
-                </a>
-                <div class="menu-bottom">
+                <a href="{% if lang == 'en' %}{% url 'home_en' %}{% else %}{% url 'home' %}{% endif %}">{% if lang == 'en' %}PRESENTATION{% else %}PREZENTACJA{% endif %}</a>
+                <a href="{% if lang == 'en' %}{% url 'galeria_en' %}{% else %}{% url 'galeria' %}{% endif %}">{% if lang == 'en' %}GALLERY{% else %}GALERIA{% endif %}</a>
+                <a href="{% if lang == 'en' %}{% url 'kontakt_en' %}{% else %}{% url 'kontakt' %}{% endif %}">{% if lang == 'en' %}ABOUT ME{% else %}O MNIE{% endif %}</a>
+                <a href="{% if lang == 'en' %}{% url 'kontakt_en' %}{% else %}{% url 'kontakt' %}{% endif %}#contact-form">{% if lang == 'en' %}CONTACT{% else %}KONTAKT{% endif %}</a>
+                <div class="menu-bottom desktop-only-switches">
                     <div>
                         <input type="checkbox" class="checkbox lang-toggle" role="switch" id="lang-toggle" {% if lang == 'pl' or not lang %}checked{% endif %} />
-                        <input type="checkbox" class="checkbox" role="switch" id="theme-toggle" />
+                        <input type="checkbox" class="checkbox theme-toggle" role="switch" id="theme-toggle" />
                     </div>
                 </div>
             </nav>
