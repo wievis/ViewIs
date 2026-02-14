@@ -4,20 +4,69 @@
 
 {% block extra_head %}
 <style>
-.gallery{padding:1rem;max-width:1400px;margin:0 auto}
-.stack-group{position:relative;width:100%;height:600px;margin-bottom:1.5rem}
-.stack-item,.media-item{position:absolute;width:80%;max-width:900px;top:0;display:flex;justify-content:center;cursor:pointer;transition:transform 1.2s cubic-bezier(.23,1,.32,1),z-index .1s}
-.media-item{position:relative;margin-bottom:1.5rem;width:100%}
-.media-frame{width:100%;height:600px;overflow:hidden;display:flex;align-items:center;justify-content:center}
-.media-frame img,.media-frame video{width:100%;height:100%;object-fit:contain;transform:scale(1.25);transition:transform 1.2s cubic-bezier(.23,1,.32,1);box-shadow:0 10px 30px rgba(0,0,0,.5);border-radius:4px;pointer-events:none}
-.stack-item[data-is-top="true"]:hover,.media-item:hover{z-index:99!important}
-.stack-item[data-is-top="true"]:hover .media-frame img,
+.gallery {
+    padding: 1rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+.stack-group {
+    position: relative;
+    width: 100%;
+    height: 600px;
+}
+.stack-item {
+    position: absolute;
+    width: 80%;
+    max-width: 900px;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+    transition: transform 1.2s cubic-bezier(.23,1,.32,1), z-index .1s;
+}
+.media-item {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
+.media-frame {
+    width: 100%;
+    max-width: 900px;
+    height: auto;
+    max-height: 600px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.stack-group .media-frame {
+    height: 600px;
+}
+.media-frame img, .media-frame video {
+    width: 100%;
+    height: auto;
+    max-height: 600px;
+    object-fit: contain;
+    transform: scale(1.25);
+    transition: transform 1.2s cubic-bezier(.23,1,.32,1);
+    box-shadow: 0 10px 30px rgba(0,0,0,.5);
+    border-radius: 4px;
+    display: block;
+}
 .media-item:hover .media-frame img,
-.media-item:hover .media-frame video{transform:scale(1)}
+.stack-item[data-is-top="true"]:hover .media-frame img {
+    transform: scale(1);
+}
 @media(max-width:768px){
-.stack-group{height:400px;margin-bottom:1.5rem}
-.stack-item{width:85%}
-.media-frame{height:400px}
+    .gallery { gap: 1rem; }
+    .stack-group { height: 400px; }
+    .stack-group .media-frame { height: 400px; }
+    .media-frame img, .media-frame video { max-height: 400px; }
+    .stack-item { width: 85%; }
 }
 </style>
 {% endblock %}
@@ -25,70 +74,66 @@
 {% block content %}
 <div class="gallery">
 {% for item in top_level_media %}
-{% if item.media_type == 'album' %}
-<div class="stack-group">
-{% for child in item.children.all %}
-{% if child.file %}
-<div class="stack-item" onclick="handleItemInteraction(this,'{{ child.file.url }}')">
-<div class="media-frame">
-<img src="{{ child.file.url }}">
-</div>
-</div>
-{% endif %}
-{% endfor %}
-</div>
-{% else %}
-{% if item.file %}
-<div class="media-item" onclick="openLightboxByUrl('{{ item.file.url }}')">
-<div class="media-frame">
-{% if item.media_type == 'image' %}
-<img src="{{ item.file.url }}">
-{% elif item.media_type == 'video' %}
-<video src="{{ item.file.url }}" autoplay loop muted playsinline></video>
-{% elif item.media_type == 'model3d' %}
-<div class="model-viewer" data-model="{{ item.file.url }}" data-hdr="{% if item.hdr_setting %}{{ item.hdr_setting.file.url }}{% endif %}" style="height:600px;width:100%"></div>
-{% endif %}
-</div>
-</div>
-{% endif %}
-{% endif %}
+    {% if item.media_type == 'album' %}
+    <div class="stack-group">
+        {% for child in item.children.all %}
+            <div class="stack-item" onclick="handleItemInteraction(this,'{{ child.file.url }}')">
+                <div class="media-frame">
+                    <img src="{{ child.file.url }}">
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    {% else %}
+        {% if item.file %}
+        <div class="media-item" onclick="openLightboxByUrl('{{ item.file.url }}')">
+            <div class="media-frame">
+                {% if item.media_type == 'image' %}
+                    <img src="{{ item.file.url }}">
+                {% elif item.media_type == 'video' %}
+                    <video src="{{ item.file.url }}" autoplay loop muted playsinline></video>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+    {% endif %}
 {% endfor %}
 </div>
 
 <script>
 window.mediaItems=[
 {% for item in media_items %}{% if item.file %}
-{url:"{{ item.file.url }}",type:"{{ item.media_type }}",hdr:"{% if item.hdr_setting %}{{ item.hdr_setting.file.url }}{% endif %}"}{% if not forloop.last %},{% endif %}
+{url:"{{ item.file.url }}",type:"{{ item.media_type }}"}{% if not forloop.last %},{% endif %}
 {% endif %}{% endfor %}
 ]
 
 function reorderStack(clickedItem){
-const container=clickedItem.parentElement
-const items=Array.from(container.querySelectorAll('.stack-item'))
-const total=items.length
-const clickedIdx=items.indexOf(clickedItem)
-items.forEach((item,i)=>{
-let relativeIndex=(i-clickedIdx+total)%total
-let zIndex=total-relativeIndex
-item.style.zIndex=zIndex
-item.style.transform=`translateX(${relativeIndex*30}px) scale(${1-relativeIndex*.025})`
-item.setAttribute('data-is-top',zIndex===total?'true':'false')
-})
+    const container=clickedItem.parentElement;
+    const items=Array.from(container.querySelectorAll('.stack-item'));
+    const total=items.length;
+    const clickedIdx=items.indexOf(clickedItem);
+    items.forEach((item,i)=>{
+        let relativeIndex=(i-clickedIdx+total)%total;
+        let zIndex=total-relativeIndex;
+        item.style.zIndex=zIndex;
+        item.style.transform=`translateX(calc(-50% + ${relativeIndex*30}px)) scale(${1-relativeIndex*.025})`;
+        item.setAttribute('data-is-top',zIndex===total?'true':'false');
+    });
 }
 
 function handleItemInteraction(el,url){
-if(el.getAttribute('data-is-top')==='true'){openLightboxByUrl(url)}
-else{reorderStack(el)}
+    if(el.getAttribute('data-is-top')==='true'){openLightboxByUrl(url)}
+    else{reorderStack(el)}
 }
 
 function openLightboxByUrl(url){
-const idx=window.mediaItems.findIndex(i=>i.url===url)
-if(idx!==-1)openLightbox(idx)
+    const idx=window.mediaItems.findIndex(i=>i.url===url);
+    if(idx!==-1)openLightbox(idx);
 }
 
 document.querySelectorAll('.stack-group').forEach(group=>{
-const first=group.querySelector('.stack-item')
-if(first)reorderStack(first)
-})
+    const first=group.querySelector('.stack-item');
+    if(first)reorderStack(first);
+});
 </script>
 {% endblock %}

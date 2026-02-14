@@ -25,7 +25,7 @@
     <script src="{% static 'theme-lang.js' %}"></script>
     <script src="{% static 'lightbox.js' %}"></script>
     <script type="module" src="{% static 'model-viewer.js' %}"></script>
-    <script>
+    {% comment %} <script>
         function adjustMainPadding() {
             const menu = document.querySelector('.menu');
             const main = document.querySelector('main');
@@ -41,6 +41,6 @@
         if (document.querySelector('.menu')) {
             observer.observe(document.querySelector('.menu'), { attributes: true, childList: true, subtree: true });
         }
-    </script>
+    </script> {% endcomment %}
 </body>
 </html>
