@@ -1,3 +1,4 @@
+// lightbox.js
 let currentIndex = 0;
 let lbTouchStartX = 0;
 let lbTouchStartY = 0;
