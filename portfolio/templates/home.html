@@ -5,12 +5,11 @@
 {% block extra_head %}
 <style>
 .gallery{padding:1rem;max-width:1400px;margin:0 auto}
-.stack-group{position:relative;width:100%;height:600px;margin-bottom:1.5rem;touch-action:pan-y}
-.stack-item,.media-item{position:absolute;width:80%;max-width:900px;top:0;display:flex;justify-content:center;cursor:pointer;transition:transform 1.2s cubic-bezier(.23,1,.32,1),z-index .1s}
+.stack-group{position:relative;width:100%;height:600px;margin-bottom:1.5rem;touch-action:pan-y;overflow:visible}
+.stack-item,.media-item{position:absolute;width:80%;max-width:900px;top:0;display:flex;justify-content:center;cursor:pointer;transition:transform 0.4s cubic-bezier(.23,1,.32,1);will-change:transform, z-index}
 .media-item{position:relative;margin-bottom:1.5rem;width:100%}
 .media-frame{width:100%;height:600px;overflow:hidden;display:flex;align-items:center;justify-content:center}
-.media-frame img,.media-frame video{width:100%;height:100%;object-fit:contain;transform:scale(1.25);transition:transform 1.2s cubic-bezier(.23,1,.32,1);box-shadow:0 10px 30px rgba(0,0,0,.5);border-radius:4px;pointer-events:none}
-.stack-item[data-is-top="true"]:hover,.media-item:hover{z-index:99!important}
+.media-frame img,.media-frame video{width:100%;height:100%;object-fit:contain;transform:scale(1.25);transition:transform 0.4s cubic-bezier(.23,1,.32,1);box-shadow:0 10px 30px rgba(0,0,0,.5);border-radius:4px;pointer-events:none;will-change:transform}
 .stack-item[data-is-top="true"]:hover .media-frame img,
 .media-item:hover .media-frame img,
 .media-item:hover .media-frame video{transform:scale(1)}
@@ -31,7 +30,7 @@
 {% if child.file %}
 <div class="stack-item" onclick="handleItemInteraction(this,'{{ child.file.url }}')">
 <div class="media-frame">
-<img src="{{ child.file.url }}">
+<img src="{{ child.file.url }}" loading="lazy">
 </div>
 </div>
 {% endif %}
@@ -42,7 +41,7 @@
 <div class="media-item" onclick="openLightboxByUrl('{{ item.file.url }}')">
 <div class="media-frame">
 {% if item.media_type == 'image' %}
-<img src="{{ item.file.url }}">
+<img src="{{ item.file.url }}" loading="lazy">
 {% elif item.media_type == 'video' %}
 <video src="{{ item.file.url }}" autoplay loop muted playsinline></video>
 {% elif item.media_type == 'model3d' %}
@@ -62,55 +61,58 @@ window.mediaItems=[
 {% endif %}{% endfor %}
 ]
 
-function reorderStack(clickedItem, isSwipeLeft = false){
-    const container=clickedItem.parentElement
-    const items=Array.from(container.querySelectorAll('.stack-item'))
-    const total=items.length
-    const clickedIdx=items.indexOf(clickedItem)
-    items.forEach((item,i)=>{
-        let relativeIndex=(i-clickedIdx+total)%total
-        let zIndex=total-relativeIndex
-        item.style.zIndex=zIndex
-        
-        let tx = relativeIndex * 30
-        if (isSwipeLeft && relativeIndex === total - 1) {
-            tx = -60
-        }
-        
-        item.style.transform=`translateX(${tx}px) scale(${1-relativeIndex*.025})`
-        item.setAttribute('data-is-top',zIndex===total?'true':'false')
+function reorderStack(clickedItem){
+    const container = clickedItem.parentElement
+    const items = Array.from(container.querySelectorAll('.stack-item'))
+    const total = items.length
+    const clickedIdx = items.indexOf(clickedItem)
+    
+    requestAnimationFrame(() => {
+        items.forEach((item, i) => {
+            const relativeIndex = (i - clickedIdx + total) % total
+            const zIndex = total - relativeIndex
+            const transform = `translateX(${relativeIndex * 30}px) scale(${1 - relativeIndex * 0.025})`
+            
+            item.style.zIndex = zIndex
+            item.style.transform = transform
+            item.setAttribute('data-is-top', zIndex === total ? 'true' : 'false')
+        })
     })
 }
 
-function handleItemInteraction(el,url){
-    if(el.getAttribute('data-is-top')==='true'){openLightboxByUrl(url)}
+function handleItemInteraction(el, url){
+    if(el.getAttribute('data-is-top') === 'true'){openLightboxByUrl(url)}
     else{reorderStack(el)}
 }
 
 function openLightboxByUrl(url){
-    const idx=window.mediaItems.findIndex(i=>i.url===url)
-    if(idx!==-1)openLightbox(idx)
+    const idx = window.mediaItems.findIndex(i => i.url === url)
+    if(idx !== -1) openLightbox(idx)
 }
 
-document.querySelectorAll('.stack-group').forEach(group=>{
-    const first=group.querySelector('.stack-item')
-    if(first)reorderStack(first)
+document.querySelectorAll('.stack-group').forEach(group => {
+    const first = group.querySelector('.stack-item')
+    if(first) reorderStack(first)
 
     let startX = 0
-    group.addEventListener('touchstart', e => { startX = e.touches[0].clientX }, {passive: true})
+    let isLocked = false
+
+    group.addEventListener('touchstart', e => { 
+        startX = e.touches[0].clientX 
+    }, {passive: true})
+
     group.addEventListener('touchend', e => {
+        if(isLocked) return
         const diffX = startX - e.changedTouches[0].clientX
-        if (Math.abs(diffX) > 50) {
+        if (Math.abs(diffX) > 40) {
+            isLocked = true
             const items = Array.from(group.querySelectorAll('.stack-item'))
             const topItem = items.find(i => i.getAttribute('data-is-top') === 'true')
-            let nextIdx;
-            if (diffX > 0) {
-                nextIdx = (items.indexOf(topItem) + 1) % items.length
-                reorderStack(items[nextIdx], true)
-            } else {
-                nextIdx = (items.indexOf(topItem) - 1 + items.length) % items.length
-                reorderStack(items[nextIdx], false)
-            }
+            const currentIdx = items.indexOf(topItem)
+            const nextIdx = diffX > 0 ? (currentIdx + 1) % items.length : (currentIdx - 1 + items.length) % items.length
+            
+            reorderStack(items[nextIdx])
+            setTimeout(() => { isLocked = false }, 400)
         }
     }, {passive: true})
 })
