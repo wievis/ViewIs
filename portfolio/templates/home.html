@@ -5,20 +5,36 @@
 {% block extra_head %}
 <style>
 .gallery{padding:1rem;max-width:1400px;margin:0 auto}
-.stack-group{position:relative;width:100%;height:600px;margin-bottom:1.5rem;touch-action:pan-y;overflow:visible}
-.stack-item,.media-item{position:absolute;width:80%;max-width:900px;top:0;display:flex;justify-content:center;cursor:pointer;transition:transform 0.4s cubic-bezier(.23,1,.32,1);will-change:transform, z-index}
-.media-item{position:relative;margin-bottom:1.5rem;width:100%}
-.media-frame{width:100%;height:600px;overflow:hidden;display:flex;align-items:center;justify-content:center}
-.media-frame img,.media-frame video{width:100%;height:100%;object-fit:contain;transform:scale(1.25);transition:transform 0.4s cubic-bezier(.23,1,.32,1);box-shadow:0 10px 30px rgba(0,0,0,.5);border-radius:4px;pointer-events:none;will-change:transform}
+.stack-group{position:relative;width:100%;margin-bottom:1.5rem;touch-action:pan-y;overflow:visible;display:flex;justify-content:center}
+.stack-item,.media-item{position:absolute;width:fit-content;max-width:900px;top:0;display:flex;justify-content:center;cursor:pointer;transition:transform 0.4s cubic-bezier(.23,1,.32,1);will-change:transform, z-index}
+.media-item{position:relative;margin-bottom:1.5rem;width:100%;display:flex;justify-content:center}
+.media-frame{width:fit-content;height:auto;overflow:hidden;display:flex;align-items:center;justify-content:center;border-radius:4px;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+.media-frame img,.media-frame video{width:auto;height:auto;max-width:100%;max-height:85vh;display:block;transform:scale(1.25);transition:transform 0.4s cubic-bezier(.23,1,.32,1);pointer-events:none;will-change:transform}
+.stack-item:not([data-is-top="true"]) .media-frame img{object-fit:cover}
 .stack-item[data-is-top="true"]:hover .media-frame img,
 .media-item:hover .media-frame img,
 .media-item:hover .media-frame video{transform:scale(1)}
 @media(max-width:768px){
-.stack-group{height:400px;margin-bottom:1.5rem}
-.stack-item{width:85%}
-.media-frame{height:400px}
+.stack-item{max-width:85%}
 }
 </style>
+<script>
+function updateStackSize(img) {
+    const item = img.closest('.stack-item');
+    if (item && item.getAttribute('data-is-top') !== 'true') return;
+    const group = img.closest('.stack-group') || img.closest('.media-item');
+    if (group) {
+        const h = img.offsetHeight;
+        const w = img.offsetWidth;
+        group.style.height = h + 'px';
+        const frames = group.querySelectorAll('.media-frame');
+        frames.forEach(f => {
+            f.style.height = h + 'px';
+            f.style.width = w + 'px';
+        });
+    }
+}
+</script>
 {% endblock %}
 
 {% block content %}
@@ -30,7 +46,7 @@
 {% if child.file %}
 <div class="stack-item" onclick="handleItemInteraction(this,'{{ child.file.url }}')">
 <div class="media-frame">
-<img src="{{ child.file.url }}" loading="lazy">
+<img src="{{ child.file.url }}" loading="lazy" onload="updateStackSize(this)">
 </div>
 </div>
 {% endif %}
@@ -38,12 +54,12 @@
 </div>
 {% else %}
 {% if item.file %}
-<div class="media-item" onclick="openLightboxByUrl('{{ item.file.url }}')">
-<div class="media-frame">
+<div class="media-item">
+<div class="media-frame" onclick="openLightboxByUrl('{{ item.file.url }}')">
 {% if item.media_type == 'image' %}
-<img src="{{ item.file.url }}" loading="lazy">
+<img src="{{ item.file.url }}" loading="lazy" onload="updateStackSize(this)">
 {% elif item.media_type == 'video' %}
-<video src="{{ item.file.url }}" autoplay loop muted playsinline></video>
+<video src="{{ item.file.url }}" autoplay loop muted playsinline onloadedmetadata="updateStackSize(this)"></video>
 {% elif item.media_type == 'model3d' %}
 <div class="model-viewer" data-model="{{ item.file.url }}" data-hdr="{% if item.hdr_setting %}{{ item.hdr_setting.file.url }}{% endif %}" style="height:600px;width:100%"></div>
 {% endif %}
@@ -67,17 +83,18 @@ function reorderStack(clickedItem){
     const total = items.length
     const clickedIdx = items.indexOf(clickedItem)
     
-    requestAnimationFrame(() => {
-        items.forEach((item, i) => {
-            const relativeIndex = (i - clickedIdx + total) % total
-            const zIndex = total - relativeIndex
-            const transform = `translateX(${relativeIndex * 30}px) scale(${1 - relativeIndex * 0.025})`
-            
-            item.style.zIndex = zIndex
-            item.style.transform = transform
-            item.setAttribute('data-is-top', zIndex === total ? 'true' : 'false')
-        })
+    items.forEach((item, i) => {
+        const relativeIndex = (i - clickedIdx + total) % total
+        const zIndex = total - relativeIndex
+        const transform = `translateX(${relativeIndex * 30}px) scale(${1 - relativeIndex * 0.025})`
+        
+        item.style.zIndex = zIndex
+        item.style.transform = transform
+        item.setAttribute('data-is-top', zIndex === total ? 'true' : 'false')
     })
+
+    const topImg = clickedItem.querySelector('img');
+    if (topImg && topImg.complete) updateStackSize(topImg);
 }
 
 function handleItemInteraction(el, url){
@@ -116,5 +133,12 @@ document.querySelectorAll('.stack-group').forEach(group => {
         }
     }, {passive: true})
 })
+
+window.addEventListener('resize', () => {
+    document.querySelectorAll('.stack-group, .media-item').forEach(container => {
+        const activeMedia = container.querySelector('.stack-item[data-is-top="true"] img, .media-item img, video');
+        if (activeMedia) updateStackSize(activeMedia);
+    });
+});
 </script>
 {% endblock %}
