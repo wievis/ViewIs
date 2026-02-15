@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}404 | {% if lang == 'en' %}Not Found{% else %}Nie znaleziono{% endif %}{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'kontakt.css' %}">
+<style>
+    .error-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 70vh;
+        max-width: 800px;
+    }
+    .error-header {
+        font-family: 'Courier New', monospace;
+        font-size: 6rem;
+        font-weight: 400;
+        margin-bottom: 10px;
+        letter-spacing: -0.05em;
+    }
+    .error-btn {
+        margin-top: 40px;
+        text-decoration: none;
+        display: inline-block;
+        font-family: 'Courier New', monospace;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="contact-container">
+    <div class="error-wrapper">
+        <section class="intro-section">
+            <h1 class="error-header">404</h1>
+            <p class="lead-text">
+                {% if lang == 'en' %}Resource not located.{% else %}Zasób nie został odnaleziony.{% endif %}
+            </p>
+            <p class="description">
+                {% if lang == 'en' %}
+                    The requested URL was not found on this server. Integration failed.
+                {% else %}
+                    Żądany adres URL nie został odnaleziony. Integracja przerwana.
+                {% endif %}
+            </p>
+            
+            <a href="{% if lang == 'en' %}{% url 'home_en' %}{% else %}{% url 'home' %}{% endif %}" class="error-btn submit-btn">
+                {% if lang == 'en' %}Return to index{% else %}Powrót do indeksu{% endif %}
+            </a>
+        </section>
+
+        <section class="manifesto">
+            <p>
+                {% if lang == 'en' %}
+                    Technical void or structural gap?
+                {% else %}
+                    Techniczna pustka czy luka strukturalna?
+                {% endif %}
+            </p>
+            <strong>
+                {% if lang == 'en' %}
+                    FORM FOLLOWS FUNCTION.
+                {% else %}
+                    FORMA PODĄŻA ZA FUNKCJĄ.
+                {% endif %}
+            </strong>
+        </section>
+    </div>
+</div>
+{% endblock %}

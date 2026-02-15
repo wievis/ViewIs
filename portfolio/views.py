@@ -41,3 +41,7 @@ def kontakt(request, lang='pl'):
         except Exception as e:
             return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
     return render(request, 'kontakt.html', {'lang': lang})
+
+def custom_404(request, exception):
+    lang = 'en' if '/en/' in request.path else 'pl'
+    return render(request, '404.html', {'lang': lang}, status=404)
