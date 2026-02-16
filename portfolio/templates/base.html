@@ -6,26 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Maciej Wielgosz | Computer Designer{% endblock %}</title>
     
-    <meta name="description" content="Portfolio Computer Designer - projekty 3D, wizualizacje i design.">
+    <link rel="canonical" href="https://www.viewis.pl{{ request.path }}">
+    
+    <meta name="description" content="{% if lang == 'en' %}Portfolio of 3D projects, visualizations and modern design.{% else %}Portfolio projektów 3D, wizualizacji i nowoczesnego designu.{% endif %}">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    <meta property="og:url" content="https://www.viewis.pl{{ request.path }}">
     <meta property="og:title" content="{% block og_title %}Maciej Wielgosz - Computer Designer Portfolio{% endblock %}">
-    <meta property="og:description" content="Projekty 3D, wizualizacje i design. Zobacz moje najnowsze realizacje.">
-    <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'CEO-background-1200-630.jpg' %}">
+    <meta property="og:description" content="{% if lang == 'en' %}3D designs, visualizations and digital tools. See my latest work.{% else %}Projekty 3D, wizualizacje i design. Zobacz moje najnowsze realizacje.{% endif %}">
+    <meta property="og:image" content="https://www.viewis.pl{% static 'CEO-background-1200-630.jpg' %}">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Maciej Wielgosz | Computer Designer">
-    <meta name="twitter:description" content="Projekty 3D, wizualizacje i design. Zobacz moje portfolio.">
-    <meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'CEO-background-1200-630.jpg' %}">
+    <meta name="twitter:description" content="{% if lang == 'en' %}3D designs, visualizations and digital tools.{% else %}Projekty 3D, wizualizacje i design.{% endif %}">
+    <meta name="twitter:image" content="https://www.viewis.pl{% static 'CEO-background-1200-630.jpg' %}">
 
     <script type="application/ld+json">
     {
       "@context": "https://schema.org/",
       "@type": "Person",
       "name": "Maciej Wielgosz",
-      "url": "{{ request.scheme }}://{{ request.get_host }}",
+      "url": "https://www.viewis.pl",
       "jobTitle": "Computer Designer",
-      "description": "Portfolio projektów 3D, wizualizacji i nowoczesnego designu."
+      "description": "{% if lang == 'en' %}Portfolio of 3D projects and visualizations.{% else %}Portfolio projektów 3D i wizualizacji.{% endif %}"
     }
     </script>
 
