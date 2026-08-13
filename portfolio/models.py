@@ -1,4 +1,6 @@
 from django.db import models
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFit
 
 class HDRSetting(models.Model):
     name = models.CharField(max_length=100)
@@ -15,6 +17,12 @@ class Media(models.Model):
     
     name = models.CharField(max_length=200, blank=True)
     file = models.FileField(upload_to='media/', null=True, blank=True)
+    compressed_image = ImageSpecField(
+        source='file',
+        processors=[ResizeToFit(2500, 2500)],
+        format='WEBP',
+        options={'quality': 85}
+    )
     media_type = models.CharField(max_length=10, choices=TYPES, default='image')
     parent_album = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
     hdr_setting = models.ForeignKey(HDRSetting, on_delete=models.SET_NULL, blank=True, null=True)

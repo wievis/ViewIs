@@ -46,7 +46,7 @@ function updateStackSize(img) {
 {% if child.file %}
 <div class="stack-item" onclick="handleItemInteraction(this,'{{ child.file.url }}')">
 <div class="media-frame">
-<img src="{{ child.file.url }}" loading="lazy" onload="updateStackSize(this)">
+<img src="{% if child.media_type == 'image' %}{{ child.compressed_image.url }}{% else %}{{ child.file.url }}{% endif %}" loading="lazy" onload="updateStackSize(this)">
 </div>
 </div>
 {% endif %}
@@ -57,7 +57,7 @@ function updateStackSize(img) {
 <div class="media-item">
 <div class="media-frame" onclick="openLightboxByUrl('{{ item.file.url }}')">
 {% if item.media_type == 'image' %}
-<img src="{{ item.file.url }}" loading="lazy" onload="updateStackSize(this)">
+<img src="{{ item.compressed_image.url }}" loading="lazy" onload="updateStackSize(this)">
 {% elif item.media_type == 'video' %}
 <video src="{{ item.file.url }}" autoplay loop muted playsinline onloadedmetadata="updateStackSize(this)"></video>
 {% elif item.media_type == 'model3d' %}
