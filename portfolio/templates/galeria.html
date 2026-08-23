@@ -27,7 +27,7 @@
 <div class="gallery-grid">
     {% for item in media_items %}
     {% if item.file %}
-    <div class="media-thumb" onclick="openLightboxByUrl('{{ item.file.url }}')">
+    <div class="media-thumb" onclick="openLightbox({{ forloop.counter0 }})">
         {% if item.media_type == 'image' %}
             <img src="{{ item.compressed_image.url }}" alt="Projekt {{ forloop.counter }}" loading="lazy">
         {% elif item.media_type == 'video' %}
@@ -44,16 +44,11 @@
     window.mediaItems = [
         {% for item in media_items %}{% if item.file %}
         { 
-            url: "{{ item.file.url }}", 
+            url: "{% if item.media_type == 'image' %}{{ item.compressed_image.url }}{% else %}{{ item.file.url }}{% endif %}", 
             type: "{{ item.media_type }}", 
             hdr: "{% if item.hdr_setting %}{{ item.hdr_setting.file.url }}{% endif %}" 
         }{% if not forloop.last %},{% endif %}
         {% endif %}{% endfor %}
     ];
-
-    function openLightboxByUrl(url) {
-        const idx = window.mediaItems.findIndex(i => i.url === url);
-        if (idx !== -1) openLightbox(idx);
-    }
 </script>
 {% endblock %}
