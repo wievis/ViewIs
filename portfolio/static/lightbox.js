@@ -1,4 +1,3 @@
-// lightbox.js
 let currentIndex = 0;
 let lbTouchStartX = 0;
 let lbTouchStartY = 0;
@@ -30,17 +29,21 @@ function createMediaElement(item) {
         video.autoplay = true;
         content.appendChild(video);
     } else if (item.type === 'model3d') {
-        const viewer = document.createElement('div');
-        viewer.className = 'model-viewer';
-        viewer.dataset.model = item.url;
-        viewer.dataset.hdr = item.hdr || '';
+        const viewer = document.createElement('model-viewer');
+        viewer.src = item.url;
+        
+        if (item.hdr && item.hdr !== '') {
+            viewer.setAttribute('environment-image', item.hdr);
+        }
+        
+        viewer.setAttribute('camera-controls', '');
+        viewer.setAttribute('auto-rotate', '');
+        viewer.setAttribute('shadow-intensity', '1');
         viewer.style.width = '100%';
         viewer.style.height = '100%';
-        content.appendChild(viewer);
+        viewer.style.outline = 'none';
         
-        setTimeout(() => {
-            if (window.initSingleModelViewer) window.initSingleModelViewer(viewer);
-        }, 50);
+        content.appendChild(viewer);
     }
 }
 
