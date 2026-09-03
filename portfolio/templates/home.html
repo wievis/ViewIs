@@ -47,7 +47,7 @@ function updateStackSize(img) {
 <div class="stack-group">
 {% for child in item.children.all %}
 {% if child.file %}
-<div class="stack-item" onclick="handleItemInteraction(this,'{% if child.media_type == 'image' %}{{ child.compressed_image.url }}{% else %}{{ child.file.url }}{% endif %}')">
+<div class="stack-item" onclick="if(isClick(event)) handleItemInteraction(this,'{% if child.media_type == 'image' %}{{ child.compressed_image.url }}{% else %}{{ child.file.url }}{% endif %}')">
 <div class="media-frame">
 <img src="{% if child.media_type == 'image' %}{{ child.compressed_image.url }}{% else %}{{ child.file.url }}{% endif %}" loading="lazy" onload="updateStackSize(this)">
 </div>
@@ -58,7 +58,7 @@ function updateStackSize(img) {
 {% else %}
 {% if item.file %}
 <div class="media-item">
-<div class="media-frame" onclick="openLightboxByUrl('{% if item.media_type == 'image' %}{{ item.compressed_image.url }}{% else %}{{ item.file.url }}{% endif %}')">
+<div class="media-frame" onclick="if(isClick(event)) openLightboxByUrl('{% if item.media_type == 'image' %}{{ item.compressed_image.url }}{% else %}{{ item.file.url }}{% endif %}')">
 {% if item.media_type == 'image' %}
 <img src="{{ item.compressed_image.url }}" loading="lazy" onload="updateStackSize(this)">
 {% elif item.media_type == 'video' %}
@@ -74,6 +74,17 @@ function updateStackSize(img) {
 </div>
 
 <script>
+let ptrX = 0, ptrY = 0, ptrT = 0;
+document.addEventListener('pointerdown', e => {
+    ptrX = e.clientX;
+    ptrY = e.clientY;
+    ptrT = Date.now();
+}, { passive: true, capture: true });
+
+function isClick(e) {
+    return Math.abs(e.clientX - ptrX) < 10 && Math.abs(e.clientY - ptrY) < 10 && (Date.now() - ptrT) < 400;
+}
+
 window.mediaItems=[
 {% for item in media_items %}{% if item.file %}
 {url:"{% if item.media_type == 'image' %}{{ item.compressed_image.url }}{% else %}{{ item.file.url }}{% endif %}",type:"{{ item.media_type }}",hdr:"{% if item.hdr_setting %}{{ item.hdr_setting.file.url }}{% endif %}"}{% if not forloop.last %},{% endif %}
