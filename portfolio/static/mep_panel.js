@@ -1,9 +1,13 @@
-let currentTab = "ilosci";
+let currentTab = "3d";
 const loadedModels = {};
+let sheetIndexCache = { stamp: 0, data: null };
+let currentActiveSheetName = "";
+let visibleSheetsList = [];
 
 Office.onReady(async () => {
   registerSelectionEvents();
   registerSheetListEvents();
+  registerGlobalKeyEvents();
   await renderSheetButtons();
 });
 
@@ -37,12 +41,26 @@ function autoDetectBranch(fileName) {
   return null;
 }
 
-function processFileList(files) {
-  const ifcFiles = Array.from(files).filter(f => f.name.toLowerCase().endsWith(".ifc"));
-  if (ifcFiles.length === 0) {
-    alert("W wybranym folderze nie ma plików .ifc");
-    return;
+function onProjectFolderSelected(event) {
+  const allFiles = Array.from(event.target.files);
+  const ifcFiles = allFiles.filter(f => f.name.toLowerCase().endsWith(".ifc"));
+  const jsonFiles = allFiles.filter(f => f.name.toLowerCase().endsWith(".json") && f.name.includes("system"));
+
+  if (jsonFiles.length > 0) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const parsed = JSON.parse(e.target.result);
+        sendToViewer({
+          type: "REGISTER_SYSTEM_DATA",
+          members: parsed.members || {},
+          details: parsed.details || {}
+        });
+      } catch(err){}
+    };
+    reader.readAsText(jsonFiles[0]);
   }
+
   const detected = [];
   ifcFiles.forEach(file => {
     let branch = autoDetectBranch(file.name);
@@ -64,16 +82,10 @@ function processFileList(files) {
     };
     reader.readAsArrayBuffer(file);
   });
+
+  const jsonStatus = jsonFiles.length > 0 ? " | JSON: aktywny" : " | JSON: brak";
   const lbl = document.getElementById("models-status-label");
-  if (lbl) lbl.textContent = detected.join(" | ");
-}
-
-function onIfcFolderSelected(event) {
-  processFileList(event.target.files);
-}
-
-function onIfcFilesSelected(event) {
-  processFileList(event.target.files);
+  if (lbl) lbl.textContent = (detected.join(" | ") || "Brak IFC") + jsonStatus;
 }
 
 function sendToViewer(msg) {
@@ -99,7 +111,9 @@ async function renderSheetButtons() {
       const active = context.workbook.worksheets.getActiveWorksheet();
       active.load("name");
       await context.sync();
+      currentActiveSheetName = active.name;
       list.innerHTML = "";
+      visibleSheetsList = sheets.items.filter(s => s.visibility === Excel.SheetVisibility.visible).map(s => s.name);
       sheets.items.filter(s => s.visibility === Excel.SheetVisibility.visible).forEach(s => {
         const t = getSheetTheme(s.name);
         const isActive = s.name === active.name;
@@ -119,6 +133,7 @@ async function switchWorksheet(name) {
       context.workbook.worksheets.getItem(name).activate();
       await context.sync();
     });
+    currentActiveSheetName = name;
     await renderSheetButtons();
     await handleSelectionChange();
   } catch(e){}
@@ -128,7 +143,10 @@ function registerSheetListEvents() {
   if (typeof Excel === "undefined") return;
   Excel.run(async (context) => {
     const sheets = context.workbook.worksheets;
-    const refresh = async () => { await renderSheetButtons(); };
+    const refresh = async () => { 
+      sheetIndexCache.data = null;
+      await renderSheetButtons(); 
+    };
     ["onAdded", "onDeleted", "onNameChanged"].forEach(n => {
       if (sheets[n]) sheets[n].add(refresh);
     });
@@ -147,6 +165,107 @@ function registerSelectionEvents() {
   }).catch(()=>{});
 }
 
+function registerGlobalKeyEvents() {
+  window.addEventListener("keydown", (e) => {
+    if (e.altKey && !e.ctrlKey && (e.key === "ArrowLeft" || e.key === "ArrowRight")) {
+      e.preventDefault();
+      cycleVisibleSheets(e.key === "ArrowRight" ? 1 : -1);
+    } else if (e.altKey && e.ctrlKey && (e.key === "ArrowLeft" || e.key === "ArrowRight")) {
+      e.preventDefault();
+      sendToViewer({ type: "REQ_OCC_NAV", delta: e.key === "ArrowRight" ? 1 : -1 });
+    } else if (e.shiftKey && (e.key === "ArrowLeft" || e.key === "ArrowRight")) {
+      e.preventDefault();
+      handleColNav(e.key === "ArrowRight" ? 1 : -1);
+    }
+  });
+}
+
+async function cycleVisibleSheets(delta) {
+  if (visibleSheetsList.length <= 1) return;
+  let idx = visibleSheetsList.indexOf(currentActiveSheetName);
+  if (idx === -1) idx = 0;
+  let nextIdx = (idx + delta + visibleSheetsList.length) % visibleSheetsList.length;
+  await switchWorksheet(visibleSheetsList[nextIdx]);
+}
+
+async function handleColNav(delta) {
+  if (typeof Excel === "undefined") return;
+  try {
+    await Excel.run(async (context) => {
+      const sheet = context.workbook.worksheets.getActiveWorksheet();
+      const range = context.workbook.getSelectedRange();
+      const used = sheet.getUsedRange();
+      range.load(["rowIndex", "columnIndex"]);
+      used.load(["columnCount"]);
+      await context.sync();
+      let targetCol = range.columnIndex + delta;
+      if (targetCol < 0) targetCol = 0;
+      if (targetCol >= used.columnCount) targetCol = used.columnCount - 1;
+      sheet.getCell(range.rowIndex, targetCol).select();
+      await context.sync();
+      await handleSelectionChange();
+    });
+  } catch(err){}
+}
+
+async function buildSheetIndex() {
+  const now = Date.now();
+  if (sheetIndexCache.data && now - sheetIndexCache.stamp < 15000) return sheetIndexCache.data;
+  const result = [];
+  try {
+    await Excel.run(async (context) => {
+      const sheets = context.workbook.worksheets;
+      sheets.load(["items/name", "items/visibility"]);
+      await context.sync();
+      const visible = sheets.items.filter(s => s.visibility === Excel.SheetVisibility.visible);
+      const usedRanges = visible.map(s => {
+        const u = s.getUsedRangeOrNullObject();
+        u.load(["isNullObject", "values", "rowIndex"]);
+        return u;
+      });
+      await context.sync();
+
+      visible.forEach((s, idx) => {
+        const u = usedRanges[idx];
+        const set = new Set();
+        result.push({ name: s.name, tokens: set, rowIndex: u.isNullObject ? 0 : u.rowIndex });
+        if (u.isNullObject || !u.values) return;
+        u.values.forEach(row => {
+          row.forEach(cell => {
+            const str = String(cell || "").trim();
+            if (str) {
+              str.split(/[\s,;|]+/).forEach(tok => {
+                if (tok && tok.length >= 6) set.add(tok);
+              });
+            }
+          });
+        });
+      });
+    });
+  } catch(e){}
+  sheetIndexCache = { stamp: now, data: result };
+  return result;
+}
+
+async function publishOccurrences(tokens) {
+  if (!tokens || tokens.length === 0) {
+    sendToViewer({ type: "SET_OCCURRENCES", occurrences: [], activeSheet: currentActiveSheetName });
+    return;
+  }
+  const index = await buildSheetIndex();
+  const occurrences = [];
+  index.forEach(entry => {
+    if (tokens.some(t => entry.tokens.has(t))) {
+      occurrences.push(entry.name);
+    }
+  });
+  sendToViewer({
+    type: "SET_OCCURRENCES",
+    occurrences: occurrences,
+    activeSheet: currentActiveSheetName
+  });
+}
+
 async function handleSelectionChange() {
   if (typeof Excel === "undefined") return;
   try {
@@ -156,11 +275,14 @@ async function handleSelectionChange() {
       const used = sheet.getUsedRange();
       sheet.load("name");
       range.load(["rowIndex", "columnIndex"]);
-      used.load(["values", "rowCount"]);
+      used.load(["values", "rowCount", "columnCount"]);
       await context.sync();
 
+      currentActiveSheetName = sheet.name;
       const totalRows = used.rowCount;
       const rIdx = range.rowIndex;
+      const cIdx = range.columnIndex;
+
       let headerIdx = 0;
       for (let r = 0; r < Math.min(10, totalRows); r++) {
         const row = used.values[r] || [];
@@ -187,29 +309,66 @@ async function handleSelectionChange() {
       if (upSheet.includes("LFT") || upSheet.includes("WENTYL")) detectedBranch = "LFT";
       else if (upSheet.includes("ARC") || upSheet.includes("ŚCIAN") || upSheet.includes("STROP")) detectedBranch = "ARC";
 
-      let rowKey = "";
+      let rowKeys = [];
       const rkIdx = headers.indexOf("Row_Key");
-      if (rkIdx >= 0 && rowVals[rkIdx]) rowKey = String(rowVals[rkIdx]).trim();
-      else {
+      if (rkIdx >= 0 && rowVals[rkIdx]) {
+        rowKeys = String(rowVals[rkIdx]).trim().split(/[\s,;|]+/).filter(Boolean);
+      } else {
         for (let v of rowVals) {
           const s = String(v || "").trim();
-          if (/^[A-Z0-9]{3,4}-[A-F0-9]{6,}/i.test(s)) { rowKey = s; break; }
+          if (/^[A-Z0-9]{3,4}-[A-F0-9]{6,}/i.test(s)) {
+            rowKeys = s.split(/[\s,;|]+/).filter(Boolean);
+            break;
+          }
         }
       }
 
       let guids = [];
-      const gIdx = headers.indexOf("GlobalId");
-      if (gIdx >= 0 && rowVals[gIdx]) {
-        guids = String(rowVals[gIdx]).trim().split(/[\s,;|]+/).filter(Boolean);
+      const isBilans = upSheet.includes("BILANS");
+      if (isBilans) {
+        const clickedHeader = String(headers[cIdx] || "").toLowerCase();
+        const normH = headers.map(h => h.toLowerCase().replace(/[\s_]+/g, ""));
+        const pomIdx = normH.indexOf("globalidpominiete");
+        const rapIdx = normH.indexOf("globalidraport");
+        const allIdx = normH.indexOf("globalid");
+
+        let targetVal = "";
+        if (clickedHeader.includes("pomini") || clickedHeader.includes("odrzucone")) {
+          targetVal = pomIdx >= 0 ? rowVals[pomIdx] : "";
+        } else if (clickedHeader.includes("rapor")) {
+          targetVal = rapIdx >= 0 ? rowVals[rapIdx] : "";
+        } else {
+          targetVal = allIdx >= 0 ? rowVals[allIdx] : (rapIdx >= 0 ? rowVals[rapIdx] : "");
+        }
+        if (targetVal) {
+          guids = String(targetVal).trim().split(/[\s,;|]+/).filter(Boolean);
+        }
+      } else {
+        headers.forEach((h, i) => {
+          const hLow = h.toLowerCase();
+          if (hLow.includes("globalid") || hLow === "guid") {
+            const val = String(rowVals[i] || "").trim();
+            if (val) {
+              val.split(/[\s,;|]+/).forEach(g => {
+                if (g && g.length >= 16 && !guids.includes(g)) guids.push(g);
+              });
+            }
+          }
+        });
       }
+
+      const lookupTokens = [...guids, ...rowKeys].filter(Boolean);
+      await publishOccurrences(lookupTokens);
 
       sendToViewer({
         type: "SWITCH_AND_FOCUS_GROUP",
         branch: detectedBranch,
-        rowKey: rowKey || `ROW_${rIdx}`,
+        rowKey: rowKeys[0] || `ROW_${rIdx}`,
+        rowKeys: rowKeys,
         guids: guids,
         rowData: rowData,
-        sheetName: sheet.name
+        sheetName: sheet.name,
+        isBilans: isBilans
       });
     });
   } catch(e){}
@@ -218,7 +377,39 @@ async function handleSelectionChange() {
 window.addEventListener("message", async (e) => {
   const d = e.data;
   if (!d) return;
-  if (d.type === "VIEWER_PICK_GUID" && d.guid && typeof Excel !== "undefined") {
+
+  if (d.type === "ROW_NAV" && typeof Excel !== "undefined") {
+    try {
+      await Excel.run(async (context) => {
+        const sheet = context.workbook.worksheets.getActiveWorksheet();
+        const range = context.workbook.getSelectedRange();
+        const used = sheet.getUsedRange();
+        range.load(["rowIndex", "columnIndex"]);
+        used.load(["rowCount"]);
+        await context.sync();
+        let targetRow = range.rowIndex + d.delta;
+        if (targetRow < 1) targetRow = 1;
+        if (targetRow >= used.rowCount) targetRow = used.rowCount - 1;
+        sheet.getCell(targetRow, range.columnIndex).select();
+        await context.sync();
+        await handleSelectionChange();
+      });
+    } catch(err){}
+  } else if (d.type === "COL_NAV") {
+    await handleColNav(d.delta);
+  } else if (d.type === "SHEET_CYCLE") {
+    await cycleVisibleSheets(d.delta);
+  } else if (d.type === "OCC_NAV") {
+    const list = d.occurrences || [];
+    if (list.length > 1 && typeof Excel !== "undefined") {
+      let idx = list.indexOf(currentActiveSheetName);
+      if (idx === -1) idx = 0;
+      let nextIdx = (idx + d.delta + list.length) % list.length;
+      await switchWorksheet(list[nextIdx]);
+    }
+  } else if (d.type === "JUMP_TO_SHEET" && d.sheetName) {
+    await switchWorksheet(d.sheetName);
+  } else if (d.type === "VIEWER_PICK_GUID" && d.guid && typeof Excel !== "undefined") {
     try {
       await Excel.run(async (context) => {
         const sheet = context.workbook.worksheets.getActiveWorksheet();

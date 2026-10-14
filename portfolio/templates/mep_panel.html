@@ -9,24 +9,26 @@
 </head>
 <body>
   <div class="tabs">
-    <button class="tab active" style="background: #3b6a8f; color: #fff;" onclick="handleTabClick('ilosci', '#3b6a8f', this)">Zestawienia</button>
-    <button class="tab" onclick="handleTabClick('3d', '#4f46e5', this)">Podgląd 3D</button>
+    <button class="tab" onclick="handleTabClick('modele', '#059669', this)">Folder Projektu</button>
+    <button class="tab active" style="background: #3b6a8f; color: #fff;" onclick="handleTabClick('3d', '#3b6a8f', this)">Podgląd 3D</button>
   </div>
 
-  <div id="tab-ilosci" class="content active">
-    <div class="model-picker-bar">
-      <input type="file" id="ifcFolderInput" webkitdirectory directory multiple style="display:none;" onchange="onIfcFolderSelected(event)">
-      <input type="file" id="ifcFilesInput" accept=".ifc" multiple style="display:none;" onchange="onIfcFilesSelected(event)">
-      <button class="btn-picker" onclick="document.getElementById('ifcFolderInput').click()">Wskaż folder IFC</button>
-      <button class="btn-picker secondary" onclick="document.getElementById('ifcFilesInput').click()">Wybierz pliki</button>
-      <span id="models-status-label">Brak załadowanych modeli</span>
+  <div id="tab-modele" class="content" style="padding: 12px; gap: 10px; overflow-y: auto;">
+    <div style="font-size: 12px; font-weight: bold; color: #f8fafc;">Katalog projektu (IFC + JSON)</div>
+    <div style="font-size: 11px; color: #94a3b8; line-height: 1.5;">
+      Wskaż główny folder projektu/rewizji. Dodatek automatycznie wczyta modele z podfolderu <code>ifc</code> oraz plik danych <code>*_system.json</code>.
     </div>
-    <div class="status" style="line-height: 1.6; margin-top: 8px;">
-      Zaznacz wiersz w arkuszu Excela, aby zlokalizować i podświetlić element w modelu 3D.
+    <div style="display: flex; gap: 8px; margin-top: 8px;">
+      <input type="file" id="projFolderInput" webkitdirectory directory multiple style="display:none;" onchange="onProjectFolderSelected(event)">
+      <button class="btn-picker" onclick="document.getElementById('projFolderInput').click()" style="background:#2563eb;color:#fff;border:none;padding:8px 16px;border-radius:4px;cursor:pointer;font-size:11px;font-weight:600;">Wskaż folder projektu</button>
+    </div>
+    <div style="margin-top: 12px; border-top: 1px solid #334155; padding-top: 10px;">
+      <div style="font-size: 11px; font-weight: bold; color: #cbd5e1; margin-bottom: 4px;">Stan wczytanych zasobów:</div>
+      <div id="models-status-label" style="font-size: 11px; color: #38bdf8; word-break: break-all;">Brak wskazanego folderu</div>
     </div>
   </div>
 
-  <div id="tab-3d" class="content">
+  <div id="tab-3d" class="content active">
     <iframe id="viewerFrame" src="/mep/viewer/"></iframe>
   </div>
 

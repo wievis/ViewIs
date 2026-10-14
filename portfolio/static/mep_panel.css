@@ -21,45 +21,15 @@ body {
   background: #1e293b;
   border: none;
   color: var(--subtext);
-  padding: 6px 12px;
+  padding: 6px 14px;
   font-size: 11px;
   cursor: pointer;
   border-radius: 4px;
+  transition: all 0.15s ease;
 }
 .tab.active { color: #fff; font-weight: bold; }
 .content { display: none; flex: 1; flex-direction: column; overflow: hidden; }
 .content.active { display: flex; }
-.model-picker-bar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  align-items: center;
-  background: #1e293b;
-  border: 1px solid #334155;
-  border-radius: 6px;
-  padding: 8px;
-}
-.btn-picker {
-  background: #2563eb;
-  border: none;
-  color: #fff;
-  padding: 5px 10px;
-  border-radius: 4px;
-  font-size: 11px;
-  font-weight: 600;
-  cursor: pointer;
-}
-.btn-picker.secondary { background: #334155; }
-.btn-picker:hover { opacity: 0.9; }
-#models-status-label {
-  font-size: 11px;
-  color: #38bdf8;
-  margin-left: 4px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.status { font-size: 11px; color: var(--subtext); }
 .sheets-drawer {
   margin-top: auto;
   border-top: 1px solid #334155;
@@ -84,5 +54,5 @@ body {
 .drawer-arrow { font-size: 10px; transition: transform 0.2s ease; }
 .sheets-drawer.collapsed .drawer-arrow { transform: rotate(180deg); }
 .sheets-tabs { display: flex; flex-wrap: wrap; gap: 4px; padding: 4px 0; overflow-y: auto; flex: 1; }
-#tab-3d { width: 100%; height: calc(100vh - 100px); position: relative; }
+#tab-3d { width: 100%; height: calc(100vh - 80px); position: relative; }
 #viewerFrame { width: 100%; height: 100%; border: 1px solid #334155; border-radius: 4px; background: #0b1120; }
