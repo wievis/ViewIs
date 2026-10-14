@@ -5,39 +5,39 @@
   <meta charset="UTF-8">
   <title>ViewIs MEP Link</title>
   <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: "Segoe UI", sans-serif; }
-    body {
-      background: #0f172a; color: #f8fafc; height: 100vh;
-      display: flex; flex-direction: column; overflow: hidden; padding: 8px;
-    }
-    .header {
-      display: flex; justify-content: space-between; align-items: center;
-      background: #1e293b; border: 1px solid #334155; border-radius: 6px;
-      padding: 6px 10px; margin-bottom: 8px; font-size: 11px;
-    }
-    .brand { font-weight: bold; color: #38bdf8; font-family: monospace; }
-    .btn-file {
-      background: #2563eb; color: #fff; border: none; padding: 4px 10px;
-      border-radius: 4px; font-size: 11px; font-weight: 600; cursor: pointer;
-    }
-    .btn-file:hover { background: #1d4ed8; }
-    #model-info { font-size: 10px; color: #94a3b8; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 170px; }
-    #viewer-frame {
-      flex: 1; border: 1px solid #334155; border-radius: 6px; width: 100%; height: 100%; background: #0b1120;
-    }
-  </style>
+  <link rel="stylesheet" href="{% static 'mep_panel.css' %}">
 </head>
 <body>
-  <div class="header">
-    <div>
-      <span class="brand">ViewIs MEP</span>
-      <span id="model-info">&middot; Brak modelu</span>
-    </div>
-    <input type="file" id="localIfcInput" accept=".ifc" style="display:none;" onchange="onLocalIfcSelected(event)">
-    <button class="btn-file" onclick="document.getElementById('localIfcInput').click()">Wskaż plik IFC</button>
+  <div class="tabs">
+    <button class="tab active" style="background: #3b6a8f; color: #fff;" onclick="handleTabClick('ilosci', '#3b6a8f', this)">Zestawienia</button>
+    <button class="tab" onclick="handleTabClick('3d', '#4f46e5', this)">Podgląd 3D</button>
   </div>
-  <iframe id="viewer-frame" src="/mep/viewer/"></iframe>
+
+  <div id="tab-ilosci" class="content active">
+    <div class="model-picker-bar">
+      <input type="file" id="ifcFolderInput" webkitdirectory directory multiple style="display:none;" onchange="onIfcFolderSelected(event)">
+      <input type="file" id="ifcFilesInput" accept=".ifc" multiple style="display:none;" onchange="onIfcFilesSelected(event)">
+      <button class="btn-picker" onclick="document.getElementById('ifcFolderInput').click()">Wskaż folder IFC</button>
+      <button class="btn-picker secondary" onclick="document.getElementById('ifcFilesInput').click()">Wybierz pliki</button>
+      <span id="models-status-label">Brak załadowanych modeli</span>
+    </div>
+    <div class="status" style="line-height: 1.6; margin-top: 8px;">
+      Zaznacz wiersz w arkuszu Excela, aby zlokalizować i podświetlić element w modelu 3D.
+    </div>
+  </div>
+
+  <div id="tab-3d" class="content">
+    <iframe id="viewerFrame" src="/mep/viewer/"></iframe>
+  </div>
+
+  <div id="sheetsDrawer" class="sheets-drawer">
+    <div class="sheets-toggle-bar" onclick="toggleSheetsDrawer()">
+      <span>Arkusze</span>
+      <span id="sheetsToggleArrow" class="drawer-arrow">▲</span>
+    </div>
+    <div id="sheetsList" class="sheets-tabs"></div>
+  </div>
+
   <script src="{% static 'mep_panel.js' %}"></script>
 </body>
 </html>

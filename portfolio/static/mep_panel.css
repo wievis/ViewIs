@@ -1,0 +1,88 @@
+:root {
+  --bg: #0f172a;
+  --card: #1e293b;
+  --text: #f8fafc;
+  --subtext: #94a3b8;
+  --accent: #3b6a8f;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: "Segoe UI", sans-serif; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  border: 10px solid var(--accent);
+  padding: 8px;
+  overflow: hidden;
+}
+.tabs { display: flex; gap: 4px; margin-bottom: 8px; border-bottom: 1px solid #334155; padding-bottom: 4px; flex-shrink: 0; }
+.tab {
+  background: #1e293b;
+  border: none;
+  color: var(--subtext);
+  padding: 6px 12px;
+  font-size: 11px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.tab.active { color: #fff; font-weight: bold; }
+.content { display: none; flex: 1; flex-direction: column; overflow: hidden; }
+.content.active { display: flex; }
+.model-picker-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 6px;
+  padding: 8px;
+}
+.btn-picker {
+  background: #2563eb;
+  border: none;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn-picker.secondary { background: #334155; }
+.btn-picker:hover { opacity: 0.9; }
+#models-status-label {
+  font-size: 11px;
+  color: #38bdf8;
+  margin-left: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.status { font-size: 11px; color: var(--subtext); }
+.sheets-drawer {
+  margin-top: auto;
+  border-top: 1px solid #334155;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  max-height: 33vh;
+  transition: max-height 0.2s ease;
+}
+.sheets-drawer.collapsed { max-height: 24px; }
+.sheets-toggle-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 0;
+  font-size: 11px;
+  font-weight: bold;
+  color: var(--subtext);
+  cursor: pointer;
+}
+.drawer-arrow { font-size: 10px; transition: transform 0.2s ease; }
+.sheets-drawer.collapsed .drawer-arrow { transform: rotate(180deg); }
+.sheets-tabs { display: flex; flex-wrap: wrap; gap: 4px; padding: 4px 0; overflow-y: auto; flex: 1; }
+#tab-3d { width: 100%; height: calc(100vh - 100px); position: relative; }
+#viewerFrame { width: 100%; height: 100%; border: 1px solid #334155; border-radius: 4px; background: #0b1120; }

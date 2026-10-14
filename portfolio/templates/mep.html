@@ -77,8 +77,8 @@
         {% endif %}
       </p>
 
-      <a href="{% url 'mep_manifest' %}" class="submit-btn btn-download">
-        {% if lang == 'en' %}Download Add-in (.xml){% else %}Pobierz wtyczkę (.xml){% endif %}
+      <a href="{% url 'mep_download_zip' %}" class="submit-btn btn-download">
+        {% if lang == 'en' %}Download Add-in (.zip){% else %}Pobierz wtyczkę (.zip){% endif %}
       </a>
     </section>
 
@@ -97,19 +97,19 @@
 
     <section class="competencies-grid" style="gap: 30px; margin-bottom: 40px;">
       <div class="category">
-        <h2>{% if lang == 'en' %}How to launch in 30 seconds{% else %}Instalacja w 30 sekund{% endif %}</h2>
+        <h2>{% if lang == 'en' %}Quick Setup (Windows){% else %}Szybkie uruchomienie (Windows){% endif %}</h2>
         <ul class="steps-list">
           <li>
             <span class="step-num">01.</span>
-            <span>{% if lang == 'en' %}Download the <code>viewis-mep-manifest.xml</code> file above.{% else %}Pobierz plik manifestu <code>viewis-mep-manifest.xml</code> przyciskiem powyżej.{% endif %}</span>
+            <span>{% if lang == 'en' %}Download and extract the <code>viewis-mep-link.zip</code> package.{% else %}Pobierz i wypakuj paczkę <code>viewis-mep-link.zip</code> przyciskiem powyżej.{% endif %}</span>
           </li>
           <li>
             <span class="step-num">02.</span>
-            <span>{% if lang == 'en' %}Open Excel &rarr; <em>Insert</em> &rarr; <em>My Add-ins</em> &rarr; <em>Upload My Add-in</em> and select the XML file.{% else %}W programie Excel przejdź do <em>Wstawianie</em> &rarr; <em>Moje dodatki</em> &rarr; <em>Przekaż dodatek</em> i wskaż pobrany plik XML.{% endif %}</span>
+            <span>{% if lang == 'en' %}Run <code>instaluj-viewis-mep.bat</code> (registers the add-in in Excel without admin rights).{% else %}Uruchom plik <code>instaluj-viewis-mep.bat</code> (automatycznie rejestruje wtyczkę w programie Excel bez praw administratora).{% endif %}</span>
           </li>
           <li>
             <span class="step-num">03.</span>
-            <span>{% if lang == 'en' %}Open your takeoff workbook, click <em>Wskaż plik IFC</em> in the sidebar and choose your model from disk.{% else %}Otwórz arkusz przedmiaru, kliknij <em>Wskaż plik IFC</em> w panelu bocznym i wybierz model ze swojego dysku.{% endif %}</span>
+            <span>{% if lang == 'en' %}Open your takeoff workbook in Excel, click <em>ViewIs MEP</em> on the Home ribbon, and select your IFC model.{% else %}Otwórz arkusz przedmiaru w programie Excel, kliknij przycisk <em>ViewIs MEP</em> na wstążce i wskaż plik IFC ze swojego dysku.{% endif %}</span>
           </li>
         </ul>
       </div>

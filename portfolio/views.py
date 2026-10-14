@@ -1,6 +1,6 @@
 import os
 from django.shortcuts import render
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse, HttpResponse, FileResponse
 from django.core.mail import send_mail
 from django.views.decorators.clickjacking import xframe_options_exempt
 from .models import Media
@@ -52,6 +52,10 @@ def mep_manifest(request):
     response = HttpResponse(content, content_type='application/xml')
     response['Content-Disposition'] = 'attachment; filename="viewis-mep-manifest.xml"'
     return response
+
+def mep_download_zip(request):
+    zip_path = os.path.join(os.path.dirname(__file__), 'static', 'viewis-mep-link.zip')
+    return FileResponse(open(zip_path, 'rb'), as_attachment=True, filename='viewis-mep-link.zip')
 
 def custom_404(request, exception):
     lang = 'en' if '/en/' in request.path else 'pl'

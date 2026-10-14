@@ -13,4 +13,5 @@ urlpatterns = [
     path('mep/panel/', views.mep_panel, name='mep_panel'),
     path('mep/viewer/', views.mep_viewer, name='mep_viewer'),
     path('mep/manifest.xml', views.mep_manifest, name='mep_manifest'),
+    path('mep/download/', views.mep_download_zip, name='mep_download_zip'),
 ]

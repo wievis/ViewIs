@@ -5,13 +5,13 @@
            xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides"
            xsi:type="TaskPaneApp">
   <Id>d7c4a194-48f8-4e89-a2e1-4c19d83e720a</Id>
-  <Version>1.4.0.0</Version>
+  <Version>1.0.0.0</Version>
   <ProviderName>ViewIs</ProviderName>
   <DefaultLocale>pl-PL</DefaultLocale>
   <DisplayName DefaultValue="ViewIs MEP Link"/>
-  <Description DefaultValue="Interaktywny podgląd modeli IFC powiązany z arkuszem Excel"/>
-  <IconUrl DefaultValue="https://www.viewis.pl/static/favicon.ico"/>
-  <HighResolutionIconUrl DefaultValue="https://www.viewis.pl/static/favicon.ico"/>
+  <Description DefaultValue="Podglad 3D modeli IFC powiazany z arkuszem Excel"/>
+  <IconUrl DefaultValue="https://www.viewis.pl/static/icon.png"/>
+  <HighResolutionIconUrl DefaultValue="https://www.viewis.pl/static/icon.png"/>
   <SupportUrl DefaultValue="https://www.viewis.pl/mep/"/>
   <AppDomains>
     <AppDomain>https://www.viewis.pl</AppDomain>
@@ -45,7 +45,7 @@
                   <bt:Image size="32" resid="I"/>
                   <bt:Image size="80" resid="I"/>
                 </Icon>
-                <Control xsi:type="Button" id="ViewIsMepBtn">
+                <Control xsi:type="Button" id="ViewIsMepButton">
                   <Label resid="T"/>
                   <Supertip>
                     <Title resid="T"/>
@@ -69,7 +69,7 @@
     </Hosts>
     <Resources>
       <bt:Images>
-        <bt:Image id="I" DefaultValue="https://www.viewis.pl/static/favicon.ico"/>
+        <bt:Image id="I" DefaultValue="https://www.viewis.pl/static/icon.png"/>
       </bt:Images>
       <bt:Urls>
         <bt:Url id="P" DefaultValue="https://www.viewis.pl/mep/panel/"/>
@@ -79,7 +79,7 @@
         <bt:String id="T" DefaultValue="ViewIs MEP"/>
       </bt:ShortStrings>
       <bt:LongStrings>
-        <bt:String id="D" DefaultValue="Interaktywny podgląd modeli IFC powiązany z arkuszem Excel"/>
+        <bt:String id="D" DefaultValue="Interaktywny podglad 3D powiazany z arkuszem Excel"/>
       </bt:LongStrings>
     </Resources>
   </VersionOverrides>
