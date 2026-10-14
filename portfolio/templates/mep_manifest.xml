@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
+           xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides"
+           xsi:type="TaskPaneApp">
+  <Id>d7c4a194-48f8-4e89-a2e1-4c19d83e720a</Id>
+  <Version>1.4.0.0</Version>
+  <ProviderName>ViewIs</ProviderName>
+  <DefaultLocale>pl-PL</DefaultLocale>
+  <DisplayName DefaultValue="ViewIs MEP Link"/>
+  <Description DefaultValue="Interaktywny podgląd modeli IFC powiązany z arkuszem Excel"/>
+  <IconUrl DefaultValue="https://www.viewis.pl/static/favicon.ico"/>
+  <HighResolutionIconUrl DefaultValue="https://www.viewis.pl/static/favicon.ico"/>
+  <SupportUrl DefaultValue="https://www.viewis.pl/mep/"/>
+  <AppDomains>
+    <AppDomain>https://www.viewis.pl</AppDomain>
+    <AppDomain>https://viewis.pl</AppDomain>
+    <AppDomain>https://unpkg.com</AppDomain>
+    <AppDomain>https://cdnjs.cloudflare.com</AppDomain>
+    <AppDomain>https://cdn.jsdelivr.net</AppDomain>
+  </AppDomains>
+  <Hosts>
+    <Host Name="Workbook"/>
+  </Hosts>
+  <DefaultSettings>
+    <SourceLocation DefaultValue="https://www.viewis.pl/mep/panel/"/>
+  </DefaultSettings>
+  <Permissions>ReadWriteDocument</Permissions>
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="VersionOverridesV1_0">
+    <Hosts>
+      <Host xsi:type="Workbook">
+        <DesktopFormFactor>
+          <GetStarted>
+            <Title resid="T"/>
+            <Description resid="D"/>
+            <LearnMoreUrl resid="U"/>
+          </GetStarted>
+          <ExtensionPoint xsi:type="PrimaryCommandSurface">
+            <OfficeTab id="TabHome">
+              <Group id="ViewIsMepGroup">
+                <Label resid="T"/>
+                <Icon>
+                  <bt:Image size="16" resid="I"/>
+                  <bt:Image size="32" resid="I"/>
+                  <bt:Image size="80" resid="I"/>
+                </Icon>
+                <Control xsi:type="Button" id="ViewIsMepBtn">
+                  <Label resid="T"/>
+                  <Supertip>
+                    <Title resid="T"/>
+                    <Description resid="D"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="I"/>
+                    <bt:Image size="32" resid="I"/>
+                    <bt:Image size="80" resid="I"/>
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <TaskpaneId>ViewIsMepPane</TaskpaneId>
+                    <SourceLocation resid="P"/>
+                  </Action>
+                </Control>
+              </Group>
+            </OfficeTab>
+          </ExtensionPoint>
+        </DesktopFormFactor>
+      </Host>
+    </Hosts>
+    <Resources>
+      <bt:Images>
+        <bt:Image id="I" DefaultValue="https://www.viewis.pl/static/favicon.ico"/>
+      </bt:Images>
+      <bt:Urls>
+        <bt:Url id="P" DefaultValue="https://www.viewis.pl/mep/panel/"/>
+        <bt:Url id="U" DefaultValue="https://www.viewis.pl/mep/"/>
+      </bt:Urls>
+      <bt:ShortStrings>
+        <bt:String id="T" DefaultValue="ViewIs MEP"/>
+      </bt:ShortStrings>
+      <bt:LongStrings>
+        <bt:String id="D" DefaultValue="Interaktywny podgląd modeli IFC powiązany z arkuszem Excel"/>
+      </bt:LongStrings>
+    </Resources>
+  </VersionOverrides>
+</OfficeApp>

@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}ViewIs MEP | BIM Link{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'kontakt.css' %}">
+<style>
+  .mep-container {
+    max-width: 900px;
+    margin: 0;
+    padding: 40px 20px;
+    position: relative;
+    z-index: 1;
+  }
+  .mep-badge {
+    display: inline-block;
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #38bdf8;
+    margin-bottom: 12px;
+  }
+  .tech-block {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 24px;
+    margin: 30px 0;
+  }
+  body.light-mode .tech-block {
+    background: rgba(0, 0, 0, 0.02);
+    border-color: rgba(0, 0, 0, 0.1);
+  }
+  .steps-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .steps-list li {
+    display: flex;
+    gap: 14px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+  .step-num {
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    color: #38bdf8;
+    flex-shrink: 0;
+  }
+  .btn-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    text-decoration: none;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="contact-container">
+  <div class="mep-container">
+    <section class="intro-section">
+      <span class="mep-badge">Excel &middot; BIM 3D Integration</span>
+      <h1 class="lead-text" style="font-size: 2.2rem;">ViewIs MEP Link</h1>
+      <p class="description">
+        {% if lang == 'en' %}
+          Interactive bridge connecting BIM IFC models with Excel quantity takeoffs. Inspect, navigate, and cross-reference 3D spatial geometry right inside Microsoft Excel without third-party desktop viewers.
+        {% else %}
+          Bezpośredni most łączący modele BIM IFC z przedmiarami Excela. Zaznacz pozycję w arkuszu kosztorysu, aby natychmiast wyizolować, zweryfikować i podświetlić element w 3D bezpośrednio w oknie programu Excel.
+        {% endif %}
+      </p>
+
+      <a href="{% url 'mep_manifest' %}" class="submit-btn btn-download">
+        {% if lang == 'en' %}Download Add-in (.xml){% else %}Pobierz wtyczkę (.xml){% endif %}
+      </a>
+    </section>
+
+    <div class="tech-block">
+      <div class="category">
+        <h2>{% if lang == 'en' %}Architecture & Privacy{% else %}Architektura i prywatność{% endif %}</h2>
+        <p style="margin-top: 8px; line-height: 1.6;">
+          {% if lang == 'en' %}
+            Zero-Cloud Storage: Your IFC models are parsed strictly inside your local browser runtime memory via WebAssembly (Web-IFC). No proprietary model data or drawings are uploaded to external servers.
+          {% else %}
+            Pełna ochrona danych projektowych: modele IFC są przetwarzane w całości lokalnie w pamięci RAM Twojego komputera za pomocą WebAssembly (Web-IFC). Żadne geometrie ani pliki modeli nie są przesyłane na serwer zewnętrzny.
+          {% endif %}
+        </p>
+      </div>
+    </div>
+
+    <section class="competencies-grid" style="gap: 30px; margin-bottom: 40px;">
+      <div class="category">
+        <h2>{% if lang == 'en' %}How to launch in 30 seconds{% else %}Instalacja w 30 sekund{% endif %}</h2>
+        <ul class="steps-list">
+          <li>
+            <span class="step-num">01.</span>
+            <span>{% if lang == 'en' %}Download the <code>viewis-mep-manifest.xml</code> file above.{% else %}Pobierz plik manifestu <code>viewis-mep-manifest.xml</code> przyciskiem powyżej.{% endif %}</span>
+          </li>
+          <li>
+            <span class="step-num">02.</span>
+            <span>{% if lang == 'en' %}Open Excel &rarr; <em>Insert</em> &rarr; <em>My Add-ins</em> &rarr; <em>Upload My Add-in</em> and select the XML file.{% else %}W programie Excel przejdź do <em>Wstawianie</em> &rarr; <em>Moje dodatki</em> &rarr; <em>Przekaż dodatek</em> i wskaż pobrany plik XML.{% endif %}</span>
+          </li>
+          <li>
+            <span class="step-num">03.</span>
+            <span>{% if lang == 'en' %}Open your takeoff workbook, click <em>Wskaż plik IFC</em> in the sidebar and choose your model from disk.{% else %}Otwórz arkusz przedmiaru, kliknij <em>Wskaż plik IFC</em> w panelu bocznym i wybierz model ze swojego dysku.{% endif %}</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="manifesto">
+      <p>
+        {% if lang == 'en' %}
+          Deterministic quantity audit. Every spreadsheet row points directly to verified geometry.
+        {% else %}
+          Deterministyczny audyt ilościowy. Każdy wiersz kosztorysu bezpośrednio powiązany ze zweryfikowaną geometrią.
+        {% endif %}
+      </p>
+      <strong>FORM FOLLOWS FUNCTION &middot; ACCURACY MATTERS</strong>
+    </section>
+  </div>
+</div>
+{% endblock %}

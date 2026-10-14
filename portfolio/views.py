@@ -1,7 +1,8 @@
 import os
 from django.shortcuts import render
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.core.mail import send_mail
+from django.views.decorators.clickjacking import xframe_options_exempt
 from .models import Media
 
 def home(request, lang='pl'):
@@ -32,6 +33,25 @@ def kontakt(request, lang='pl'):
         except Exception as e:
             return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
     return render(request, 'kontakt.html', {'lang': lang})
+
+def mep_landing(request, lang='pl'):
+    return render(request, 'mep.html', {'lang': lang})
+
+@xframe_options_exempt
+def mep_panel(request):
+    return render(request, 'mep_panel.html')
+
+@xframe_options_exempt
+def mep_viewer(request):
+    return render(request, 'mep_viewer.html')
+
+def mep_manifest(request):
+    manifest_path = os.path.join(os.path.dirname(__file__), 'templates', 'mep_manifest.xml')
+    with open(manifest_path, 'r', encoding='utf-8') as f:
+        content = f.read()
+    response = HttpResponse(content, content_type='application/xml')
+    response['Content-Disposition'] = 'attachment; filename="viewis-mep-manifest.xml"'
+    return response
 
 def custom_404(request, exception):
     lang = 'en' if '/en/' in request.path else 'pl'

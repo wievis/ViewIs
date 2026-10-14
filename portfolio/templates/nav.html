@@ -13,7 +13,7 @@
             </div>
             <nav>
                 <a href="{% if lang == 'en' %}{% url 'home_en' %}{% else %}{% url 'home' %}{% endif %}">{% if lang == 'en' %}PRESENTATION{% else %}PREZENTACJA{% endif %}</a>
-                <a href="{% if lang == 'en' %}{% url 'galeria_en' %}{% else %}{% url 'galeria' %}{% endif %}">{% if lang == 'en' %}GALLERY{% else %}GALERIA{% endif %}</a>
+                <a href="{% if lang == 'en' %}{% url 'galeria_en' %}{% else %}{% url 'galeria' %}{% endif %}">{% if lang == 'en' %}GALLERY{% else %}GALERIA{% endif %}</a>\n                <a href="{% if lang == 'en' %}{% url 'mep_landing_en' %}{% else %}{% url 'mep_landing' %}{% endif %}">MEP</a>
                 <a href="{% if lang == 'en' %}{% url 'kontakt_en' %}{% else %}{% url 'kontakt' %}{% endif %}">{% if lang == 'en' %}ABOUT ME{% else %}O MNIE{% endif %}</a>
                 <a href="{% if lang == 'en' %}{% url 'kontakt_en' %}{% else %}{% url 'kontakt' %}{% endif %}#contact-form">{% if lang == 'en' %}CONTACT{% else %}KONTAKT{% endif %}</a>
                 <div class="menu-bottom desktop-only-switches">
