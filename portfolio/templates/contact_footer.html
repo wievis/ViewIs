@@ -1,0 +1,32 @@
+<section class="contact-section" id="contact">
+    <div class="container contact-grid">
+        <div class="reveal">
+            <span class="eyebrow">{% if lang == 'en' %}Contact{% else %}Kontakt{% endif %}</span>
+            <h2 class="h2">{% if lang == 'en' %}Have a project? Let's talk.{% else %}Masz projekt? Porozmawiajmy.{% endif %}</h2>
+            <p class="lead">{% if lang == 'en' %}Describe what you need: visualization, animation, virtual environment or a tool. I reply with a quote and a proposed approach.{% else %}Opisz, czego potrzebujesz: wizualizacji, animacji, środowiska wirtualnego lub narzędzia. Odpowiem wyceną i propozycją podejścia.{% endif %}</p>
+            <ul class="contact-list">
+                <li><span>E-mail</span><a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a></li>
+                {% if CONTACT_PHONE %}<li><span>{% if lang == 'en' %}Phone{% else %}Telefon{% endif %}</span><a href="tel:{{ CONTACT_PHONE|cut:' ' }}">{{ CONTACT_PHONE }}</a></li>{% endif %}
+                <li><span>{% if lang == 'en' %}Location{% else %}Lokalizacja{% endif %}</span>{% if CONTACT_LOCATION %}{{ CONTACT_LOCATION }}{% elif lang == 'en' %}Poland &middot; remote worldwide{% else %}Polska &middot; praca zdalna{% endif %}</li>
+                <li><span>{% if lang == 'en' %}Response time{% else %}Czas odpowiedzi{% endif %}</span>{% if lang == 'en' %}usually within 24 h{% else %}zwykle do 24 h{% endif %}</li>
+            </ul>
+        </div>
+
+        <form class="form js-contact-form reveal" style="--d:.1s">
+            {% csrf_token %}
+            <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <div class="row">
+                <input type="text" name="first_name" placeholder="{% if lang == 'en' %}First name{% else %}Imię{% endif %}">
+                <input type="text" name="last_name" placeholder="{% if lang == 'en' %}Last name{% else %}Nazwisko{% endif %}">
+            </div>
+            <input type="email" name="email" placeholder="{% if lang == 'en' %}E-mail address{% else %}Adres e-mail{% endif %}" required>
+            <textarea name="message" rows="5" placeholder="{% if lang == 'en' %}Tell me about your project{% else %}Opowiedz o swoim projekcie{% endif %}" required></textarea>
+            <label class="consent">
+                <input type="checkbox" required>
+                <span>{% if lang == 'en' %}I consent to the processing of my personal data for the purpose of correspondence.{% else %}Wyrażam zgodę na przetwarzanie moich danych osobowych w celu prowadzenia korespondencji.{% endif %}</span>
+            </label>
+            <button type="submit" class="btn btn-primary">{% if lang == 'en' %}Send message{% else %}Wyślij wiadomość{% endif %}</button>
+            <div class="form-status" role="status" aria-live="polite"></div>
+        </form>
+    </div>
+</section>

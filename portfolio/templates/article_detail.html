@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static md %}
+{% block title %}{{ a.d_title }} | Computer Designer{% endblock %}
+{% block meta_description %}{{ a.d_lead|default:a.d_title|truncatechars:155 }}{% endblock %}
+{% block content %}
+<article>
+    <header class="article-head">
+        <div class="meta">{% if a.category %}{{ a.category }} &middot; {% endif %}{{ a.date|date:"d.m.Y" }} &middot; {{ a.reading_time }} min</div>
+        <h1>{{ a.d_title }}</h1>
+        {% if a.d_lead %}<p class="lead">{{ a.d_lead }}</p>{% endif %}
+    </header>
+    {% if a.cover %}<div class="article-cover-big"><img src="{{ a.cover.url }}" alt="{{ a.d_title }}"></div>{% endif %}
+    <div class="prose">
+        {{ a.d_content|markdown }}
+        <a class="back-link" href="{% if lang == 'en' %}{% url 'articles_en' %}{% else %}{% url 'articles' %}{% endif %}">&larr; {% if lang == 'en' %}All articles{% else %}Wszystkie artykuły{% endif %}</a>
+    </div>
+</article>
+{% endblock %}

@@ -1,23 +1,20 @@
-{% load static %}
-<!DOCTYPE html>
+{% load static %}<!DOCTYPE html>
 <html lang="{{ lang|default:'pl' }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Maciej Wielgosz | Computer Designer{% endblock %}</title>
-    
+    <script>document.documentElement.classList.add('js');try{if(localStorage.getItem('theme')==='light')document.documentElement.classList.add('light-mode')}catch(e){}</script>
+
     <link rel="canonical" href="https://www.viewis.pl{{ request.path }}">
-    
-    <meta name="description" content="{% if lang == 'en' %}Portfolio of 3D projects, visualizations and modern design.{% else %}Portfolio projektów 3D, wizualizacji i nowoczesnego designu.{% endif %}">
+    <meta name="description" content="{% block meta_description %}{% if lang == 'en' %}Portfolio of 3D projects, visualizations, animations and virtual environments.{% else %}Portfolio projektów 3D: wizualizacje, animacje, środowiska i makiety wirtualne.{% endif %}{% endblock %}">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.viewis.pl{{ request.path }}">
     <meta property="og:title" content="{% block og_title %}Maciej Wielgosz - Computer Designer Portfolio{% endblock %}">
     <meta property="og:description" content="{% if lang == 'en' %}3D designs, visualizations and digital tools. See my latest work.{% else %}Projekty 3D, wizualizacje i design. Zobacz moje najnowsze realizacje.{% endif %}">
     <meta property="og:image" content="https://www.viewis.pl{% static 'CEO-background-1200-630.jpg' %}">
-
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Maciej Wielgosz | Computer Designer">
-    <meta name="twitter:description" content="{% if lang == 'en' %}3D designs, visualizations and digital tools.{% else %}Projekty 3D, wizualizacje i design.{% endif %}">
     <meta name="twitter:image" content="https://www.viewis.pl{% static 'CEO-background-1200-630.jpg' %}">
 
     <script type="application/ld+json">
@@ -32,41 +29,45 @@
     </script>
 
     <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'tokens.css' %}">
     <link rel="stylesheet" href="{% static 'base.css' %}">
     <link rel="stylesheet" href="{% static 'nav.css' %}">
     <link rel="stylesheet" href="{% static 'switch.css' %}">
     <link rel="stylesheet" href="{% static 'lightbox.css' %}">
-    
+    <link rel="stylesheet" href="{% static 'site.css' %}">
+
     <script type="importmap"> { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/" } } </script>
     {% block extra_head %}{% endblock %}
 </head>
-<body>
+<body class="{% block body_class %}{% endblock %}">
     {% include 'nav.html' %}
     <main>
         {% block content %}{% endblock %}
     </main>
-    <footer>
-        {% if lang == 'en' %}Designed & Developed by Maciej Wielgosz{% else %}Projekt i realizacja: Maciej Wielgosz{% endif %}
+
+    {% block footer_contact %}{% include 'contact_footer.html' %}{% endblock %}
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <span>&copy; {% now "Y" %} Maciej Wielgosz &middot; {% if lang == 'en' %}Designed &amp; Developed by Maciej Wielgosz{% else %}Projekt i realizacja: Maciej Wielgosz{% endif %}</span>
+            <nav>
+                <a href="{% if lang == 'en' %}{% url 'portfolio_en' %}{% else %}{% url 'portfolio' %}{% endif %}">Portfolio</a>
+                <a href="{% if lang == 'en' %}{% url 'articles_en' %}{% else %}{% url 'articles' %}{% endif %}">{% if lang == 'en' %}Articles{% else %}Artykuły{% endif %}</a>
+                <a href="{% if lang == 'en' %}{% url 'mep_landing_en' %}{% else %}{% url 'mep_landing' %}{% endif %}">MEP</a>
+                <a href="{% if lang == 'en' %}{% url 'about_en' %}{% else %}{% url 'about' %}{% endif %}">{% if lang == 'en' %}About{% else %}O mnie{% endif %}</a>
+            </nav>
+        </div>
     </footer>
+
     <script src="{% static 'theme-lang.js' %}"></script>
     <script src="{% static 'lightbox.js' %}"></script>
     <script type="module" src="{% static 'model-viewer.js' %}"></script>
-    <script>
-        function adjustMainPadding() {
-            const menu = document.querySelector('.menu');
-            const main = document.querySelector('main');
-            if (window.innerWidth <= 768 && menu && main) {
-                main.style.paddingTop = menu.offsetHeight + 'px';
-            } else if (main) {
-                main.style.paddingTop = '0px';
-            }
-        }
-        window.addEventListener('load', adjustMainPadding);
-        window.addEventListener('resize', adjustMainPadding);
-        const observer = new MutationObserver(adjustMainPadding);
-        if (document.querySelector('.menu')) {
-            observer.observe(document.querySelector('.menu'), { attributes: true, childList: true, subtree: true });
-        }
-    </script>
+    <script src="{% static 'site.js' %}"></script>
+    <script src="{% static 'kontakt.js' %}"></script>
+    {% block extra_js %}{% endblock %}
 </body>
 </html>

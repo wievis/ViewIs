@@ -1,158 +1,97 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Portfolio | Computer Designer{% endblock %}
-
-{% block extra_head %}
-<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
-<style>
-.gallery{padding:1rem;max-width:1400px;margin:0 auto}
-.stack-group{position:relative;width:100%;margin-bottom:1.5rem;touch-action:pan-y;overflow:visible;display:flex;justify-content:center}
-.stack-item,.media-item{position:absolute;width:fit-content;max-width:900px;top:0;display:flex;justify-content:center;cursor:pointer;transition:transform 0.4s cubic-bezier(.23,1,.32,1);will-change:transform, z-index}
-.media-item{position:relative;margin-bottom:1.5rem;width:100%;display:flex;justify-content:center}
-.media-frame{width:fit-content;height:auto;overflow:hidden;display:flex;align-items:center;justify-content:center;border-radius:4px;box-shadow:0 10px 30px rgba(0,0,0,.5)}
-.media-frame img,.media-frame video{width:auto;height:auto;max-width:100%;max-height:85vh;display:block;transform:scale(1.25);transition:transform 0.4s cubic-bezier(.23,1,.32,1);pointer-events:none;will-change:transform}
-.stack-item:not([data-is-top="true"]) .media-frame img{object-fit:cover}
-.stack-item[data-is-top="true"]:hover .media-frame img,
-.media-item:hover .media-frame img,
-.media-item:hover .media-frame video{transform:scale(1)}
-model-viewer{width:600px;height:500px;max-width:100%;outline:none}
-@media(max-width:768px){
-.stack-item{max-width:85%}
-model-viewer{width:100%;height:350px}
-}
-</style>
-<script>
-function updateStackSize(img) {
-    const item = img.closest('.stack-item');
-    if (item && item.getAttribute('data-is-top') !== 'true') return;
-    const group = img.closest('.stack-group') || img.closest('.media-item');
-    if (group) {
-        const h = img.offsetHeight;
-        const w = img.offsetWidth;
-        group.style.height = h + 'px';
-        const frames = group.querySelectorAll('.media-frame');
-        frames.forEach(f => {
-            f.style.height = h + 'px';
-            f.style.width = w + 'px';
-        });
-    }
-}
-</script>
-{% endblock %}
+{% block title %}Maciej Wielgosz | Computer Designer{% endblock %}
+{% block body_class %}page-home{% endblock %}
 
 {% block content %}
-<div class="gallery">
-{% for item in top_level_media %}
-{% if item.media_type == 'album' %}
-<div class="stack-group">
-{% for child in item.children.all %}
-{% if child.file %}
-<div class="stack-item" onclick="if(isClick(event)) handleItemInteraction(this,'{% if child.media_type == 'image' %}{{ child.compressed_image.url }}{% else %}{{ child.file.url }}{% endif %}')">
-<div class="media-frame">
-<img src="{% if child.media_type == 'image' %}{{ child.compressed_image.url }}{% else %}{{ child.file.url }}{% endif %}" loading="lazy" onload="updateStackSize(this)">
-</div>
-</div>
+<section class="hero">
+    <div class="hero-media" style="background-image:url('{% static 'CEO-background-1200-630.jpg' %}')">
+        <video class="hero-video" muted playsinline preload="none" aria-hidden="true" data-src="{% static 'video/hero-1.mp4' %}"></video>
+        <video class="hero-video" muted playsinline preload="none" aria-hidden="true" data-src="{% static 'video/hero-2.mp4' %}"></video>
+        <video class="hero-video" muted playsinline preload="none" aria-hidden="true" data-src="{% static 'video/hero-3.mp4' %}"></video>
+    </div>
+    <div class="hero-vignette"></div>
+
+    <div class="hero-center">
+        <span class="eyebrow">COMPUTER DESIGNER</span>
+        <h1>{% if lang == 'en' %}Visualizations, animations and 3D environments that <em>sell the project</em>.{% else %}Wizualizacje, animacje i środowiska 3D, które <em>sprzedają projekt</em>.{% endif %}</h1>
+        <p class="hero-lead">{% if lang == 'en' %}I design and produce 3D products of every kind: visualizations, animations, virtual mockups and interactive environments, from idea to finished material.{% else %}Projektuję i produkuję szeroko rozumiane produkty 3D: wizualizacje, animacje, makiety wirtualne i interaktywne środowiska, od pomysłu po gotowy materiał.{% endif %}</p>
+        <div class="hero-cta">
+            <a class="btn btn-primary" href="{% if lang == 'en' %}{% url 'portfolio_en' %}{% else %}{% url 'portfolio' %}{% endif %}">{% if lang == 'en' %}View portfolio{% else %}Zobacz portfolio{% endif %}</a>
+            <a class="btn btn-ghost" href="#contact">{% if lang == 'en' %}Request a quote{% else %}Zapytaj o wycenę{% endif %}</a>
+        </div>
+    </div>
+
+    <nav class="hero-tiles" aria-label="{% if lang == 'en' %}Site sections{% else %}Sekcje strony{% endif %}">
+        <a href="{% if lang == 'en' %}{% url 'portfolio_en' %}{% else %}{% url 'portfolio' %}{% endif %}"><span class="t-num">01</span><span class="t-title">Portfolio</span><span class="t-desc">{% if lang == 'en' %}Selected work{% else %}Wybrane realizacje{% endif %}</span><span class="t-arrow">&rarr;</span></a>
+        <a href="{% if lang == 'en' %}{% url 'articles_en' %}{% else %}{% url 'articles' %}{% endif %}"><span class="t-num">02</span><span class="t-title">{% if lang == 'en' %}Articles{% else %}Artykuły{% endif %}</span><span class="t-desc">{% if lang == 'en' %}Knowledge and code{% else %}Wiedza i kod{% endif %}</span><span class="t-arrow">&rarr;</span></a>
+        <a href="{% if lang == 'en' %}{% url 'mep_landing_en' %}{% else %}{% url 'mep_landing' %}{% endif %}"><span class="t-num">03</span><span class="t-title">MEP</span><span class="t-desc">Excel &harr; IFC</span><span class="t-arrow">&rarr;</span></a>
+        <a href="{% if lang == 'en' %}{% url 'about_en' %}{% else %}{% url 'about' %}{% endif %}"><span class="t-num">04</span><span class="t-title">{% if lang == 'en' %}About me{% else %}O mnie{% endif %}</span><span class="t-desc">{% if lang == 'en' %}Skills and tools{% else %}Kompetencje i narzędzia{% endif %}</span><span class="t-arrow">&rarr;</span></a>
+        <a href="#contact"><span class="t-num">05</span><span class="t-title">{% if lang == 'en' %}Contact{% else %}Kontakt{% endif %}</span><span class="t-desc">{% if lang == 'en' %}Quote and collaboration{% else %}Wycena i współpraca{% endif %}</span><span class="t-arrow">&rarr;</span></a>
+    </nav>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="section-head reveal">
+            <span class="eyebrow">{% if lang == 'en' %}Services{% else %}Oferta{% endif %}</span>
+            <h2 class="h2">{% if lang == 'en' %}Everything in 3D, under one roof.{% else %}Wszystko w 3D, w jednym miejscu.{% endif %}</h2>
+            <p class="lead">{% if lang == 'en' %}From a single render to a complete virtual environment, built to communicate clearly and look exceptional.{% else %}Od pojedynczego renderu po kompletne środowisko wirtualne. Wszystko ma jasno komunikować i wyglądać wyjątkowo.{% endif %}</p>
+        </div>
+        <div class="cards">
+            <div class="card reveal"><span class="t-num">01</span><h3>{% if lang == 'en' %}Visualizations{% else %}Wizualizacje{% endif %}</h3><p>{% if lang == 'en' %}Interior, exterior and product renders of photographic quality.{% else %}Wnętrza, zewnętrza i obiekty w jakości fotograficznej.{% endif %}</p></div>
+            <div class="card reveal" style="--d:.06s"><span class="t-num">02</span><h3>{% if lang == 'en' %}Animations{% else %}Animacje{% endif %}</h3><p>{% if lang == 'en' %}Walkthroughs, product films and motion that explains the idea.{% else %}Spacery, filmy produktowe i ruch, który tłumaczy ideę.{% endif %}</p></div>
+            <div class="card reveal" style="--d:.12s"><span class="t-num">03</span><h3>{% if lang == 'en' %}Virtual environments{% else %}Środowiska i makiety wirtualne{% endif %}</h3><p>{% if lang == 'en' %}Interactive spaces and virtual mockups you can explore in real time.{% else %}Interaktywne przestrzenie i makiety, które można zwiedzać w czasie rzeczywistym.{% endif %}</p></div>
+            <div class="card reveal"><span class="t-num">04</span><h3>{% if lang == 'en' %}3D models and products{% else %}Modele 3D i produkty{% endif %}</h3><p>{% if lang == 'en' %}Optimized models for web, presentation and production.{% else %}Zoptymalizowane modele do sieci, prezentacji i produkcji.{% endif %}</p></div>
+            <div class="card reveal" style="--d:.06s"><span class="t-num">05</span><h3>{% if lang == 'en' %}Tools and automation{% else %}Narzędzia i automatyzacja{% endif %}</h3><p>{% if lang == 'en' %}Scripts and dedicated workflow solutions that save hours.{% else %}Skrypty i dedykowane rozwiązania workflow, które oszczędzają godziny.{% endif %}</p></div>
+            <div class="card reveal" style="--d:.12s"><span class="t-num">06</span><h3>MEP &amp; QTO</h3><p>{% if lang == 'en' %}Quantity takeoffs and BIM-linked tools for engineers and subcontractors.{% else %}Przedmiary i narzędzia powiązane z BIM dla inżynierów i podwykonawców.{% endif %}</p></div>
+        </div>
+    </div>
+</section>
+
+{% if featured %}
+<section class="section" style="padding-top:0">
+    <div class="container">
+        <div class="section-head reveal">
+            <span class="eyebrow">Portfolio</span>
+            <h2 class="h2">{% if lang == 'en' %}Selected work{% else %}Wybrane realizacje{% endif %}</h2>
+        </div>
+        <div class="featured">
+            {% for m in featured %}
+            <a class="reveal" style="--d:{{ forloop.counter0|add:0 }}0ms" href="{% if lang == 'en' %}{% url 'portfolio_en' %}{% else %}{% url 'portfolio' %}{% endif %}"><img src="{{ m.compressed_image.url }}" alt="{{ m.name|default:'Projekt' }}" loading="lazy"></a>
+            {% endfor %}
+        </div>
+        <div class="center-cta"><a class="btn btn-ghost" href="{% if lang == 'en' %}{% url 'portfolio_en' %}{% else %}{% url 'portfolio' %}{% endif %}">{% if lang == 'en' %}Full portfolio{% else %}Całe portfolio{% endif %} &rarr;</a></div>
+    </div>
+</section>
 {% endif %}
-{% endfor %}
-</div>
-{% else %}
-{% if item.file %}
-<div class="media-item">
-<div class="media-frame" onclick="if(isClick(event)) openLightboxByUrl('{% if item.media_type == 'image' %}{{ item.compressed_image.url }}{% else %}{{ item.file.url }}{% endif %}')">
-{% if item.media_type == 'image' %}
-<img src="{{ item.compressed_image.url }}" loading="lazy" onload="updateStackSize(this)">
-{% elif item.media_type == 'video' %}
-<video src="{{ item.file.url }}" autoplay loop muted playsinline onloadedmetadata="updateStackSize(this)"></video>
-{% elif item.media_type == 'model3d' %}
-<model-viewer src="{{ item.file.url }}" {% if item.hdr_setting %}environment-image="{{ item.hdr_setting.file.url }}"{% endif %} camera-controls auto-rotate shadow-intensity="1"></model-viewer>
-{% endif %}
-</div>
-</div>
-{% endif %}
-{% endif %}
-{% endfor %}
-</div>
 
-<script>
-let ptrX = 0, ptrY = 0, ptrT = 0;
-document.addEventListener('pointerdown', e => {
-    ptrX = e.clientX;
-    ptrY = e.clientY;
-    ptrT = Date.now();
-}, { passive: true, capture: true });
+<section class="section" style="padding-top:0">
+    <div class="container">
+        <div class="section-head reveal">
+            <span class="eyebrow">{% if lang == 'en' %}Process{% else %}Jak pracuję{% endif %}</span>
+            <h2 class="h2">{% if lang == 'en' %}Clear steps, no surprises.{% else %}Jasne etapy, bez niespodzianek.{% endif %}</h2>
+        </div>
+        <div class="steps">
+            <div class="step reveal"><span class="t-num">01</span><h3>Brief</h3><p>{% if lang == 'en' %}We define goals, audience, scope and deadline.{% else %}Ustalamy cel, odbiorców, zakres i termin.{% endif %}</p></div>
+            <div class="step reveal" style="--d:.06s"><span class="t-num">02</span><h3>{% if lang == 'en' %}Concept{% else %}Koncepcja{% endif %}</h3><p>{% if lang == 'en' %}Camera, mood and composition, approved before production.{% else %}Kadry, nastrój i kompozycja, akceptowane przed produkcją.{% endif %}</p></div>
+            <div class="step reveal" style="--d:.12s"><span class="t-num">03</span><h3>{% if lang == 'en' %}Production{% else %}Produkcja{% endif %}</h3><p>{% if lang == 'en' %}Modelling, lighting, rendering with checkpoints along the way.{% else %}Modelowanie, światło, render, z punktami kontrolnymi po drodze.{% endif %}</p></div>
+            <div class="step reveal" style="--d:.18s"><span class="t-num">04</span><h3>{% if lang == 'en' %}Delivery{% else %}Dostawa{% endif %}</h3><p>{% if lang == 'en' %}Final files in the formats you need, plus a round of corrections.{% else %}Pliki w potrzebnych formatach oraz runda poprawek.{% endif %}</p></div>
+        </div>
+    </div>
+</section>
 
-function isClick(e) {
-    return Math.abs(e.clientX - ptrX) < 10 && Math.abs(e.clientY - ptrY) < 10 && (Date.now() - ptrT) < 400;
-}
-
-window.mediaItems=[
-{% for item in media_items %}{% if item.file %}
-{url:"{% if item.media_type == 'image' %}{{ item.compressed_image.url }}{% else %}{{ item.file.url }}{% endif %}",type:"{{ item.media_type }}",hdr:"{% if item.hdr_setting %}{{ item.hdr_setting.file.url }}{% endif %}"}{% if not forloop.last %},{% endif %}
-{% endif %}{% endfor %}
-]
-
-function reorderStack(clickedItem){
-    const container = clickedItem.parentElement
-    const items = Array.from(container.querySelectorAll('.stack-item'))
-    const total = items.length
-    const clickedIdx = items.indexOf(clickedItem)
-    
-    items.forEach((item, i) => {
-        const relativeIndex = (i - clickedIdx + total) % total
-        const zIndex = total - relativeIndex
-        const transform = `translateX(${relativeIndex * 30}px) scale(${1 - relativeIndex * 0.025})`
-        
-        item.style.zIndex = zIndex
-        item.style.transform = transform
-        item.setAttribute('data-is-top', zIndex === total ? 'true' : 'false')
-    })
-
-    const topImg = clickedItem.querySelector('img');
-    if (topImg && topImg.complete) updateStackSize(topImg);
-}
-
-function handleItemInteraction(el, url){
-    if(el.getAttribute('data-is-top') === 'true'){openLightboxByUrl(url)}
-    else{reorderStack(el)}
-}
-
-function openLightboxByUrl(url){
-    const idx = window.mediaItems.findIndex(i => i.url === url)
-    if(idx !== -1) openLightbox(idx)
-}
-
-document.querySelectorAll('.stack-group').forEach(group => {
-    const first = group.querySelector('.stack-item')
-    if(first) reorderStack(first)
-
-    let startX = 0
-    let isLocked = false
-
-    group.addEventListener('touchstart', e => { 
-        startX = e.touches[0].clientX 
-    }, {passive: true})
-
-    group.addEventListener('touchend', e => {
-        if(isLocked) return
-        const diffX = startX - e.changedTouches[0].clientX
-        if (Math.abs(diffX) > 40) {
-            isLocked = true
-            const items = Array.from(group.querySelectorAll('.stack-item'))
-            const topItem = items.find(i => i.getAttribute('data-is-top') === 'true')
-            const currentIdx = items.indexOf(topItem)
-            const nextIdx = diffX > 0 ? (currentIdx + 1) % items.length : (currentIdx - 1 + items.length) % items.length
-            
-            reorderStack(items[nextIdx])
-            setTimeout(() => { isLocked = false }, 400)
-        }
-    }, {passive: true})
-})
-
-window.addEventListener('resize', () => {
-    document.querySelectorAll('.stack-group, .media-item').forEach(container => {
-        const activeMedia = container.querySelector('.stack-item[data-is-top="true"] img, .media-item img, video');
-        if (activeMedia) updateStackSize(activeMedia);
-    });
-});
-</script>
+<section class="section" style="padding-top:0">
+    <div class="container">
+        <div class="band reveal">
+            <div>
+                <span class="eyebrow">ViewIs MEP Link</span>
+                <h2 class="h2">{% if lang == 'en' %}Click a row in Excel. See it in 3D.{% else %}Kliknij wiersz w Excelu. Zobacz element w 3D.{% endif %}</h2>
+                <p>{% if lang == 'en' %}An add-in that links IFC models with quantity takeoffs. Built for engineers and subcontractors; models never leave your computer.{% else %}Wtyczka łącząca modele IFC z przedmiarami. Dla inżynierów i podwykonawców, a modele nie opuszczają Twojego komputera.{% endif %}</p>
+                <a class="btn btn-primary" href="{% if lang == 'en' %}{% url 'mep_landing_en' %}{% else %}{% url 'mep_landing' %}{% endif %}">{% if lang == 'en' %}Learn more{% else %}Dowiedz się więcej{% endif %} &rarr;</a>
+            </div>
+            <div class="band-flow"><div>IFC</div><span>&darr;</span><div>Excel / QTO</div><span>&darr;</span><div>3D</div></div>
+        </div>
+    </div>
+</section>
 {% endblock %}

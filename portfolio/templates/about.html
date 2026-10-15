@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{% if lang == 'en' %}About me{% else %}O mnie{% endif %} | Computer Designer{% endblock %}
+{% block content %}
+<section class="page-hero container">
+    <span class="eyebrow">{% if lang == 'en' %}About me{% else %}O mnie{% endif %}</span>
+    <h1 class="display">{% if lang == 'en' %}I invite you to collaborate.{% else %}Zapraszam do nawiązania współpracy.{% endif %}</h1>
+</section>
+
+<section class="container" style="padding-bottom:90px">
+    <div class="about-grid">
+        <div class="portrait reveal"><span>MW</span></div>
+        <div class="reveal" style="--d:.08s">
+            <p class="lead" style="font-size:1.2rem;color:var(--text)">{% if lang == 'en' %}I specialize in visual and technical design within architecture, 3D graphics, and digital tools. I design visualizations, create tools, and automate processes.{% else %}Zajmuję się projektowaniem wizualnym i technicznym w obszarze architektury, grafiki 3D oraz narzędzi cyfrowych. Projektuję wizualizacje, tworzę narzędzia i automatyzuję procesy.{% endif %}</p>
+
+            <div class="competency" style="margin-top:34px">
+                <h3>Archviz</h3>
+                <p>{% if lang == 'en' %}Interior, exterior and object visualizations{% else %}Wizualizacje wnętrz, zewnętrz i obiektów{% endif %}</p>
+                <div class="chips"><span>Unreal Engine</span><span>3ds Max</span><span>Blender</span></div>
+            </div>
+            <div class="competency">
+                <h3>{% if lang == 'en' %}Technical 2D{% else %}Techniczne 2D{% endif %}</h3>
+                <p>{% if lang == 'en' %}Inventory, drafting, documentation{% else %}Inwentaryzacja, kreślenie, dokumentacja{% endif %}</p>
+                <div class="chips"><span>AutoCAD</span><span>FreeCAD</span></div>
+            </div>
+            <div class="competency">
+                <h3>{% if lang == 'en' %}2D Graphics{% else %}Grafika 2D{% endif %}</h3>
+                <p>{% if lang == 'en' %}Raster and vector graphics for project presentations{% else %}Grafika rastrowa i wektorowa do prezentacji projektów{% endif %}</p>
+                <div class="chips"><span>Photoshop</span><span>Illustrator</span><span>Krita</span></div>
+            </div>
+            <div class="competency">
+                <h3>{% if lang == 'en' %}Optimization &amp; Tools{% else %}Optymalizacja i narzędzia{% endif %}</h3>
+                <p>{% if lang == 'en' %}Process automation, scripts, dedicated workflow solutions{% else %}Automatyzacja procesów, skrypty, dedykowane rozwiązania workflow{% endif %}</p>
+                <div class="chips"><span>MaxScript</span><span>Python</span><span>PySide6</span><span>AutoLISP</span><span>JavaScript</span><span>Blueprint</span></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section" style="padding-top:0">
+    <div class="container reveal">
+        <p class="quote">{% if lang == 'en' %}Ultimately, I focus on functionality, clarity, and real project value.{% else %}Na końcu stawiam funkcjonalność, czytelność i realną wartość projektu.{% endif %}<small>{% if lang == 'en' %}EVERY PROJECT IS A TOOL.{% else %}KAŻDY PROJEKT TO NARZĘDZIE.{% endif %}</small></p>
+    </div>
+</section>
+{% endblock %}

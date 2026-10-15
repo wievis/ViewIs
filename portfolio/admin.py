@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from .models import Media, HDRSetting
+from django.utils.safestring import mark_safe
+from .models import Media, HDRSetting, Article
+
 
 class MediaInline(admin.TabularInline):
     model = Media
@@ -14,10 +16,12 @@ class MediaInline(admin.TabularInline):
             return format_html('<img src="{}" style="height: 50px; width: auto; border-radius: 4px;" />', obj.file.url)
         return "-"
 
+
 @admin.register(Media)
 class MediaAdmin(admin.ModelAdmin):
-    list_display = ['get_preview', 'id', 'name', 'media_type', 'order', 'created']
-    list_editable = ['order']
+    list_display = ['get_preview', 'id', 'name', 'media_type', 'category', 'featured', 'order', 'created']
+    list_editable = ['order', 'category', 'featured']
+    list_filter = ['category', 'featured', 'media_type']
     inlines = [MediaInline]
     readonly_fields = ['get_preview']
 
@@ -29,11 +33,9 @@ class MediaAdmin(admin.ModelAdmin):
                 if child.file:
                     html += f'<img src="{child.file.url}" style="height: 40px; width: auto; border-radius: 2px; border: 1px solid #ddd;" />'
             html += '</div>'
-            return format_html(html)
-        
+            return mark_safe(html)
         if obj.file:
             return format_html('<img src="{}" style="height: 60px; width: auto; border-radius: 4px; border: 1px solid #ccc;" />', obj.file.url)
-        
         return "Brak podglądu"
 
     get_preview.short_description = 'Podgląd'
@@ -41,6 +43,16 @@ class MediaAdmin(admin.ModelAdmin):
     def get_queryset(self, request):
         return super().get_queryset(request).filter(parent_album__isnull=True).prefetch_related('children')
 
+
 @admin.register(HDRSetting)
 class HDRSettingAdmin(admin.ModelAdmin):
     list_display = ['name', 'id']
+
+
+@admin.register(Article)
+class ArticleAdmin(admin.ModelAdmin):
+    list_display = ['title', 'category', 'date', 'published']
+    list_filter = ['published', 'category']
+    list_editable = ['published']
+    search_fields = ['title', 'content']
+    prepopulated_fields = {'slug': ('title',)}

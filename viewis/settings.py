@@ -43,6 +43,7 @@ TEMPLATES = [{
             'django.template.context_processors.request',
             'django.contrib.auth.context_processors.auth',
             'django.contrib.messages.context_processors.messages',
+            'portfolio.context.site_info',
         ],
     },
 }]
@@ -100,3 +101,7 @@ EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+
+CONTACT_EMAIL = os.environ.get('CONTACT_EMAIL', 'wielgoszviz@gmail.com')
+CONTACT_PHONE = os.environ.get('CONTACT_PHONE', '')
+CONTACT_LOCATION = os.environ.get('CONTACT_LOCATION', '')

@@ -1,92 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
-
 {% block title %}{% if lang == 'en' %}Contact{% else %}Kontakt{% endif %} | Computer Designer{% endblock %}
-
-{% block extra_head %}
-<link rel="stylesheet" href="{% static 'kontakt.css' %}">
-<style>
-    .contact-form input, .contact-form textarea, .submit-btn {
-        transition: transform 0.2s ease-in-out;
-    }
-    .contact-form input:hover, .contact-form textarea:hover, .submit-btn:hover {
-        transform: scale(1.04);
-    }
-</style>
-{% endblock %}
-
 {% block content %}
-<div class="contact-container">
-    <section class="intro-section">
-        <p class="lead-text">
-            {% if lang == 'en' %}I invite you to collaborate.{% else %}Zapraszam do nawiązania współpracy.{% endif %}
-        </p>
-        <p class="description">
-            {% if lang == 'en' %}
-                I specialize in visual and technical design within architecture, 3D graphics, and digital tools. I design visualizations, create tools, and automate processes.
-            {% else %}
-                Zajmuję się projektowaniem wizualnym i technicznym w obszarze architektury, grafiki 3D oraz narzędzi cyfrowych. Projektuję wizualizacje, tworzę narzędzia i automatyzuję procesy.
-            {% endif %}
-        </p>
-    </section>
-
-    <section class="competencies-grid">
-        <div class="category">
-            <h2>Archviz</h2>
-            <p>{% if lang == 'en' %}Interior, exterior and object visualizations{% else %}Wizualizacje wnętrz, zewnętrz i obiektów{% endif %}</p>
-            <span class="tech-stack">Unreal Engine · 3ds Max · Blender</span>
-        </div>
-
-        <div class="category">
-            <h2>{% if lang == 'en' %}Technical 2D{% else %}Techniczne 2D{% endif %}</h2>
-            <p>{% if lang == 'en' %}Inventory, drafting, documentation{% else %}Inwentaryzacja, kreślenie, dokumentacja{% endif %}</p>
-            <span class="tech-stack">AutoCAD · FreeCAD</span>
-        </div>
-
-        <div class="category">
-            <h2>{% if lang == 'en' %}2D Graphics{% else %}Grafika 2D{% endif %}</h2>
-            <p>{% if lang == 'en' %}Raster and vector graphics for project presentations{% else %}Grafika rastrowa i wektorowa do prezentacji projektów{% endif %}</p>
-            <span class="tech-stack">Photoshop · Illustrator · Krita</span>
-        </div>
-
-        <div class="category">
-            <h2>{% if lang == 'en' %}Optimization & Tools{% else %}Optymalizacja i narzędzia{% endif %}</h2>
-            <p>{% if lang == 'en' %}Process automation, scripts, dedicated workflow solutions{% else %}Automatyzacja procesów, skrypty, dedykowane rozwiązania workflow{% endif %}</p>
-            <span class="tech-stack">MaxScript · Python · PySide6 · AutoLISP · JavaScript · Blueprint</span>
-        </div>
-    </section>
-
-    <section class="manifesto">
-        <p>{% if lang == 'en' %}Ultimately, I focus on functionality, clarity, and real project value.{% else %}Na końcu stawiam funkcjonalność, czytelność i realną wartość projektu.{% endif %}</p>
-        <strong>{% if lang == 'en' %}EVERY PROJECT IS A TOOL.{% else %}KAŻDY PROJEKT TO NARZĘDZIE.{% endif %}</strong>
-    </section>
-
-    <form id="contact-form" class="contact-form">
-        {% csrf_token %}
-        <div class="form-row">
-            <input type="text" name="first_name" placeholder="{% if lang == 'en' %}First Name{% else %}Imię{% endif %}">
-            <input type="text" name="last_name" placeholder="{% if lang == 'en' %}Last Name{% else %}Nazwisko{% endif %}">
-        </div>
-        <input type="email" name="email" placeholder="{% if lang == 'en' %}E-mail address{% else %}Adres e-mail{% endif %}" required>
-        <textarea name="message" rows="6" placeholder="{% if lang == 'en' %}Enter message content{% else %}Wpisz treść wiadomości{% endif %}" required></textarea>
-        
-        <div class="consent-wrapper">
-            <input type="checkbox" id="consent" required>
-            <label for="consent">
-                {% if lang == 'en' %}
-                    I consent to the processing of my personal data for the purpose of correspondence.
-                {% else %}
-                    Wyrażam zgodę na przetwarzanie moich danych osobowych w celu prowadzenia korespondencji.
-                {% endif %}
-            </label>
-        </div>
-
-        <button type="submit" class="submit-btn">{% if lang == 'en' %}Send{% else %}Wyślij{% endif %}</button>
-    </form>
-</div>
-
-<script>
-    const currentLang = "{{ lang }}";
-</script>
-<script src="{% static 'kontakt.js' %}"></script>
+<section class="page-hero container" style="padding-bottom:10px">
+    <span class="eyebrow">{% if lang == 'en' %}Contact{% else %}Kontakt{% endif %}</span>
+    <h1 class="display">{% if lang == 'en' %}Let's build something.{% else %}Zbudujmy coś razem.{% endif %}</h1>
+    <p class="lead" style="margin-top:14px">{% if lang == 'en' %}Visualizations, animations, virtual environments, tools. Tell me what you need.{% else %}Wizualizacje, animacje, środowiska wirtualne, narzędzia. Napisz, czego potrzebujesz.{% endif %}</p>
+</section>
 {% endblock %}

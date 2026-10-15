@@ -1,39 +1,28 @@
-document.getElementById('contact-form').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    const formData = new FormData(this);
-    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-
-    const messages = {
-        pl: {
-            success: 'Wiadomość została wysłana!',
-            error: 'Błąd serwera.',
-            connection: 'Błąd połączenia.'
-        },
-        en: {
-            success: 'Message has been sent!',
-            error: 'Server error.',
-            connection: 'Connection error.'
+document.querySelectorAll('.js-contact-form').forEach(form => {
+    form.addEventListener('submit', async e => {
+        e.preventDefault();
+        const en = document.documentElement.lang === 'en';
+        const t = en
+            ? { sending: 'Sending...', ok: 'Message sent. I will reply shortly.', err: 'Server error. Please try again.', conn: 'Connection error.' }
+            : { sending: 'Wysyłanie...', ok: 'Wiadomość wysłana. Odpowiem wkrótce.', err: 'Błąd serwera. Spróbuj ponownie.', conn: 'Błąd połączenia.' };
+        const status = form.querySelector('.form-status');
+        const btn = form.querySelector('button[type=submit]');
+        const set = (msg, cls) => { if (status) { status.textContent = msg; status.className = 'form-status ' + (cls || ''); } };
+        const token = form.querySelector('[name=csrfmiddlewaretoken]');
+        btn.disabled = true;
+        set(t.sending);
+        try {
+            const response = await fetch('/kontakt/', {
+                method: 'POST',
+                body: new FormData(form),
+                headers: { 'X-CSRFToken': token ? token.value : '', 'X-Requested-With': 'XMLHttpRequest' }
+            });
+            if (response.ok) { set(t.ok, 'ok'); form.reset(); }
+            else { set(t.err, 'err'); }
+        } catch (err) {
+            set(t.conn, 'err');
+        } finally {
+            btn.disabled = false;
         }
-    };
-
-    const msg = currentLang === 'en' ? messages.en : messages.pl;
-
-    try {
-        const response = await fetch('/kontakt/', {
-            method: 'POST',
-            body: formData,
-            headers: {
-                'X-CSRFToken': csrfToken,
-                'X-Requested-With': 'XMLHttpRequest'
-            }
-        });
-        if (response.ok) {
-            alert(msg.success);
-            this.reset();
-        } else {
-            alert(msg.error);
-        }
-    } catch (error) {
-        alert(msg.connection);
-    }
+    });
 });

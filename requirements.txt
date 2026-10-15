@@ -11,3 +11,5 @@ google-auth-oauthlib==1.2.0
 google-auth
 google-api-python-client
 django-imagekit
+markdown>=3.5
+pygments>=2.17
