@@ -50,20 +50,6 @@ def portfolio(request, lang='pl'):
     })
 
 
-def article_list(request, lang='pl'):
-    try:
-        articles = [_localize(a, lang) for a in Article.objects.filter(published=True)]
-    except Exception:
-        logger.exception('article_list')
-        articles = []
-    return render(request, 'article_list.html', {'articles': articles, 'lang': lang, 'section': 'articles'})
-
-
-def article_detail(request, slug, lang='pl'):
-    a = _localize(get_object_or_404(Article, slug=slug, published=True), lang)
-    return render(request, 'article_detail.html', {'a': a, 'lang': lang, 'section': 'articles'})
-
-
 def about(request, lang='pl'):
     return render(request, 'about.html', {'lang': lang, 'section': 'about'})
 
@@ -148,3 +134,28 @@ def sitemap(request):
 def custom_404(request, exception):
     lang = 'en' if '/en/' in request.path else 'pl'
     return render(request, '404.html', {'lang': lang}, status=404)
+
+
+from .articles_data import get_articles, get_article_by_slug
+from django.http import Http404
+
+def articles_list(request):
+    articles = get_articles()
+    return render(request, 'articles_list.html', {'articles': articles})
+
+
+from .articles_data import get_articles, get_article_by_slug
+from django.http import Http404
+
+def article_list(request):
+    articles = get_articles()
+    return render(request, 'articles_list.html', {'articles': articles})
+
+def articles_list(request):
+    return article_list(request)
+
+def article_detail(request, slug):
+    article = get_article_by_slug(slug)
+    if not article:
+        raise Http404("Artykuł nie został odnaleziony")
+    return render(request, article['template'], {'article': article})

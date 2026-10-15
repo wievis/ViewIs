@@ -1,0 +1,28 @@
+(vl-load-com)
+
+(defun c:dwt (/ old_echo old_expert target_path file_path)
+  (setq old_echo (getvar "CMDECHO"))
+  (setq old_expert (getvar "EXPERT"))
+  (setvar "CMDECHO" 0)
+  (setvar "EXPERT" 2)
+  (if (boundp '*path*)
+    (progn
+      (setq target_path (vl-string-right-trim "\\" (vl-string-right-trim "/" *path*)))
+      (if (not (vl-file-directory-p target_path))
+        (vl-mkdir target_path)
+      )
+      (setq file_path (strcat target_path "\VI.dwt"))
+      (command "_.saveas" "_Template" file_path)
+      (while (> (getvar "CMDACTIVE") 0)
+        (command "")
+      )
+      (prompt (strcat "
+[ViewIs CAD] Szablon zapisany w: " file_path))
+    )
+    (prompt "
+[ViewIs CAD Blad] Zmienna *path* nie jest zdefiniowana w srodowisku.")
+  )
+  (setvar "EXPERT" old_expert)
+  (setvar "CMDECHO" old_echo)
+  (princ)
+)

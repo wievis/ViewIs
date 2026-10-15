@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section style="position: relative; z-index: 10; min-height: 85vh; padding-top: 140px; padding-bottom: 80px;">
+  <div style="max-width: 920px; margin: 0 auto; padding: 0 24px;">
+    
+    <div style="margin-bottom: 40px; border-bottom: 1px solid rgba(255, 255, 255, 0.12); padding-bottom: 24px;">
+      <h1 style="font-size: 36px; font-weight: 800; color: #ffffff; margin-bottom: 12px; letter-spacing: -0.02em;">Baza wiedzy & Narzędzia</h1>
+      <p style="font-size: 15px; color: #94a3b8; line-height: 1.6; margin: 0;">Praktyczne skrypty, automatyzacje CAD/BIM oraz techniczne rozwiązania z codziennej praktyki projektowej.</p>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 24px;">
+      {% for art in articles %}
+        <article style="background: #0f172a; border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 12px; padding: 28px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);">
+          <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 14px; font-size: 12px;">
+            <span style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); padding: 3px 10px; border-radius: 20px; font-weight: 600;">{{ art.category }}</span>
+            <span style="color: #475569;">•</span>
+            <span style="color: #94a3b8;">{{ art.date }}</span>
+            <span style="color: #475569;">•</span>
+            <span style="color: #94a3b8;">{{ art.read_time }}</span>
+          </div>
+          <h2 style="font-size: 22px; font-weight: 700; margin-bottom: 12px; line-height: 1.35;">
+            <a href="/artykuly/{{ art.slug }}/" style="color: #ffffff; text-decoration: none;">{{ art.title }}</a>
+          </h2>
+          <p style="font-size: 14.5px; line-height: 1.65; color: #cbd5e1; margin-bottom: 20px;">{{ art.lead }}</p>
+          <a href="/artykuly/{{ art.slug }}/" style="display: inline-flex; align-items: center; gap: 6px; color: #38bdf8; font-size: 13.5px; font-weight: 600; text-decoration: none;">
+            Czytaj artykuł & pobierz skrypty <span>→</span>
+          </a>
+        </article>
+      {% empty %}
+        <div style="padding: 40px; text-align: center; color: #94a3b8; background: #0f172a; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.08);">
+          Brak opublikowanych artykułów.
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+{% endblock %}
