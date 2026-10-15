@@ -1,47 +1,54 @@
-// theme-lang.js: motyw jasny/ciemny + przelacznik jezyka
 const themeToggle = document.getElementById('theme-toggle');
+const themeToggleMob = document.getElementById('theme-toggle-mob');
 const langToggle = document.getElementById('lang-toggle');
+const langToggleMob = document.getElementById('lang-toggle-mob');
 
-function applyTheme(light) {
-    document.documentElement.classList.toggle('light-mode', light);
-    document.body.classList.toggle('light-mode', light);
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'light') {
+    document.body.classList.add('light-mode');
+    if (themeToggle) themeToggle.checked = true;
+    if (themeToggleMob) themeToggleMob.checked = true;
+} else {
+    document.body.classList.remove('light-mode');
+    if (themeToggle) themeToggle.checked = false;
+    if (themeToggleMob) themeToggleMob.checked = false;
 }
 
-let savedLight = false;
-try { savedLight = localStorage.getItem('theme') === 'light'; } catch (e) {}
-applyTheme(savedLight);
-if (themeToggle) {
-    themeToggle.checked = savedLight;
-    themeToggle.addEventListener('change', e => {
-        applyTheme(e.target.checked);
-        try { localStorage.setItem('theme', e.target.checked ? 'light' : 'dark'); } catch (err) {}
-    });
-}
-
-const LANG_MAP = [
-    ['/', '/en/'],
-    ['/portfolio/', '/en/portfolio/'],
-    ['/artykuly/', '/en/articles/'],
-    ['/o-mnie/', '/en/about/'],
-    ['/mep/', '/en/mep/'],
-    ['/kontakt/', '/en/contact/']
-];
-
-function swapLangPath(path, toPl) {
-    for (const [pl, en] of LANG_MAP) {
-        const from = toPl ? en : pl;
-        const to = toPl ? pl : en;
-        if (from === '/') { if (path === '/') return to; continue; }
-        if (path === from || path.startsWith(from)) return to + path.slice(from.length);
+const handleThemeChange = (e) => {
+    const isChecked = e.target.checked;
+    if (isChecked) {
+        document.body.classList.add('light-mode');
+        localStorage.setItem('theme', 'light');
+    } else {
+        document.body.classList.remove('light-mode');
+        localStorage.setItem('theme', 'dark');
     }
-    return toPl ? '/' : '/en/';
-}
+    if (themeToggle) themeToggle.checked = isChecked;
+    if (themeToggleMob) themeToggleMob.checked = isChecked;
+};
 
-if (langToggle) {
-    langToggle.addEventListener('change', e => {
-        const toPl = e.target.checked; // zaznaczony = PL
-        setTimeout(() => {
-            window.location.href = swapLangPath(window.location.pathname, toPl);
-        }, 450);
-    });
-}
+if (themeToggle) themeToggle.addEventListener('change', handleThemeChange);
+if (themeToggleMob) themeToggleMob.addEventListener('change', handleThemeChange);
+
+const handleLangChange = (e) => {
+    const isChecked = e.target.checked;
+    const lbEl = document.getElementById('lightbox');
+    const isLightboxActive = lbEl ? lbEl.classList.contains('active') : false;
+    const currentLightboxIndex = (isLightboxActive && typeof currentIndex !== 'undefined') ? currentIndex : null;
+    const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+    
+    setTimeout(() => {
+        const targetPath = isChecked 
+            ? (window.location.pathname === '/en/contact/' ? '/kontakt/' : (window.location.pathname.startsWith('/en/mep/') ? '/mep/' : '/'))
+            : (window.location.pathname === '/kontakt/' ? '/en/contact/' : (window.location.pathname.startsWith('/mep/') ? '/en/mep/' : '/en/'));
+        
+        if (isLightboxActive && currentLightboxIndex !== null) {
+            window.location.href = targetPath + '?lightbox=' + currentLightboxIndex;
+        } else {
+            window.location.href = targetPath + '?scroll=' + scrollPosition;
+        }
+    }, 450);
+};
+
+if (langToggle) langToggle.addEventListener('change', handleLangChange);
+if (langToggleMob) langToggleMob.addEventListener('change', handleLangChange);
