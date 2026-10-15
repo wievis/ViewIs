@@ -1,168 +1,139 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Portfolio | Computer Designer{% endblock %}
+{% block title %}{% if lang == 'en' %}Portfolio{% else %}Portfolio{% endif %} | Computer Designer{% endblock %}
 
 {% block extra_head %}
 <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
-<style>
-.gallery{padding:1rem;max-width:1400px;margin:0 auto}
-.stack-group{position:relative;width:100%;margin-bottom:1.5rem;touch-action:pan-y;overflow:visible;display:flex;justify-content:center}
-.stack-item,.media-item{position:absolute;width:fit-content;max-width:900px;top:0;display:flex;justify-content:center;cursor:pointer;transition:transform 0.4s cubic-bezier(.23,1,.32,1);will-change:transform, z-index}
-.media-item{position:relative;margin-bottom:1.5rem;width:100%;display:flex;justify-content:center}
-.media-frame{width:fit-content;height:auto;overflow:hidden;display:flex;align-items:center;justify-content:center;border-radius:4px;box-shadow:0 10px 30px rgba(0,0,0,.5)}
-.media-frame img,.media-frame video{width:auto;height:auto;max-width:100%;max-height:85vh;display:block;transform:scale(1.25);transition:transform 0.4s cubic-bezier(.23,1,.32,1);pointer-events:none;will-change:transform}
-.stack-item:not([data-is-top="true"]) .media-frame img{object-fit:cover}
-.stack-item[data-is-top="true"]:hover .media-frame img,
-.media-item:hover .media-frame img,
-.media-item:hover .media-frame video{transform:scale(1)}
-model-viewer{width:600px;height:500px;max-width:100%;outline:none}
-@media(max-width:768px){
-.stack-item{max-width:85%}
-model-viewer{width:100%;height:350px}
-}
-</style>
-<script>
-function updateStackSize(img) {
-    const item = img.closest('.stack-item');
-    if (item && item.getAttribute('data-is-top') !== 'true') return;
-    const group = img.closest('.stack-group') || img.closest('.media-item');
-    if (group) {
-        const h = img.offsetHeight;
-        const w = img.offsetWidth;
-        group.style.height = h + 'px';
-        const frames = group.querySelectorAll('.media-frame');
-        frames.forEach(f => {
-            f.style.height = h + 'px';
-            f.style.width = w + 'px';
-        });
-    }
-}
-</script>
 {% endblock %}
 
 {% block content %}
-<section class="page-hero container">
+<section class="page-hero container portfolio-header">
   <span class="eyebrow">Portfolio</span>
-  <h1 class="display">{% if lang == 'en' %}Selected work{% else %}Wybrane realizacje{% endif %}</h1>
+  <h1 class="display">{% if lang == 'en' %}Selected Work &amp; 3D Projects{% else %}Wybrane realizacje i projekty 3D{% endif %}</h1>
+  <p class="lead">
+    {% if lang == 'en' %}
+    Architectural visualisations, real-time virtual environments, product models, and dedicated automation tools.
+    {% else %}
+    Wizualizacje architektoniczne, środowiska wirtualne w czasie rzeczywistym, modele produktów oraz narzędzia automatyzacji.
+    {% endif %}
+  </p>
 </section>
-{% if categories %}
-<div class="filters">
-  <button class="chip active" data-filter="all">{% if lang == 'en' %}All{% else %}Wszystko{% endif %}</button>
-  {% for key, label in categories %}<button class="chip" data-filter="{{ key }}">{{ label }}</button>{% endfor %}
-</div>
-{% endif %}
-<div class="gallery">
-{% for item in top_level_media %}
-{% if item.media_type == 'album' %}
-<div class="stack-group" data-cat="{{ item.category }}">
-{% for child in item.children.all %}
-{% if child.file %}
-<div class="stack-item" onclick="if(isClick(event)) handleItemInteraction(this,'{% if child.media_type == 'image' %}{{ child.display_url }}{% else %}{{ child.file.url }}{% endif %}')">
-<div class="media-frame">
-<img src="{% if child.media_type == 'image' %}{{ child.display_url }}{% else %}{{ child.file.url }}{% endif %}" loading="lazy" onload="updateStackSize(this)">
-</div>
-</div>
-{% endif %}
-{% endfor %}
-</div>
-{% else %}
-{% if item.file %}
-<div class="media-item" data-cat="{{ item.category }}">
-<div class="media-frame" onclick="if(isClick(event)) openLightboxByUrl('{% if item.media_type == 'image' %}{{ item.display_url }}{% else %}{{ item.file.url }}{% endif %}')">
-{% if item.media_type == 'image' %}
-<img src="{{ item.display_url }}" loading="lazy" onload="updateStackSize(this)">
-{% elif item.media_type == 'video' %}
-<video src="{{ item.file.url }}" autoplay loop muted playsinline onloadedmetadata="updateStackSize(this)"></video>
-{% elif item.media_type == 'model3d' %}
-<model-viewer src="{{ item.file.url }}" {% if item.hdr_setting %}environment-image="{{ item.hdr_setting.file.url }}"{% endif %} camera-controls auto-rotate shadow-intensity="1"></model-viewer>
-{% endif %}
-</div>
-</div>
-{% endif %}
-{% endif %}
-{% endfor %}
+
+<div class="container">
+  {% if categories %}
+  <div class="filters-bar">
+    <div class="filters">
+      <button class="filter-btn active" data-filter="all">
+        {% if lang == 'en' %}All Projects{% else %}Wszystkie realizacje{% endif %}
+      </button>
+      {% for key, label in categories %}
+      <button class="filter-btn" data-filter="{{ key }}">{{ label }}</button>
+      {% endfor %}
+    </div>
+    <div class="portfolio-stats">
+      <span id="visible-count">{{ top_level_media|length }}</span> / {{ top_level_media|length }}
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="portfolio-grid">
+    {% for item in top_level_media %}
+      {% if item.media_type == 'album' %}
+        {% with first_child=item.children.first %}
+        <div class="portfolio-card" data-cat="{{ item.category }}" onclick="openAlbumPreview({{ item.id }})">
+          <div class="card-media-wrapper">
+            <span class="card-badge badge-album">
+              {% if lang == 'en' %}Album &middot; {{ item.children.count }} views{% else %}Seria &middot; {{ item.children.count }} ujęć{% endif %}
+            </span>
+            {% if first_child and first_child.file %}
+              <img src="{% if first_child.media_type == 'image' %}{{ first_child.display_url }}{% else %}{{ first_child.file.url }}{% endif %}" alt="{{ item.name }}" loading="lazy">
+            {% else %}
+              <div style="width:100%; height:100%; background:var(--surface-2);"></div>
+            {% endif %}
+          </div>
+          <div class="card-info">
+            <span class="card-meta">
+              {% for k, l in categories %}{% if k == item.category %}{{ l }}{% endif %}{% endfor %}
+            </span>
+            <h3 class="card-title">{{ item.name|default:"Seria wizualizacji" }}</h3>
+          </div>
+        </div>
+        {% endwith %}
+      {% else %}
+        {% if item.file %}
+        <div class="portfolio-card" data-cat="{{ item.category }}" onclick="openItemPreview('{% if item.media_type == 'image' %}{{ item.display_url }}{% else %}{{ item.file.url }}{% endif %}')">
+          <div class="card-media-wrapper">
+            <span class="card-badge">
+              {% if item.media_type == 'video' %}Video{% elif item.media_type == 'model3d' %}3D Model{% else %}Render{% endif %}
+            </span>
+            {% if item.media_type == 'image' %}
+              <img src="{{ item.display_url }}" alt="{{ item.name }}" loading="lazy">
+            {% elif item.media_type == 'video' %}
+              <video src="{{ item.file.url }}" autoplay loop muted playsinline></video>
+            {% elif item.media_type == 'model3d' %}
+              <model-viewer src="{{ item.file.url }}" {% if item.hdr_setting %}environment-image="{{ item.hdr_setting.file.url }}"{% endif %} camera-controls auto-rotate shadow-intensity="1" style="width:100%; height:100%;"></model-viewer>
+            {% endif %}
+          </div>
+          <div class="card-info">
+            <span class="card-meta">
+              {% for k, l in categories %}{% if k == item.category %}{{ l }}{% endif %}{% endfor %}
+            </span>
+            <h3 class="card-title">{{ item.name|default:"Wizualizacja" }}</h3>
+          </div>
+        </div>
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+  </div>
 </div>
 
 <script>
-let ptrX = 0, ptrY = 0, ptrT = 0;
-document.addEventListener('pointerdown', e => {
-    ptrX = e.clientX;
-    ptrY = e.clientY;
-    ptrT = Date.now();
-}, { passive: true, capture: true });
-
-function isClick(e) {
-    return Math.abs(e.clientX - ptrX) < 10 && Math.abs(e.clientY - ptrY) < 10 && (Date.now() - ptrT) < 400;
-}
-
-window.mediaItems=[
+window.mediaItems = [
 {% for item in media_items %}{% if item.file %}
-{url:"{% if item.media_type == 'image' %}{{ item.display_url }}{% else %}{{ item.file.url }}{% endif %}",type:"{{ item.media_type }}",hdr:"{% if item.hdr_setting %}{{ item.hdr_setting.file.url }}{% endif %}"}{% if not forloop.last %},{% endif %}
+  {
+    url: "{% if item.media_type == 'image' %}{{ item.display_url }}{% else %}{{ item.file.url }}{% endif %}",
+    type: "{{ item.media_type }}",
+    hdr: "{% if item.hdr_setting %}{{ item.hdr_setting.file.url }}{% endif %}",
+    parentId: {{ item.parent_album_id|default:"null" }}
+  }{% if not forloop.last %},{% endif %}
 {% endif %}{% endfor %}
-]
+];
 
-function reorderStack(clickedItem){
-    const container = clickedItem.parentElement
-    const items = Array.from(container.querySelectorAll('.stack-item'))
-    const total = items.length
-    const clickedIdx = items.indexOf(clickedItem)
-    
-    items.forEach((item, i) => {
-        const relativeIndex = (i - clickedIdx + total) % total
-        const zIndex = total - relativeIndex
-        const transform = `translateX(${relativeIndex * 30}px) scale(${1 - relativeIndex * 0.025})`
-        
-        item.style.zIndex = zIndex
-        item.style.transform = transform
-        item.setAttribute('data-is-top', zIndex === total ? 'true' : 'false')
-    })
-
-    const topImg = clickedItem.querySelector('img');
-    if (topImg && topImg.complete) updateStackSize(topImg);
+function openItemPreview(url) {
+  const idx = window.mediaItems.findIndex(i => i.url === url);
+  if (idx !== -1) openLightbox(idx);
 }
 
-function handleItemInteraction(el, url){
-    if(el.getAttribute('data-is-top') === 'true'){openLightboxByUrl(url)}
-    else{reorderStack(el)}
+function openAlbumPreview(albumId) {
+  const idx = window.mediaItems.findIndex(i => i.parentId === albumId);
+  if (idx !== -1) openLightbox(idx);
 }
 
-function openLightboxByUrl(url){
-    const idx = window.mediaItems.findIndex(i => i.url === url)
-    if(idx !== -1) openLightbox(idx)
-}
+// Filtrowanie z dynamicznym licznikiem
+document.addEventListener('DOMContentLoaded', () => {
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.portfolio-card');
+  const countEl = document.getElementById('visible-count');
 
-document.querySelectorAll('.stack-group').forEach(group => {
-    const first = group.querySelector('.stack-item')
-    if(first) reorderStack(first)
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const cat = btn.dataset.filter;
+      let visible = 0;
 
-    let startX = 0
-    let isLocked = false
-
-    group.addEventListener('touchstart', e => { 
-        startX = e.touches[0].clientX 
-    }, {passive: true})
-
-    group.addEventListener('touchend', e => {
-        if(isLocked) return
-        const diffX = startX - e.changedTouches[0].clientX
-        if (Math.abs(diffX) > 40) {
-            isLocked = true
-            const items = Array.from(group.querySelectorAll('.stack-item'))
-            const topItem = items.find(i => i.getAttribute('data-is-top') === 'true')
-            const currentIdx = items.indexOf(topItem)
-            const nextIdx = diffX > 0 ? (currentIdx + 1) % items.length : (currentIdx - 1 + items.length) % items.length
-            
-            reorderStack(items[nextIdx])
-            setTimeout(() => { isLocked = false }, 400)
+      cards.forEach(card => {
+        if (cat === 'all' || card.dataset.cat === cat) {
+          card.style.display = 'flex';
+          visible++;
+        } else {
+          card.style.display = 'none';
         }
-    }, {passive: true})
-})
+      });
 
-window.addEventListener('resize', () => {
-    document.querySelectorAll('.stack-group, .media-item').forEach(container => {
-        const activeMedia = container.querySelector('.stack-item[data-is-top="true"] img, .media-item img, video');
-        if (activeMedia) updateStackSize(activeMedia);
+      if (countEl) countEl.textContent = visible;
     });
+  });
 });
 </script>
 {% endblock %}
