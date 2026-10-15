@@ -57,9 +57,9 @@ function updateStackSize(img) {
 <div class="stack-group" data-cat="{{ item.category }}">
 {% for child in item.children.all %}
 {% if child.file %}
-<div class="stack-item" onclick="if(isClick(event)) handleItemInteraction(this,'{% if child.media_type == 'image' %}{{ child.compressed_image.url }}{% else %}{{ child.file.url }}{% endif %}')">
+<div class="stack-item" onclick="if(isClick(event)) handleItemInteraction(this,'{% if child.media_type == 'image' %}{{ child.display_url }}{% else %}{{ child.file.url }}{% endif %}')">
 <div class="media-frame">
-<img src="{% if child.media_type == 'image' %}{{ child.compressed_image.url }}{% else %}{{ child.file.url }}{% endif %}" loading="lazy" onload="updateStackSize(this)">
+<img src="{% if child.media_type == 'image' %}{{ child.display_url }}{% else %}{{ child.file.url }}{% endif %}" loading="lazy" onload="updateStackSize(this)">
 </div>
 </div>
 {% endif %}
@@ -68,9 +68,9 @@ function updateStackSize(img) {
 {% else %}
 {% if item.file %}
 <div class="media-item" data-cat="{{ item.category }}">
-<div class="media-frame" onclick="if(isClick(event)) openLightboxByUrl('{% if item.media_type == 'image' %}{{ item.compressed_image.url }}{% else %}{{ item.file.url }}{% endif %}')">
+<div class="media-frame" onclick="if(isClick(event)) openLightboxByUrl('{% if item.media_type == 'image' %}{{ item.display_url }}{% else %}{{ item.file.url }}{% endif %}')">
 {% if item.media_type == 'image' %}
-<img src="{{ item.compressed_image.url }}" loading="lazy" onload="updateStackSize(this)">
+<img src="{{ item.display_url }}" loading="lazy" onload="updateStackSize(this)">
 {% elif item.media_type == 'video' %}
 <video src="{{ item.file.url }}" autoplay loop muted playsinline onloadedmetadata="updateStackSize(this)"></video>
 {% elif item.media_type == 'model3d' %}
@@ -97,7 +97,7 @@ function isClick(e) {
 
 window.mediaItems=[
 {% for item in media_items %}{% if item.file %}
-{url:"{% if item.media_type == 'image' %}{{ item.compressed_image.url }}{% else %}{{ item.file.url }}{% endif %}",type:"{{ item.media_type }}",hdr:"{% if item.hdr_setting %}{{ item.hdr_setting.file.url }}{% endif %}"}{% if not forloop.last %},{% endif %}
+{url:"{% if item.media_type == 'image' %}{{ item.display_url }}{% else %}{{ item.file.url }}{% endif %}",type:"{{ item.media_type }}",hdr:"{% if item.hdr_setting %}{{ item.hdr_setting.file.url }}{% endif %}"}{% if not forloop.last %},{% endif %}
 {% endif %}{% endfor %}
 ]
 

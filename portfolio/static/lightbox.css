@@ -3,12 +3,9 @@
 .lightbox {
     display: none;
     position: fixed;
-    top: 0;
-    left: 280px;
-    right: 0;
-    bottom: 0;
+    inset: 0;
     background: rgba(0,0,0,0.98);
-    z-index: 1000;
+    z-index: 2000;
 }
 
 .lightbox.active {
@@ -20,8 +17,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 95%;
-    height: 95%;
+    width: 92%;
+    height: 88%;
     pointer-events: auto;
     z-index: 1;
     display: flex;
@@ -45,16 +42,16 @@
     pointer-events: auto;
 }
 
-.lightbox-content .model-viewer {
+.lightbox-content model-viewer {
     pointer-events: auto;
 }
 
 .close {
     position: absolute;
-    top: 2rem;
-    right: 2rem;
+    top: 1.4rem;
+    right: 1.8rem;
     color: #fff;
-    font-size: 3rem;
+    font-size: 2.2rem;
     cursor: pointer;
     opacity: 0.6;
     transition: opacity 0.3s;
@@ -71,11 +68,12 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 8rem;
+    font-size: 3.2rem;
+    font-weight: 100;
     color: #fff;
     cursor: pointer;
-    opacity: 0.8;
-    transition: font-size 0.7s ease-in-out, opacity 0.3s ease;
+    opacity: 0.55;
+    transition: font-size 0.4s ease, opacity 0.3s ease;
     user-select: none;
     line-height: 1;
     z-index: 3;
@@ -83,38 +81,22 @@
 
 .nav-btn:hover {
     opacity: 1;
-    font-size: 12rem;
+    font-size: 3.8rem;
 }
 
-.prev { left: 2rem; }
-.next { right: 2rem; }
+.prev { left: 1.5rem; }
+.next { right: 1.5rem; }
+
+body.light-mode .lightbox {
+    background: rgba(255,255,255,0.98);
+}
 
 body.light-mode .close,
 body.light-mode .nav-btn {
     color: #222;
 }
 
-body.light-mode .lightbox {
-    background: rgba(255,255,255,0.98);
-}
-
 @media (max-width: 768px) {
-    .nav-btn {
-        font-size: 1rem;
-    }
-    
-    .prev { left: 1rem; }
-    .next { right: 1rem; }
-
-    .lightbox {
-        left: 0;
-        top: 0;
-    }
-    
-    .lightbox-content {
-        width: 95%;
-        height: calc(100vh - var(--menu-height, 120px));
-        top: calc(50% + var(--menu-height, 120px) / 2);
-        transform: translate(-50%, -50%);
-    }
+    .nav-btn, .nav-btn:hover { font-size: 2rem; }
+    .lightbox-content { height: 80%; }
 }

@@ -38,7 +38,7 @@ def home(request, lang='pl'):
 
 def portfolio(request, lang='pl'):
     top_level_media = list(Media.objects.filter(parent_album__isnull=True).order_by('order').prefetch_related('children'))
-    media_items = Media.objects.filter(file__isnull=False).exclude(file='').order_by('order')
+    media_items = Media.objects.filter(file__isnull=False).exclude(file='').select_related('hdr_setting').order_by('parent_album__order', 'order')
     present = {m.category for m in top_level_media if m.category}
     categories = []
     for key, label in Media.CATEGORIES:
@@ -48,11 +48,6 @@ def portfolio(request, lang='pl'):
         'top_level_media': top_level_media, 'media_items': media_items,
         'categories': categories, 'lang': lang, 'section': 'portfolio',
     })
-
-
-def galeria(request, lang='pl'):
-    media_items = Media.objects.filter(file__isnull=False).exclude(file='').order_by('order')
-    return render(request, 'galeria.html', {'media_items': media_items, 'lang': lang, 'section': 'portfolio'})
 
 
 def article_list(request, lang='pl'):

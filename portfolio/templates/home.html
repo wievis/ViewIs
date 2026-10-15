@@ -58,7 +58,7 @@
         </div>
         <div class="featured">
             {% for m in featured %}
-            <a class="reveal" style="--d:{{ forloop.counter0|add:0 }}0ms" href="{% if lang == 'en' %}{% url 'portfolio_en' %}{% else %}{% url 'portfolio' %}{% endif %}"><img src="{{ m.compressed_image.url }}" alt="{{ m.name|default:'Projekt' }}" loading="lazy"></a>
+            <a class="reveal" style="--d:{{ forloop.counter0|add:0 }}0ms" href="{% if lang == 'en' %}{% url 'portfolio_en' %}{% else %}{% url 'portfolio' %}{% endif %}"><img src="{{ m.display_url }}" alt="{{ m.name|default:'Projekt' }}" loading="lazy"></a>
             {% endfor %}
         </div>
         <div class="center-cta"><a class="btn btn-ghost" href="{% if lang == 'en' %}{% url 'portfolio_en' %}{% else %}{% url 'portfolio' %}{% endif %}">{% if lang == 'en' %}Full portfolio{% else %}Całe portfolio{% endif %} &rarr;</a></div>

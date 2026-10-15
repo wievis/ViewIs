@@ -24,8 +24,7 @@ const LANG_MAP = [
     ['/artykuly/', '/en/articles/'],
     ['/o-mnie/', '/en/about/'],
     ['/mep/', '/en/mep/'],
-    ['/kontakt/', '/en/contact/'],
-    ['/galeria/', '/en/gallery/']
+    ['/kontakt/', '/en/contact/']
 ];
 
 function swapLangPath(path, toPl) {

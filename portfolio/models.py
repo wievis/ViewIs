@@ -55,6 +55,17 @@ class Media(models.Model):
             self.media_type = 'album'
         super().save(*args, **kwargs)
 
+    @property
+    def display_url(self):
+        if not self.file:
+            return ''
+        if self.media_type == 'image':
+            try:
+                return self.compressed_image.url
+            except Exception:
+                pass
+        return self.file.url
+
     def __str__(self):
         return self.name if self.name else f"{self.media_type} {self.id}"
 

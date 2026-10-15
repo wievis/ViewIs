@@ -173,18 +173,6 @@ html.js .reveal.in { opacity: 1; transform: none; }
 .chip:hover { border-color: var(--accent); }
 .chip.active { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
 
-/* ---------- lightbox overrides ---------- */
-.lightbox { left: 0; z-index: 2000; }
-.lightbox-content { width: 92%; height: 88%; top: 50%; left: 50%; transform: translate(-50%, -50%); }
-.nav-btn { font-size: 3.2rem; font-weight: 100; opacity: .55; }
-.nav-btn:hover { font-size: 3.8rem; opacity: 1; }
-.prev { left: 1.5rem; } .next { right: 1.5rem; }
-.close { font-size: 2.2rem; top: 1.4rem; right: 1.8rem; }
-@media (max-width: 768px) {
-  .nav-btn, .nav-btn:hover { font-size: 2rem; }
-  .lightbox { top: 0; }
-  .lightbox-content { top: 50%; height: 80%; transform: translate(-50%, -50%); }
-}
 
 /* ---------- articles ---------- */
 .article-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
@@ -272,6 +260,3 @@ html.js .reveal.in { opacity: 1; transform: none; }
 /* ---------- 404 ---------- */
 .err-wrap { min-height: 70vh; display: flex; flex-direction: column; justify-content: center; }
 .err-code { font-family: var(--mono); font-size: clamp(5rem, 14vw, 9rem); line-height: 1; letter-spacing: -.05em; color: var(--accent); }
-
-/* ---------- galeria (stara) ---------- */
-body.light-mode .model-viewer { background: var(--surface-2); }

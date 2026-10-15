@@ -2,18 +2,6 @@ let currentIndex = 0;
 let lbTouchStartX = 0;
 let lbTouchStartY = 0;
 
-function updateMenuHeight() {
-    if (window.innerWidth <= 768) {
-        const menu = document.querySelector('.menu');
-        if (menu) {
-            const menuHeight = menu.offsetHeight;
-            document.documentElement.style.setProperty('--menu-height', menuHeight + 'px');
-        }
-    } else {
-        document.documentElement.style.removeProperty('--menu-height');
-    }
-}
-
 function createMediaElement(item) {
     const content = document.querySelector('.lightbox-content');
     content.innerHTML = '';
@@ -49,7 +37,6 @@ function createMediaElement(item) {
 
 function openLightbox(index) {
     currentIndex = index;
-    updateMenuHeight();
     createMediaElement(window.mediaItems[currentIndex]);
     document.getElementById('lightbox').classList.add('active');
 }
@@ -97,6 +84,3 @@ document.addEventListener('keydown', e => {
     if (e.key === 'ArrowLeft') changePhoto(-1);
     if (e.key === 'ArrowRight') changePhoto(1);
 });
-
-window.addEventListener('resize', updateMenuHeight);
-updateMenuHeight();
