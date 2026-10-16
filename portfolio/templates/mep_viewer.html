@@ -36,6 +36,23 @@
       max-width: 380px; display: none; line-height: 1.5; box-shadow: 0 4px 16px rgba(0,0,0,0.5);
     }
     #info-card strong { color: #f8fafc; font-size: 12px; }
+    #clone-panel {
+      position: absolute; bottom: 126px; right: 16px; z-index: 25;
+      display: none; align-items: center; gap: 8px;
+      background: #4c0519; border: 1px solid #be123c;
+      padding: 6px 10px; border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.6); color: #ffe4e6;
+    }
+    #clone-panel button {
+      background: #881337; border: 1px solid #e11d48; color: #fff;
+      width: 26px; height: 26px; border-radius: 4px; cursor: pointer;
+      font-size: 12px; display: flex; align-items: center; justify-content: center;
+      transition: background 0.15s ease;
+    }
+    #clone-panel button:hover { background: #be123c; }
+    #clone-counter {
+      font-size: 11px; font-weight: 700; white-space: nowrap; letter-spacing: 0.02em;
+    }
     #nav-panel {
       position: absolute; bottom: 16px; right: 16px; z-index: 20;
       display: flex; flex-direction: column; align-items: stretch; gap: 6px;
@@ -78,6 +95,13 @@
   </button>
 
   <div id="info-card"></div>
+
+  <div id="clone-panel">
+    <button onclick="prevClone()" title="Poprzedni klon geometrii">❮</button>
+    <span id="clone-counter">Klon: 1 / 1</span>
+    <button onclick="nextClone()" title="Następny klon geometrii">❯</button>
+  </div>
+
   <div id="nav-panel">
     <div id="row-label">RZĄD: -</div>
     <button class="row-btn" onclick="rowNav(-1)" title="Poprzedni wiersz">▲</button>
@@ -88,6 +112,7 @@
     </div>
     <button class="row-btn" onclick="rowNav(1)" title="Następny wiersz">▼</button>
   </div>
+
   <div id="canvas-container"></div>
   <script type="module" src="{% static 'mep_viewer.js' %}"></script>
 </body>

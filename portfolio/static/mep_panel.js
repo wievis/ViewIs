@@ -54,7 +54,8 @@ function onProjectFolderSelected(event) {
         sendToViewer({
           type: "REGISTER_SYSTEM_DATA",
           members: parsed.members || {},
-          details: parsed.details || {}
+          details: parsed.details || {},
+          duplicates: parsed.duplicates || {}
         });
       } catch(err){}
     };
@@ -324,21 +325,22 @@ async function handleSelectionChange() {
       }
 
       let guids = [];
-      const isBilans = upSheet.includes("BILANS");
-      if (isBilans) {
-        const clickedHeader = String(headers[cIdx] || "").toLowerCase();
-        const normH = headers.map(h => h.toLowerCase().replace(/[\s_]+/g, ""));
-        const pomIdx = normH.indexOf("globalidpominiete");
-        const rapIdx = normH.indexOf("globalidraport");
-        const allIdx = normH.indexOf("globalid");
+      const isBilans = upSheet.includes("BILANS") || upSheet.includes("AUDYT");
+      const clickedHeader = String(headers[cIdx] || "").toLowerCase();
+      const normH = headers.map(h => h.toLowerCase().replace(/[\s_]+/g, ""));
+      const dupIdx = normH.indexOf("globalidduplikaty");
+      const pomIdx = normH.indexOf("globalidpominiete");
+      const rapIdx = normH.indexOf("globalidraport");
+      const allIdx = normH.indexOf("globalid");
 
+      if (isBilans || clickedHeader.includes("błąd") || clickedHeader.includes("blad") || clickedHeader.includes("pomini") || clickedHeader.includes("odrzucon") || clickedHeader.includes("duplikat")) {
         let targetVal = "";
-        if (clickedHeader.includes("pomini") || clickedHeader.includes("odrzucone")) {
-          targetVal = pomIdx >= 0 ? rowVals[pomIdx] : "";
+        if (clickedHeader.includes("pomini") || clickedHeader.includes("odrzucone") || clickedHeader.includes("błąd") || clickedHeader.includes("blad") || clickedHeader.includes("duplikat")) {
+          targetVal = (dupIdx >= 0 && rowVals[dupIdx]) ? rowVals[dupIdx] : (pomIdx >= 0 ? rowVals[pomIdx] : "");
         } else if (clickedHeader.includes("rapor")) {
           targetVal = rapIdx >= 0 ? rowVals[rapIdx] : "";
         } else {
-          targetVal = allIdx >= 0 ? rowVals[allIdx] : (rapIdx >= 0 ? rowVals[rapIdx] : "");
+          targetVal = (dupIdx >= 0 && rowVals[dupIdx]) ? rowVals[dupIdx] : (pomIdx >= 0 && rowVals[pomIdx] ? rowVals[pomIdx] : (rapIdx >= 0 ? rowVals[rapIdx] : (allIdx >= 0 ? rowVals[allIdx] : "")));
         }
         if (targetVal) {
           guids = String(targetVal).trim().split(/[\s,;|]+/).filter(Boolean);

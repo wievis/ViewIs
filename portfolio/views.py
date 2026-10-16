@@ -1,3 +1,4 @@
+from django.http import JsonResponse, Http404
 import os
 import logging
 from django.conf import settings
@@ -59,34 +60,59 @@ def _clean(s, n=100):
 
 
 def kontakt(request, lang='pl'):
-    if request.method == 'POST':
-        if request.POST.get('website'):  # honeypot
-            return JsonResponse({'status': 'success'})
-        first_name = _clean(request.POST.get('first_name'))
-        last_name = _clean(request.POST.get('last_name'))
-        email = _clean(request.POST.get('email'), 200)
-        message = (request.POST.get('message') or '').strip()[:5000]
-        try:
-            validate_email(email)
-        except ValidationError:
-            return JsonResponse({'status': 'error', 'message': 'invalid email'}, status=400)
-        if not message:
-            return JsonResponse({'status': 'error', 'message': 'empty message'}, status=400)
-        full_message = f"Od: {first_name} {last_name} <{email}>\n\n{message}"
-        try:
-            EmailMessage(
-                subject=f"Kontakt: {first_name} {last_name}".strip(),
-                body=full_message,
-                from_email=getattr(settings, 'DEFAULT_FROM_EMAIL', 'kontakt@viewis.pl'),
-                to=[getattr(settings, 'CONTACT_EMAIL', 'kontakt@viewis.pl')],
-                reply_to=[email],
-            ).send(fail_silently=False)
-            return JsonResponse({'status': 'success'})
-        except Exception:
-            logger.exception('kontakt: blad wysylki')
-            return JsonResponse({'status': 'error'}, status=500)
-    return render(request, 'kontakt.html', {'lang': lang, 'section': 'kontakt'})
-
+    if request.method != 'POST':
+        return JsonResponse({'status': 'error', 'message': 'Method not allowed'}, status=405)
+    
+    first_name = request.POST.get('first_name', '').strip()
+    last_name = request.POST.get('last_name', '').strip()
+    email = request.POST.get('email', '').strip()
+    message = request.POST.get('message', '').strip()
+    
+    if not email or not message:
+        return JsonResponse({'status': 'error', 'message': 'Wypełnij email i treść.'})
+    
+    try:
+        validate_email(email)
+    except Exception:
+        return JsonResponse({'status': 'error', 'message': 'Niepoprawny adres email.'})
+    
+    resend_api_key = os.environ.get('RESEND_API_KEY')
+    if not resend_api_key:
+        return JsonResponse({'status': 'error', 'message': 'Brak klucza RESEND_API_KEY na Railway.'})
+    
+    import json
+    import urllib.request
+    
+    target_email = os.environ.get('CONTACT_EMAIL', 'kontakt@viewis.pl')
+    full_body = f"Imię i nazwisko: {first_name} {last_name}\nEmail kontaktowy: {email}\n\nWiadomość:\n{message}"
+    
+    payload = {
+        "from": "ViewIs <kontakt@viewis.pl>",
+        "to": [target_email],
+        "reply_to": email,
+        "subject": f"Wiadomość z formularza: {first_name} {last_name}".strip(),
+        "text": full_body
+    }
+    
+    req = urllib.request.Request(
+        "https://api.resend.com/emails",
+        data=json.dumps(payload).encode('utf-8'),
+        headers={
+            "Authorization": f"Bearer {resend_api_key.strip()}",
+            "Content-Type": "application/json",
+            "User-Agent": "ViewIs-Website"
+        },
+        method="POST"
+    )
+    
+    try:
+        with urllib.request.urlopen(req, timeout=8) as resp:
+            return JsonResponse({'status': 'ok', 'message': 'Wiadomość została wysłana!'})
+    except urllib.error.HTTPError as http_err:
+        err_body = http_err.read().decode('utf-8', errors='ignore')
+        return JsonResponse({'status': 'error', 'message': f'Błąd Resend: {err_body}'})
+    except Exception as err:
+        return JsonResponse({'status': 'error', 'message': str(err)})
 
 def mep_landing(request, lang='pl'):
     return render(request, 'mep.html', {'lang': lang, 'section': 'mep'})

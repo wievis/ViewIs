@@ -12,7 +12,7 @@
             </ul>
         </div>
 
-        <form class="form js-contact-form reveal" style="--d:.1s">
+        <form action="/kontakt/" method="POST" class="form js-contact-form reveal" style="--d:.1s">
             {% csrf_token %}
             <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
             <div class="row">
@@ -28,5 +28,63 @@
             <button type="submit" class="btn btn-primary">{% if lang == 'en' %}Send message{% else %}Wyślij wiadomość{% endif %}</button>
             <div class="form-status" role="status" aria-live="polite"></div>
         </form>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const form = document.querySelector(".js-contact-form");
+  if (!form) return;
+
+  form.addEventListener("submit", async function(e) {
+    e.preventDefault();
+    const btn = form.querySelector("button[type='submit']") || form.querySelector("button");
+    const origText = btn ? btn.innerText : "";
+    if (btn) {
+      btn.disabled = true;
+      btn.innerText = "Wysyłanie...";
+    }
+
+    try {
+      const targetUrl = form.getAttribute("action") || window.location.pathname;
+      const res = await fetch(targetUrl, {
+        method: "POST",
+        body: new FormData(form),
+        headers: {
+          "X-Requested-With": "XMLHttpRequest",
+          "Accept": "application/json"
+        }
+      });
+
+      const contentType = res.headers.get("content-type") || "";
+      if (contentType.includes("application/json")) {
+        const data = await res.json();
+        if (res.ok && data.status === "ok") {
+          alert("Wiadomość została wysłana!");
+          form.reset();
+        } else {
+          alert(data.message || "Wystąpił błąd.");
+        }
+      } else {
+        if (res.ok) {
+          alert("Wiadomość została wysłana!");
+          form.reset();
+        } else {
+          alert("Błąd serwera (Status " + res.status + ")");
+        }
+      }
+    } catch (err) {
+      alert("Błąd połączenia: " + err.message);
+    } finally {
+      if (btn) {
+        btn.disabled = false;
+        btn.innerText = origText;
+      }
+    }
+  });
+});
+</script>
+
+
+
+
+
     </div>
 </section>

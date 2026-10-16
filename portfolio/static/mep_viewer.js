@@ -10,6 +10,7 @@ let elementMeshesMap = new Map();
 let elementMetadataMap = new Map();
 let elementStoreyMap = new Map();
 let elementDiamsMap = new Map();
+let elementCenterMap = new Map();
 
 let currentGroupExpressIDs = [];
 let currentGroupIndex = 0;
@@ -20,8 +21,14 @@ let isWireframeMode = false;
 let targetBoxHelper = null;
 let externalMembersMap = {};
 let externalDetailsMap = {};
+let externalDuplicatesMap = {};
+
+let spatialClusterMap = new Map();
+let currentCloneCluster = [];
+let currentCloneIndex = 0;
 
 const activeHighlightMat = new THREE.MeshLambertMaterial({ color: 0xff4500, emissive: 0xd63000, side: THREE.DoubleSide });
+const duplicateCloneMat = new THREE.MeshLambertMaterial({ color: 0xbe123c, emissive: 0x881337, side: THREE.DoubleSide });
 const groupHighlightMat = new THREE.MeshLambertMaterial({ color: 0xffd700, emissive: 0x5a4a00, transparent: true, opacity: 0.18, side: THREE.DoubleSide });
 const ghostWireMat = new THREE.MeshBasicMaterial({ color: 0x334155, wireframe: true, transparent: true, opacity: 0.12 });
 const ghostSolidMat = new THREE.MeshLambertMaterial({ color: 0x475569, transparent: true, opacity: 0.08, depthWrite: false });
@@ -112,6 +119,28 @@ async function registerBranchModel(branch, filename, buffer) {
   }
 }
 
+function computeSpatialClusters() {
+  spatialClusterMap.clear();
+  const bucketTol = 0.02;
+  const buckets = new Map();
+
+  for (let [expId, center] of elementCenterMap.entries()) {
+    const kx = Math.round(center.x / bucketTol);
+    const ky = Math.round(center.y / bucketTol);
+    const kz = Math.round(center.z / bucketTol);
+    const diam = elementDiamsMap.get(expId) || 0;
+    const bucketKey = `${kx}_${ky}_${kz}_${diam}`;
+    if (!buckets.has(bucketKey)) buckets.set(bucketKey, []);
+    buckets.get(bucketKey).push(expId);
+  }
+
+  for (let cluster of buckets.values()) {
+    if (cluster.length > 1) {
+      cluster.forEach(eid => spatialClusterMap.set(eid, cluster));
+    }
+  }
+}
+
 async function switchActiveBranch(branch) {
   if (!branchModels[branch]) return;
   currentActiveBranch = branch;
@@ -125,6 +154,7 @@ async function switchActiveBranch(branch) {
   elementMetadataMap.clear();
   elementStoreyMap.clear();
   elementDiamsMap.clear();
+  elementCenterMap.clear();
 
   try {
     const storeys = ifcApi.GetLineIDsWithType(modelID, WebIFC.IFCBUILDINGSTOREY);
@@ -198,6 +228,9 @@ async function switchActiveBranch(branch) {
         const b = new THREE.Box3();
         meshList.forEach(m => b.expandByObject(m));
         const sz = b.getSize(new THREE.Vector3());
+        const center = b.getCenter(new THREE.Vector3());
+        elementCenterMap.set(expressID, center);
+
         const dims = [sz.x, sz.y, sz.z].sort((a,b) => a - b);
         const approxDiamMm = Math.round(((dims[0] + dims[1]) / 2) * 1000);
         elementDiamsMap.set(expressID, approxDiamMm);
@@ -206,6 +239,7 @@ async function switchActiveBranch(branch) {
   });
 
   scene.add(group);
+  computeSpatialClusters();
   zoomToFit(group);
 }
 
@@ -226,6 +260,8 @@ function resetView() {
   document.getElementById("info-card").style.display = "none";
   const nav = document.getElementById("nav-arrows");
   if (nav) nav.style.display = "none";
+  const cloneP = document.getElementById("clone-panel");
+  if (cloneP) cloneP.style.display = "none";
 }
 
 function toggleGhostMode() {
@@ -243,7 +279,6 @@ async function focusGroup(data) {
     await switchActiveBranch(targetBranch);
   }
   if (!currentActiveBranch || !branchModels[currentActiveBranch]) return;
-  const modelID = branchModels[currentActiveBranch].modelID;
 
   let matchedExpressIDs = [];
   const targetKeys = (data.rowKeys && data.rowKeys.length > 0) ? data.rowKeys : [data.rowKey].filter(Boolean);
@@ -336,6 +371,8 @@ function renderFocusHighlights(isBilans = false) {
   const nav = document.getElementById("nav-arrows");
   if (currentGroupExpressIDs.length === 0) {
     if (nav) nav.style.display = "none";
+    const cp = document.getElementById("clone-panel");
+    if (cp) cp.style.display = "none";
     showInfoCard(null, isBilans);
     return;
   }
@@ -354,7 +391,8 @@ function renderFocusHighlights(isBilans = false) {
     }
   });
 
-  activeMeshes.forEach(m => m.material = activeHighlightMat);
+  const isCloneSelected = (currentCloneCluster.length > 1 && currentCloneIndex > 0);
+  activeMeshes.forEach(m => m.material = isCloneSelected ? duplicateCloneMat : activeHighlightMat);
 
   const focusBox = new THREE.Box3();
   if (activeMeshes.length > 0) {
@@ -368,6 +406,7 @@ function renderFocusHighlights(isBilans = false) {
   if (!focusBox.isEmpty()) {
     targetBoxHelper.setFromObject(activeMeshes[0] || allMeshes[0]);
     targetBoxHelper.box = focusBox;
+    targetBoxHelper.material.color.setHex(isCloneSelected ? 0xbe123c : 0xff4500);
     targetBoxHelper.visible = true;
 
     const center = focusBox.getCenter(new THREE.Vector3());
@@ -383,7 +422,67 @@ function renderFocusHighlights(isBilans = false) {
     controls.update();
   }
 
+  updateCloneCluster(activeEid);
   showInfoCard(activeEid, isBilans);
+}
+
+function updateCloneCluster(activeEid) {
+  const panel = document.getElementById("clone-panel");
+  if (!panel) return;
+
+  const line = elementMetadataMap.get(activeEid);
+  const activeGuid = (line && line.GlobalId && (line.GlobalId.value || line.GlobalId)) || "";
+
+  let clusterEids = [];
+  if (activeGuid && externalDuplicatesMap[activeGuid]) {
+    const guidList = externalDuplicatesMap[activeGuid];
+    for (let [expId, meta] of elementMetadataMap.entries()) {
+      const g = (meta && meta.GlobalId && (meta.GlobalId.value || meta.GlobalId)) || "";
+      if (guidList.includes(g) && !clusterEids.includes(expId)) clusterEids.push(expId);
+    }
+  }
+
+  if (clusterEids.length <= 1 && spatialClusterMap.has(activeEid)) {
+    clusterEids = spatialClusterMap.get(activeEid);
+  }
+
+  if (clusterEids.length > 1) {
+    currentCloneCluster = clusterEids;
+    currentCloneIndex = currentCloneCluster.indexOf(activeEid);
+    if (currentCloneIndex === -1) currentCloneIndex = 0;
+    panel.style.display = "flex";
+    const statusTxt = currentCloneIndex === 0 ? "ZESTAWIENIE" : "ODRZUCONY DUPLIKAT";
+    document.getElementById("clone-counter").innerText = `Klon: ${currentCloneIndex + 1} / ${currentCloneCluster.length} (${statusTxt})`;
+  } else {
+    currentCloneCluster = [];
+    currentCloneIndex = 0;
+    panel.style.display = "none";
+  }
+}
+
+function nextClone() {
+  if (currentCloneCluster.length <= 1) return;
+  currentCloneIndex = (currentCloneIndex + 1) % currentCloneCluster.length;
+  applyCloneSelection();
+}
+
+function prevClone() {
+  if (currentCloneCluster.length <= 1) return;
+  currentCloneIndex = (currentCloneIndex - 1 + currentCloneCluster.length) % currentCloneCluster.length;
+  applyCloneSelection();
+}
+
+function applyCloneSelection() {
+  const targetEid = currentCloneCluster[currentCloneIndex];
+  if (!targetEid) return;
+  const idx = currentGroupExpressIDs.indexOf(targetEid);
+  if (idx >= 0) {
+    currentGroupIndex = idx;
+  } else {
+    currentGroupExpressIDs.push(targetEid);
+    currentGroupIndex = currentGroupExpressIDs.length - 1;
+  }
+  renderFocusHighlights();
 }
 
 function showInfoCard(eid, isBilans = false) {
@@ -402,7 +501,17 @@ function showInfoCard(eid, isBilans = false) {
     return true;
   });
 
-  let body = filteredEntries.map(([k,v]) => `${k}: <strong>${v}</strong>`).join("<br>");
+  let body = "";
+  if (currentCloneCluster.length > 1) {
+    const isDup = currentCloneIndex > 0;
+    const badgeColor = isDup ? "#f43f5e" : "#10b981";
+    const badgeBg = isDup ? "rgba(244, 63, 94, 0.15)" : "rgba(16, 185, 129, 0.15)";
+    const badgeBorder = isDup ? "#be123c" : "#059669";
+    const badgeText = isDup ? "ODRZUCONY DUPLIKAT GEOMETRII" : "POZYCJA W ZESTAWIENIU (GŁÓWNA)";
+    body += `<div style="background:${badgeBg};border:1px solid ${badgeBorder};color:${badgeColor};font-size:10px;font-weight:700;padding:3px 8px;border-radius:4px;margin-bottom:8px;text-align:center;">${badgeText} (${currentCloneIndex + 1} z ${currentCloneCluster.length})</div>`;
+  }
+
+  body += filteredEntries.map(([k,v]) => `${k}: <strong>${v}</strong>`).join("<br>");
 
   if (currentOccurrences && currentOccurrences.length > 0) {
     body += `<div style="margin-top:6px;padding-top:4px;border-top:1px solid #334155;font-size:10px;display:flex;flex-wrap:wrap;gap:4px;align-items:center;">`;
@@ -470,6 +579,13 @@ function setupKeyboardEvents() {
       colNav(e.key === "ArrowRight" ? 1 : -1);
       return;
     }
+    if (e.ctrlKey && (e.key === "ArrowLeft" || e.key === "ArrowRight")) {
+      e.preventDefault();
+      e.stopPropagation();
+      if (e.key === "ArrowRight") nextClone();
+      else prevClone();
+      return;
+    }
     if (e.key === "ArrowRight") {
       e.preventDefault();
       nextElement();
@@ -516,6 +632,8 @@ function setupClickEvents() {
 
 window.nextElement = nextElement;
 window.prevElement = prevElement;
+window.nextClone = nextClone;
+window.prevClone = prevClone;
 window.rowNav = rowNav;
 window.resetView = resetView;
 window.toggleGhostMode = toggleGhostMode;
@@ -528,6 +646,7 @@ window.addEventListener("message", async (e) => {
   } else if (d.type === "REGISTER_SYSTEM_DATA") {
     externalMembersMap = d.members || {};
     externalDetailsMap = d.details || {};
+    externalDuplicatesMap = d.duplicates || {};
   } else if (d.type === "SWITCH_AND_FOCUS_GROUP") {
     await focusGroup(d);
   } else if (d.type === "SET_OCCURRENCES") {
