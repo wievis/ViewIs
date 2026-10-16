@@ -285,7 +285,7 @@ async function focusGroup(data) {
 
   for (let rk of targetKeys) {
     const cleanKey = String(rk).trim();
-    const cleanKeyBase = cleanKey.replace(/-\d+\$/, "");
+    const cleanKeyBase = cleanKey.replace(/-\d+$/, "");
     const guidsFromMembers = externalMembersMap[cleanKey] || externalMembersMap[cleanKeyBase] || [];
     if (guidsFromMembers.length > 0) {
       const guidSet = new Set(guidsFromMembers);
@@ -430,24 +430,23 @@ function updateCloneCluster(activeEid) {
   const panel = document.getElementById("clone-panel");
   if (!panel) return;
 
-  const line = elementMetadataMap.get(activeEid);
-  const activeGuid = (line && line.GlobalId && (line.GlobalId.value || line.GlobalId)) || "";
+  const activeCenter = elementCenterMap.get(activeEid);
+  if (!activeCenter) {
+    currentCloneCluster = [];
+    currentCloneIndex = 0;
+    panel.style.display = "none";
+    return;
+  }
 
-  let clusterEids = [];
-  if (activeGuid && externalDuplicatesMap[activeGuid]) {
-    const guidList = externalDuplicatesMap[activeGuid];
-    for (let [expId, meta] of elementMetadataMap.entries()) {
-      const g = (meta && meta.GlobalId && (meta.GlobalId.value || meta.GlobalId)) || "";
-      if (guidList.includes(g) && !clusterEids.includes(expId)) clusterEids.push(expId);
+  const cluster = [];
+  for (let [expId, center] of elementCenterMap.entries()) {
+    if (activeCenter.distanceTo(center) <= 0.01) {
+      cluster.push(expId);
     }
   }
 
-  if (clusterEids.length <= 1 && spatialClusterMap.has(activeEid)) {
-    clusterEids = spatialClusterMap.get(activeEid);
-  }
-
-  if (clusterEids.length > 1) {
-    currentCloneCluster = clusterEids;
+  if (cluster.length > 1) {
+    currentCloneCluster = cluster;
     currentCloneIndex = currentCloneCluster.indexOf(activeEid);
     if (currentCloneIndex === -1) currentCloneIndex = 0;
     panel.style.display = "flex";
