@@ -1,6 +1,7 @@
 (vl-load-com)
 
-(setq *path-acad* "C:/Users/tmczs/Documents/AUTOCAD/lsp/start/")
+;; WSKAZ WLASNA SCIEZKE DO FOLDERU ZE SKRYPTAMI LISP:
+(setq *path-acad* "C:/Users/UZYTKOWNIK/Documents/AUTOCAD/lsp/start/")
 
 (defun c:regenlisp (/ ignore scan)
   (setq ignore '(".git" "archiwum" "test" ".venv"))

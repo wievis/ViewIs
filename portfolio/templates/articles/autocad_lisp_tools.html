@@ -12,10 +12,11 @@
     </nav>
 
     <header style="margin-bottom: 32px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 24px;">
-      <div style="display: flex; gap: 10px; align-items: center; font-size: 12px; margin-bottom: 12px;">
+      <div style="display: flex; gap: 8px; align-items: center; font-size: 12px; margin-bottom: 12px; flex-wrap: wrap;">
         <span style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); padding: 3px 10px; border-radius: 20px; font-weight: 600;">{{ article.category }}</span>
-        <span style="color: #475569;">•</span>
-        <span style="color: #94a3b8;">{{ article.date }}</span>
+        {% for t in article.tags %}
+          <span style="background: rgba(148, 163, 184, 0.12); color: #cbd5e1; border: 1px solid rgba(148, 163, 184, 0.25); padding: 3px 9px; border-radius: 20px; font-size: 11.5px; font-weight: 500;">{{ t }}</span>
+        {% endfor %}
         <span style="color: #475569;">•</span>
         <span style="color: #94a3b8;">{{ article.read_time }}</span>
       </div>
@@ -28,6 +29,7 @@
     </header>
 
     <div class="split-layout">
+      
       <div class="split-descriptions">
         
         <div class="desc-card">
@@ -57,12 +59,12 @@
           <div class="cmd-badge">Polecenie: CALCULATEAREA</div>
           <h3 style="font-size: 17px; font-weight: 700; color: #38bdf8; margin-bottom: 8px;">2. Sumowanie powierzchni</h3>
           <p style="color: #cbd5e1; font-size: 14px; line-height: 1.65; margin-bottom: 10px;">
-            Standardowe polecenie <code>_AREA</code> wymaga klikania punktów lub pojedynczych konturów z opcją <em>Add</em>.
+            Standardowe polecenie <code>_AREA</code> wymaga żmudnego klikania punktów lub pojedynczych konturów z opcją <em>Add</em>.
           </p>
           <ul style="padding-left: 18px; color: #94a3b8; font-size: 13.5px; line-height: 1.6;">
             <li>Filtruje jednocześnie obiekty typu <code>*POLYLINE</code>, <code>CIRCLE</code>, <code>HATCH</code> i <code>REGION</code>.</li>
             <li>Odrzuca otwarte polilinie bez powierzchni za pomocą maski bitowej <code>(70 . 128)</code>.</li>
-            <li>Odpytuje obiekty przez interfejs ActiveX (<code>vla-get-property Area</code>) i wyświetla sumę w m² z licznikiem obiektów.</li>
+            <li>Odpytuje obiekty przez interfejs ActiveX (<code>vla-get-property Area</code>) i wyświetla gotową sumę w m² wraz z licznikiem obiektów.</li>
           </ul>
         </div>
 
@@ -83,7 +85,7 @@
           <div style="font-size: 12px; font-weight: 700; color: #38bdf8; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">Powiązany poradnik</div>
           <h4 style="font-size: 16px; font-weight: 700; color: #ffffff; margin-bottom: 6px;">Jak skonfigurować AutoCADa do automatycznego ładowania skryptów?</h4>
           <p style="font-size: 13.5px; color: #94a3b8; margin: 0; line-height: 1.55;">
-            Zobacz kompletny poradnik krok po kroku: dodawanie zaufanych folderów (<em>Trusted Locations</em>) oraz automatyczne przeładowywanie kodu w locie poleceniem <code>REGENLISP</code> →
+            Zobacz kompletny poradnik opisujący krok po kroku dodawanie zaufanych folderów (<em>Trusted Locations</em>) oraz automatyczne przeładowywanie kodu w locie poleceniem <code>REGENLISP</code> →
           </p>
         </div>
 

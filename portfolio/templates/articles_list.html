@@ -13,10 +13,11 @@
     <div style="display: flex; flex-direction: column; gap: 20px;">
       {% for art in articles %}
         <article class="article-card" onclick="window.location.href='/artykuly/{{ art.slug }}/'">
-          <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 14px; font-size: 12px;">
+          <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 14px; font-size: 12px; flex-wrap: wrap;">
             <span style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); padding: 3px 10px; border-radius: 20px; font-weight: 600;">{{ art.category }}</span>
-            <span style="color: #475569;">•</span>
-            <span style="color: #94a3b8;">{{ art.date }}</span>
+            {% for t in art.tags %}
+              <span style="background: rgba(148, 163, 184, 0.12); color: #cbd5e1; border: 1px solid rgba(148, 163, 184, 0.25); padding: 3px 9px; border-radius: 20px; font-size: 11.5px; font-weight: 500;">{{ t }}</span>
+            {% endfor %}
             <span style="color: #475569;">•</span>
             <span style="color: #94a3b8;">{{ art.read_time }}</span>
           </div>

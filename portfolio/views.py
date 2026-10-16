@@ -155,15 +155,24 @@ def articles_list(request):
     return article_list(request)
 
 
+
 def article_detail(request, slug):
     article = get_article_by_slug(slug)
     if not article:
         raise Http404("Artykuł nie został odnaleziony")
     
     ctx = {'article': article}
-    lsp_path = os.path.join(os.path.abspath(os.getcwd()), "portfolio", "static", "lsp", "viewis-cad-tools.lsp")
-    if os.path.exists(lsp_path):
-        with open(lsp_path, "r", encoding="utf-8") as f:
-            ctx['unified_code'] = f.read()
+    static_lsp = os.path.join(os.path.abspath(os.getcwd()), "portfolio", "static", "lsp")
+    
+    if slug == "autocad-lisp-narzedzia-przyspieszajace-prace":
+        p = os.path.join(static_lsp, "viewis-cad-tools.lsp")
+        if os.path.exists(p):
+            with open(p, "r", encoding="utf-8") as f:
+                ctx['unified_code'] = f.read()
+    elif slug == "autolisp-pierwsze-kroki-automatyczne-ladowanie":
+        p = os.path.join(static_lsp, "regenlisp.lsp")
+        if os.path.exists(p):
+            with open(p, "r", encoding="utf-8") as f:
+                ctx['regenlisp_code'] = f.read()
     
     return render(request, article['template'], ctx)
