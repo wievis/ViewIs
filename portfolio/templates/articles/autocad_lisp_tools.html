@@ -2,210 +2,198 @@
 {% load static %}
 
 {% block content %}
-<main style="max-width: 860px; margin: 0 auto; padding-top: 140px; padding-bottom: 80px; padding: 0 20px; color: #f8fafc; line-height: 1.75; font-size: 15px;">
-  <nav style="margin-bottom: 24px; font-size: 13px;">
-    <a href="/artykuly/" style="color: #38bdf8; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
-      ← Wszystkie artykuły
-    </a>
-  </nav>
+<section style="position: relative; z-index: 10; min-height: 85vh; padding-top: 140px; padding-bottom: 80px;">
+  <div style="max-width: 1240px; margin: 0 auto; padding: 0 24px;">
+    
+    <nav style="margin-bottom: 24px; font-size: 13px;">
+      <a href="/artykuly/" style="color: #38bdf8; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+        ← Wszystkie artykuły
+      </a>
+    </nav>
 
-  <header style="margin-bottom: 32px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 24px;">
-    <div style="display: flex; gap: 10px; align-items: center; font-size: 12px; margin-bottom: 12px;">
-      <span style="background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.3); padding: 3px 10px; border-radius: 20px; font-weight: 600;">{{ article.category }}</span>
-      <span style="color: #64748b;">•</span>
-      <span style="color: #94a3b8;">{{ article.date }}</span>
-      <span style="color: #64748b;">•</span>
-      <span style="color: #94a3b8;">Czas czytania: {{ article.read_time }}</span>
-    </div>
-    <h1 style="font-size: 32px; font-weight: 800; line-height: 1.25; margin-bottom: 16px; letter-spacing: -0.02em;">
-      {{ article.title }}
-    </h1>
-    <p style="font-size: 16px; color: #94a3b8; line-height: 1.6;">
-      {{ article.lead }}
-    </p>
-  </header>
-
-  <section style="margin-bottom: 40px;">
-    <p style="margin-bottom: 16px; color: #cbd5e1;">
-      W codziennym kreśleniu i koordynacji dokumentacji CAD powtarzamy setki mechanicznych operacji: zaznaczanie pozostałych obiektów, ręczne sumowanie powierzchni pod tabelki czy setup nowego pliku na bazie firmowego szablonu.
-    </p>
-    <p style="margin-bottom: 16px; color: #cbd5e1;">
-      Poniżej przygotowałem 3 praktyczne procedury w AutoLISP, które rozwiązują te braki bez konieczności instalowania zewnętrznych nakładek. Możesz skopiować kod bezpośrednio lub pobrać gotowe pliki <code>.lsp</code> do folderu automatycznego ładowania (<code>APPLOAD</code>).
-    </p>
-  </section>
-
-  <!-- Narzedzie 1 -->
-  <section style="margin-bottom: 48px; background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 24px;">
-    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; flex-wrap: wrap; gap: 12px;">
-      <div>
-        <h2 style="font-size: 20px; font-weight: 700; color: #38bdf8; margin-bottom: 4px;">1. Odwrócenie zaznaczenia: <code>SELECTREVERSE</code></h2>
-        <p style="font-size: 13px; color: #94a3b8; margin: 0;">Zaznacza wszystkie obiekty w bieżącym układzie (Model/Layout) poza elementami aktualnie wybranymi.</p>
+    <header style="margin-bottom: 32px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 24px;">
+      <div style="display: flex; gap: 10px; align-items: center; font-size: 12px; margin-bottom: 12px;">
+        <span style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); padding: 3px 10px; border-radius: 20px; font-weight: 600;">{{ article.category }}</span>
+        <span style="color: #475569;">•</span>
+        <span style="color: #94a3b8;">{{ article.date }}</span>
+        <span style="color: #475569;">•</span>
+        <span style="color: #94a3b8;">{{ article.read_time }}</span>
       </div>
-      <a href="{% static 'lsp/selectreverse.lsp' %}" download class="btn-download">Pobierz .lsp</a>
-    </div>
+      <h1 style="font-size: 32px; font-weight: 800; color: #ffffff; line-height: 1.3; margin-bottom: 14px; letter-spacing: -0.02em;">
+        {{ article.title }}
+      </h1>
+      <p style="font-size: 15.5px; color: #94a3b8; line-height: 1.6; max-width: 900px; margin: 0;">
+        {{ article.lead }}
+      </p>
+    </header>
 
-    <div class="code-box">
-      <div class="code-header">
-        <span>AutoLISP (selectreverse.lsp)</span>
-        <button class="btn-copy" onclick="copyCode('code-selectreverse', this)">Kopiuj kod</button>
+    <div class="split-layout">
+      <div class="split-descriptions">
+        
+        <div class="desc-card">
+          <h2 style="font-size: 19px; font-weight: 700; color: #ffffff; margin-bottom: 10px;">Architektura zestawu</h2>
+          <p style="color: #cbd5e1; font-size: 14px; line-height: 1.65; margin-bottom: 14px;">
+            Trzy procedury zawarte w pliku <code>viewis-cad-tools.lsp</code> zostały przygotowane tak, by działać w każdym standardowym środowisku AutoCAD bez zewnętrznych bibliotek DLL i bez ingerencji w rejestr systemowy.
+          </p>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <a href="{% static 'lsp/viewis-cad-tools.lsp' %}" download class="btn-download">Pobierz viewis-cad-tools.lsp</a>
+          </div>
+        </div>
+
+        <div class="desc-card">
+          <div class="cmd-badge">Polecenie: SELECTREVERSE</div>
+          <h3 style="font-size: 17px; font-weight: 700; color: #38bdf8; margin-bottom: 8px;">1. Odwrócenie zaznaczenia</h3>
+          <p style="color: #cbd5e1; font-size: 14px; line-height: 1.65; margin-bottom: 10px;">
+            AutoCAD natywnie nie oferuje prostego odwrócenia aktywnego zbioru wskazań w obszarze Modelu lub bieżącego arkusza (Layout).
+          </p>
+          <ul style="padding-left: 18px; color: #94a3b8; font-size: 13.5px; line-height: 1.6;">
+            <li>Pobiera aktualnie zaznaczone obiekty przez <code>(ssget "_I")</code>.</li>
+            <li>Zbiera wszystkie widoczne elementy z bieżącej przestrzeni (filtr DXF 410 = <code>CTAB</code>) ignorując obiekty ukryte (kod DXF 60).</li>
+            <li>Tworzy nowy zbiór różnicowy i natychmiast go aktywuje za pomocą <code>sssetfirst</code>.</li>
+          </ul>
+        </div>
+
+        <div class="desc-card">
+          <div class="cmd-badge">Polecenie: CALCULATEAREA</div>
+          <h3 style="font-size: 17px; font-weight: 700; color: #38bdf8; margin-bottom: 8px;">2. Sumowanie powierzchni</h3>
+          <p style="color: #cbd5e1; font-size: 14px; line-height: 1.65; margin-bottom: 10px;">
+            Standardowe polecenie <code>_AREA</code> wymaga klikania punktów lub pojedynczych konturów z opcją <em>Add</em>.
+          </p>
+          <ul style="padding-left: 18px; color: #94a3b8; font-size: 13.5px; line-height: 1.6;">
+            <li>Filtruje jednocześnie obiekty typu <code>*POLYLINE</code>, <code>CIRCLE</code>, <code>HATCH</code> i <code>REGION</code>.</li>
+            <li>Odrzuca otwarte polilinie bez powierzchni za pomocą maski bitowej <code>(70 . 128)</code>.</li>
+            <li>Odpytuje obiekty przez interfejs ActiveX (<code>vla-get-property Area</code>) i wyświetla sumę w m² z licznikiem obiektów.</li>
+          </ul>
+        </div>
+
+        <div class="desc-card">
+          <div class="cmd-badge">Polecenie: DWT</div>
+          <h3 style="font-size: 17px; font-weight: 700; color: #38bdf8; margin-bottom: 8px;">3. Natychmiastowy szablon DWT</h3>
+          <p style="color: #cbd5e1; font-size: 14px; line-height: 1.65; margin-bottom: 10px;">
+            Eksport szablonu w CADzie standardowo zmusza do przeklikiwania dialogów zapisu i wyboru formatu.
+          </p>
+          <ul style="padding-left: 18px; color: #94a3b8; font-size: 13.5px; line-height: 1.6;">
+            <li>Zapisuje bieżący stan rysunku jako <code>VI.dwt</code> do katalogu wskazanego globalną zmienną <code>*path*</code>.</li>
+            <li>Sprawdza istnienie katalogu i automatycznie tworzy brakującą strukturę (<code>vl-mkdir</code>).</li>
+            <li>Wycisza komunikaty (<code>CMDECHO = 0</code>) i nadpisuje plik bez monitów (<code>EXPERT = 2</code>).</li>
+          </ul>
+        </div>
+
+        <div class="notice-card" onclick="window.location.href='/artykuly/autolisp-pierwsze-kroki-automatyczne-ladowanie/'">
+          <div style="font-size: 12px; font-weight: 700; color: #38bdf8; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">Powiązany poradnik</div>
+          <h4 style="font-size: 16px; font-weight: 700; color: #ffffff; margin-bottom: 6px;">Jak skonfigurować AutoCADa do automatycznego ładowania skryptów?</h4>
+          <p style="font-size: 13.5px; color: #94a3b8; margin: 0; line-height: 1.55;">
+            Zobacz kompletny poradnik krok po kroku: dodawanie zaufanych folderów (<em>Trusted Locations</em>) oraz automatyczne przeładowywanie kodu w locie poleceniem <code>REGENLISP</code> →
+          </p>
+        </div>
+
       </div>
-      <pre id="code-selectreverse"><code>(defun c:selectreverse (/ inv_ss all_ss result_ss i ent)
-  (setq inv_ss (ssget "_I"))
-  (setq all_ss (ssget "_X" (list (cons 410 (getvar "CTAB")) '(-4 . "&lt;NOT") '(60 . 1) '(-4 . "NOT&gt;"))))
-  (if all_ss
-    (progn
-      (setq result_ss (ssadd))
-      (setq i 0)
-      (repeat (sslength all_ss)
-        (setq ent (ssname all_ss i))
-        (if (or (null inv_ss) (not (ssmemb ent inv_ss)))
-          (ssadd ent result_ss)
-        )
-        (setq i (1+ i))
-      )
-      (sssetfirst nil result_ss)
-    )
-  )
-  (princ)
-)</code></pre>
-    </div>
-  </section>
 
-  <!-- Narzedzie 2 -->
-  <section style="margin-bottom: 48px; background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 24px;">
-    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; flex-wrap: wrap; gap: 12px;">
-      <div>
-        <h2 style="font-size: 20px; font-weight: 700; color: #38bdf8; margin-bottom: 4px;">2. Szybka suma powierzchni: <code>CALCULATEAREA</code></h2>
-        <p style="font-size: 13px; color: #94a3b8; margin: 0;">Sumuje pole powierzchni dowolnych zaznaczonych polilinii, okręgów, kreskowań i regionów z konwersją do m².</p>
+      <div class="split-code">
+        <div class="code-box">
+          <div class="code-header">
+            <span>viewis-cad-tools.lsp</span>
+            <div style="display: flex; gap: 8px;">
+              <button class="btn-copy" onclick="copyCode('code-unified', this)">Kopiuj kod</button>
+              <a href="{% static 'lsp/viewis-cad-tools.lsp' %}" download class="btn-copy" style="text-decoration:none; display:inline-block;">Pobierz .lsp</a>
+            </div>
+          </div>
+          <pre id="code-unified" class="vscode-lisp"><code>{{ unified_code|escape }}</code></pre>
+        </div>
       </div>
-      <a href="{% static 'lsp/calculatearea.lsp' %}" download class="btn-download">Pobierz .lsp</a>
+
     </div>
 
-    <div class="code-box">
-      <div class="code-header">
-        <span>AutoLISP (calculatearea.lsp)</span>
-        <button class="btn-copy" onclick="copyCode('code-calculatearea', this)">Kopiuj kod</button>
-      </div>
-      <pre id="code-calculatearea"><code>(vl-load-com)
-
-(defun c:calculatearea (/ ss i total ent obj area count)
-  (setq total 0.0)
-  (setq count 0)
-  (prompt "\nWybierz obiekty do zliczenia powierzchni (Polilinie, Kregi, Kreskowania, Regiony)... ")
-  (if (setq ss (ssget '((0 . "*POLYLINE,CIRCLE,HATCH,REGION") (-4 . "&lt;NOT") (-4 . "&=") (70 . 128) (-4 . "NOT&gt;"))))
-    (progn
-      (repeat (setq i (sslength ss))
-        (setq ent (ssname ss (setq i (1- i))))
-        (setq obj (vlax-ename-&gt;vla-object ent))
-        (if (and (vlax-property-available-p obj 'Area)
-                 (numberp (setq area (vlax-get-property obj 'Area))))
-          (progn
-            (setq total (+ total area))
-            (setq count (1+ count))
-          )
-        )
-      )
-      (princ (strcat "\n[ViewIs CAD] Zliczono obiektow: " (itoa count) " | Laczna powierzchnia: " (rtos (/ total 10000.0) 2 2) " m2"))
-    )
-    (prompt "\nNie wybrano wlasciwych obiektow.")
-  )
-  (princ)
-)</code></pre>
-    </div>
-  </section>
-
-  <!-- Narzedzie 3 -->
-  <section style="margin-bottom: 48px; background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 24px;">
-    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; flex-wrap: wrap; gap: 12px;">
-      <div>
-        <h2 style="font-size: 20px; font-weight: 700; color: #38bdf8; margin-bottom: 4px;">3. Natychmiastowy zapis szablonu: <code>DWT</code></h2>
-        <p style="font-size: 13px; color: #94a3b8; margin: 0;">Automatycznie eksportuje bieżący plik jako czysty szablon <code>VI.dwt</code> do katalogu projektu pod zmienną <code>*path*</code>.</p>
-      </div>
-      <a href="{% static 'lsp/dwt.lsp' %}" download class="btn-download">Pobierz .lsp</a>
-    </div>
-
-    <div class="code-box">
-      <div class="code-header">
-        <span>AutoLISP (dwt.lsp)</span>
-        <button class="btn-copy" onclick="copyCode('code-dwt', this)">Kopiuj kod</button>
-      </div>
-      <pre id="code-dwt"><code>(vl-load-com)
-
-(defun c:dwt (/ old_echo old_expert target_path file_path)
-  (setq old_echo (getvar "CMDECHO"))
-  (setq old_expert (getvar "EXPERT"))
-  (setvar "CMDECHO" 0)
-  (setvar "EXPERT" 2)
-  (if (boundp '*path*)
-    (progn
-      (setq target_path (vl-string-right-trim "\\" (vl-string-right-trim "/" *path*)))
-      (if (not (vl-file-directory-p target_path))
-        (vl-mkdir target_path)
-      )
-      (setq file_path (strcat target_path "\\VI.dwt"))
-      (command "_.saveas" "_Template" file_path)
-      (while (&gt; (getvar "CMDACTIVE") 0)
-        (command "")
-      )
-      (prompt (strcat "\n[ViewIs CAD] Szablon zapisany w: " file_path))
-    )
-    (prompt "\n[ViewIs CAD Blad] Zmienna *path* nie jest zdefiniowana w srodowisku.")
-  )
-  (setvar "EXPERT" old_expert)
-  (setvar "CMDECHO" old_echo)
-  (princ)
-)</code></pre>
-    </div>
-  </section>
-
-  <!-- Instrukcja instalacji -->
-  <section style="background: rgba(30, 41, 59, 0.4); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 24px; margin-bottom: 40px;">
-    <h3 style="font-size: 16px; font-weight: 700; color: #f8fafc; margin-bottom: 8px;">Jak załadować skrypty do AutoCADa na stałe?</h3>
-    <ol style="padding-left: 20px; font-size: 14px; color: #cbd5e1; line-height: 1.8;">
-      <li>Wpisz w AutoCADzie polecenie <code>APPLOAD</code> i zatwierdź klawiszem Enter.</li>
-      <li>W sekcji <strong>Startup Suite</strong> (ikona walizki) kliknij <strong>Contents...</strong></li>
-      <li>Kliknij <strong>Add...</strong> i wskaż pobrane pliki <code>.lsp</code>.</li>
-      <li>Zamknij okna – od tej pory polecenia <code>SELECTREVERSE</code>, <code>CALCULATEAREA</code> i <code>DWT</code> będą aktywne przy każdym uruchomieniu programu.</li>
-    </ol>
-  </section>
-</main>
+  </div>
+</section>
 
 <style>
+  .split-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+  @media (max-width: 980px) {
+    .split-layout {
+      grid-template-columns: 1fr;
+    }
+  }
+  .split-descriptions {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .desc-card {
+    background: #0f172a;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+  .cmd-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-family: ui-monospace, SFMono-Regular, monospace;
+    font-weight: 700;
+    color: #38bdf8;
+    background: rgba(56, 189, 248, 0.1);
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+  }
+  .notice-card {
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 58, 138, 0.25));
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    border-radius: 12px;
+    padding: 22px;
+    cursor: pointer;
+    transition: transform 0.15s ease, border-color 0.15s ease;
+  }
+  .notice-card:hover {
+    transform: translateY(-2px);
+    border-color: #38bdf8;
+  }
+  .split-code {
+    position: sticky;
+    top: 100px;
+  }
+  .code-box {
+    background: #1e1e1e;
+    border: 1px solid #333333;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  }
+  .code-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #252526;
+    padding: 8px 14px;
+    border-bottom: 1px solid #333333;
+    font-size: 12px;
+    color: #cccccc;
+    font-family: ui-monospace, monospace;
+  }
   .btn-download {
     display: inline-flex;
     align-items: center;
     background: #0284c7;
     color: #fff;
-    padding: 6px 14px;
+    padding: 8px 16px;
     border-radius: 6px;
     font-size: 12px;
     font-weight: 600;
     text-decoration: none;
     transition: background 0.15s ease;
   }
-  .btn-download:hover {
-    background: #0369a1;
-  }
-  .code-box {
-    background: #020617;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    overflow: hidden;
-  }
-  .code-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #0f172a;
-    padding: 8px 14px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    font-size: 12px;
-    color: #94a3b8;
-  }
+  .btn-download:hover { background: #0369a1; }
   .btn-copy {
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.12);
-    color: #cbd5e1;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #cccccc;
     padding: 4px 10px;
     border-radius: 4px;
     cursor: pointer;
@@ -213,34 +201,66 @@
     transition: all 0.15s ease;
   }
   .btn-copy:hover {
-    background: rgba(255,255,255,0.15);
+    background: rgba(255, 255, 255, 0.2);
     color: #fff;
   }
-  pre {
+  pre.vscode-lisp {
     margin: 0;
     padding: 16px;
     overflow-x: auto;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: 13px;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 12.5px;
     line-height: 1.6;
-    color: #38bdf8;
+    max-height: 72vh;
+    color: #d4d4d4;
   }
+
+  .hl-comment { color: #6a9955; font-style: italic; }
+  .hl-keyword { color: #569cd6; font-weight: 600; }
+  .hl-function { color: #dcdcaa; }
+  .hl-string { color: #ce9178; }
+  .hl-number { color: #b5cea8; }
+  .hl-variable { color: #9cdcfe; }
+  .hl-paren { color: #ffd700; }
 </style>
 
 <script>
 function copyCode(elementId, btn) {
   const code = document.getElementById(elementId).innerText;
   navigator.clipboard.writeText(code).then(() => {
-    const original = btn.innerText;
+    const orig = btn.innerText;
     btn.innerText = "Skopiowano!";
     btn.style.background = "#059669";
-    btn.style.color = "#fff";
     setTimeout(() => {
-      btn.innerText = original;
-      btn.style.background = "rgba(255,255,255,0.06)";
-      btn.style.color = "#cbd5e1";
+      btn.innerText = orig;
+      btn.style.background = "rgba(255, 255, 255, 0.08)";
     }, 2000);
   });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const codeEl = document.getElementById("code-unified");
+  if (!codeEl) return;
+  let text = codeEl.innerText;
+
+  const lines = text.split("\n");
+  const highlighted = lines.map(line => {
+    if (line.trim().startsWith(";")) {
+      return `<span class="hl-comment">${escapeHtml(line)}</span>`;
+    }
+    let res = line.replace(/(".*?")/g, '<span class="hl-string">\$1</span>');
+    res = res.replace(/\b(defun|setq|vl-load-com|princ|prompt|if|progn|repeat|while|cond|not|and|or|member|append|itoa|rtos|strcat|strcase)\b/g, '<span class="hl-keyword">\$1</span>');
+    res = res.replace(/\b(ssget|ssadd|sslength|ssname|ssmemb|sssetfirst|getvar|setvar|vlax-ename->vla-object|vlax-property-available-p|vlax-get-property|vl-string-right-trim|vl-file-directory-p|vl-mkdir|command)\b/g, '<span class="hl-function">\$1</span>');
+    res = res.replace(/(\*path\*|CTAB|CMDECHO|EXPERT)/g, '<span class="hl-variable">\$1</span>');
+    res = res.replace(/([\(\)])/g, '<span class="hl-paren">\$1</span>');
+    return res;
+  }).join("\n");
+
+  codeEl.innerHTML = highlighted;
+});
+
+function escapeHtml(str) {
+  return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 </script>
 {% endblock %}

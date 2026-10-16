@@ -154,8 +154,16 @@ def article_list(request):
 def articles_list(request):
     return article_list(request)
 
+
 def article_detail(request, slug):
     article = get_article_by_slug(slug)
     if not article:
         raise Http404("Artykuł nie został odnaleziony")
-    return render(request, article['template'], {'article': article})
+    
+    ctx = {'article': article}
+    lsp_path = os.path.join(os.path.abspath(os.getcwd()), "portfolio", "static", "lsp", "viewis-cad-tools.lsp")
+    if os.path.exists(lsp_path):
+        with open(lsp_path, "r", encoding="utf-8") as f:
+            ctx['unified_code'] = f.read()
+    
+    return render(request, article['template'], ctx)

@@ -1,0 +1,310 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section style="position: relative; z-index: 10; min-height: 85vh; padding-top: 140px; padding-bottom: 80px;">
+  <div style="max-width: 900px; margin: 0 auto; padding: 0 24px; color: #f8fafc; line-height: 1.75; font-size: 15px;">
+    
+    <nav style="margin-bottom: 24px; font-size: 13px;">
+      <a href="/artykuly/" style="color: #38bdf8; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+        ← Wszystkie artykuły
+      </a>
+    </nav>
+
+    <header style="margin-bottom: 36px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 24px;">
+      <div style="display: flex; gap: 10px; align-items: center; font-size: 12px; margin-bottom: 12px;">
+        <span style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); padding: 3px 10px; border-radius: 20px; font-weight: 600;">{{ article.category }}</span>
+        <span style="color: #475569;">•</span>
+        <span style="color: #94a3b8;">{{ article.date }}</span>
+        <span style="color: #475569;">•</span>
+        <span style="color: #94a3b8;">{{ article.read_time }}</span>
+      </div>
+      <h1 style="font-size: 34px; font-weight: 800; color: #ffffff; line-height: 1.25; margin-bottom: 16px; letter-spacing: -0.02em;">
+        {{ article.title }}
+      </h1>
+      <p style="font-size: 16px; color: #94a3b8; line-height: 1.6; margin: 0;">
+        {{ article.lead }}
+      </p>
+    </header>
+
+    <section class="guide-section">
+      <h2 class="section-title">1. Jak po raz pierwszy załadować plik .lsp do AutoCADa?</h2>
+      <p>
+        Plik AutoLISP to zwykły plik tekstowy z rozszerzeniem <code>.lsp</code>. Aby wypróbować dowolną funkcję po raz pierwszy w otwartym rysunku, masz dwie najszybsze metody:
+      </p>
+
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-num">Metoda A</div>
+          <h3 style="font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 8px;">Przeciągnij i upuść (Drag & Drop)</h3>
+          <p style="font-size: 13.5px; color: #cbd5e1; margin: 0;">
+            Chwyć plik <code>.lsp</code> z Eksploratora Windows i upuść go bezpośrednio na czarny obszar kreślenia (Model) w AutoCADzie. Na pasku poleceń pojawi się komunikat potwierdzający załadowanie.
+          </p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">Metoda B</div>
+          <h3 style="font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 8px;">Polecenie APPLOAD</h3>
+          <p style="font-size: 13.5px; color: #cbd5e1; margin: 0;">
+            Wpisz polecenie <code>APPLOAD</code>, wskaż pobrany plik na dysku i kliknij <strong>Load</strong>. W dolnym pasku dialogu zobaczysz komunikat <em>successfully loaded</em>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="guide-section">
+      <h2 class="section-title">2. Zabezpieczenia AutoCAD: Konfiguracja Trusted Paths</h2>
+      <p>
+        Współczesne wersje programu AutoCAD domyślnie blokują wykonywanie skryptów z nieznanych folderów, wyświetlając przy każdym uruchomieniu okno ostrzeżenia: <em>File Load: Security Concern</em>.
+      </p>
+      <p>
+        Aby skrypty ładowały się automatycznie bez żadnych powiadomień, należy dodać folder ze skryptami do zaufanych lokalizacji (<code>TRUSTEDPATHS</code>):
+      </p>
+
+      <div class="callout-box">
+        <ol style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.8;">
+          <li>Wpisz polecenie <code>OPTIONS</code> (lub skrót <code>OP</code>) i przejdź do pierwszej zakładki: <strong>Files</strong>.</li>
+          <li>Rozwiń gałąź <strong>Trusted Locations</strong> (Zaufane lokalizacje).</li>
+          <li>Kliknij przycisk <strong>Add...</strong>, a następnie <strong>Browse...</strong> i wskaż swój folder ze skryptami (np. <code>C:\Users\tmczs\Documents\AUTOCAD\lsp\</code>).</li>
+          <li><strong>Wskazówka:</strong> Zakończenie ścieżki trzema kropkami (np. <code>C:\...\lsp\...</code>) powoduje, że AutoCAD uzna za zaufane również <strong>wszystkie podfoldery</strong>.</li>
+          <li>Zatwierdź klikając <strong>Apply</strong> oraz <strong>OK</strong>.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="guide-section">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; flex-wrap: wrap; gap: 12px;">
+        <div>
+          <h2 class="section-title" style="margin: 0;">3. Automatyzacja: Hot-reload skryptów poleceniem REGENLISP</h2>
+        </div>
+        <a href="{% static 'lsp/regenlisp.lsp' %}" download class="btn-download">Pobierz regenlisp.lsp</a>
+      </div>
+
+      <p>
+        Tradycyjna praca ze skryptami w CADzie bywa uciążliwa: po każdej zmianie w kodzie trzeba ponownie otwierać <code>APPLOAD</code> albo restartować program.
+      </p>
+      <p>
+        Procedura <code>REGENLISP</code> skanuje rekurencyjnie wskazany folder i w ułamku sekundy przeładowuje wszystkie pliki <code>.lsp</code> w locie.
+      </p>
+
+      <div class="code-box" style="margin: 20px 0;">
+        <div class="code-header">
+          <span>regenlisp.lsp</span>
+          <button class="btn-copy" onclick="copyCode('code-regenlisp', this)">Kopiuj kod</button>
+        </div>
+        <pre id="code-regenlisp" class="vscode-lisp"><code>(vl-load-com)
+
+(setq *path-acad* "C:/Users/tmczs/Documents/AUTOCAD/lsp/start/")
+
+(defun c:regenlisp (/ ignore scan)
+  (setq ignore '(".git" "archiwum" "test" ".venv"))
+
+  (defun scan (dir / full)
+    (foreach f (vl-directory-files dir "*.lsp" 1)
+      (setq full (strcat dir "/" f))
+      (if (vl-catch-all-error-p (vl-catch-all-apply 'load (list full)))
+        (princ (strcat "\nBŁĄD: " f))
+        (princ (strcat "\nOK: " f))))
+    (foreach d (vl-directory-files dir nil -1)
+      (if (not (member (strcase d t) (append '("." "..") ignore)))
+        (scan (strcat dir "/" d)))))
+
+  (cond
+    ((not (boundp '*path-acad*))
+     (princ "\nBŁĄD: zmienna *path-acad* nie jest ustawiona."))
+    ((not (vl-file-directory-p *path-acad*))
+     (princ (strcat "\nBŁĄD: folder nie istnieje: " *path-acad*)))
+    (t
+     (scan (vl-string-right-trim "/" *path-acad*))))
+  (princ)
+)</code></pre>
+      </div>
+
+      <h3 style="font-size: 17px; font-weight: 700; color: #38bdf8; margin: 20px 0 10px 0;">Jak działa ten skrypt?</h3>
+      <ul style="padding-left: 20px; font-size: 14px; line-height: 1.7; color: #cbd5e1;">
+        <li>
+          <strong>Zmienna <code>*path-acad*</code>:</strong> Definiuje główną ścieżkę do katalogu ze skryptami. Podajemy ją ze zwykłymi ukośnikami <code>/</code>.
+        </li>
+        <li>
+          <strong>Lista ignorowanych folderów (<code>ignore</code>):</strong> Odrzuca katalogi takie jak repozytorium <code>.git</code>, środowiska wirtualne <code>.venv</code> czy foldery <code>archiwum</code>.
+        </li>
+        <li>
+          <strong>Rekurencyjny skan:</strong> Funkcja przechodzi przez wszystkie poziomy podfolderów, ładując każdy plik <code>.lsp</code>.
+        </li>
+        <li>
+          <strong>Odporność na błędy (<code>vl-catch-all-apply</code>):</strong> Błąd w jednym pliku nie przerywa działania pętli.
+        </li>
+      </ul>
+    </section>
+
+    <div class="next-card" onclick="window.location.href='/artykuly/autocad-lisp-narzedzia-przyspieszajace-prace/'">
+      <div style="font-size: 12px; font-weight: 700; color: #38bdf8; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">Kolejny krok</div>
+      <h3 style="font-size: 18px; font-weight: 700; color: #ffffff; margin-bottom: 6px;">3 gotowe narzędzia do codziennej pracy w AutoCADzie</h3>
+      <p style="font-size: 14px; color: #94a3b8; margin: 0;">
+        Pobierz zestaw funkcji: odwracanie zaznaczenia, sumę powierzchni i eksport szablonu DWT →
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .guide-section {
+    margin-bottom: 48px;
+    background: #0f172a;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 28px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+  .section-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 14px;
+  }
+  .steps-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 18px;
+  }
+  @media (max-width: 720px) {
+    .steps-grid { grid-template-columns: 1fr; }
+  }
+  .step-card {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 20px;
+  }
+  .step-num {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    color: #38bdf8;
+    background: rgba(56, 189, 248, 0.1);
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+  }
+  .callout-box {
+    background: rgba(30, 58, 138, 0.15);
+    border-left: 3px solid #38bdf8;
+    border-radius: 0 8px 8px 0;
+    padding: 18px 20px;
+    margin-top: 16px;
+  }
+  .btn-download {
+    display: inline-flex;
+    align-items: center;
+    background: #0284c7;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.15s ease;
+  }
+  .btn-download:hover { background: #0369a1; }
+  .code-box {
+    background: #1e1e1e;
+    border: 1px solid #333333;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .code-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #252526;
+    padding: 8px 14px;
+    border-bottom: 1px solid #333333;
+    font-size: 12px;
+    color: #cccccc;
+    font-family: ui-monospace, monospace;
+  }
+  .btn-copy {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #cccccc;
+    padding: 4px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 11px;
+    transition: all 0.15s ease;
+  }
+  .btn-copy:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+  }
+  pre.vscode-lisp {
+    margin: 0;
+    padding: 16px;
+    overflow-x: auto;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 12.5px;
+    line-height: 1.6;
+    color: #d4d4d4;
+  }
+  .next-card {
+    background: linear-gradient(135deg, #0f172a, rgba(30, 58, 138, 0.3));
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    border-radius: 12px;
+    padding: 24px;
+    cursor: pointer;
+    transition: transform 0.15s ease, border-color 0.15s ease;
+  }
+  .next-card:hover {
+    transform: translateY(-2px);
+    border-color: #38bdf8;
+  }
+
+  .hl-comment { color: #6a9955; font-style: italic; }
+  .hl-keyword { color: #569cd6; font-weight: 600; }
+  .hl-function { color: #dcdcaa; }
+  .hl-string { color: #ce9178; }
+  .hl-number { color: #b5cea8; }
+  .hl-variable { color: #9cdcfe; }
+  .hl-paren { color: #ffd700; }
+</style>
+
+<script>
+function copyCode(elementId, btn) {
+  const code = document.getElementById(elementId).innerText;
+  navigator.clipboard.writeText(code).then(() => {
+    const orig = btn.innerText;
+    btn.innerText = "Skopiowano!";
+    btn.style.background = "#059669";
+    setTimeout(() => {
+      btn.innerText = orig;
+      btn.style.background = "rgba(255, 255, 255, 0.08)";
+    }, 2000);
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const codeEl = document.getElementById("code-regenlisp");
+  if (!codeEl) return;
+  const lines = codeEl.innerText.split("\n");
+  const highlighted = lines.map(line => {
+    if (line.trim().startsWith(";")) {
+      return `<span class="hl-comment">${escapeHtml(line)}</span>`;
+    }
+    let res = line.replace(/(".*?")/g, '<span class="hl-string">\$1</span>');
+    res = res.replace(/\b(defun|setq|vl-load-com|princ|foreach|if|not|cond|t|member|append|strcase|strcat)\b/g, '<span class="hl-keyword">\$1</span>');
+    res = res.replace(/\b(vl-directory-files|vl-catch-all-error-p|vl-catch-all-apply|load|boundp|vl-file-directory-p|vl-string-right-trim)\b/g, '<span class="hl-function">\$1</span>');
+    res = res.replace(/(\*path-acad\*)/g, '<span class="hl-variable">\$1</span>');
+    res = res.replace(/([\(\)])/g, '<span class="hl-paren">\$1</span>');
+    return res;
+  }).join("\n");
+
+  codeEl.innerHTML = highlighted;
+});
+
+function escapeHtml(str) {
+  return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+</script>
+{% endblock %}
