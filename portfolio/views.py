@@ -77,8 +77,8 @@ def kontakt(request, lang='pl'):
             EmailMessage(
                 subject=f"Kontakt: {first_name} {last_name}".strip(),
                 body=full_message,
-                from_email=os.environ.get('EMAIL_HOST_USER'),
-                to=[getattr(settings, 'CONTACT_EMAIL', 'wielgoszviz@gmail.com')],
+                from_email=getattr(settings, 'DEFAULT_FROM_EMAIL', 'kontakt@viewis.pl'),
+                to=[getattr(settings, 'CONTACT_EMAIL', 'kontakt@viewis.pl')],
                 reply_to=[email],
             ).send(fail_silently=False)
             return JsonResponse({'status': 'success'})
