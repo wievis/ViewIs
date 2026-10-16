@@ -17,8 +17,6 @@
         {% for t in article.tags %}
           <span style="background: rgba(148, 163, 184, 0.12); color: #cbd5e1; border: 1px solid rgba(148, 163, 184, 0.25); padding: 3px 9px; border-radius: 20px; font-size: 11.5px; font-weight: 500;">{{ t }}</span>
         {% endfor %}
-        <span style="color: #475569;">•</span>
-        <span style="color: #94a3b8;">{{ article.read_time }}</span>
       </div>
       <h1 style="font-size: 32px; font-weight: 800; color: #ffffff; line-height: 1.3; margin-bottom: 14px; letter-spacing: -0.02em;">
         {{ article.title }}
@@ -59,7 +57,7 @@
             <li>Wpisz polecenie <code>OPTIONS</code> (skrót <code>OP</code>) i przejdź do zakładki <strong>Files</strong>.</li>
             <li>Rozwiń sekcję <strong>Trusted Locations</strong> (Zaufane lokalizacje).</li>
             <li>Kliknij <strong>Add...</strong>, a następnie <strong>Browse...</strong> i wskaż swój folder na skrypty.</li>
-            <li><strong>Ważne:</strong> Dodaj na końcu ścieżki trzy kropki (<code>...</code>), np. <code>C:\...\lsp\...</code>, aby AutoCAD uznał za zaufane wszystkie podkatalogi.</li>
+            <li><strong>Ważne:</strong> Dodaj na końcu ścieżki trzy kropki (<code>...</code>), np. <code>C:\...\lsp\...</code>, aby AutoCAD uznał za zaufane również wszystkie podkatalogi.</li>
             <li>Kliknij <strong>Apply</strong> i <strong>OK</strong>.</li>
           </ol>
         </div>
@@ -86,7 +84,7 @@
 
         <div class="notice-card" onclick="window.location.href='/artykuly/autocad-lisp-narzedzia-przyspieszajace-prace/'">
           <div style="font-size: 12px; font-weight: 700; color: #38bdf8; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">Kolejny krok</div>
-          <h4 style="font-size: 16px; font-weight: 700; color: #ffffff; margin-bottom: 6px;">3 gotowe narzędzia do codziennej pracy w AutoCADzie</h4>
+          <h4 style="font-size: 16px; font-weight: 700; color: #ffffff; margin-bottom: 6px;">Funkcje jakich brakuje w AutoCAD</h4>
           <p style="font-size: 13.5px; color: #94a3b8; margin: 0; line-height: 1.55;">
             Gdy środowisko jest gotowe, pobierz zestaw funkcji: odwracanie zaznaczenia, sumę powierzchni i eksport szablonu DWT →
           </p>
@@ -97,13 +95,13 @@
       <div class="split-code">
         <div class="code-box">
           <div class="code-header">
-            <span>regenlisp.lsp</span>
+            <span>viewis-autolisp-loader.lsp</span>
             <div style="display: flex; gap: 8px;">
-              <button class="btn-copy" onclick="copyCode('code-regenlisp', this)">Kopiuj kod</button>
-              <a href="{% static 'lsp/regenlisp.lsp' %}" download class="btn-copy" style="text-decoration:none; display:inline-block;">Pobierz .lsp</a>
+              <button class="btn-copy" onclick="copyCode('code-loader', this)">Kopiuj kod</button>
+              <a href="{% static 'lsp/viewis-autolisp-loader.lsp' %}" download class="btn-copy" style="text-decoration:none; display:inline-block;">Pobierz .lsp</a>
             </div>
           </div>
-          <pre id="code-regenlisp" class="vscode-lisp"><code>{{ regenlisp_code|escape }}</code></pre>
+          <pre id="code-loader" class="vscode-lisp"><code>{{ loader_code|escape }}</code></pre>
         </div>
       </div>
 
@@ -231,7 +229,7 @@ function copyCode(elementId, btn) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  const codeEl = document.getElementById("code-regenlisp");
+  const codeEl = document.getElementById("code-loader");
   if (!codeEl) return;
   let text = codeEl.innerText;
 

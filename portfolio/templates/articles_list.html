@@ -18,8 +18,6 @@
             {% for t in art.tags %}
               <span style="background: rgba(148, 163, 184, 0.12); color: #cbd5e1; border: 1px solid rgba(148, 163, 184, 0.25); padding: 3px 9px; border-radius: 20px; font-size: 11.5px; font-weight: 500;">{{ t }}</span>
             {% endfor %}
-            <span style="color: #475569;">•</span>
-            <span style="color: #94a3b8;">{{ art.read_time }}</span>
           </div>
           <h2 style="font-size: 21px; font-weight: 700; margin-bottom: 12px; line-height: 1.35;">
             <a href="/artykuly/{{ art.slug }}/" style="color: #ffffff; text-decoration: none;">{{ art.title }}</a>

@@ -17,8 +17,6 @@
         {% for t in article.tags %}
           <span style="background: rgba(148, 163, 184, 0.12); color: #cbd5e1; border: 1px solid rgba(148, 163, 184, 0.25); padding: 3px 9px; border-radius: 20px; font-size: 11.5px; font-weight: 500;">{{ t }}</span>
         {% endfor %}
-        <span style="color: #475569;">•</span>
-        <span style="color: #94a3b8;">{{ article.read_time }}</span>
       </div>
       <h1 style="font-size: 32px; font-weight: 800; color: #ffffff; line-height: 1.3; margin-bottom: 14px; letter-spacing: -0.02em;">
         {{ article.title }}
@@ -83,9 +81,9 @@
 
         <div class="notice-card" onclick="window.location.href='/artykuly/autolisp-pierwsze-kroki-automatyczne-ladowanie/'">
           <div style="font-size: 12px; font-weight: 700; color: #38bdf8; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">Powiązany poradnik</div>
-          <h4 style="font-size: 16px; font-weight: 700; color: #ffffff; margin-bottom: 6px;">Jak skonfigurować AutoCADa do automatycznego ładowania skryptów?</h4>
+          <h4 style="font-size: 16px; font-weight: 700; color: #ffffff; margin-bottom: 6px;">Jak używać AutoLISP?</h4>
           <p style="font-size: 13.5px; color: #94a3b8; margin: 0; line-height: 1.55;">
-            Zobacz kompletny poradnik opisujący krok po kroku dodawanie zaufanych folderów (<em>Trusted Locations</em>) oraz automatyczne przeładowywanie kodu w locie poleceniem <code>REGENLISP</code> →
+            Zobacz kompletny poradnik opisujący krok po kroku dodawanie zaufanych folderów (<em>Trusted Locations</em>) oraz automatyczne przeładowywanie kodu w locie skryptem <code>viewis-autolisp-loader.lsp</code> →
           </p>
         </div>
 

@@ -1,20 +1,18 @@
 ARTICLES = [
     {
         "slug": "autolisp-pierwsze-kroki-automatyczne-ladowanie",
-        "title": "AutoLISP od zera: Pierwsze uruchomienie, Trusted Paths i automatyczne odświeżanie skryptów w locie",
+        "title": "Jak używać AutoLISP",
         "category": "Workflow",
         "tags": ["AutoCAD", "AutoLISP"],
-        "read_time": "5 min",
         "lead": "Kompletny przewodnik po konfiguracji środowiska LISP: jak poprawnie załadować swój pierwszy plik .lsp, skonfigurować zaufane ścieżki Trusted Paths w AutoCADzie i automatycznie przeładowywać kod podczas pracy jednym poleceniem.",
         "template": "articles/autolisp_getting_started.html"
     },
     {
         "slug": "autocad-lisp-narzedzia-przyspieszajace-prace",
-        "title": "Trzy funkcje AutoLISP, których brakuje w podstawowym AutoCADzie",
+        "title": "Funkcje jakich brakuje w AutoCAD",
         "category": "Automatyzacja",
         "tags": ["AutoCAD", "AutoLISP"],
-        "read_time": "4 min",
-        "lead": "Odwracanie zaznaczenia, błyskawiczna suma powierzchni wielu konturów i natychmiastowy eksport szablonu DWT. Zbiór gotowych procedur w jednym pliku eliminujących powtarzalne czynności w codziennym kreśleniu.",
+        "lead": "Czyli moje efektywne narzędzia bez których nawet nie zaczynam pracy. Odwracanie zaznaczenia, zliczanie powierzchni wielu konturów oraz zapis własnego szablonu.",
         "template": "articles/autocad_lisp_tools.html"
     }
 ]

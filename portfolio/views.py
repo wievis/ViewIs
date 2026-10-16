@@ -156,6 +156,7 @@ def articles_list(request):
 
 
 
+
 def article_detail(request, slug):
     article = get_article_by_slug(slug)
     if not article:
@@ -170,9 +171,9 @@ def article_detail(request, slug):
             with open(p, "r", encoding="utf-8") as f:
                 ctx['unified_code'] = f.read()
     elif slug == "autolisp-pierwsze-kroki-automatyczne-ladowanie":
-        p = os.path.join(static_lsp, "regenlisp.lsp")
+        p = os.path.join(static_lsp, "viewis-autolisp-loader.lsp")
         if os.path.exists(p):
             with open(p, "r", encoding="utf-8") as f:
-                ctx['regenlisp_code'] = f.read()
+                ctx['loader_code'] = f.read()
     
     return render(request, article['template'], ctx)
