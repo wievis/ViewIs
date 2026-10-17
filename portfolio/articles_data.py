@@ -1,5 +1,13 @@
 ARTICLES = [
     {
+        "slug": "maxscript-hot-reload-automatyczne-ladowanie",
+        "title": "Jak używać MAXScript",
+        "category": "Workflow",
+        "tags": ["3ds Max", "MAXScript"],
+        "lead": "Kompletny przewodnik po konfiguracji środowiska i pisaniu skryptów w 3ds Max bez restartu programu: jak stworzyć własny macroScript, przypisać go do paska narzędzi i automatycznie przeładowywać kod w locie.",
+        "template": "articles/maxscript_getting_started.html"
+    },
+    {
         "slug": "autocad-lisp-narzedzia-przyspieszajace-prace",
         "title": "Funkcje jakich brakuje w AutoCAD",
         "category": "Automatyzacja",

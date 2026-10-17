@@ -165,7 +165,14 @@ def article_detail(request, slug):
     ctx = {'article': article}
     static_lsp = os.path.join(os.path.abspath(os.getcwd()), "portfolio", "static", "lsp")
 
-    if slug == "autocad-lisp-narzedzia-przyspieszajace-prace":
+    static_ms = os.path.join(os.path.abspath(os.getcwd()), "portfolio", "static", "ms")
+
+    if slug == "maxscript-hot-reload-automatyczne-ladowanie":
+        p = os.path.join(static_ms, "viewis-regen-scripts.ms")
+        if os.path.exists(p):
+            with open(p, "r", encoding="utf-8") as f:
+                ctx['ms_code'] = f.read()
+    elif slug == "autocad-lisp-narzedzia-przyspieszajace-prace":
         p = os.path.join(static_lsp, "viewis-cad-tools.lsp")
         if os.path.exists(p):
             with open(p, "r", encoding="utf-8") as f:
