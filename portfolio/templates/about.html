@@ -9,7 +9,18 @@
 
 <section class="container" style="padding-bottom:90px">
     <div class="about-grid">
-        <div class="portrait reveal"><span>MW</span></div>
+        <div class="reveal">
+            <div class="portrait"><span>MW</span></div>
+            <p class="quote" style="margin-top:34px;font-size:clamp(1.4rem,2.2vw,1.85rem)">
+                {% if lang == 'en' %}
+                I build functionality, clarity, and real project value.
+                <small>EVERY PROJECT IS A TOOL.</small>
+                {% else %}
+                Tworzę funkcjonalność, czytelność i realną wartość projektu.
+                <small>KAŻDY PROJEKT TO NARZĘDZIE.</small>
+                {% endif %}
+            </p>
+        </div>
         <div class="reveal" style="--d:.08s">
             <p class="lead" style="font-size:1.2rem;color:var(--text)">
                 {% if lang == 'en' %}
@@ -130,20 +141,6 @@
             </div>
 
         </div>
-    </div>
-</section>
-
-<section class="section" style="padding-top:0">
-    <div class="container reveal">
-        <p class="quote">
-            {% if lang == 'en' %}
-            I build functionality, clarity, and real project value.
-            <small>EVERY PROJECT IS A TOOL.</small>
-            {% else %}
-            Tworzę funkcjonalność, czytelność i realną wartość projektu.
-            <small>KAŻDY PROJEKT TO NARZĘDZIE.</small>
-            {% endif %}
-        </p>
     </div>
 </section>
 {% endblock %}

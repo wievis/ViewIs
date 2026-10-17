@@ -55,7 +55,6 @@
             <span class="card-meta">
               {% for k, l in categories %}{% if k == item.category %}{{ l }}{% endif %}{% endfor %}
             </span>
-            <h3 class="card-title">{{ item.name|default:"Seria wizualizacji" }}</h3>
           </div>
         </div>
         {% endwith %}
@@ -78,7 +77,6 @@
             <span class="card-meta">
               {% for k, l in categories %}{% if k == item.category %}{{ l }}{% endif %}{% endfor %}
             </span>
-            <h3 class="card-title">{{ item.name|default:"Wizualizacja" }}</h3>
           </div>
         </div>
         {% endif %}
