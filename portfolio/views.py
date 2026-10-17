@@ -1,15 +1,17 @@
-from django.http import JsonResponse, Http404
 import os
+import json
 import logging
+import urllib.request
 from django.conf import settings
 from django.shortcuts import render, get_object_or_404
-from django.http import JsonResponse, HttpResponse, FileResponse
+from django.http import JsonResponse, HttpResponse, FileResponse, Http404
 from django.core.mail import EmailMessage
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 from django.urls import reverse
 from django.views.decorators.clickjacking import xframe_options_exempt
 from .models import Media, Article
+from .articles_data import get_articles, get_article_by_slug
 
 logger = logging.getLogger(__name__)
 
@@ -18,14 +20,12 @@ CATEGORY_EN = {
     'model': '3D models', 'other': 'Other',
 }
 
-
 def _localize(a, lang):
     en = lang == 'en'
     a.d_title = (a.title_en if en and a.title_en else a.title)
     a.d_lead = (a.lead_en if en and a.lead_en else a.lead)
     a.d_content = (a.content_en if en and a.content_en else a.content)
     return a
-
 
 def home(request, lang='pl'):
     featured = []
@@ -37,7 +37,6 @@ def home(request, lang='pl'):
     except Exception:
         logger.exception('home: nie udalo sie pobrac realizacji')
     return render(request, 'home.html', {'featured': featured, 'lang': lang, 'section': 'home'})
-
 
 def portfolio(request, lang='pl'):
     top_level_media = list(Media.objects.filter(parent_album__isnull=True).order_by('order').prefetch_related('children'))
@@ -52,82 +51,74 @@ def portfolio(request, lang='pl'):
         'categories': categories, 'lang': lang, 'section': 'portfolio',
     })
 
-
 def about(request, lang='pl'):
     return render(request, 'about.html', {'lang': lang, 'section': 'about'})
-
 
 def _clean(s, n=100):
     return ' '.join((s or '').split())[:n]
 
-
 def kontakt(request, lang='pl'):
     if request.method == 'POST':
-    
-    first_name = request.POST.get('first_name', '').strip()
-    last_name = request.POST.get('last_name', '').strip()
-    email = request.POST.get('email', '').strip()
-    message = request.POST.get('message', '').strip()
-    
-    if not email or not message:
-        return JsonResponse({'status': 'error', 'message': 'Wypełnij email i treść.'})
-    
-    try:
-        validate_email(email)
-    except Exception:
-        return JsonResponse({'status': 'error', 'message': 'Niepoprawny adres email.'})
-    
-    resend_api_key = os.environ.get('RESEND_API_KEY')
-    if not resend_api_key:
-        return JsonResponse({'status': 'error', 'message': 'Brak klucza RESEND_API_KEY na Railway.'})
-    
-    import json
-    import urllib.request
-    
-    target_email = os.environ.get('CONTACT_EMAIL', 'kontakt@viewis.pl')
-    full_body = f"Imię i nazwisko: {first_name} {last_name}\nEmail kontaktowy: {email}\n\nWiadomość:\n{message}"
-    
-    payload = {
-        "from": "ViewIs <kontakt@viewis.pl>",
-        "to": [target_email],
-        "reply_to": email,
-        "subject": f"Wiadomość z formularza: {first_name} {last_name}".strip(),
-        "text": full_body
-    }
-    
-    req = urllib.request.Request(
-        "https://api.resend.com/emails",
-        data=json.dumps(payload).encode('utf-8'),
-        headers={
-            "Authorization": f"Bearer {resend_api_key.strip()}",
-            "Content-Type": "application/json",
-            "User-Agent": "ViewIs-Website"
-        },
-        method="POST"
-    )
-    
-    try:
-        with urllib.request.urlopen(req, timeout=8) as resp:
-            return JsonResponse({'status': 'ok', 'message': 'Wiadomość została wysłana!'})
-    except urllib.error.HTTPError as http_err:
-        err_body = http_err.read().decode('utf-8', errors='ignore')
-        return JsonResponse({'status': 'error', 'message': f'Błąd Resend: {err_body}'})
-    except Exception as err:
-        return JsonResponse({'status': 'error', 'message': str(err)})
+        first_name = request.POST.get('first_name', '').strip()
+        last_name = request.POST.get('last_name', '').strip()
+        email = request.POST.get('email', '').strip()
+        message = request.POST.get('message', '').strip()
+
+        if not email or not message:
+            return JsonResponse({'status': 'error', 'message': 'Wypełnij email i treść.'})
+
+        try:
+            validate_email(email)
+        except Exception:
+            return JsonResponse({'status': 'error', 'message': 'Niepoprawny adres email.'})
+
+        resend_api_key = os.environ.get('RESEND_API_KEY')
+        if not resend_api_key:
+            return JsonResponse({'status': 'error', 'message': 'Brak klucza RESEND_API_KEY na Railway.'})
+
+        target_email = os.environ.get('CONTACT_EMAIL', 'kontakt@viewis.pl')
+        full_body = f"Imię i nazwisko: {first_name} {last_name}\nEmail kontaktowy: {email}\n\nWiadomość:\n{message}"
+
+        payload = {
+            "from": "ViewIs <kontakt@viewis.pl>",
+            "to": [target_email],
+            "reply_to": email,
+            "subject": f"Wiadomość z formularza: {first_name} {last_name}".strip(),
+            "text": full_body
+        }
+
+        req = urllib.request.Request(
+            "https://api.resend.com/emails",
+            data=json.dumps(payload).encode('utf-8'),
+            headers={
+                "Authorization": f"Bearer {resend_api_key.strip()}",
+                "Content-Type": "application/json",
+                "User-Agent": "ViewIs-Website"
+            },
+            method="POST"
+        )
+
+        try:
+            with urllib.request.urlopen(req, timeout=8) as resp:
+                return JsonResponse({'status': 'ok', 'message': 'Wiadomość została wysłana!'})
+        except urllib.error.HTTPError as http_err:
+            err_body = http_err.read().decode('utf-8', errors='ignore')
+            return JsonResponse({'status': 'error', 'message': f'Błąd Resend: {err_body}'})
+        except Exception as err:
+            return JsonResponse({'status': 'error', 'message': str(err)})
+
+    return render(request, 'kontakt.html', {'lang': lang, 'section': 'kontakt'})
 
 def mep_landing(request, lang='pl'):
     return render(request, 'mep.html', {'lang': lang, 'section': 'mep'})
-
 
 @xframe_options_exempt
 def mep_panel(request):
     return render(request, 'mep_panel.html')
 
-
 @xframe_options_exempt
 def mep_viewer(request):
     return render(request, 'mep_viewer.html')
-
 
 def mep_manifest(request):
     manifest_path = os.path.join(os.path.dirname(__file__), 'templates', 'mep_manifest.xml')
@@ -137,11 +128,9 @@ def mep_manifest(request):
     response['Content-Disposition'] = 'attachment; filename="viewis-mep-manifest.xml"'
     return response
 
-
 def mep_download_zip(request):
     zip_path = os.path.join(os.path.dirname(__file__), 'static', 'viewis-mep-link.zip')
     return FileResponse(open(zip_path, 'rb'), as_attachment=True, filename='viewis-mep-link.zip')
-
 
 def sitemap(request):
     names = ['home', 'home_en', 'portfolio', 'portfolio_en', 'articles', 'articles_en',
@@ -157,22 +146,9 @@ def sitemap(request):
     xml += ''.join(f'  <url><loc>{u}</loc></url>\n' for u in urls) + '</urlset>\n'
     return HttpResponse(xml, content_type='application/xml')
 
-
 def custom_404(request, exception):
     lang = 'en' if '/en/' in request.path else 'pl'
     return render(request, '404.html', {'lang': lang}, status=404)
-
-
-from .articles_data import get_articles, get_article_by_slug
-from django.http import Http404
-
-def articles_list(request):
-    articles = get_articles()
-    return render(request, 'articles_list.html', {'articles': articles})
-
-
-from .articles_data import get_articles, get_article_by_slug
-from django.http import Http404
 
 def article_list(request):
     articles = get_articles()
@@ -181,17 +157,14 @@ def article_list(request):
 def articles_list(request):
     return article_list(request)
 
-
-
-
 def article_detail(request, slug):
     article = get_article_by_slug(slug)
     if not article:
         raise Http404("Artykuł nie został odnaleziony")
-    
+
     ctx = {'article': article}
     static_lsp = os.path.join(os.path.abspath(os.getcwd()), "portfolio", "static", "lsp")
-    
+
     if slug == "autocad-lisp-narzedzia-przyspieszajace-prace":
         p = os.path.join(static_lsp, "viewis-cad-tools.lsp")
         if os.path.exists(p):
@@ -202,5 +175,5 @@ def article_detail(request, slug):
         if os.path.exists(p):
             with open(p, "r", encoding="utf-8") as f:
                 ctx['loader_code'] = f.read()
-    
+
     return render(request, article['template'], ctx)
