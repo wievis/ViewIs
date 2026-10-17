@@ -11,35 +11,139 @@
     <div class="about-grid">
         <div class="portrait reveal"><span>MW</span></div>
         <div class="reveal" style="--d:.08s">
-            <p class="lead" style="font-size:1.2rem;color:var(--text)">{% if lang == 'en' %}I specialize in visual and technical design within architecture, 3D graphics, and digital tools. I design visualizations, create tools, and automate processes.{% else %}Zajmuję się projektowaniem wizualnym i technicznym w obszarze architektury, grafiki 3D oraz narzędzi cyfrowych. Projektuję wizualizacje, tworzę narzędzia i automatyzuję procesy.{% endif %}</p>
+            <p class="lead" style="font-size:1.2rem;color:var(--text)">
+                {% if lang == 'en' %}
+                I combine 3D graphics engineering and BIM methodology with custom software development and pipeline automation. I deliver photorealistic architectural visualizations, real-time interactive presentations in Unreal Engine, and automated data workflows – from IFC parameter extraction to interactive Web 3D applications.
+                {% else %}
+                Łączę inżynierię grafiki 3D i metodykę BIM z programowaniem autorskich narzędzi produkcyjnych. Realizuję fotorealistyczne wizualizacje architektoniczne, interaktywne prezentacje czasu rzeczywistego w silniku Unreal Engine oraz buduję zautomatyzowane potoki danych – od ekstrakcji parametrów z modeli IFC po aplikacje Web 3D.
+                {% endif %}
+            </p>
 
             <div class="competency" style="margin-top:34px">
-                <h3>Archviz</h3>
-                <p>{% if lang == 'en' %}Interior, exterior and object visualizations{% else %}Wizualizacje wnętrz, zewnętrz i obiektów{% endif %}</p>
-                <div class="chips"><span>Unreal Engine</span><span>3ds Max</span><span>Blender</span></div>
+                <h3>{% if lang == 'en' %}3D &amp; Interaction{% else %}3D &amp; Interakcja{% endif %}</h3>
+                <p>
+                    {% if lang == 'en' %}
+                    Photorealistic spatial environments, performance profiling and asset optimization for large-scale scenes, as well as native logic programming for interactive presentations and walkthroughs.
+                    {% else %}
+                    Fotorealistyczne sceny architektoniczne, zaawansowane profilowanie i optymalizacja wydajności dużych układów przestrzennych oraz programowanie logiki interaktywnych prezentacji i wirtualnych spacerów.
+                    {% endif %}
+                </p>
+                <div class="chips">
+                    <span>Unreal Engine</span>
+                    <span>C++ (UE)</span>
+                    <span>Python w UE</span>
+                    <span>3ds Max</span>
+                    <span>Blender</span>
+                    <span>Rhinoceros 3D</span>
+                    <span>Grasshopper</span>
+                </div>
             </div>
+
             <div class="competency">
-                <h3>{% if lang == 'en' %}Technical 2D{% else %}Techniczne 2D{% endif %}</h3>
-                <p>{% if lang == 'en' %}Inventory, drafting, documentation{% else %}Inwentaryzacja, kreślenie, dokumentacja{% endif %}</p>
-                <div class="chips"><span>AutoCAD</span><span>FreeCAD</span></div>
+                <h3>BIM &amp; CAD</h3>
+                <p>
+                    {% if lang == 'en' %}
+                    Multi-discipline technical documentation, complex parametric families and dynamic blocks based on logical formulas, as well as automated quantity takeoffs (QTO) derived directly from IFC models.
+                    {% else %}
+                    Koordynacja wielobranżowej dokumentacji technicznej, projektowanie zaawansowanych rodzin parametrycznych i bloków dynamicznych oraz automatyczne generowanie przedmiarów robót (QTO) bezpośrednio z modeli IFC.
+                    {% endif %}
+                </p>
+                <div class="chips">
+                    <span>AutoCAD</span>
+                    <span>Revit</span>
+                    <span>IFC (OpenBIM)</span>
+                    <span>Microsoft Excel</span>
+                </div>
             </div>
+
             <div class="competency">
-                <h3>{% if lang == 'en' %}2D Graphics{% else %}Grafika 2D{% endif %}</h3>
-                <p>{% if lang == 'en' %}Raster and vector graphics for project presentations{% else %}Grafika rastrowa i wektorowa do prezentacji projektów{% endif %}</p>
-                <div class="chips"><span>Photoshop</span><span>Illustrator</span><span>Krita</span></div>
+                <h3>{% if lang == 'en' %}Programming &amp; Pipeline{% else %}Programowanie &amp; Pipeline{% endif %}</h3>
+                <p>
+                    {% if lang == 'en' %}
+                    Building custom data bridges between CAD, 3D packages, and databases. Developing in-editor UI toolsets, automating drawing tasks, and orchestrating operating system workflows.
+                    {% else %}
+                    Budowa mostów wymiany danych pomiędzy oprogramowaniem CAD, 3D a bazami danych. Tworzenie narzędzi z dedykowanym interfejsem użytkownika, automatyzacja kreślenia oraz skryptowanie procesów w systemie.
+                    {% endif %}
+                </p>
+                <div class="chips">
+                    <span>Python</span>
+                    <span>AutoLISP</span>
+                    <span>MAXScript</span>
+                    <span>PowerShell / Bash</span>
+                    <span>Git / GitHub</span>
+                    <span>SQLite</span>
+                </div>
             </div>
+
             <div class="competency">
-                <h3>{% if lang == 'en' %}Optimization &amp; Tools{% else %}Optymalizacja i narzędzia{% endif %}</h3>
-                <p>{% if lang == 'en' %}Process automation, scripts, dedicated workflow solutions{% else %}Automatyzacja procesów, skrypty, dedykowane rozwiązania workflow{% endif %}</p>
-                <div class="chips"><span>MaxScript</span><span>Python</span><span>PySide6</span><span>AutoLISP</span><span>JavaScript</span><span>Blueprint</span></div>
+                <h3>Web &amp; Web 3D</h3>
+                <p>
+                    {% if lang == 'en' %}
+                    Developing interactive 3D configurators and viewers in the browser, optimizing geometry (GLB) for maximum frame rate, and engineering backend architectures and APIs for web applications.
+                    {% else %}
+                    Wdrażanie interaktywnych konfiguratorów i scen 3D w przeglądarce, optymalizacja geometrii (GLB) pod kątem maksymalnej płynności oraz budowa zaplecza backendowego i API dla aplikacji internetowych.
+                    {% endif %}
+                </p>
+                <div class="chips">
+                    <span>Three.js</span>
+                    <span>WebGL</span>
+                    <span>HTML / CSS / JavaScript</span>
+                    <span>Django</span>
+                    <span>REST API</span>
+                </div>
             </div>
+
+            <div class="competency">
+                <h3>{% if lang == 'en' %}2D Graphics, DTP &amp; Post-production{% else %}Grafika 2D, DTP &amp; Postprodukcja{% endif %}</h3>
+                <p>
+                    {% if lang == 'en' %}
+                    Advanced digital compositing and retouching for architectural renders, vector functional diagrams and branding, and professional layout composition for investment brochures and portfolios.
+                    {% else %}
+                    Zaawansowany compositing i precyzyjny retusz renderów architektonicznych, schematy funkcjonalne i grafika wektorowa oraz profesjonalny skład wielostronicowych katalogów i ofert inwestycyjnych.
+                    {% endif %}
+                </p>
+                <div class="chips">
+                    <span>Adobe Photoshop</span>
+                    <span>Adobe Illustrator</span>
+                    <span>Adobe InDesign</span>
+                </div>
+            </div>
+
+            <div class="competency">
+                <h3>{% if lang == 'en' %}Data Exchange &amp; Interoperability{% else %}Wymiana Danych &amp; Interoperacyjność{% endif %}</h3>
+                <p>
+                    {% if lang == 'en' %}
+                    Lossless conversion, topology validation, and parameter preservation across engineering formats, real-time engines, and relational data structures.
+                    {% else %}
+                    Projektowanie bezstratnych potoków danych, normalizacja topologii siatek oraz zachowanie metadanych przy migracji pomiędzy oprogramowaniem inżynierskim, silnikami a strukturami bazodanowymi.
+                    {% endif %}
+                </p>
+                <div class="chips">
+                    <span>GLB</span>
+                    <span>FBX</span>
+                    <span>OBJ</span>
+                    <span>DWG / DXF</span>
+                    <span>IFC</span>
+                    <span>STEP / SAT</span>
+                    <span>JSON / CSV</span>
+                </div>
+            </div>
+
         </div>
     </div>
 </section>
 
 <section class="section" style="padding-top:0">
     <div class="container reveal">
-        <p class="quote">{% if lang == 'en' %}Ultimately, I focus on functionality, clarity, and real project value.{% else %}Na końcu stawiam funkcjonalność, czytelność i realną wartość projektu.{% endif %}<small>{% if lang == 'en' %}EVERY PROJECT IS A TOOL.{% else %}KAŻDY PROJEKT TO NARZĘDZIE.{% endif %}</small></p>
+        <p class="quote">
+            {% if lang == 'en' %}
+            I build functionality, clarity, and real project value.
+            <small>EVERY PROJECT IS A TOOL.</small>
+            {% else %}
+            Tworzę funkcjonalność, czytelność i realną wartość projektu.
+            <small>KAŻDY PROJEKT TO NARZĘDZIE.</small>
+            {% endif %}
+        </p>
     </div>
 </section>
 {% endblock %}
