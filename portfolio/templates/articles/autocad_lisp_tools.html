@@ -48,8 +48,8 @@
           </p>
           <ul style="padding-left: 18px; color: #94a3b8; font-size: 13.5px; line-height: 1.6;">
             <li>Pobiera aktualnie zaznaczone obiekty przez <code>(ssget "_I")</code>.</li>
-            <li>Zbiera wszystkie widoczne elementy z bieżącej przestrzeni (filtr DXF 410 = <code>CTAB</code>) ignorując obiekty ukryte (kod DXF 60).</li>
-            <li>Tworzy nowy zbiór różnicowy i natychmiast go aktywuje za pomocą <code>sssetfirst</code>.</li>
+            <li>Zbiera wszystkie widoczne elementy z bieżącej przestrzeni (filtr DXF 410 = <code>CTAB</code>) ignorując obiekty ukryte (kod DXF 60 = 1).</li>
+            <li>Tworzy nowy zbiór różnicowy i natychmiast go aktywuje wraz z uchwytami za pomocą <code>sssetfirst</code>.</li>
           </ul>
         </div>
 
@@ -60,9 +60,9 @@
             Standardowe polecenie <code>_AREA</code> wymaga żmudnego klikania punktów lub pojedynczych konturów z opcją <em>Add</em>.
           </p>
           <ul style="padding-left: 18px; color: #94a3b8; font-size: 13.5px; line-height: 1.6;">
-            <li>Filtruje jednocześnie obiekty typu <code>*POLYLINE</code>, <code>CIRCLE</code>, <code>HATCH</code> i <code>REGION</code>.</li>
-            <li>Odrzuca otwarte polilinie bez powierzchni za pomocą maski bitowej <code>(70 . 128)</code>.</li>
-            <li>Odpytuje obiekty przez interfejs ActiveX (<code>vla-get-property Area</code>) i wyświetla gotową sumę w m² wraz z licznikiem obiektów.</li>
+            <li>Filtruje obiekty typu <code>*POLYLINE</code>, <code>CIRCLE</code>, <code>HATCH</code> i <code>REGION</code>.</li>
+            <li>Odpytuje obiekty przez interfejs ActiveX (<code>vla-get-property Area</code>) z pełną izolacją błędów przed uszkodzoną geometrią.</li>
+            <li>Wyświetla gotową sumę w m² wraz z licznikiem obiektów (domyślny przelicznik dla rysunków w centymetrach).</li>
           </ul>
         </div>
 
@@ -73,9 +73,9 @@
             Eksport szablonu w CADzie standardowo zmusza do przeklikiwania dialogów zapisu i wyboru formatu.
           </p>
           <ul style="padding-left: 18px; color: #94a3b8; font-size: 13.5px; line-height: 1.6;">
-            <li>Zapisuje bieżący stan rysunku jako <code>VI.dwt</code> do katalogu wskazanego globalną zmienną <code>*path*</code>.</li>
-            <li>Sprawdza istnienie katalogu i automatycznie tworzy brakującą strukturę (<code>vl-mkdir</code>).</li>
-            <li>Wycisza komunikaty (<code>CMDECHO = 0</code>) i nadpisuje plik bez monitów (<code>EXPERT = 2</code>).</li>
+            <li>Zapisuje bieżący stan rysunku jako <code>VI.dwt</code> do katalogu wskazanego zmienną <code>*path-acad*</code> (lub <code>*path*</code>).</li>
+            <li>Automatycznie weryfikuje istnienie folderu i w razie potrzeby tworzy brakującą strukturę (<code>vl-mkdir</code>).</li>
+            <li>Wycisza komunikaty (<code>CMDECHO = 0</code>) i nadpisuje plik bez irytujących monitów (<code>EXPERT = 2</code>).</li>
           </ul>
         </div>
 
@@ -83,7 +83,7 @@
           <div style="font-size: 12px; font-weight: 700; color: #38bdf8; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">Powiązany poradnik</div>
           <h4 style="font-size: 16px; font-weight: 700; color: #ffffff; margin-bottom: 6px;">Jak używać AutoLISP?</h4>
           <p style="font-size: 13.5px; color: #94a3b8; margin: 0; line-height: 1.55;">
-            Zobacz kompletny poradnik opisujący krok po kroku dodawanie zaufanych folderów (<em>Trusted Locations</em>) oraz automatyczne przeładowywanie kodu w locie skryptem <code>viewis-autolisp-loader.lsp</code> →
+            Zobacz kompletny poradnik opisujący konfigurację zaufanych folderów (<em>Trusted Locations</em>) oraz automatyczne przeładowywanie kodu w locie skryptem <code>viewis-autolisp-loader.lsp</code> →
           </p>
         </div>
 
@@ -238,29 +238,30 @@ function copyCode(elementId, btn) {
   });
 }
 
+function escapeHtml(str) {
+  return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   const codeEl = document.getElementById("code-unified");
   if (!codeEl) return;
-  let text = codeEl.innerText;
+  const text = codeEl.innerText;
 
-  const lines = text.split("\n");
+  const lines = text.split(/\r?\n/);
   const highlighted = lines.map(line => {
     if (line.trim().startsWith(";")) {
       return `<span class="hl-comment">${escapeHtml(line)}</span>`;
     }
-    let res = line.replace(/(".*?")/g, '<span class="hl-string">\$1</span>');
+    let res = escapeHtml(line);
+    res = res.replace(/(".*?")/g, '<span class="hl-string">\$1</span>');
     res = res.replace(/\b(defun|setq|vl-load-com|princ|prompt|if|progn|repeat|while|cond|not|and|or|member|append|itoa|rtos|strcat|strcase)\b/g, '<span class="hl-keyword">\$1</span>');
-    res = res.replace(/\b(ssget|ssadd|sslength|ssname|ssmemb|sssetfirst|getvar|setvar|vlax-ename->vla-object|vlax-property-available-p|vlax-get-property|vl-string-right-trim|vl-file-directory-p|vl-mkdir|command)\b/g, '<span class="hl-function">\$1</span>');
-    res = res.replace(/(\*path\*|CTAB|CMDECHO|EXPERT)/g, '<span class="hl-variable">\$1</span>');
+    res = res.replace(/\b(ssget|ssadd|sslength|ssname|ssmemb|sssetfirst|getvar|setvar|vlax-ename(?:->|-&gt;)vla-object|vlax-property-available-p|vlax-get-property|vl-string-right-trim|vl-file-directory-p|vl-mkdir|command|vl-catch-all-apply|vl-catch-all-error-p)\b/g, '<span class="hl-function">\$1</span>');
+    res = res.replace(/(\*path-acad\*|\*path\*|CTAB|CMDECHO|EXPERT)/g, '<span class="hl-variable">\$1</span>');
     res = res.replace(/([\(\)])/g, '<span class="hl-paren">\$1</span>');
     return res;
   }).join("\n");
 
   codeEl.innerHTML = highlighted;
 });
-
-function escapeHtml(str) {
-  return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-}
 </script>
 {% endblock %}
