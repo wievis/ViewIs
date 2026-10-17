@@ -58,6 +58,10 @@ class Media(models.Model):
     @property
     def display_url(self):
         if not self.file:
+            if self.media_type == 'album':
+                first_child = self.children.filter(file__isnull=False).first()
+                if first_child:
+                    return first_child.display_url
             return ''
         if self.media_type == 'image':
             try:

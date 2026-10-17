@@ -30,8 +30,10 @@ def _localize(a, lang):
 def home(request, lang='pl'):
     featured = []
     try:
-        base = Media.objects.filter(media_type='image', file__isnull=False).exclude(file='')
-        featured = list(base.filter(featured=True)[:6]) or list(base[:6])
+        qs = Media.objects.filter(parent_album__isnull=True, featured=True).order_by('order', '-created')
+        featured = list(qs[:6])
+        if not featured:
+            featured = list(Media.objects.filter(parent_album__isnull=True).order_by('order', '-created')[:6])
     except Exception:
         logger.exception('home: nie udalo sie pobrac realizacji')
     return render(request, 'home.html', {'featured': featured, 'lang': lang, 'section': 'home'})
@@ -60,8 +62,7 @@ def _clean(s, n=100):
 
 
 def kontakt(request, lang='pl'):
-    if request.method != 'POST':
-        return JsonResponse({'status': 'error', 'message': 'Method not allowed'}, status=405)
+    if request.method == 'POST':
     
     first_name = request.POST.get('first_name', '').strip()
     last_name = request.POST.get('last_name', '').strip()
