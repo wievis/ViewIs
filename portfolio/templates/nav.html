@@ -22,11 +22,47 @@
     </div>
 </header>
 
-<div class="lightbox" id="lightbox">
-    <span class="close" onclick="closeLightbox()">&times;</span>
-    <span class="nav-btn prev" onclick="changePhoto(-1)">&#8249;</span>
-    <div class="lightbox-content">
-        <img id="lightbox-img" src="" alt="" style="display: none;">
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+    <div class="lb-progress-bar" id="lb-progress-bar"></div>
+    <div class="lb-header">
+        <div class="lb-badge" id="lb-badge"></div>
+        <div class="lb-controls">
+            <span class="lb-counter" id="lb-counter"></span>
+            <button type="button" class="lb-btn-icon" id="lb-fullscreen" onclick="toggleLightboxFullscreen()" aria-label="Fullscreen">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 9V5a1 1 0 0 1 1-1h4"></path>
+                    <path d="M20 9V5a1 1 0 0 0-1-1h-4"></path>
+                    <path d="M4 15v4a1 1 0 0 0 1 1h4"></path>
+                    <path d="M20 15v4a1 1 0 0 1-1 1h-4"></path>
+                </svg>
+            </button>
+            <button type="button" class="lb-btn-icon" onclick="closeLightbox()" aria-label="Close">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
     </div>
-    <span class="nav-btn next" onclick="changePhoto(1)">&#8250;</span>
+
+    <button type="button" class="lb-nav prev" onclick="changePhoto(-1)" aria-label="Previous">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+    </button>
+
+    <div class="lightbox-content"></div>
+
+    <button type="button" class="lb-nav next" onclick="changePhoto(1)" aria-label="Next">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+    </button>
+
+    <div class="lb-footer">
+        <div class="lb-hint-3d" id="lb-hint-3d"></div>
+        <div class="lb-thumbnails-wrap" id="lb-thumbnails-wrap">
+            <div class="lb-thumbnails" id="lb-thumbnails"></div>
+        </div>
+    </div>
 </div>

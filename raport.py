@@ -97,7 +97,7 @@ def run_tree(root_dir, mep_only=False):
 
 def run_report(root_dir, mep_only=False):
     this_file = os.path.abspath(__file__)
-    mode_info = " [TYLKO MEP]" if mep_only else " [BEZ MEP]"
+    mode_info = " [TYLKO MEP]" if mep_only else " [website] "
     output = [f"======== {os.path.basename(root_dir)}{mode_info} =========\n\n\n"]
 
     for current_root, dirs, files in os.walk(root_dir):

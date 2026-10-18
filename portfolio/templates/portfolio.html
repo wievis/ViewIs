@@ -43,10 +43,10 @@
         <div class="portfolio-card" data-cat="{{ item.category }}" onclick="openAlbumPreview({{ item.id }})">
           <div class="card-media-wrapper">
             <span class="card-badge badge-album">
-              {% if lang == 'en' %}Album &middot; {{ item.children.count }} views{% else %}Seria &middot; {{ item.children.count }} ujęć{% endif %}
+              {% if lang == 'en' %}Series &middot; {{ item.children.count }}{% else %}Seria &middot; {{ item.children.count }}{% endif %}
             </span>
             {% if first_child and first_child.file %}
-              <img src="{% if first_child.media_type == 'image' %}{{ first_child.display_url }}{% else %}{{ first_child.file.url }}{% endif %}" alt="{{ item.name }}" loading="lazy">
+              <img src="{% if first_child.media_type == 'image' %}{{ first_child.display_url }}{% else %}{{ first_child.file.url }}{% endif %}" alt="" loading="lazy">
             {% else %}
               <div style="width:100%; height:100%; background:var(--surface-2);"></div>
             {% endif %}
@@ -60,17 +60,19 @@
         {% endwith %}
       {% else %}
         {% if item.file %}
-        <div class="portfolio-card" data-cat="{{ item.category }}" onclick="openItemPreview('{% if item.media_type == 'image' %}{{ item.display_url }}{% else %}{{ item.file.url }}{% endif %}')">
+        <div class="portfolio-card" data-cat="{{ item.category }}" onclick="openItemPreview({{ item.id }})">
           <div class="card-media-wrapper">
             <span class="card-badge">
-              {% if item.media_type == 'video' %}Video{% elif item.media_type == 'model3d' %}3D Model{% else %}Render{% endif %}
+              {% if item.media_type == 'video' %}Video{% elif item.media_type == 'model3d' %}3D{% else %}Render{% endif %}
             </span>
             {% if item.media_type == 'image' %}
-              <img src="{{ item.display_url }}" alt="{{ item.name }}" loading="lazy">
+              <img src="{{ item.display_url }}" alt="" loading="lazy">
             {% elif item.media_type == 'video' %}
               <video src="{{ item.file.url }}" autoplay loop muted playsinline></video>
             {% elif item.media_type == 'model3d' %}
-              <model-viewer src="{{ item.file.url }}" {% if item.hdr_setting %}environment-image="{{ item.hdr_setting.file.url }}"{% endif %} camera-controls auto-rotate shadow-intensity="1" style="width:100%; height:100%;"></model-viewer>
+              <model-viewer src="{{ item.file.url }}" {% if item.hdr_setting %}environment-image="{{ item.hdr_setting.file.url }}"{% endif %} camera-controls auto-rotate shadow-intensity="1" style="width:100%; height:100%;">
+                <div slot="progress-bar" class="mv-progress-bar"><div class="mv-progress-bar-fill"></div></div>
+              </model-viewer>
             {% endif %}
           </div>
           <div class="card-info">
@@ -89,25 +91,17 @@
 window.mediaItems = [
 {% for item in media_items %}{% if item.file %}
   {
+    id: {{ item.id }},
     url: "{% if item.media_type == 'image' %}{{ item.display_url }}{% else %}{{ item.file.url }}{% endif %}",
+    thumb: "{% if item.media_type == 'image' %}{{ item.display_url }}{% elif item.thumbnail %}{{ item.thumbnail.url }}{% else %}{{ item.file.url }}{% endif %}",
     type: "{{ item.media_type }}",
+    category: "{% for k, l in categories %}{% if k == item.category %}{{ l }}{% endif %}{% endfor %}",
     hdr: "{% if item.hdr_setting %}{{ item.hdr_setting.file.url }}{% endif %}",
     parentId: {{ item.parent_album_id|default:"null" }}
   }{% if not forloop.last %},{% endif %}
 {% endif %}{% endfor %}
 ];
 
-function openItemPreview(url) {
-  const idx = window.mediaItems.findIndex(i => i.url === url);
-  if (idx !== -1) openLightbox(idx);
-}
-
-function openAlbumPreview(albumId) {
-  const idx = window.mediaItems.findIndex(i => i.parentId === albumId);
-  if (idx !== -1) openLightbox(idx);
-}
-
-// Filtrowanie z dynamicznym licznikiem
 document.addEventListener('DOMContentLoaded', () => {
   const filterBtns = document.querySelectorAll('.filter-btn');
   const cards = document.querySelectorAll('.portfolio-card');
@@ -130,6 +124,17 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       if (countEl) countEl.textContent = visible;
+    });
+  });
+
+  document.querySelectorAll('model-viewer').forEach(mv => {
+    mv.addEventListener('progress', e => {
+      const fill = mv.querySelector('.mv-progress-bar-fill');
+      if (fill) fill.style.width = ((e.detail.totalProgress || 0) * 100) + '%';
+    });
+    mv.addEventListener('load', () => {
+      const p = mv.querySelector('.mv-progress-bar');
+      if (p) setTimeout(() => p.style.opacity = '0', 250);
     });
   });
 });
