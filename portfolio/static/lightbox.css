@@ -490,3 +490,63 @@
   .lightbox.has-rail .lightbox-content { padding-right: 14px; }
   .lightbox.has-rail .lb-nav.next { right: 8px; }
 }
+
+/* ---------- przełączniki w górnym panelu ---------- */
+.lb-meta-right .checkbox { margin: 0; flex-shrink: 0; }
+
+@media (max-width: 600px) {
+  .lb-badge, .lb-node-sep, #lb-fullscreen { display: none; }
+  .lb-meta-left, .lb-meta-right { flex: 0 0 auto; }
+  .lb-meta-center { flex: 1; }
+  .lb-meta-right { gap: 8px; }
+}
+
+/* ---------- lightbox w trybie jasnym ---------- */
+body.light-mode .lightbox { background: rgba(246, 244, 240, 0.97); }
+body.light-mode .lb-bar,
+body.light-mode .lb-rail { background: rgba(255, 255, 255, 0.9); }
+body.light-mode .lb-header,
+body.light-mode .lb-rail-head { border-bottom-color: rgba(0, 0, 0, 0.1); }
+body.light-mode .lb-footer { border-top-color: rgba(0, 0, 0, 0.1); }
+body.light-mode .lb-rail { border-left-color: rgba(0, 0, 0, 0.1); }
+body.light-mode .lb-brand-node,
+body.light-mode .lb-counter,
+body.light-mode .lb-btn-icon,
+body.light-mode .lb-nav,
+body.light-mode .lb-mouse-hint { color: #1a1a1a; }
+body.light-mode .lb-counter,
+body.light-mode .lb-btn-icon,
+body.light-mode .lb-nav { background: rgba(0, 0, 0, 0.05); border-color: rgba(0, 0, 0, 0.14); }
+body.light-mode .lb-btn-icon:hover,
+body.light-mode .lb-nav:hover {
+  background: rgba(138, 106, 47, 0.15);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+body.light-mode .lb-node-sep { color: rgba(0, 0, 0, 0.25); }
+body.light-mode .lb-status-text,
+body.light-mode .lb-rail-count { color: #6b6b70; }
+body.light-mode .lb-thumb,
+body.light-mode .lb-proj,
+body.light-mode .lb-proj-thumb { background: #e9e6df; border-color: rgba(0, 0, 0, 0.15); }
+body.light-mode .lb-proj.active { border-color: var(--accent); }
+body.light-mode .lb-thumb.active { border-color: var(--accent); }
+body.light-mode .lightbox-content img,
+body.light-mode .lightbox-content video,
+body.light-mode .lightbox-content model-viewer { box-shadow: 0 16px 44px rgba(0, 0, 0, 0.25); }
+
+/* ---------- modele 3D na jasnym tle w trybie jasnym ---------- */
+body.light-mode .lightbox-content model-viewer {
+  background: radial-gradient(circle at center, #ffffff 0%, #e3dfd6 100%);
+  border-color: rgba(0, 0, 0, 0.12);
+}
+body.light-mode .card-media-wrapper {
+  background: #efece6;
+}
+body.light-mode .card-media-wrapper model-viewer {
+  background: radial-gradient(circle at center, #ffffff 0%, #e3dfd6 100%);
+}
+body.light-mode .lb-wireframe-text,
+body.light-mode .lb-thumb-tag {
+  color: var(--accent);
+}

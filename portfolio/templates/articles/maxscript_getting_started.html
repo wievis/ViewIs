@@ -7,8 +7,8 @@
   <div style="max-width: 1240px; margin: 0 auto; padding: 0 24px;">
     
     <nav style="margin-bottom: 24px; font-size: 13px;">
-      <a href="/artykuly/" style="color: #38bdf8; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
-        ← Wszystkie artykuły
+      <a href="{{ art_base }}" style="color: #38bdf8; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+        {% if lang == 'en' %}← All articles{% else %}← Wszystkie artykuły{% endif %}
       </a>
     </nav>
 
@@ -32,47 +32,47 @@
       <div class="split-descriptions">
         
         <div class="desc-card">
-          <h2 style="font-size: 19px; font-weight: 700; color: #ffffff; margin-bottom: 10px;">1. Czym jest macroScript?</h2>
+          <h2 style="font-size: 19px; font-weight: 700; color: #ffffff; margin-bottom: 10px;">{% if lang == 'en' %}1. What is a macroScript?{% else %}1. Czym jest macroScript?{% endif %}</h2>
           <p style="color: #cbd5e1; font-size: 14px; line-height: 1.65; margin-bottom: 14px;">
-            W 3ds Max zwykły plik <code>.ms</code> po wykonaniu znika z pamięci podręcznej interfejsu. Definicja <code>macroScript</code> rejestruje polecenie na stałe w systemie, dzięki czemu pojawia się ono w oknie <em>Customize User Interface</em> i można je przeciągnąć na pasek narzędzi lub przypisać do skrótu klawiszowego.
+            {% if lang == 'en' %}In 3ds Max a regular <code>.ms</code> file disappears from the interface cache once it has run. A <code>macroScript</code> definition registers the command permanently, so it shows up in the <em>Customize User Interface</em> window and can be dragged onto a toolbar or assigned to a keyboard shortcut.{% else %}W 3ds Max zwykły plik <code>.ms</code> po wykonaniu znika z pamięci podręcznej interfejsu. Definicja <code>macroScript</code> rejestruje polecenie na stałe w systemie, dzięki czemu pojawia się ono w oknie <em>Customize User Interface</em> i można je przeciągnąć na pasek narzędzi lub przypisać do skrótu klawiszowego.{% endif %}
           </p>
           <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-            <a href="{% static 'ms/viewis-regen-scripts.ms' %}" download class="btn-download">Pobierz viewis-regen-scripts.ms</a>
+            <a href="{% static 'ms/viewis-regen-scripts.ms' %}" download class="btn-download">{% if lang == 'en' %}Download viewis-regen-scripts.ms{% else %}Pobierz viewis-regen-scripts.ms{% endif %}</a>
           </div>
         </div>
 
         <div class="desc-card">
-          <div class="cmd-badge">INSTALACJA I SKRÓT</div>
-          <h3 style="font-size: 17px; font-weight: 700; color: #38bdf8; margin-bottom: 8px;">2. Jak dodać przycisk do paska?</h3>
+          <div class="cmd-badge">{% if lang == 'en' %}INSTALLATION & SHORTCUT{% else %}INSTALACJA I SKRÓT{% endif %}</div>
+          <h3 style="font-size: 17px; font-weight: 700; color: #38bdf8; margin-bottom: 8px;">{% if lang == 'en' %}2. How to add a button to a toolbar?{% else %}2. Jak dodać przycisk do paska?{% endif %}</h3>
           <p style="color: #cbd5e1; font-size: 14px; line-height: 1.65; margin-bottom: 12px;">
-            Aby zarejestrować macroScript i mieć go pod ręką w interfejsie:
+            {% if lang == 'en' %}To register the macroScript and keep it at hand in the interface:{% else %}Aby zarejestrować macroScript i mieć go pod ręką w interfejsie:{% endif %}
           </p>
           <ol style="margin: 0; padding-left: 18px; color: #94a3b8; font-size: 13.5px; line-height: 1.7;">
-            <li>Przeciągnij plik <code>viewis-regen-scripts.ms</code> bezpośrednio do okna rzutni (Viewport) lub uruchom przez <em>Scripting → Run Script</em>.</li>
-            <li>Wejdź w menu <strong>Customize → Customize User Interface</strong> i przejdź do zakładki <strong>Toolbars</strong>.</li>
-            <li>W rozwijanej liście <strong>Category</strong> wybierz kategorię <code>ViewIs Tools</code>.</li>
-            <li>Przeciągnij pozycję <em>Regen Scripts</em> na dowolny pasek narzędzi na górnej belce programu.</li>
+            <li>{% if lang == 'en' %}Drag the <code>viewis-regen-scripts.ms</code> file straight into a viewport, or run it via <em>Scripting → Run Script</em>.{% else %}Przeciągnij plik <code>viewis-regen-scripts.ms</code> bezpośrednio do okna rzutni (Viewport) lub uruchom przez <em>Scripting → Run Script</em>.{% endif %}</li>
+            <li>{% if lang == 'en' %}Open <strong>Customize → Customize User Interface</strong> and go to the <strong>Toolbars</strong> tab.{% else %}Wejdź w menu <strong>Customize → Customize User Interface</strong> i przejdź do zakładki <strong>Toolbars</strong>.{% endif %}</li>
+            <li>{% if lang == 'en' %}In the <strong>Category</strong> drop-down choose <code>ViewIs Tools</code>.{% else %}W rozwijanej liście <strong>Category</strong> wybierz kategorię <code>ViewIs Tools</code>.{% endif %}</li>
+            <li>{% if lang == 'en' %}Drag <em>Regen Scripts</em> onto any toolbar at the top of the program.{% else %}Przeciągnij pozycję <em>Regen Scripts</em> na dowolny pasek narzędzi na górnej belce programu.{% endif %}</li>
           </ol>
         </div>
 
         <div class="desc-card">
-          <div class="cmd-badge">PRZEPŁYW PRACY (WORKFLOW)</div>
-          <h3 style="font-size: 17px; font-weight: 700; color: #38bdf8; margin-bottom: 8px;">3. Hot-Reload w praktyce</h3>
+          <div class="cmd-badge">{% if lang == 'en' %}WORKFLOW{% else %}PRZEPŁYW PRACY (WORKFLOW){% endif %}</div>
+          <h3 style="font-size: 17px; font-weight: 700; color: #38bdf8; margin-bottom: 8px;">{% if lang == 'en' %}3. Hot-reload in practice{% else %}3. Hot-Reload w praktyce{% endif %}</h3>
           <p style="color: #cbd5e1; font-size: 14px; line-height: 1.65; margin-bottom: 12px;">
-            Zamiast restartować 3ds Maxa po każdej modyfikacji tworzonego narzędzia, procedura odświeża cały folder skryptów za pomocą funkcji <code>fileIn</code> w ułamku sekundy:
+            {% if lang == 'en' %}Instead of restarting 3ds Max after every change to the tool you are building, the routine reloads the whole scripts folder with <code>fileIn</code> in a fraction of a second:{% else %}Zamiast restartować 3ds Maxa po każdej modyfikacji tworzonego narzędzia, procedura odświeża cały folder skryptów za pomocą funkcji <code>fileIn</code> w ułamku sekundy:{% endif %}
           </p>
           <ul style="padding-left: 18px; color: #94a3b8; font-size: 13.5px; line-height: 1.6;">
-            <li><strong>Izolacja wyjątków:</strong> Blok <code>try ... catch</code> przechwytuje błędy składniowe i wyświetla komunikat z <code>getCurrentException()</code> w oknie Listenera bez przerywania pętli.</li>
-            <li><strong>Czarna lista:</strong> Tablica <code>excludedFiles</code> pozwala wykluczyć pliki tymczasowe lub ciężkie biblioteki pomocnicze.</li>
-            <li><strong>Normalizacja ścieżki:</strong> Automatyczne sprawdzanie obecności folderu i korygowanie kończących ukośników zapobiega błędom IO.</li>
+            <li>{% if lang == 'en' %}<strong>Exception isolation:</strong> A <code>try ... catch</code> block catches syntax errors and prints the message from <code>getCurrentException()</code> in the Listener window without breaking the loop.{% else %}<strong>Izolacja wyjątków:</strong> Blok <code>try ... catch</code> przechwytuje błędy składniowe i wyświetla komunikat z <code>getCurrentException()</code> w oknie Listenera bez przerywania pętli.{% endif %}</li>
+            <li>{% if lang == 'en' %}<strong>Blacklist:</strong> The <code>excludedFiles</code> array lets you exclude temporary files or heavy helper libraries.{% else %}<strong>Czarna lista:</strong> Tablica <code>excludedFiles</code> pozwala wykluczyć pliki tymczasowe lub ciężkie biblioteki pomocnicze.{% endif %}</li>
+            <li>{% if lang == 'en' %}<strong>Path normalisation:</strong> Automatically checking that the folder exists and fixing trailing slashes prevents IO errors.{% else %}<strong>Normalizacja ścieżki:</strong> Automatyczne sprawdzanie obecności folderu i korygowanie kończących ukośników zapobiega błędom IO.{% endif %}</li>
           </ul>
         </div>
 
-        <div class="notice-card" onclick="window.location.href='/artykuly/autocad-lisp-narzedzia-przyspieszajace-prace/'">
-          <div style="font-size: 12px; font-weight: 700; color: #38bdf8; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">CAD & Automatyzacja</div>
-          <h4 style="font-size: 16px; font-weight: 700; color: #ffffff; margin-bottom: 6px;">Funkcje jakich brakuje w AutoCAD</h4>
+        <div class="notice-card" onclick="window.location.href='{{ art_base }}autocad-lisp-narzedzia-przyspieszajace-prace/'">
+          <div style="font-size: 12px; font-weight: 700; color: #38bdf8; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">{% if lang == 'en' %}CAD & Automation{% else %}CAD & Automatyzacja{% endif %}</div>
+          <h4 style="font-size: 16px; font-weight: 700; color: #ffffff; margin-bottom: 6px;">{% if lang == 'en' %}Functions AutoCAD is missing{% else %}Funkcje jakich brakuje w AutoCAD{% endif %}</h4>
           <p style="font-size: 13.5px; color: #94a3b8; margin: 0; line-height: 1.55;">
-            Sprawdź narzędzia do odwracania zaznaczenia, zliczania powierzchni i automatycznego eksportu szablonów DWT w środowisku AutoCAD →
+            {% if lang == 'en' %}Check out the tools for reversing a selection, summing areas and automatically exporting DWT templates in AutoCAD →{% else %}Sprawdź narzędzia do odwracania zaznaczenia, zliczania powierzchni i automatycznego eksportu szablonów DWT w środowisku AutoCAD →{% endif %}
           </p>
         </div>
 
@@ -83,8 +83,8 @@
           <div class="code-header">
             <span>viewis-regen-scripts.ms</span>
             <div style="display: flex; gap: 8px;">
-              <button class="btn-copy" onclick="copyCode('code-ms', this)">Kopiuj kod</button>
-              <a href="{% static 'ms/viewis-regen-scripts.ms' %}" download class="btn-copy" style="text-decoration:none; display:inline-block;">Pobierz .ms</a>
+              <button class="btn-copy" onclick="copyCode('code-ms', this)">{% if lang == 'en' %}Copy code{% else %}Kopiuj kod{% endif %}</button>
+              <a href="{% static 'ms/viewis-regen-scripts.ms' %}" download class="btn-copy" style="text-decoration:none; display:inline-block;">{% if lang == 'en' %}Download .ms{% else %}Pobierz .ms{% endif %}</a>
             </div>
           </div>
           <pre id="code-ms" class="vscode-lisp"><code>{{ ms_code|escape }}</code></pre>
@@ -218,7 +218,7 @@ function copyCode(elementId, btn) {
   const code = document.getElementById(elementId).innerText;
   navigator.clipboard.writeText(code).then(() => {
     const orig = btn.innerText;
-    btn.innerText = "Skopiowano!";
+    btn.innerText = "{% if lang == 'en' %}Copied!{% else %}Skopiowano!{% endif %}";
     btn.style.background = "#059669";
     setTimeout(() => {
       btn.innerText = orig;

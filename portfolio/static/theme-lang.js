@@ -1,54 +1,49 @@
-const themeToggle = document.getElementById('theme-toggle');
-const themeToggleMob = document.getElementById('theme-toggle-mob');
-const langToggle = document.getElementById('lang-toggle');
-const langToggleMob = document.getElementById('lang-toggle-mob');
+(function () {
+    const themeToggles = Array.from(document.querySelectorAll('.theme-toggle'));
+    const langToggles = Array.from(document.querySelectorAll('.lang-toggle'));
 
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme === 'light') {
-    document.body.classList.add('light-mode');
-    if (themeToggle) themeToggle.checked = true;
-    if (themeToggleMob) themeToggleMob.checked = true;
-} else {
-    document.body.classList.remove('light-mode');
-    if (themeToggle) themeToggle.checked = false;
-    if (themeToggleMob) themeToggleMob.checked = false;
-}
+    // ---------- motyw ----------
+    let saved = null;
+    try { saved = localStorage.getItem('theme'); } catch (e) {}
+    const applyTheme = light => {
+        document.documentElement.classList.toggle('light-mode', light);
+        document.body.classList.toggle('light-mode', light);
+        themeToggles.forEach(t => { t.checked = light; });
+    };
+    applyTheme(saved === 'light');
 
-const handleThemeChange = (e) => {
-    const isChecked = e.target.checked;
-    if (isChecked) {
-        document.body.classList.add('light-mode');
-        localStorage.setItem('theme', 'light');
-    } else {
-        document.body.classList.remove('light-mode');
-        localStorage.setItem('theme', 'dark');
-    }
-    if (themeToggle) themeToggle.checked = isChecked;
-    if (themeToggleMob) themeToggleMob.checked = isChecked;
-};
+    themeToggles.forEach(t => t.addEventListener('change', e => {
+        const light = e.target.checked;
+        applyTheme(light);
+        try { localStorage.setItem('theme', light ? 'light' : 'dark'); } catch (err) {}
+    }));
 
-if (themeToggle) themeToggle.addEventListener('change', handleThemeChange);
-if (themeToggleMob) themeToggleMob.addEventListener('change', handleThemeChange);
+    // ---------- język ----------
+    const PAIRS = [
+        ['/portfolio/', '/en/portfolio/'],
+        ['/o-mnie/', '/en/about/'],
+        ['/kontakt/', '/en/contact/'],
+        ['/mep/', '/en/mep/'],
+        ['/', '/en/']
+    ];
 
-const handleLangChange = (e) => {
-    const isChecked = e.target.checked;
-    const lbEl = document.getElementById('lightbox');
-    const isLightboxActive = lbEl ? lbEl.classList.contains('active') : false;
-    const currentLightboxIndex = (isLightboxActive && typeof currentIndex !== 'undefined') ? currentIndex : null;
-    const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
-    
-    setTimeout(() => {
-        const targetPath = isChecked 
-            ? (window.location.pathname === '/en/contact/' ? '/kontakt/' : (window.location.pathname.startsWith('/en/mep/') ? '/mep/' : '/'))
-            : (window.location.pathname === '/kontakt/' ? '/en/contact/' : (window.location.pathname.startsWith('/mep/') ? '/en/mep/' : '/en/'));
-        
-        if (isLightboxActive && currentLightboxIndex !== null) {
-            window.location.href = targetPath + '?lightbox=' + currentLightboxIndex;
-        } else {
-            window.location.href = targetPath + '?scroll=' + scrollPosition;
+    function targetPath(toEn) {
+        const path = window.location.pathname;
+        const art = toEn ? ['/artykuly/', '/en/articles/'] : ['/en/articles/', '/artykuly/'];
+        if (path.startsWith(art[0])) return art[1] + path.slice(art[0].length);
+        for (const [pl, en] of PAIRS) {
+            if (path === (toEn ? pl : en)) return toEn ? en : pl;
         }
-    }, 450);
-};
+        return toEn ? '/en/' : '/';
+    }
 
-if (langToggle) langToggle.addEventListener('change', handleLangChange);
-if (langToggleMob) langToggleMob.addEventListener('change', handleLangChange);
+    langToggles.forEach(t => t.addEventListener('change', e => {
+        const toEn = !e.target.checked;   // zaznaczony = PL
+        const lbEl = document.getElementById('lightbox');
+        const lbActive = lbEl ? lbEl.classList.contains('active') : false;
+        const state = { scroll: window.pageYOffset || document.documentElement.scrollTop || 0 };
+        if (lbActive && typeof window.lbGetCurrentId === 'function') state.lb = window.lbGetCurrentId();
+        try { sessionStorage.setItem('viewis-restore', JSON.stringify(state)); } catch (err) {}
+        setTimeout(() => { window.location.href = targetPath(toEn); }, 450);
+    }));
+})();

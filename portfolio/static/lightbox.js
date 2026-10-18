@@ -128,7 +128,7 @@ function renderActiveItem() {
 
     const badge = document.getElementById('lb-badge');
     if (badge) {
-        badge.textContent = item.category || (item.type === 'model3d' ? '3D MODEL' : (item.type === 'video' ? 'ANIMACJA' : 'WIZUALIZACJA'));
+        badge.textContent = item.category || (item.type === 'model3d' ? lbT('model') : (item.type === 'video' ? lbT('anim') : lbT('viz')));
     }
 
     const cluster = document.getElementById('lb-status-cluster');
@@ -143,7 +143,7 @@ function renderActiveItem() {
         if (cluster) cluster.style.display = 'none';
         if (statusText) {
             statusText.style.display = 'inline-flex';
-            statusText.textContent = item.type === 'video' ? 'ODTWARZANIE WIDEO' : '← → ZDJĘCIA • ↑ ↓ PROJEKTY • ESC ZAMKNIJ';
+            statusText.textContent = item.type === 'video' ? lbT('playing') : lbT('hint');
         }
         if (tagEngine) tagEngine.textContent = item.type === 'video' ? 'H.264 // MP4' : 'FULL-RES RENDER';
     }
@@ -183,7 +183,7 @@ function renderActiveItem() {
         const wf = document.createElement('div');
         wf.className = 'lb-wireframe-loader';
         wf.id = 'lb-wireframe-loader';
-        wf.innerHTML = '<div class="lb-wireframe-cube"><div class="lb-cube-face"></div><div class="lb-cube-face"></div><div class="lb-cube-face"></div></div><span class="lb-wireframe-text">ŁADOWANIE SIATKI GEOMETRII...</span>';
+        wf.innerHTML = '<div class="lb-wireframe-cube"><div class="lb-cube-face"></div><div class="lb-cube-face"></div><div class="lb-cube-face"></div></div><span class="lb-wireframe-text">' + lbT('loading') + '</span>';
         content.appendChild(wf);
 
         const viewer = document.createElement('model-viewer');
@@ -409,3 +409,40 @@ function syncRail(pid) {
     const act = rail.querySelector('.active');
     if (act) rail.scrollTop = act.offsetTop - (rail.clientHeight - act.offsetHeight) / 2;
 }
+
+// ---------- teksty PL / EN ----------
+function lbT(key) {
+    const en = document.documentElement.lang === 'en';
+    const t = {
+        model: ['3D MODEL', '3D MODEL'],
+        anim: ['ANIMACJA', 'ANIMATION'],
+        viz: ['WIZUALIZACJA', 'VISUALIZATION'],
+        playing: ['ODTWARZANIE WIDEO', 'PLAYING VIDEO'],
+        hint: ['← → ZDJĘCIA • ↑ ↓ PROJEKTY • ESC ZAMKNIJ', '← → IMAGES • ↑ ↓ PROJECTS • ESC CLOSE'],
+        loading: ['ŁADOWANIE SIATKI GEOMETRII...', 'LOADING MESH GEOMETRY...']
+    };
+    return t[key] ? t[key][en ? 1 : 0] : '';
+}
+
+// ---------- stan lightboxa przy zmianie języka ----------
+window.lbGetCurrentId = function () {
+    const it = currentGroup[currentGroupIndex];
+    return it ? it.id : null;
+};
+
+(function restoreAfterLangSwitch() {
+    let raw = null;
+    try {
+        raw = sessionStorage.getItem('viewis-restore');
+        sessionStorage.removeItem('viewis-restore');
+    } catch (e) {}
+    if (!raw) return;
+    let st;
+    try { st = JSON.parse(raw); } catch (e) { return; }
+    const go = () => {
+        if (typeof st.scroll === 'number') window.scrollTo({ top: st.scroll, behavior: 'instant' });
+        if (st.lb !== undefined && st.lb !== null) openLightboxById(st.lb);
+    };
+    if (document.readyState === 'complete') go();
+    else window.addEventListener('load', go);
+})();

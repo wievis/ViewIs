@@ -7,13 +7,13 @@
   <div style="max-width: 920px; margin: 0 auto; padding: 0 24px;">
     
     <div style="margin-bottom: 40px; border-bottom: 1px solid rgba(255, 255, 255, 0.12); padding-bottom: 24px;">
-      <h1 style="font-size: 34px; font-weight: 800; color: #ffffff; margin-bottom: 12px; letter-spacing: -0.02em;">Baza wiedzy & Narzędzia</h1>
-      <p style="font-size: 15px; color: #94a3b8; line-height: 1.6; margin: 0;">Praktyczne skrypty, automatyzacje CAD/BIM oraz techniczne rozwiązania z codziennej praktyki inżynierskiej.</p>
+      <h1 style="font-size: 34px; font-weight: 800; color: #ffffff; margin-bottom: 12px; letter-spacing: -0.02em;">{% if lang == 'en' %}Knowledge base & Tools{% else %}Baza wiedzy & Narzędzia{% endif %}</h1>
+      <p style="font-size: 15px; color: #94a3b8; line-height: 1.6; margin: 0;">{% if lang == 'en' %}Practical scripts, CAD/BIM automation and technical solutions from everyday engineering practice.{% else %}Praktyczne skrypty, automatyzacje CAD/BIM oraz techniczne rozwiązania z codziennej praktyki inżynierskiej.{% endif %}</p>
     </div>
 
     <div style="display: flex; flex-direction: column; gap: 20px;">
       {% for art in articles %}
-        <article class="article-card" onclick="window.location.href='/artykuly/{{ art.slug }}/'">
+        <article class="article-card" onclick="window.location.href='{{ art_base }}{{ art.slug }}/'">
           <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 14px; font-size: 12px; flex-wrap: wrap;">
             <span style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); padding: 3px 10px; border-radius: 20px; font-weight: 600;">{{ art.category }}</span>
             {% for t in art.tags %}
@@ -21,16 +21,16 @@
             {% endfor %}
           </div>
           <h2 style="font-size: 21px; font-weight: 700; margin-bottom: 12px; line-height: 1.35;">
-            <a href="/artykuly/{{ art.slug }}/" style="color: #ffffff; text-decoration: none;">{{ art.title }}</a>
+            <a href="{{ art_base }}{{ art.slug }}/" style="color: #ffffff; text-decoration: none;">{{ art.title }}</a>
           </h2>
           <p style="font-size: 14.5px; line-height: 1.65; color: #cbd5e1; margin-bottom: 16px;">{{ art.lead }}</p>
           <div style="display: inline-flex; align-items: center; gap: 6px; color: #38bdf8; font-size: 13.5px; font-weight: 600;">
-            Czytaj artykuł & kod <span>→</span>
+            {% if lang == 'en' %}Read the article & code{% else %}Czytaj artykuł & kod{% endif %} <span>→</span>
           </div>
         </article>
       {% empty %}
         <div style="padding: 40px; text-align: center; color: #94a3b8; background: #0f172a; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.08);">
-          Brak opublikowanych artykułów.
+          {% if lang == 'en' %}No published articles yet.{% else %}Brak opublikowanych artykułów.{% endif %}
         </div>
       {% endfor %}
     </div>

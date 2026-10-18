@@ -7,8 +7,8 @@
   <div style="max-width: 1240px; margin: 0 auto; padding: 0 24px;">
     
     <nav style="margin-bottom: 24px; font-size: 13px;">
-      <a href="/artykuly/" style="color: #38bdf8; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
-        ← Wszystkie artykuły
+      <a href="{{ art_base }}" style="color: #38bdf8; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+        {% if lang == 'en' %}← All articles{% else %}← Wszystkie artykuły{% endif %}
       </a>
     </nav>
 
@@ -32,59 +32,59 @@
       <div class="split-descriptions">
         
         <div class="desc-card">
-          <h2 style="font-size: 19px; font-weight: 700; color: #ffffff; margin-bottom: 10px;">Architektura zestawu</h2>
+          <h2 style="font-size: 19px; font-weight: 700; color: #ffffff; margin-bottom: 10px;">{% if lang == 'en' %}Toolkit architecture{% else %}Architektura zestawu{% endif %}</h2>
           <p style="color: #cbd5e1; font-size: 14px; line-height: 1.65; margin-bottom: 14px;">
-            Trzy procedury zawarte w pliku <code>viewis-cad-tools.lsp</code> zostały przygotowane tak, by działać w każdym standardowym środowisku AutoCAD bez zewnętrznych bibliotek DLL i bez ingerencji w rejestr systemowy.
+            {% if lang == 'en' %}The three routines in <code>viewis-cad-tools.lsp</code> are built to run in any standard AutoCAD environment, with no external DLL libraries and no changes to the system registry.{% else %}Trzy procedury zawarte w pliku <code>viewis-cad-tools.lsp</code> zostały przygotowane tak, by działać w każdym standardowym środowisku AutoCAD bez zewnętrznych bibliotek DLL i bez ingerencji w rejestr systemowy.{% endif %}
           </p>
           <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-            <a href="{% static 'lsp/viewis-cad-tools.lsp' %}" download class="btn-download">Pobierz viewis-cad-tools.lsp</a>
+            <a href="{% static 'lsp/viewis-cad-tools.lsp' %}" download class="btn-download">{% if lang == 'en' %}Download viewis-cad-tools.lsp{% else %}Pobierz viewis-cad-tools.lsp{% endif %}</a>
           </div>
         </div>
 
         <div class="desc-card">
-          <div class="cmd-badge">Polecenie: SELECTREVERSE</div>
-          <h3 style="font-size: 17px; font-weight: 700; color: #38bdf8; margin-bottom: 8px;">1. Odwrócenie zaznaczenia</h3>
+          <div class="cmd-badge">{% if lang == 'en' %}Command: SELECTREVERSE{% else %}Polecenie: SELECTREVERSE{% endif %}</div>
+          <h3 style="font-size: 17px; font-weight: 700; color: #38bdf8; margin-bottom: 8px;">{% if lang == 'en' %}1. Reverse selection{% else %}1. Odwrócenie zaznaczenia{% endif %}</h3>
           <p style="color: #cbd5e1; font-size: 14px; line-height: 1.65; margin-bottom: 10px;">
-            AutoCAD natywnie nie oferuje prostego odwrócenia aktywnego zbioru wskazań w obszarze Modelu lub bieżącego arkusza (Layout).
+            {% if lang == 'en' %}AutoCAD has no built-in way to simply invert the active selection set in Model space or in the current Layout.{% else %}AutoCAD natywnie nie oferuje prostego odwrócenia aktywnego zbioru wskazań w obszarze Modelu lub bieżącego arkusza (Layout).{% endif %}
           </p>
           <ul style="padding-left: 18px; color: #94a3b8; font-size: 13.5px; line-height: 1.6;">
-            <li>Pobiera aktualnie zaznaczone obiekty przez <code>(ssget "_I")</code>.</li>
-            <li>Zbiera wszystkie widoczne elementy z bieżącej przestrzeni (filtr DXF 410 = <code>CTAB</code>) ignorując obiekty ukryte (kod DXF 60 = 1).</li>
-            <li>Tworzy nowy zbiór różnicowy i natychmiast go aktywuje wraz z uchwytami za pomocą <code>sssetfirst</code>.</li>
+            <li>{% if lang == 'en' %}Gets the currently selected objects via <code>(ssget "_I")</code>.{% else %}Pobiera aktualnie zaznaczone obiekty przez <code>(ssget "_I")</code>.{% endif %}</li>
+            <li>{% if lang == 'en' %}Collects all visible entities from the current space (DXF filter 410 = <code>CTAB</code>), skipping hidden objects (DXF code 60 = 1).{% else %}Zbiera wszystkie widoczne elementy z bieżącej przestrzeni (filtr DXF 410 = <code>CTAB</code>) ignorując obiekty ukryte (kod DXF 60 = 1).{% endif %}</li>
+            <li>{% if lang == 'en' %}Builds a new difference set and immediately activates it, with grips, using <code>sssetfirst</code>.{% else %}Tworzy nowy zbiór różnicowy i natychmiast go aktywuje wraz z uchwytami za pomocą <code>sssetfirst</code>.{% endif %}</li>
           </ul>
         </div>
 
         <div class="desc-card">
-          <div class="cmd-badge">Polecenie: CALCULATEAREA</div>
-          <h3 style="font-size: 17px; font-weight: 700; color: #38bdf8; margin-bottom: 8px;">2. Sumowanie powierzchni</h3>
+          <div class="cmd-badge">{% if lang == 'en' %}Command: CALCULATEAREA{% else %}Polecenie: CALCULATEAREA{% endif %}</div>
+          <h3 style="font-size: 17px; font-weight: 700; color: #38bdf8; margin-bottom: 8px;">{% if lang == 'en' %}2. Summing areas{% else %}2. Sumowanie powierzchni{% endif %}</h3>
           <p style="color: #cbd5e1; font-size: 14px; line-height: 1.65; margin-bottom: 10px;">
-            Standardowe polecenie <code>_AREA</code> wymaga żmudnego klikania punktów lub pojedynczych konturów z opcją <em>Add</em>.
+            {% if lang == 'en' %}The standard <code>_AREA</code> command forces you to click points one by one, or pick single contours with the <em>Add</em> option.{% else %}Standardowe polecenie <code>_AREA</code> wymaga żmudnego klikania punktów lub pojedynczych konturów z opcją <em>Add</em>.{% endif %}
           </p>
           <ul style="padding-left: 18px; color: #94a3b8; font-size: 13.5px; line-height: 1.6;">
-            <li>Filtruje obiekty typu <code>*POLYLINE</code>, <code>CIRCLE</code>, <code>HATCH</code> i <code>REGION</code>.</li>
-            <li>Odpytuje obiekty przez interfejs ActiveX (<code>vla-get-property Area</code>) z pełną izolacją błędów przed uszkodzoną geometrią.</li>
-            <li>Wyświetla gotową sumę w m² wraz z licznikiem obiektów (domyślny przelicznik dla rysunków w centymetrach).</li>
+            <li>{% if lang == 'en' %}Filters objects of type <code>*POLYLINE</code>, <code>CIRCLE</code>, <code>HATCH</code> and <code>REGION</code>.{% else %}Filtruje obiekty typu <code>*POLYLINE</code>, <code>CIRCLE</code>, <code>HATCH</code> i <code>REGION</code>.{% endif %}</li>
+            <li>{% if lang == 'en' %}Queries objects through the ActiveX interface (<code>vla-get-property Area</code>), with full error isolation against corrupted geometry.{% else %}Odpytuje obiekty przez interfejs ActiveX (<code>vla-get-property Area</code>) z pełną izolacją błędów przed uszkodzoną geometrią.{% endif %}</li>
+            <li>{% if lang == 'en' %}Prints the total in m² together with an object count (the default conversion assumes drawings in centimetres).{% else %}Wyświetla gotową sumę w m² wraz z licznikiem obiektów (domyślny przelicznik dla rysunków w centymetrach).{% endif %}</li>
           </ul>
         </div>
 
         <div class="desc-card">
-          <div class="cmd-badge">Polecenie: DWT</div>
-          <h3 style="font-size: 17px; font-weight: 700; color: #38bdf8; margin-bottom: 8px;">3. Natychmiastowy szablon DWT</h3>
+          <div class="cmd-badge">{% if lang == 'en' %}Command: DWT{% else %}Polecenie: DWT{% endif %}</div>
+          <h3 style="font-size: 17px; font-weight: 700; color: #38bdf8; margin-bottom: 8px;">{% if lang == 'en' %}3. Instant DWT template{% else %}3. Natychmiastowy szablon DWT{% endif %}</h3>
           <p style="color: #cbd5e1; font-size: 14px; line-height: 1.65; margin-bottom: 10px;">
-            Eksport szablonu w CADzie standardowo zmusza do przeklikiwania dialogów zapisu i wyboru formatu.
+            {% if lang == 'en' %}Exporting a template in CAD normally means clicking through the save dialogs and choosing a format.{% else %}Eksport szablonu w CADzie standardowo zmusza do przeklikiwania dialogów zapisu i wyboru formatu.{% endif %}
           </p>
           <ul style="padding-left: 18px; color: #94a3b8; font-size: 13.5px; line-height: 1.6;">
-            <li>Zapisuje bieżący stan rysunku jako <code>VI.dwt</code> do katalogu wskazanego zmienną <code>*path-acad*</code> (lub <code>*path*</code>).</li>
-            <li>Automatycznie weryfikuje istnienie folderu i w razie potrzeby tworzy brakującą strukturę (<code>vl-mkdir</code>).</li>
-            <li>Wycisza komunikaty (<code>CMDECHO = 0</code>) i nadpisuje plik bez irytujących monitów (<code>EXPERT = 2</code>).</li>
+            <li>{% if lang == 'en' %}Saves the current drawing as <code>VI.dwt</code> in the directory given by the <code>*path-acad*</code> variable (or <code>*path*</code>).{% else %}Zapisuje bieżący stan rysunku jako <code>VI.dwt</code> do katalogu wskazanego zmienną <code>*path-acad*</code> (lub <code>*path*</code>).{% endif %}</li>
+            <li>{% if lang == 'en' %}Automatically checks that the folder exists and creates any missing structure when needed (<code>vl-mkdir</code>).{% else %}Automatycznie weryfikuje istnienie folderu i w razie potrzeby tworzy brakującą strukturę (<code>vl-mkdir</code>).{% endif %}</li>
+            <li>{% if lang == 'en' %}Silences command echo (<code>CMDECHO = 0</code>) and overwrites the file without annoying prompts (<code>EXPERT = 2</code>).{% else %}Wycisza komunikaty (<code>CMDECHO = 0</code>) i nadpisuje plik bez irytujących monitów (<code>EXPERT = 2</code>).{% endif %}</li>
           </ul>
         </div>
 
-        <div class="notice-card" onclick="window.location.href='/artykuly/autolisp-pierwsze-kroki-automatyczne-ladowanie/'">
-          <div style="font-size: 12px; font-weight: 700; color: #38bdf8; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">Powiązany poradnik</div>
-          <h4 style="font-size: 16px; font-weight: 700; color: #ffffff; margin-bottom: 6px;">Jak używać AutoLISP?</h4>
+        <div class="notice-card" onclick="window.location.href='{{ art_base }}autolisp-pierwsze-kroki-automatyczne-ladowanie/'">
+          <div style="font-size: 12px; font-weight: 700; color: #38bdf8; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">{% if lang == 'en' %}Related guide{% else %}Powiązany poradnik{% endif %}</div>
+          <h4 style="font-size: 16px; font-weight: 700; color: #ffffff; margin-bottom: 6px;">{% if lang == 'en' %}How to use AutoLISP?{% else %}Jak używać AutoLISP?{% endif %}</h4>
           <p style="font-size: 13.5px; color: #94a3b8; margin: 0; line-height: 1.55;">
-            Zobacz kompletny poradnik opisujący konfigurację zaufanych folderów (<em>Trusted Locations</em>) oraz automatyczne przeładowywanie kodu w locie skryptem <code>viewis-autolisp-loader.lsp</code> →
+            {% if lang == 'en' %}See the complete guide to setting up trusted folders (<em>Trusted Locations</em>) and reloading code on the fly with the <code>viewis-autolisp-loader.lsp</code> script →{% else %}Zobacz kompletny poradnik opisujący konfigurację zaufanych folderów (<em>Trusted Locations</em>) oraz automatyczne przeładowywanie kodu w locie skryptem <code>viewis-autolisp-loader.lsp</code> →{% endif %}
           </p>
         </div>
 
@@ -95,8 +95,8 @@
           <div class="code-header">
             <span>viewis-cad-tools.lsp</span>
             <div style="display: flex; gap: 8px;">
-              <button class="btn-copy" onclick="copyCode('code-unified', this)">Kopiuj kod</button>
-              <a href="{% static 'lsp/viewis-cad-tools.lsp' %}" download class="btn-copy" style="text-decoration:none; display:inline-block;">Pobierz .lsp</a>
+              <button class="btn-copy" onclick="copyCode('code-unified', this)">{% if lang == 'en' %}Copy code{% else %}Kopiuj kod{% endif %}</button>
+              <a href="{% static 'lsp/viewis-cad-tools.lsp' %}" download class="btn-copy" style="text-decoration:none; display:inline-block;">{% if lang == 'en' %}Download .lsp{% else %}Pobierz .lsp{% endif %}</a>
             </div>
           </div>
           <pre id="code-unified" class="vscode-lisp"><code>{{ unified_code|escape }}</code></pre>
@@ -230,7 +230,7 @@ function copyCode(elementId, btn) {
   const code = document.getElementById(elementId).innerText;
   navigator.clipboard.writeText(code).then(() => {
     const orig = btn.innerText;
-    btn.innerText = "Skopiowano!";
+    btn.innerText = "{% if lang == 'en' %}Copied!{% else %}Skopiowano!{% endif %}";
     btn.style.background = "#059669";
     setTimeout(() => {
       btn.innerText = orig;

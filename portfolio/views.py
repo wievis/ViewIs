@@ -28,6 +28,13 @@ def _localize(a, lang):
     a.d_content = (a.content_en if en and a.content_en else a.content)
     return a
 
+def _cat_label(m, lang):
+    if not m.category:
+        return ''
+    if lang == 'en':
+        return CATEGORY_EN.get(m.category, m.category)
+    return m.get_category_display()
+
 def home(request, lang='pl'):
     featured = []
     media_items = []
@@ -41,6 +48,8 @@ def home(request, lang='pl'):
             Q(id__in=f_ids) | Q(parent_album_id__in=f_ids),
             file__isnull=False
         ).exclude(file='').select_related('hdr_setting').order_by('parent_album__order', 'order'))
+        for m in featured + media_items:
+            m.cat_label = _cat_label(m, lang)
     except Exception:
         logger.exception('home: nie udalo sie pobrac realizacji')
     return render(request, 'home.html', {
@@ -148,6 +157,9 @@ def sitemap(request):
     names = ['home', 'home_en', 'portfolio', 'portfolio_en', 'articles', 'articles_en',
              'about', 'about_en', 'mep_landing', 'mep_landing_en', 'kontakt', 'kontakt_en']
     urls = [request.build_absolute_uri(reverse(n)) for n in names]
+    for a in get_articles():
+        urls.append(request.build_absolute_uri(reverse('article_detail', args=[a['slug']])))
+        urls.append(request.build_absolute_uri(reverse('article_detail_en', args=[a['slug']])))
     try:
         for a in Article.objects.filter(published=True):
             urls.append(request.build_absolute_uri(reverse('article_detail', args=[a.slug])))
@@ -162,19 +174,28 @@ def custom_404(request, exception):
     lang = 'en' if '/en/' in request.path else 'pl'
     return render(request, '404.html', {'lang': lang}, status=404)
 
-def article_list(request):
-    articles = get_articles()
-    return render(request, 'articles_list.html', {'articles': articles})
+def _art_ctx(lang):
+    return {
+        'lang': lang,
+        'section': 'articles',
+        'art_base': '/en/articles/' if lang == 'en' else '/artykuly/',
+    }
 
-def articles_list(request):
-    return article_list(request)
+def article_list(request, lang='pl'):
+    ctx = _art_ctx(lang)
+    ctx['articles'] = get_articles(lang)
+    return render(request, 'articles_list.html', ctx)
 
-def article_detail(request, slug):
-    article = get_article_by_slug(slug)
+def articles_list(request, lang='pl'):
+    return article_list(request, lang)
+
+def article_detail(request, slug, lang='pl'):
+    article = get_article_by_slug(slug, lang)
     if not article:
         raise Http404("Artykuł nie został odnaleziony")
 
-    ctx = {'article': article}
+    ctx = _art_ctx(lang)
+    ctx['article'] = article
     static_lsp = os.path.join(os.path.abspath(os.getcwd()), "portfolio", "static", "lsp")
 
     static_ms = os.path.join(os.path.abspath(os.getcwd()), "portfolio", "static", "ms")

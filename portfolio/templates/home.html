@@ -78,7 +78,7 @@
         </div>
         <div class="featured">
             {% for m in featured %}
-            <div class="featured-item reveal" style="--d:{{ forloop.counter0 }}0ms" data-lb-id="{{ m.id }}" data-lb-kind="{% if m.media_type == 'album' %}album{% else %}item{% endif %}" data-lb-title="{{ m.name }}" data-lb-count="{% if m.media_type == 'album' %}{{ m.children.count }}{% else %}1{% endif %}" data-lb-type="{{ m.media_type }}" data-lb-thumb="{% if m.media_type == 'album' or m.media_type == 'image' %}{{ m.display_url }}{% elif m.thumbnail %}{{ m.thumbnail.url }}{% endif %}" data-lb-meta="{{ m.get_category_display }}" onclick="{% if m.media_type == 'album' %}openAlbumPreview({{ m.id }}){% else %}openItemPreview({{ m.id }}){% endif %}">
+            <div class="featured-item reveal" style="--d:{{ forloop.counter0 }}0ms" data-lb-id="{{ m.id }}" data-lb-kind="{% if m.media_type == 'album' %}album{% else %}item{% endif %}" data-lb-title="{{ m.name }}" data-lb-count="{% if m.media_type == 'album' %}{{ m.children.count }}{% else %}1{% endif %}" data-lb-type="{{ m.media_type }}" data-lb-thumb="{% if m.media_type == 'album' or m.media_type == 'image' %}{{ m.display_url }}{% elif m.thumbnail %}{{ m.thumbnail.url }}{% endif %}" data-lb-meta="{{ m.cat_label }}" onclick="{% if m.media_type == 'album' %}openAlbumPreview({{ m.id }}){% else %}openItemPreview({{ m.id }}){% endif %}">
                 <img src="{{ m.display_url }}" alt="{{ m.name|default:'Projekt' }}" loading="lazy">
                 <div class="featured-overlay">
                     <span class="featured-open-btn">
@@ -135,7 +135,7 @@ window.mediaItems = [
     url: "{% if item.media_type == 'image' %}{{ item.display_url }}{% else %}{{ item.file.url }}{% endif %}",
     thumb: "{% if item.media_type == 'image' %}{{ item.display_url }}{% elif item.thumbnail %}{{ item.thumbnail.url }}{% else %}{{ item.file.url }}{% endif %}",
     type: "{{ item.media_type }}",
-    category: "{{ item.get_category_display|default:item.category }}",
+    category: "{{ item.cat_label }}",
     hdr: "{% if item.hdr_setting %}{{ item.hdr_setting.file.url }}{% endif %}",
     parentId: {{ item.parent_album_id|default:"null" }}
   }{% if not forloop.last %},{% endif %}
