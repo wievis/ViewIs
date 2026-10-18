@@ -8,7 +8,7 @@ function setLoader(progress) {
     if (!bar) return;
     if (progress === null) {
         bar.style.opacity = '0';
-        setTimeout(() => { bar.style.width = '0%'; }, 250);
+        setTimeout(() => { bar.style.width = '0%'; }, 200);
         return;
     }
     bar.style.opacity = '1';
@@ -94,33 +94,48 @@ function renderActiveItem() {
 
     const counter = document.getElementById('lb-counter');
     if (counter) {
-        counter.textContent = `${currentGroupIndex + 1} / ${currentGroup.length}`;
+        if (currentGroup.length > 1) {
+            counter.textContent = `${currentGroupIndex + 1} / ${currentGroup.length}`;
+        } else {
+            counter.textContent = '1 / 1';
+        }
     }
 
     const badge = document.getElementById('lb-badge');
     if (badge) {
-        badge.textContent = item.category || (item.type === 'model3d' ? '3D' : (item.type === 'video' ? 'WIDEO' : ''));
-        badge.style.display = badge.textContent ? 'inline-flex' : 'none';
+        badge.textContent = item.category || (item.type === 'model3d' ? '3D MODEL' : (item.type === 'video' ? 'ANIMACJA' : 'WIZUALIZACJA'));
     }
 
-    const hint = document.getElementById('lb-hint-3d');
-    if (hint) {
+    const statusText = document.getElementById('lb-status-text');
+    const tagEngine = document.getElementById('lb-tag-engine');
+    if (statusText) {
         if (item.type === 'model3d') {
-            const isEn = document.documentElement.lang === 'en';
-            hint.textContent = isEn ? 'OBRÓT • ZOOM • PRZESUNIĘCIE' : 'OBRÓT • ZOOM • PRZESUNIĘCIE';
-            hint.style.display = 'inline-flex';
+            statusText.textContent = 'OBRÓT • ZOOM • PAN';
+            if (tagEngine) tagEngine.textContent = 'WEBGL // 3D';
+        } else if (item.type === 'video') {
+            statusText.textContent = 'ODTWARZANIE WIDEO';
+            if (tagEngine) tagEngine.textContent = 'H.264 // MP4';
         } else {
-            hint.style.display = 'none';
+            statusText.textContent = '← → NAWIGACJA • ESC ZAMKNIJ';
+            if (tagEngine) tagEngine.textContent = 'FULL-RES RENDER';
         }
     }
 
     renderThumbnails();
 
+    const prevBtn = document.querySelector('.lb-nav.prev');
+    const nextBtn = document.querySelector('.lb-nav.next');
+    if (prevBtn && nextBtn) {
+        const showNav = currentGroup.length > 1;
+        prevBtn.style.display = showNav ? 'flex' : 'none';
+        nextBtn.style.display = showNav ? 'flex' : 'none';
+    }
+
     const content = document.querySelector('.lightbox-content');
     if (!content) return;
     content.innerHTML = '';
 
-    setLoader(25);
+    setLoader(30);
 
     if (item.type === 'image') {
         const img = document.createElement('img');

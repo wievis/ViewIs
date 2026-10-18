@@ -71,7 +71,6 @@
               <video src="{{ item.file.url }}" autoplay loop muted playsinline></video>
             {% elif item.media_type == 'model3d' %}
               <model-viewer src="{{ item.file.url }}" {% if item.hdr_setting %}environment-image="{{ item.hdr_setting.file.url }}"{% endif %} camera-controls auto-rotate shadow-intensity="1" style="width:100%; height:100%;">
-                <div slot="progress-bar" class="mv-progress-bar"><div class="mv-progress-bar-fill"></div></div>
               </model-viewer>
             {% endif %}
           </div>
@@ -124,17 +123,6 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       if (countEl) countEl.textContent = visible;
-    });
-  });
-
-  document.querySelectorAll('model-viewer').forEach(mv => {
-    mv.addEventListener('progress', e => {
-      const fill = mv.querySelector('.mv-progress-bar-fill');
-      if (fill) fill.style.width = ((e.detail.totalProgress || 0) * 100) + '%';
-    });
-    mv.addEventListener('load', () => {
-      const p = mv.querySelector('.mv-progress-bar');
-      if (p) setTimeout(() => p.style.opacity = '0', 250);
     });
   });
 });
