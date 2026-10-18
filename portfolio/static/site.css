@@ -607,3 +607,9 @@ html.js .reveal.in { opacity: 1; transform: none; }
       color-mix(in srgb, var(--bg) 90%, transparent) 65%,
       var(--bg) 100%);
 }
+
+/* sekcja kontaktowa nad stałym tłem hero */
+.contact-section {
+  position: relative;
+  z-index: 1;
+}

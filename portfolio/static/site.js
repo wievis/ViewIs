@@ -11,19 +11,16 @@
         if (!heroBackdrop) return;
 
         const vh = window.innerHeight;
-        const progress = Math.min(1, Math.max(0, y / (vh * 2.0)));
+        const progress = Math.min(1, Math.max(0, y / (vh * 1.2)));
+        const eased = 1 - Math.pow(1 - progress, 2);
 
         if (heroMedia) {
             heroMedia.style.transform = `translate3d(0, ${-y * 0.16}px, 0)`;
         }
         if (heroScrollDim) {
-            heroScrollDim.style.opacity = progress.toFixed(3);
+            heroScrollDim.style.opacity = (eased * 0.93).toFixed(3);
         }
-        if (y > vh * 2.3) {
-            if (heroBackdrop.style.visibility !== 'hidden') heroBackdrop.style.visibility = 'hidden';
-        } else {
-            if (heroBackdrop.style.visibility === 'hidden') heroBackdrop.style.visibility = 'visible';
-        }
+        
     };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
