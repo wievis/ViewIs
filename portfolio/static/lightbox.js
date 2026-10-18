@@ -4,6 +4,9 @@ let lbTouchStartX = 0;
 let lbTouchStartY = 0;
 let progressInterval = null;
 let currentProgress = 0;
+let lbProjects = [];
+let lbProjectIndex = -1;
+let lastRailPid = null;
 
 function startLoader() {
     const bar = document.getElementById('lb-progress-bar');
@@ -91,6 +94,7 @@ function closeLightbox() {
     const lb = document.getElementById('lightbox');
     if (lb) lb.classList.remove('active');
     document.body.style.overflow = '';
+    lastRailPid = null;
     const content = document.querySelector('.lightbox-content');
     if (content) content.innerHTML = '';
     resetLoader();
@@ -114,6 +118,9 @@ function renderActiveItem() {
     const item = currentGroup[currentGroupIndex];
     if (!item) return;
 
+    const pid = (item.parentId !== null && item.parentId !== undefined) ? item.parentId : item.id;
+    syncRail(pid);
+
     const counter = document.getElementById('lb-counter');
     if (counter) {
         counter.textContent = currentGroup.length > 1 ? `${currentGroupIndex + 1} / ${currentGroup.length}` : '1 / 1';
@@ -136,7 +143,7 @@ function renderActiveItem() {
         if (cluster) cluster.style.display = 'none';
         if (statusText) {
             statusText.style.display = 'inline-flex';
-            statusText.textContent = item.type === 'video' ? 'ODTWARZANIE WIDEO' : '← → NAWIGACJA • ESC ZAMKNIJ';
+            statusText.textContent = item.type === 'video' ? 'ODTWARZANIE WIDEO' : '← → ZDJĘCIA • ↑ ↓ PROJEKTY • ESC ZAMKNIJ';
         }
         if (tagEngine) tagEngine.textContent = item.type === 'video' ? 'H.264 // MP4' : 'FULL-RES RENDER';
     }
@@ -264,6 +271,8 @@ if (lb) {
     }, { passive: true });
 
     lb.addEventListener('touchend', e => {
+        const curItem = currentGroup[currentGroupIndex];
+        if (curItem && curItem.type === 'model3d') return;
         const endX = e.changedTouches[0].screenX;
         const endY = e.changedTouches[0].screenY;
         const diffX = lbTouchStartX - endX;
@@ -275,8 +284,9 @@ if (lb) {
                 diffX > 0 ? changePhoto(1) : changePhoto(-1);
             }
         } else {
-            if (diffY > threshold && Math.abs(diffY) > 70) {
-                closeLightbox();
+            if (Math.abs(diffY) > 70) {
+                if (lbProjects.length > 1) changeProject(diffY > 0 ? 1 : -1);
+                else if (diffY > 0) closeLightbox();
             }
         }
     }, { passive: true });
@@ -288,4 +298,117 @@ document.addEventListener('keydown', e => {
     if (e.key === 'Escape') closeLightbox();
     if (e.key === 'ArrowLeft') changePhoto(-1);
     if (e.key === 'ArrowRight') changePhoto(1);
+    if (e.key === 'ArrowUp') { e.preventDefault(); changeProject(-1); }
+    if (e.key === 'ArrowDown') { e.preventDefault(); changeProject(1); }
 });
+
+// ---------- przełączanie projektów (panel po prawej) ----------
+function collectProjects() {
+    const nodes = Array.from(document.querySelectorAll('[data-lb-id]'))
+        .filter(el => el.style.display !== 'none');
+    lbProjects = nodes.map(el => ({
+        id: Number(el.dataset.lbId),
+        kind: el.dataset.lbKind || 'item',
+        title: el.dataset.lbTitle || '',
+        meta: el.dataset.lbMeta || '',
+        thumb: el.dataset.lbThumb || '',
+        type: el.dataset.lbType || 'image',
+        count: Number(el.dataset.lbCount || 1)
+    }));
+}
+
+function openProject(p) {
+    if (!window.mediaItems || !p) return false;
+    let group;
+    if (p.kind === 'album') {
+        group = window.mediaItems.filter(i => i.parentId === p.id);
+    } else {
+        const it = window.mediaItems.find(i => i.id === p.id);
+        group = it ? [it] : [];
+    }
+    if (!group.length) return false;
+    currentGroup = group;
+    currentGroupIndex = 0;
+    renderActiveItem();
+    return true;
+}
+
+function changeProject(dir) {
+    if (lbProjects.length < 2) return;
+    let idx = lbProjectIndex;
+    for (let n = 0; n < lbProjects.length; n++) {
+        idx = (idx + dir + lbProjects.length) % lbProjects.length;
+        if (openProject(lbProjects[idx])) return;
+    }
+}
+
+function syncRail(pid) {
+    const lbEl = document.getElementById('lightbox');
+    const rail = document.getElementById('lb-rail-list');
+    if (!lbEl || !rail) return;
+
+    if (lastRailPid === null) collectProjects();
+    if (pid === lastRailPid) return;
+    lastRailPid = pid;
+
+    lbProjectIndex = lbProjects.findIndex(p => p.id === pid);
+    if (lbProjects.length < 2 || lbProjectIndex < 0) {
+        lbEl.classList.remove('has-rail');
+        rail.innerHTML = '';
+        return;
+    }
+    lbEl.classList.add('has-rail');
+
+    const en = document.documentElement.lang === 'en';
+    const countEl = document.getElementById('lb-rail-count');
+    if (countEl) countEl.textContent = (lbProjectIndex + 1) + ' / ' + lbProjects.length;
+
+    rail.innerHTML = '';
+    lbProjects.forEach((p, i) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'lb-proj' + (i === lbProjectIndex ? ' active' : '');
+        btn.onclick = () => { if (i !== lbProjectIndex) openProject(p); };
+
+        const th = document.createElement('div');
+        th.className = 'lb-proj-thumb';
+        const tagText = p.type === 'video' ? 'VID' : (p.type === 'model3d' ? '3D' : '');
+        const showTag = () => {
+            const tag = document.createElement('span');
+            tag.className = 'lb-thumb-tag';
+            tag.textContent = tagText || '•';
+            th.appendChild(tag);
+        };
+        if (p.thumb) {
+            const img = document.createElement('img');
+            img.src = p.thumb;
+            img.alt = '';
+            img.loading = 'lazy';
+            img.onerror = () => { img.remove(); showTag(); };
+            th.appendChild(img);
+        } else {
+            showTag();
+        }
+
+        const info = document.createElement('div');
+        info.className = 'lb-proj-info';
+        const title = document.createElement('div');
+        title.className = 'lb-proj-title';
+        title.textContent = p.title || ((en ? 'Project ' : 'Projekt ') + (i + 1));
+        const meta = document.createElement('div');
+        meta.className = 'lb-proj-meta';
+        const parts = [];
+        if (p.meta) parts.push(p.meta);
+        if (p.count > 1) parts.push((en ? 'Series ' : 'Seria ') + p.count);
+        meta.textContent = parts.join(' · ');
+        info.appendChild(title);
+        if (parts.length) info.appendChild(meta);
+
+        btn.appendChild(th);
+        btn.appendChild(info);
+        rail.appendChild(btn);
+    });
+
+    const act = rail.querySelector('.active');
+    if (act) rail.scrollTop = act.offsetTop - (rail.clientHeight - act.offsetHeight) / 2;
+}

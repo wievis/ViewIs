@@ -40,7 +40,7 @@
     {% for item in top_level_media %}
       {% if item.media_type == 'album' %}
         {% with first_child=item.children.first %}
-        <div class="portfolio-card" data-cat="{{ item.category }}" onclick="openAlbumPreview({{ item.id }})">
+        <div class="portfolio-card" data-cat="{{ item.category }}" data-lb-id="{{ item.id }}" data-lb-kind="album" data-lb-title="{{ item.name }}" data-lb-count="{{ item.children.count }}" data-lb-type="{{ first_child.media_type|default:'image' }}" data-lb-thumb="{% if first_child.media_type == 'image' %}{{ first_child.display_url }}{% elif first_child.thumbnail %}{{ first_child.thumbnail.url }}{% endif %}" data-lb-meta="{% for k, l in categories %}{% if k == item.category %}{{ l }}{% endif %}{% endfor %}" onclick="openAlbumPreview({{ item.id }})">
           <div class="card-media-wrapper">
             <span class="card-badge badge-album">
               {% if lang == 'en' %}Series &middot; {{ item.children.count }}{% else %}Seria &middot; {{ item.children.count }}{% endif %}
@@ -60,7 +60,7 @@
         {% endwith %}
       {% else %}
         {% if item.file %}
-        <div class="portfolio-card" data-cat="{{ item.category }}" onclick="openItemPreview({{ item.id }})">
+        <div class="portfolio-card" data-cat="{{ item.category }}" data-lb-id="{{ item.id }}" data-lb-kind="item" data-lb-title="{{ item.name }}" data-lb-count="1" data-lb-type="{{ item.media_type }}" data-lb-thumb="{% if item.media_type == 'image' %}{{ item.display_url }}{% elif item.thumbnail %}{{ item.thumbnail.url }}{% endif %}" data-lb-meta="{% for k, l in categories %}{% if k == item.category %}{{ l }}{% endif %}{% endfor %}" onclick="openItemPreview({{ item.id }})">
           <div class="card-media-wrapper">
             <span class="card-badge">
               {% if item.media_type == 'video' %}Video{% elif item.media_type == 'model3d' %}3D{% else %}Render{% endif %}
