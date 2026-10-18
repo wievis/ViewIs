@@ -1,6 +1,6 @@
 (function () {
     // header: tlo po przewinieciu
-        const header = document.getElementById('site-header');
+            const header = document.getElementById('site-header');
     const heroBackdrop = document.getElementById('hero-backdrop');
     const heroMedia = document.getElementById('hero-media');
     const heroScrollDim = document.getElementById('hero-scroll-dim');
@@ -11,19 +11,18 @@
         if (!heroBackdrop) return;
 
         const vh = window.innerHeight;
-        if (y > vh * 2.2) {
-            if (heroBackdrop.style.visibility !== 'hidden') heroBackdrop.style.visibility = 'hidden';
-            return;
-        } else {
-            if (heroBackdrop.style.visibility === 'hidden') heroBackdrop.style.visibility = 'visible';
-        }
+        const progress = Math.min(1, Math.max(0, y / (vh * 2.0)));
 
-        const factor = Math.min(1, Math.max(0, y / (vh * 1.15)));
         if (heroMedia) {
-            heroMedia.style.transform = `translate3d(0, ${y * 0.32}px, 0) scale(${1 + factor * 0.04})`;
+            heroMedia.style.transform = `translate3d(0, ${-y * 0.16}px, 0)`;
         }
         if (heroScrollDim) {
-            heroScrollDim.style.opacity = Math.pow(factor, 0.85).toFixed(3);
+            heroScrollDim.style.opacity = progress.toFixed(3);
+        }
+        if (y > vh * 2.3) {
+            if (heroBackdrop.style.visibility !== 'hidden') heroBackdrop.style.visibility = 'hidden';
+        } else {
+            if (heroBackdrop.style.visibility === 'hidden') heroBackdrop.style.visibility = 'visible';
         }
     };
     onScroll();

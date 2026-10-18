@@ -20,24 +20,25 @@
 
 <section class="hero">
     <div class="hero-center">
-        <h1 class="hero-brand-title">View Is</h1>
-        <div class="hero-spec-line">
-            <span>Fotorealizm 3D</span>
-            <span class="hero-dot">&bull;</span>
-            <span>Środowiska czasu rzeczywistego</span>
-            <span class="hero-dot">&bull;</span>
-            <span class="hero-spec-dark">automatyzacja projektowa</span>
-        </div>
-        <p class="hero-lead">
-            {% if lang == 'en' %}
-            Virtual environments, dedicated data pipelines and real-time interactive graphics for investment and industry.
-            {% else %}
-            Środowiska wirtualne, dedykowane potoki danych oraz interaktywna grafika czasu rzeczywistego dla inwestycji i przemysłu.
-            {% endif %}
-        </p>
-        <div class="hero-cta">
-            <a class="btn btn-primary" href="{% if lang == 'en' %}{% url 'portfolio_en' %}{% else %}{% url 'portfolio' %}{% endif %}">{% if lang == 'en' %}View portfolio{% else %}Zobacz portfolio{% endif %}</a>
-            <a class="btn btn-ghost" href="#contact">{% if lang == 'en' %}Request a quote{% else %}Zapytaj o wycenę{% endif %}</a>
+        <div class="hero-slate">
+            <h1>
+                {% if lang == 'en' %}
+                Spatial geometry, real-time rendering and <em>custom software</em>.
+                {% else %}
+                Geometria przestrzenna, czas rzeczywisty i <em>dedykowany kod</em>.
+                {% endif %}
+            </h1>
+            <p class="hero-lead">
+                {% if lang == 'en' %}
+                Virtual environments, dedicated data pipelines and real-time interactive graphics for investment and industry.
+                {% else %}
+                Środowiska wirtualne, dedykowane potoki danych oraz interaktywna grafika czasu rzeczywistego dla inwestycji i przemysłu.
+                {% endif %}
+            </p>
+            <div class="hero-cta">
+                <a class="btn btn-primary" href="{% if lang == 'en' %}{% url 'portfolio_en' %}{% else %}{% url 'portfolio' %}{% endif %}">{% if lang == 'en' %}View portfolio{% else %}Zobacz realizacje{% endif %}</a>
+                <a class="btn btn-ghost" href="#contact">{% if lang == 'en' %}Request a quote{% else %}Wycena projektu{% endif %}</a>
+            </div>
         </div>
     </div>
 
