@@ -8,14 +8,17 @@
 {% endblock %}
 
 {% block content %}
-<section class="hero">
-    <div class="hero-media" style="background-image:url('{% static 'CEO-background-1200-630.jpg' %}')">
+<div class="hero-backdrop" id="hero-backdrop" aria-hidden="true">
+    <div class="hero-media" id="hero-media" style="background-image:url('{% static 'CEO-background-1200-630.jpg' %}')">
         <video class="hero-video" muted playsinline preload="none" aria-hidden="true" data-src="{% static 'video/hero-1.mp4' %}"></video>
         <video class="hero-video" muted playsinline preload="none" aria-hidden="true" data-src="{% static 'video/hero-2.mp4' %}"></video>
         <video class="hero-video" muted playsinline preload="none" aria-hidden="true" data-src="{% static 'video/hero-3.mp4' %}"></video>
     </div>
     <div class="hero-vignette"></div>
+    <div class="hero-scroll-dim" id="hero-scroll-dim"></div>
+</div>
 
+<section class="hero">
     <div class="hero-center">
         <h1 class="hero-brand-title">View Is</h1>
         <div class="hero-spec-line">
