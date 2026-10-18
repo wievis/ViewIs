@@ -592,3 +592,5 @@ html.js .reveal.in { opacity: 1; transform: none; }
     border-radius: 18px;
   }
 }
+
+.portrait img { object-position: center top; }

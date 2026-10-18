@@ -392,20 +392,17 @@ function syncRail(pid) {
 
         const info = document.createElement('div');
         info.className = 'lb-proj-info';
-        const title = document.createElement('div');
-        title.className = 'lb-proj-title';
-        title.textContent = p.title || ((en ? 'Project ' : 'Projekt ') + (i + 1));
+        
         const meta = document.createElement('div');
         meta.className = 'lb-proj-meta';
         const parts = [];
         if (p.meta) parts.push(p.meta);
         if (p.count > 1) parts.push((en ? 'Series ' : 'Seria ') + p.count);
         meta.textContent = parts.join(' · ');
-        info.appendChild(title);
         if (parts.length) info.appendChild(meta);
 
         btn.appendChild(th);
-        btn.appendChild(info);
+        if (parts.length) btn.appendChild(info);
         rail.appendChild(btn);
     });
 
