@@ -32,9 +32,9 @@
       <div class="split-descriptions">
         
         <div class="desc-card">
-          <h2 style="font-size: 19px; font-weight: 700; color: #ffffff; margin-bottom: 10px;">{% if lang == 'en' %}Toolkit architecture{% else %}Architektura zestawu{% endif %}</h2>
+          <h2 style="font-size: 19px; font-weight: 700; color: #ffffff; margin-bottom: 10px;">{% if lang == 'en' %}What's in the toolkit{% else %}Architektura zestawu{% endif %}</h2>
           <p style="color: #cbd5e1; font-size: 14px; line-height: 1.65; margin-bottom: 14px;">
-            {% if lang == 'en' %}The three routines in <code>viewis-cad-tools.lsp</code> are built to run in any standard AutoCAD environment, with no external DLL libraries and no changes to the system registry.{% else %}Trzy procedury zawarte w pliku <code>viewis-cad-tools.lsp</code> zostały przygotowane tak, by działać w każdym standardowym środowisku AutoCAD bez zewnętrznych bibliotek DLL i bez ingerencji w rejestr systemowy.{% endif %}
+            {% if lang == 'en' %}The three routines in <code>viewis-cad-tools.lsp</code> work in any standard AutoCAD installation, with no external DLLs and no registry changes.{% else %}Trzy procedury zawarte w pliku <code>viewis-cad-tools.lsp</code> zostały przygotowane tak, by działać w każdym standardowym środowisku AutoCAD bez zewnętrznych bibliotek DLL i bez ingerencji w rejestr systemowy.{% endif %}
           </p>
           <div style="display: flex; gap: 10px; flex-wrap: wrap;">
             <a href="{% static 'lsp/viewis-cad-tools.lsp' %}" download class="btn-download">{% if lang == 'en' %}Download viewis-cad-tools.lsp{% else %}Pobierz viewis-cad-tools.lsp{% endif %}</a>
@@ -43,27 +43,27 @@
 
         <div class="desc-card">
           <div class="cmd-badge">{% if lang == 'en' %}Command: SELECTREVERSE{% else %}Polecenie: SELECTREVERSE{% endif %}</div>
-          <h3 style="font-size: 17px; font-weight: 700; color: #38bdf8; margin-bottom: 8px;">{% if lang == 'en' %}1. Reverse selection{% else %}1. Odwrócenie zaznaczenia{% endif %}</h3>
+          <h3 style="font-size: 17px; font-weight: 700; color: #38bdf8; margin-bottom: 8px;">{% if lang == 'en' %}1. Invert selection{% else %}1. Odwrócenie zaznaczenia{% endif %}</h3>
           <p style="color: #cbd5e1; font-size: 14px; line-height: 1.65; margin-bottom: 10px;">
-            {% if lang == 'en' %}AutoCAD has no built-in way to simply invert the active selection set in Model space or in the current Layout.{% else %}AutoCAD natywnie nie oferuje prostego odwrócenia aktywnego zbioru wskazań w obszarze Modelu lub bieżącego arkusza (Layout).{% endif %}
+            {% if lang == 'en' %}AutoCAD has no simple built-in way to invert the current selection in Model space or in the active layout.{% else %}AutoCAD natywnie nie oferuje prostego odwrócenia aktywnego zbioru wskazań w obszarze Modelu lub bieżącego arkusza (Layout).{% endif %}
           </p>
           <ul style="padding-left: 18px; color: #94a3b8; font-size: 13.5px; line-height: 1.6;">
-            <li>{% if lang == 'en' %}Gets the currently selected objects via <code>(ssget "_I")</code>.{% else %}Pobiera aktualnie zaznaczone obiekty przez <code>(ssget "_I")</code>.{% endif %}</li>
-            <li>{% if lang == 'en' %}Collects all visible entities from the current space (DXF filter 410 = <code>CTAB</code>), skipping hidden objects (DXF code 60 = 1).{% else %}Zbiera wszystkie widoczne elementy z bieżącej przestrzeni (filtr DXF 410 = <code>CTAB</code>) ignorując obiekty ukryte (kod DXF 60 = 1).{% endif %}</li>
-            <li>{% if lang == 'en' %}Builds a new difference set and immediately activates it, with grips, using <code>sssetfirst</code>.{% else %}Tworzy nowy zbiór różnicowy i natychmiast go aktywuje wraz z uchwytami za pomocą <code>sssetfirst</code>.{% endif %}</li>
+            <li>{% if lang == 'en' %}Reads the currently selected objects with <code>(ssget "_I")</code>.{% else %}Pobiera aktualnie zaznaczone obiekty przez <code>(ssget "_I")</code>.{% endif %}</li>
+            <li>{% if lang == 'en' %}Gathers every visible entity in the current space (DXF filter 410 = <code>CTAB</code>), skipping hidden objects (DXF code 60 = 1).{% else %}Zbiera wszystkie widoczne elementy z bieżącej przestrzeni (filtr DXF 410 = <code>CTAB</code>) ignorując obiekty ukryte (kod DXF 60 = 1).{% endif %}</li>
+            <li>{% if lang == 'en' %}Builds the difference set and selects it right away, grips included, with <code>sssetfirst</code>.{% else %}Tworzy nowy zbiór różnicowy i natychmiast go aktywuje wraz z uchwytami za pomocą <code>sssetfirst</code>.{% endif %}</li>
           </ul>
         </div>
 
         <div class="desc-card">
           <div class="cmd-badge">{% if lang == 'en' %}Command: CALCULATEAREA{% else %}Polecenie: CALCULATEAREA{% endif %}</div>
-          <h3 style="font-size: 17px; font-weight: 700; color: #38bdf8; margin-bottom: 8px;">{% if lang == 'en' %}2. Summing areas{% else %}2. Sumowanie powierzchni{% endif %}</h3>
+          <h3 style="font-size: 17px; font-weight: 700; color: #38bdf8; margin-bottom: 8px;">{% if lang == 'en' %}2. Totaling areas{% else %}2. Sumowanie powierzchni{% endif %}</h3>
           <p style="color: #cbd5e1; font-size: 14px; line-height: 1.65; margin-bottom: 10px;">
-            {% if lang == 'en' %}The standard <code>_AREA</code> command forces you to click points one by one, or pick single contours with the <em>Add</em> option.{% else %}Standardowe polecenie <code>_AREA</code> wymaga żmudnego klikania punktów lub pojedynczych konturów z opcją <em>Add</em>.{% endif %}
+            {% if lang == 'en' %}The standard <code>_AREA</code> command makes you click points one by one, or add single outlines with the <em>Add</em> option.{% else %}Standardowe polecenie <code>_AREA</code> wymaga żmudnego klikania punktów lub pojedynczych konturów z opcją <em>Add</em>.{% endif %}
           </p>
           <ul style="padding-left: 18px; color: #94a3b8; font-size: 13.5px; line-height: 1.6;">
             <li>{% if lang == 'en' %}Filters objects of type <code>*POLYLINE</code>, <code>CIRCLE</code>, <code>HATCH</code> and <code>REGION</code>.{% else %}Filtruje obiekty typu <code>*POLYLINE</code>, <code>CIRCLE</code>, <code>HATCH</code> i <code>REGION</code>.{% endif %}</li>
-            <li>{% if lang == 'en' %}Queries objects through the ActiveX interface (<code>vla-get-property Area</code>), with full error isolation against corrupted geometry.{% else %}Odpytuje obiekty przez interfejs ActiveX (<code>vla-get-property Area</code>) z pełną izolacją błędów przed uszkodzoną geometrią.{% endif %}</li>
-            <li>{% if lang == 'en' %}Prints the total in m² together with an object count (the default conversion assumes drawings in centimetres).{% else %}Wyświetla gotową sumę w m² wraz z licznikiem obiektów (domyślny przelicznik dla rysunków w centymetrach).{% endif %}</li>
+            <li>{% if lang == 'en' %}Reads each area through the ActiveX interface (<code>vla-get-property Area</code>), with error handling so damaged geometry doesn't break the run.{% else %}Odpytuje obiekty przez interfejs ActiveX (<code>vla-get-property Area</code>) z pełną izolacją błędów przed uszkodzoną geometrią.{% endif %}</li>
+            <li>{% if lang == 'en' %}Prints the total in m² along with the object count (the default conversion assumes the drawing is in centimeters).{% else %}Wyświetla gotową sumę w m² wraz z licznikiem obiektów (domyślny przelicznik dla rysunków w centymetrach).{% endif %}</li>
           </ul>
         </div>
 
@@ -71,12 +71,12 @@
           <div class="cmd-badge">{% if lang == 'en' %}Command: DWT{% else %}Polecenie: DWT{% endif %}</div>
           <h3 style="font-size: 17px; font-weight: 700; color: #38bdf8; margin-bottom: 8px;">{% if lang == 'en' %}3. Instant DWT template{% else %}3. Natychmiastowy szablon DWT{% endif %}</h3>
           <p style="color: #cbd5e1; font-size: 14px; line-height: 1.65; margin-bottom: 10px;">
-            {% if lang == 'en' %}Exporting a template in CAD normally means clicking through the save dialogs and choosing a format.{% else %}Eksport szablonu w CADzie standardowo zmusza do przeklikiwania dialogów zapisu i wyboru formatu.{% endif %}
+            {% if lang == 'en' %}Saving a template in CAD normally means clicking through the Save As dialog and picking a format.{% else %}Eksport szablonu w CADzie standardowo zmusza do przeklikiwania dialogów zapisu i wyboru formatu.{% endif %}
           </p>
           <ul style="padding-left: 18px; color: #94a3b8; font-size: 13.5px; line-height: 1.6;">
-            <li>{% if lang == 'en' %}Saves the current drawing as <code>VI.dwt</code> in the directory given by the <code>*path-acad*</code> variable (or <code>*path*</code>).{% else %}Zapisuje bieżący stan rysunku jako <code>VI.dwt</code> do katalogu wskazanego zmienną <code>*path-acad*</code> (lub <code>*path*</code>).{% endif %}</li>
-            <li>{% if lang == 'en' %}Automatically checks that the folder exists and creates any missing structure when needed (<code>vl-mkdir</code>).{% else %}Automatycznie weryfikuje istnienie folderu i w razie potrzeby tworzy brakującą strukturę (<code>vl-mkdir</code>).{% endif %}</li>
-            <li>{% if lang == 'en' %}Silences command echo (<code>CMDECHO = 0</code>) and overwrites the file without annoying prompts (<code>EXPERT = 2</code>).{% else %}Wycisza komunikaty (<code>CMDECHO = 0</code>) i nadpisuje plik bez irytujących monitów (<code>EXPERT = 2</code>).{% endif %}</li>
+            <li>{% if lang == 'en' %}Saves the current drawing as <code>VI.dwt</code> in the folder set by the <code>*path-acad*</code> variable (or <code>*path*</code>).{% else %}Zapisuje bieżący stan rysunku jako <code>VI.dwt</code> do katalogu wskazanego zmienną <code>*path-acad*</code> (lub <code>*path*</code>).{% endif %}</li>
+            <li>{% if lang == 'en' %}Checks that the folder exists and creates any missing folders (<code>vl-mkdir</code>).{% else %}Automatycznie weryfikuje istnienie folderu i w razie potrzeby tworzy brakującą strukturę (<code>vl-mkdir</code>).{% endif %}</li>
+            <li>{% if lang == 'en' %}Turns off command echo (<code>CMDECHO = 0</code>) and overwrites the file without confirmation prompts (<code>EXPERT = 2</code>).{% else %}Wycisza komunikaty (<code>CMDECHO = 0</code>) i nadpisuje plik bez irytujących monitów (<code>EXPERT = 2</code>).{% endif %}</li>
           </ul>
         </div>
 

@@ -5,9 +5,9 @@
 {% block content %}
 <div class="container err-wrap">
     <div class="err-code">404</div>
-    <h1 class="display" style="font-size:clamp(2rem,4vw,3rem)">{% if lang == 'en' %}Resource not located.{% else %}Zasób nie został odnaleziony.{% endif %}</h1>
-    <p class="lead" style="margin:12px 0 30px">{% if lang == 'en' %}The requested URL was not found on this server. Integration failed.{% else %}Żądany adres URL nie został odnaleziony. Integracja przerwana.{% endif %}</p>
-    <p><a class="btn btn-primary" href="{% if lang == 'en' %}{% url 'home_en' %}{% else %}{% url 'home' %}{% endif %}">{% if lang == 'en' %}Return to index{% else %}Powrót do indeksu{% endif %}</a></p>
-    <p class="quote" style="margin-top:70px;font-size:1.6rem">{% if lang == 'en' %}Technical void or structural gap?{% else %}Techniczna pustka czy luka strukturalna?{% endif %}<small>{% if lang == 'en' %}FORM FOLLOWS FUNCTION.{% else %}FORMA PODĄŻA ZA FUNKCJĄ.{% endif %}</small></p>
+    <h1 class="display" style="font-size:clamp(2rem,4vw,3rem)">{% if lang == 'en' %}Page not found.{% else %}Zasób nie został odnaleziony.{% endif %}</h1>
+    <p class="lead" style="margin:12px 0 30px">{% if lang == 'en' %}We couldn't find the page you were looking for.{% else %}Żądany adres URL nie został odnaleziony. Integracja przerwana.{% endif %}</p>
+    <p><a class="btn btn-primary" href="{% if lang == 'en' %}{% url 'home_en' %}{% else %}{% url 'home' %}{% endif %}">{% if lang == 'en' %}Back to home{% else %}Powrót do indeksu{% endif %}</a></p>
+    <p class="quote" style="margin-top:70px;font-size:1.6rem">{% if lang == 'en' %}A technical void or a structural gap?{% else %}Techniczna pustka czy luka strukturalna?{% endif %}<small>{% if lang == 'en' %}FORM FOLLOWS FUNCTION.{% else %}FORMA PODĄŻA ZA FUNKCJĄ.{% endif %}</small></p>
 </div>
 {% endblock %}

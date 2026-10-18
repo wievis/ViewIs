@@ -39,11 +39,11 @@
           <div style="display: flex; flex-direction: column; gap: 10px;">
             <div style="background: rgba(15,23,42,0.6); border: 1px solid rgba(255,255,255,0.08); padding: 12px 14px; border-radius: 8px;">
               <span style="color: #38bdf8; font-weight: 700; font-size: 12px;">{% if lang == 'en' %}Method A (Drag and drop):{% else %}Metoda A (Przeciągnij i upuść):{% endif %}</span>
-              <p style="color: #94a3b8; font-size: 13px; margin: 4px 0 0 0;">{% if lang == 'en' %}Drop the <code>.lsp</code> file from Windows Explorer straight onto the black drawing area (Model).{% else %}Upuść plik <code>.lsp</code> z Eksploratora Windows prosto na czarny obszar kreślenia (Model).{% endif %}</p>
+              <p style="color: #94a3b8; font-size: 13px; margin: 4px 0 0 0;">{% if lang == 'en' %}Drag the <code>.lsp</code> file from Windows Explorer straight into the drawing area (Model space).{% else %}Upuść plik <code>.lsp</code> z Eksploratora Windows prosto na czarny obszar kreślenia (Model).{% endif %}</p>
             </div>
             <div style="background: rgba(15,23,42,0.6); border: 1px solid rgba(255,255,255,0.08); padding: 12px 14px; border-radius: 8px;">
               <span style="color: #38bdf8; font-weight: 700; font-size: 12px;">{% if lang == 'en' %}Method B (APPLOAD command):{% else %}Metoda B (Polecenie APPLOAD):{% endif %}</span>
-              <p style="color: #94a3b8; font-size: 13px; margin: 4px 0 0 0;">{% if lang == 'en' %}Type the <code>APPLOAD</code> command, select the downloaded file and confirm with <em>Load</em>.{% else %}Wpisz polecenie <code>APPLOAD</code>, wskaż pobrany plik i zatwierdź przyciskiem <em>Load</em>.{% endif %}</p>
+              <p style="color: #94a3b8; font-size: 13px; margin: 4px 0 0 0;">{% if lang == 'en' %}Run the <code>APPLOAD</code> command, select the downloaded file and click <em>Load</em>.{% else %}Wpisz polecenie <code>APPLOAD</code>, wskaż pobrany plik i zatwierdź przyciskiem <em>Load</em>.{% endif %}</p>
             </div>
           </div>
         </div>
@@ -52,10 +52,10 @@
           <div class="cmd-badge">{% if lang == 'en' %}AUTOCAD SECURITY{% else %}BEZPIECZEŃSTWO AUTOCAD{% endif %}</div>
           <h3 style="font-size: 17px; font-weight: 700; color: #38bdf8; margin-bottom: 8px;">{% if lang == 'en' %}2. Configuring Trusted Paths{% else %}2. Konfiguracja Trusted Paths{% endif %}</h3>
           <p style="color: #cbd5e1; font-size: 14px; line-height: 1.65; margin-bottom: 12px;">
-            {% if lang == 'en' %}By default AutoCAD blocks scripts from unauthorised folders and shows a <em>Security Concern</em> warning. To get rid of the prompts:{% else %}AutoCAD domyślnie blokuje skrypty z nieautoryzowanych folderów, wyświetlając ostrzeżenie <em>Security Concern</em>. Aby wyeliminować monity:{% endif %}
+            {% if lang == 'en' %}By default, AutoCAD blocks scripts from untrusted folders and shows a <em>Security Concern</em> warning. To stop the prompts:{% else %}AutoCAD domyślnie blokuje skrypty z nieautoryzowanych folderów, wyświetlając ostrzeżenie <em>Security Concern</em>. Aby wyeliminować monity:{% endif %}
           </p>
           <ol style="margin: 0; padding-left: 18px; color: #94a3b8; font-size: 13.5px; line-height: 1.7;">
-            <li>{% if lang == 'en' %}Type the <code>OPTIONS</code> command (shortcut <code>OP</code>) and go to the <strong>Files</strong> tab.{% else %}Wpisz polecenie <code>OPTIONS</code> (skrót <code>OP</code>) i przejdź do zakładki <strong>Files</strong>.{% endif %}</li>
+            <li>{% if lang == 'en' %}Run the <code>OPTIONS</code> command (shortcut <code>OP</code>) and open the <strong>Files</strong> tab.{% else %}Wpisz polecenie <code>OPTIONS</code> (skrót <code>OP</code>) i przejdź do zakładki <strong>Files</strong>.{% endif %}</li>
             <li>{% if lang == 'en' %}Expand the <strong>Trusted Locations</strong> section.{% else %}Rozwiń sekcję <strong>Trusted Locations</strong> (Zaufane lokalizacje).{% endif %}</li>
             <li>{% if lang == 'en' %}Click <strong>Add...</strong>, then <strong>Browse...</strong> and select your scripts folder.{% else %}Kliknij <strong>Add...</strong>, a następnie <strong>Browse...</strong> i wskaż swój folder na skrypty.{% endif %}</li>
             <li>{% if lang == 'en' %}<strong>Important:</strong> Add three dots at the end of the path (<code>...</code>), e.g. <code>C:\...\lsp\...</code>, so AutoCAD also trusts all subfolders.{% else %}<strong>Ważne:</strong> Dodaj na końcu ścieżki trzy kropki (<code>...</code>), np. <code>C:\...\lsp\...</code>, aby AutoCAD uznał za zaufane również wszystkie podkatalogi.{% endif %}</li>
@@ -78,16 +78,16 @@
           </div>
 
           <ul style="padding-left: 18px; color: #94a3b8; font-size: 13.5px; line-height: 1.6;">
-            <li>{% if lang == 'en' %}<strong>Folder isolation:</strong> The <code>ignore</code> list skips temporary folders (<code>.git</code>, <code>.venv</code>, <code>archiwum</code>, <code>test</code>).{% else %}<strong>Folder isolation:</strong> Lista <code>ignore</code> pomija foldery tymczasowe (<code>.git</code>, <code>.venv</code>, <code>archiwum</code>, <code>test</code>).{% endif %}</li>
+            <li>{% if lang == 'en' %}<strong>Excluded folders:</strong> The <code>ignore</code> list skips temporary folders (<code>.git</code>, <code>.venv</code>, <code>archiwum</code>, <code>test</code>).{% else %}<strong>Folder isolation:</strong> Lista <code>ignore</code> pomija foldery tymczasowe (<code>.git</code>, <code>.venv</code>, <code>archiwum</code>, <code>test</code>).{% endif %}</li>
             <li>{% if lang == 'en' %}<strong>Fault tolerance:</strong> Uses <code>vl-catch-all-apply</code>, so an error in one script does not stop the others from loading.{% else %}<strong>Odporność na awarie:</strong> Wykorzystuje <code>vl-catch-all-apply</code> – błąd w jednym skrypcie nie przerywa ładowania pozostałych.{% endif %}</li>
           </ul>
         </div>
 
         <div class="notice-card" onclick="window.location.href='{{ art_base }}autocad-lisp-narzedzia-przyspieszajace-prace/'">
           <div style="font-size: 12px; font-weight: 700; color: #38bdf8; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">{% if lang == 'en' %}Next step{% else %}Kolejny krok{% endif %}</div>
-          <h4 style="font-size: 16px; font-weight: 700; color: #ffffff; margin-bottom: 6px;">{% if lang == 'en' %}Functions AutoCAD is missing{% else %}Funkcje jakich brakuje w AutoCAD{% endif %}</h4>
+          <h4 style="font-size: 16px; font-weight: 700; color: #ffffff; margin-bottom: 6px;">{% if lang == 'en' %}Features AutoCAD is missing{% else %}Funkcje jakich brakuje w AutoCAD{% endif %}</h4>
           <p style="font-size: 13.5px; color: #94a3b8; margin: 0; line-height: 1.55;">
-            {% if lang == 'en' %}Once your environment is ready, grab the function set: reverse selection, area summing and DWT template export →{% else %}Gdy środowisko jest gotowe, pobierz zestaw funkcji: odwracanie zaznaczenia, sumę powierzchni i eksport szablonu DWT →{% endif %}
+            {% if lang == 'en' %}Once your environment is set up, grab the toolkit: invert selection, area totals and DWT template export →{% else %}Gdy środowisko jest gotowe, pobierz zestaw funkcji: odwracanie zaznaczenia, sumę powierzchni i eksport szablonu DWT →{% endif %}
           </p>
         </div>
 

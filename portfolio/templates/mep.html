@@ -6,7 +6,7 @@
 <section class="page-hero container">
     <span class="eyebrow">Excel &middot; BIM 3D Integration</span>
     <h1 class="display">ViewIs MEP Link</h1>
-    <p class="lead" style="margin-top:16px">{% if lang == 'en' %}An interactive bridge connecting BIM IFC models with Excel quantity takeoffs. Inspect, navigate and cross-reference 3D geometry right inside Microsoft Excel, with no third-party desktop viewer.{% else %}Bezpośredni most łączący modele BIM IFC z przedmiarami Excela. Zaznacz pozycję w arkuszu, aby natychmiast wyizolować, zweryfikować i podświetlić element w 3D bezpośrednio w oknie programu Excel.{% endif %}</p>
+    <p class="lead" style="margin-top:16px">{% if lang == 'en' %}A direct link between BIM IFC models and Excel quantity takeoffs. Select a row in your spreadsheet to isolate, check and highlight the element in 3D, right inside Excel, with no separate desktop viewer.{% else %}Bezpośredni most łączący modele BIM IFC z przedmiarami Excela. Zaznacz pozycję w arkuszu, aby natychmiast wyizolować, zweryfikować i podświetlić element w 3D bezpośrednio w oknie programu Excel.{% endif %}</p>
     <p style="margin-top:30px"><a href="{% url 'mep_download_zip' %}" class="btn btn-primary">{% if lang == 'en' %}Download add-in (.zip){% else %}Pobierz wtyczkę (.zip){% endif %}</a></p>
 </section>
 
@@ -27,12 +27,12 @@
             <ul>
                 <li>{% if lang == 'en' %}MEP engineers and subcontractors{% else %}Inżynierowie instalacji i podwykonawcy{% endif %}</li>
                 <li>{% if lang == 'en' %}Estimators verifying quantities against the model{% else %}Kosztorysanci weryfikujący ilości z modelem{% endif %}</li>
-                <li>{% if lang == 'en' %}Teams who want one workbook as the source of truth{% else %}Zespoły, które chcą jednego arkusza jako źródła prawdy{% endif %}</li>
+                <li>{% if lang == 'en' %}Teams that want a single workbook as the source of truth{% else %}Zespoły, które chcą jednego arkusza jako źródła prawdy{% endif %}</li>
             </ul>
         </div>
         <div class="panel reveal" style="--d:.08s">
             <h3>{% if lang == 'en' %}Architecture &amp; privacy{% else %}Architektura i prywatność{% endif %}</h3>
-            <p>{% if lang == 'en' %}Zero-cloud storage: your IFC models are parsed strictly inside your local browser runtime memory via WebAssembly (Web-IFC). No proprietary model data or drawings are uploaded to external servers.{% else %}Pełna ochrona danych projektowych: modele IFC są przetwarzane w całości lokalnie w pamięci RAM Twojego komputera za pomocą WebAssembly (Web-IFC). Żadne geometrie ani pliki modeli nie są przesyłane na serwer zewnętrzny.{% endif %}</p>
+            <p>{% if lang == 'en' %}Your data stays with you: IFC models are processed entirely in your computer's memory via WebAssembly (Web-IFC). No geometry or model files are ever uploaded to an external server.{% else %}Pełna ochrona danych projektowych: modele IFC są przetwarzane w całości lokalnie w pamięci RAM Twojego komputera za pomocą WebAssembly (Web-IFC). Żadne geometrie ani pliki modeli nie są przesyłane na serwer zewnętrzny.{% endif %}</p>
         </div>
     </div>
 
@@ -45,6 +45,6 @@
         </ul>
     </div>
 
-    <p class="quote reveal" style="margin-top:80px">{% if lang == 'en' %}Deterministic quantity audit. Every spreadsheet row points directly to verified geometry.{% else %}Deterministyczny audyt ilościowy. Każdy wiersz kosztorysu powiązany ze zweryfikowaną geometrią.{% endif %}<small>FORM FOLLOWS FUNCTION &middot; ACCURACY MATTERS</small></p>
+    <p class="quote reveal" style="margin-top:80px">{% if lang == 'en' %}Traceable quantity checks. Every spreadsheet row is tied to verified geometry.{% else %}Deterministyczny audyt ilościowy. Każdy wiersz kosztorysu powiązany ze zweryfikowaną geometrią.{% endif %}<small>FORM FOLLOWS FUNCTION &middot; ACCURACY MATTERS</small></p>
 </section>
 {% endblock %}

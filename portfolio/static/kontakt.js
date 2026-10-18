@@ -3,7 +3,7 @@ document.querySelectorAll('.js-contact-form').forEach(form => {
         e.preventDefault();
         const en = document.documentElement.lang === 'en';
         const t = en
-            ? { sending: 'Sending...', ok: 'Message sent. I will reply shortly.', err: 'Server error. Please try again.', conn: 'Connection error.' }
+            ? { sending: 'Sending...', ok: 'Message sent. I\'ll get back to you soon.', err: 'Server error. Please try again.', conn: 'Connection error.' }
             : { sending: 'Wysyłanie...', ok: 'Wiadomość wysłana. Odpowiem wkrótce.', err: 'Błąd serwera. Spróbuj ponownie.', conn: 'Błąd połączenia.' };
         const status = form.querySelector('.form-status');
         const btn = form.querySelector('button[type=submit]');

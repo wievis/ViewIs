@@ -23,14 +23,14 @@
         <div class="hero-slate">
             <h1>
                 {% if lang == 'en' %}
-                Spatial geometry, real-time rendering and <em>custom software</em>.
+                Real-time 3D, spatial design and <em>custom software</em>.
                 {% else %}
                 Geometria przestrzenna, czas rzeczywisty i <em>dedykowany kod</em>.
                 {% endif %}
             </h1>
             <p class="hero-lead">
                 {% if lang == 'en' %}
-                Virtual environments, dedicated data pipelines and real-time interactive graphics for investment and industry.
+                Virtual environments, custom data pipelines and real-time interactive graphics for architecture, real estate and industry.
                 {% else %}
                 Środowiska wirtualne, dedykowane potoki danych oraz interaktywna grafika czasu rzeczywistego dla inwestycji i przemysłu.
                 {% endif %}
@@ -44,10 +44,10 @@
 
     <nav class="hero-tiles" aria-label="{% if lang == 'en' %}Site sections{% else %}Sekcje strony{% endif %}">
         <a href="{% if lang == 'en' %}{% url 'portfolio_en' %}{% else %}{% url 'portfolio' %}{% endif %}"><span class="t-num">01</span><span class="t-title">Portfolio</span><span class="t-desc">{% if lang == 'en' %}Selected work{% else %}Wybrane realizacje{% endif %}</span><span class="t-arrow">&rarr;</span></a>
-        <a href="{% if lang == 'en' %}{% url 'articles_en' %}{% else %}{% url 'articles' %}{% endif %}"><span class="t-num">02</span><span class="t-title">{% if lang == 'en' %}Articles{% else %}Artykuły{% endif %}</span><span class="t-desc">{% if lang == 'en' %}Knowledge and code{% else %}Wiedza i kod{% endif %}</span><span class="t-arrow">&rarr;</span></a>
+        <a href="{% if lang == 'en' %}{% url 'articles_en' %}{% else %}{% url 'articles' %}{% endif %}"><span class="t-num">02</span><span class="t-title">{% if lang == 'en' %}Articles{% else %}Artykuły{% endif %}</span><span class="t-desc">{% if lang == 'en' %}Knowledge & code{% else %}Wiedza i kod{% endif %}</span><span class="t-arrow">&rarr;</span></a>
         <a href="{% if lang == 'en' %}{% url 'mep_landing_en' %}{% else %}{% url 'mep_landing' %}{% endif %}"><span class="t-num">03</span><span class="t-title">MEP</span><span class="t-desc">Excel &harr; IFC</span><span class="t-arrow">&rarr;</span></a>
         <a href="{% if lang == 'en' %}{% url 'about_en' %}{% else %}{% url 'about' %}{% endif %}"><span class="t-num">04</span><span class="t-title">{% if lang == 'en' %}About me{% else %}O mnie{% endif %}</span><span class="t-desc">{% if lang == 'en' %}Skills and tools{% else %}Kompetencje i narzędzia{% endif %}</span><span class="t-arrow">&rarr;</span></a>
-        <a href="#contact"><span class="t-num">05</span><span class="t-title">{% if lang == 'en' %}Contact{% else %}Kontakt{% endif %}</span><span class="t-desc">{% if lang == 'en' %}Quote and collaboration{% else %}Wycena i współpraca{% endif %}</span><span class="t-arrow">&rarr;</span></a>
+        <a href="#contact"><span class="t-num">05</span><span class="t-title">{% if lang == 'en' %}Contact{% else %}Kontakt{% endif %}</span><span class="t-desc">{% if lang == 'en' %}Quotes & collaboration{% else %}Wycena i współpraca{% endif %}</span><span class="t-arrow">&rarr;</span></a>
     </nav>
 </section>
 
@@ -59,11 +59,11 @@
             <p class="lead">{% if lang == 'en' %}From a single render to a complete virtual environment, built to communicate clearly and look exceptional.{% else %}Od pojedynczego renderu po kompletne środowisko wirtualne. Wszystko ma jasno komunikować i wyglądać wyjątkowo.{% endif %}</p>
         </div>
         <div class="cards">
-            <div class="card reveal"><span class="t-num">01</span><h3>{% if lang == 'en' %}Visualizations{% else %}Wizualizacje{% endif %}</h3><p>{% if lang == 'en' %}Interior, exterior and product renders of photographic quality.{% else %}Wnętrza, zewnętrza i obiekty w jakości fotograficznej.{% endif %}</p></div>
-            <div class="card reveal" style="--d:.06s"><span class="t-num">02</span><h3>{% if lang == 'en' %}Animations{% else %}Animacje{% endif %}</h3><p>{% if lang == 'en' %}Walkthroughs, product films and motion that explains the idea.{% else %}Spacery, filmy produktowe i ruch, który tłumaczy ideę.{% endif %}</p></div>
+            <div class="card reveal"><span class="t-num">01</span><h3>{% if lang == 'en' %}Visualizations{% else %}Wizualizacje{% endif %}</h3><p>{% if lang == 'en' %}Interior, exterior and product renders with photographic quality.{% else %}Wnętrza, zewnętrza i obiekty w jakości fotograficznej.{% endif %}</p></div>
+            <div class="card reveal" style="--d:.06s"><span class="t-num">02</span><h3>{% if lang == 'en' %}Animations{% else %}Animacje{% endif %}</h3><p>{% if lang == 'en' %}Walkthroughs, product films and motion that bring the idea across.{% else %}Spacery, filmy produktowe i ruch, który tłumaczy ideę.{% endif %}</p></div>
             <div class="card reveal" style="--d:.12s"><span class="t-num">03</span><h3>{% if lang == 'en' %}Virtual environments{% else %}Środowiska i makiety wirtualne{% endif %}</h3><p>{% if lang == 'en' %}Interactive spaces and virtual mockups you can explore in real time.{% else %}Interaktywne przestrzenie i makiety, które można zwiedzać w czasie rzeczywistym.{% endif %}</p></div>
             <div class="card reveal"><span class="t-num">04</span><h3>{% if lang == 'en' %}3D models and products{% else %}Modele 3D i produkty{% endif %}</h3><p>{% if lang == 'en' %}Optimized models for web, presentation and production.{% else %}Zoptymalizowane modele do sieci, prezentacji i produkcji.{% endif %}</p></div>
-            <div class="card reveal" style="--d:.06s"><span class="t-num">05</span><h3>{% if lang == 'en' %}Tools and automation{% else %}Narzędzia i automatyzacja{% endif %}</h3><p>{% if lang == 'en' %}Scripts and dedicated workflow solutions that save hours.{% else %}Skrypty i dedykowane rozwiązania workflow, które oszczędzają godziny.{% endif %}</p></div>
+            <div class="card reveal" style="--d:.06s"><span class="t-num">05</span><h3>{% if lang == 'en' %}Tools and automation{% else %}Narzędzia i automatyzacja{% endif %}</h3><p>{% if lang == 'en' %}Scripts and custom workflow tools that save hours.{% else %}Skrypty i dedykowane rozwiązania workflow, które oszczędzają godziny.{% endif %}</p></div>
             <div class="card reveal" style="--d:.12s"><span class="t-num">06</span><h3>MEP &amp; QTO</h3><p>{% if lang == 'en' %}Quantity takeoffs and BIM-linked tools for engineers and subcontractors.{% else %}Przedmiary i narzędzia powiązane z BIM dla inżynierów i podwykonawców.{% endif %}</p></div>
         </div>
     </div>
@@ -106,9 +106,9 @@
         </div>
         <div class="steps">
             <div class="step reveal"><span class="t-num">01</span><h3>Brief</h3><p>{% if lang == 'en' %}We define goals, audience, scope and deadline.{% else %}Ustalamy cel, odbiorców, zakres i termin.{% endif %}</p></div>
-            <div class="step reveal" style="--d:.06s"><span class="t-num">02</span><h3>{% if lang == 'en' %}Concept{% else %}Koncepcja{% endif %}</h3><p>{% if lang == 'en' %}Camera, mood and composition, approved before production.{% else %}Kadry, nastrój i kompozycja, akceptowane przed produkcją.{% endif %}</p></div>
-            <div class="step reveal" style="--d:.12s"><span class="t-num">03</span><h3>{% if lang == 'en' %}Production{% else %}Produkcja{% endif %}</h3><p>{% if lang == 'en' %}Modelling, lighting, rendering with checkpoints along the way.{% else %}Modelowanie, światło, render, z punktami kontrolnymi po drodze.{% endif %}</p></div>
-            <div class="step reveal" style="--d:.18s"><span class="t-num">04</span><h3>{% if lang == 'en' %}Delivery{% else %}Dostawa{% endif %}</h3><p>{% if lang == 'en' %}Final files in the formats you need, plus a round of corrections.{% else %}Pliki w potrzebnych formatach oraz runda poprawek.{% endif %}</p></div>
+            <div class="step reveal" style="--d:.06s"><span class="t-num">02</span><h3>{% if lang == 'en' %}Concept{% else %}Koncepcja{% endif %}</h3><p>{% if lang == 'en' %}Camera angles, mood and composition, signed off before production.{% else %}Kadry, nastrój i kompozycja, akceptowane przed produkcją.{% endif %}</p></div>
+            <div class="step reveal" style="--d:.12s"><span class="t-num">03</span><h3>{% if lang == 'en' %}Production{% else %}Produkcja{% endif %}</h3><p>{% if lang == 'en' %}Modeling, lighting and rendering, with review checkpoints along the way.{% else %}Modelowanie, światło, render, z punktami kontrolnymi po drodze.{% endif %}</p></div>
+            <div class="step reveal" style="--d:.18s"><span class="t-num">04</span><h3>{% if lang == 'en' %}Delivery{% else %}Dostawa{% endif %}</h3><p>{% if lang == 'en' %}Final files in the formats you need, plus a round of revisions.{% else %}Pliki w potrzebnych formatach oraz runda poprawek.{% endif %}</p></div>
         </div>
     </div>
 </section>

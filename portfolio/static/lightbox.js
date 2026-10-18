@@ -419,7 +419,7 @@ function lbT(key) {
         viz: ['WIZUALIZACJA', 'VISUALIZATION'],
         playing: ['ODTWARZANIE WIDEO', 'PLAYING VIDEO'],
         hint: ['← → ZDJĘCIA • ↑ ↓ PROJEKTY • ESC ZAMKNIJ', '← → IMAGES • ↑ ↓ PROJECTS • ESC CLOSE'],
-        loading: ['ŁADOWANIE SIATKI GEOMETRII...', 'LOADING MESH GEOMETRY...']
+        loading: ['ŁADOWANIE SIATKI GEOMETRII...', 'LOADING MODEL...']
     };
     return t[key] ? t[key][en ? 1 : 0] : '';
 }
