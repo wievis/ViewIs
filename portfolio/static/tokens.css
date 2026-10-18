@@ -27,3 +27,11 @@ html.light-mode, body.light-mode {
 }
 body.theme-mep { --accent: #38bdf8; --accent-ink: #04141f; }
 body.light-mode.theme-mep { --accent: #0369a1; --accent-ink: #ffffff; }
+
+body.theme-articles { --accent: #38bdf8; --accent-ink: #0b172a; }
+body.light-mode.theme-articles { --accent: #0284c7; --accent-ink: #ffffff; }
+body.theme-articles .brand-badge {
+  color: #38bdf8;
+  border-color: rgba(56, 189, 248, 0.35);
+  background: rgba(15, 23, 42, 0.8);
+}

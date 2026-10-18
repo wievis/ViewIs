@@ -2,8 +2,9 @@
 <header class="site-header" id="site-header">
     <div class="header-inner">
         <a class="brand" href="{% if lang == 'en' %}{% url 'home_en' %}{% else %}{% url 'home' %}{% endif %}">
-            <span class="brand-name">View Is</span>
-            <span class="brand-sub">COMPUTER DESIGNER</span>
+            <span class="brand-name">VIEWIS</span>
+            <span class="brand-sep">/</span>
+            <span class="brand-badge">COMPUTER DESIGNER</span>
         </a>
 
         <nav class="site-nav" id="site-nav" aria-label="Menu">
@@ -27,7 +28,7 @@
     
     <div class="lb-bar lb-header">
         <div class="lb-meta-left">
-            <span class="lb-brand-node">VIEWIS</span>
+            <a href="{% if lang == 'en' %}{% url 'home_en' %}{% else %}{% url 'home' %}{% endif %}" class="lb-brand-node">VIEWIS</a>
             <span class="lb-node-sep">/</span>
             <span class="lb-badge" id="lb-badge">RENDER</span>
         </div>
@@ -68,7 +69,24 @@
 
     <div class="lb-bar lb-footer">
         <div class="lb-footer-left">
-            <span class="lb-status-text" id="lb-status-text">STEROWANIE: KLIKNIJ I PRZECIĄGNIJ</span>
+            <div class="lb-status-cluster" id="lb-status-cluster">
+                <div class="lb-mouse-hint">
+                    <svg class="lb-mouse-icon" width="13" height="18" viewBox="0 0 14 20" fill="none">
+                        <rect x="1" y="1" width="12" height="18" rx="6" stroke="currentColor" stroke-width="1.4"/>
+                        <path d="M1 7h6V1A6 6 0 0 0 1 7z" fill="var(--accent)"/>
+                        <path d="M7 1v6H1" stroke="currentColor" stroke-width="1.2"/>
+                    </svg>
+                    <span>OBRÓT</span>
+                </div>
+                <div class="lb-mouse-hint">
+                    <svg class="lb-mouse-icon" width="13" height="18" viewBox="0 0 14 20" fill="none">
+                        <rect x="1" y="1" width="12" height="18" rx="6" stroke="currentColor" stroke-width="1.4"/>
+                        <rect x="6" y="4" width="2" height="5" rx="1" fill="var(--accent)"/>
+                    </svg>
+                    <span>ZOOM</span>
+                </div>
+            </div>
+            <span class="lb-status-text" id="lb-status-text">← → NAWIGACJA &bull; ESC ZAMKNIJ</span>
         </div>
         <div class="lb-footer-center">
             <div class="lb-thumbnails-wrap" id="lb-thumbnails-wrap">

@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Maciej Wielgosz | Computer Designer{% endblock %}
+{% block title %}VIEWIS | Computer Designer{% endblock %}
 {% block body_class %}page-home{% endblock %}
+
+{% block extra_head %}
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+{% endblock %}
 
 {% block content %}
 <section class="hero">
@@ -13,9 +17,21 @@
     <div class="hero-vignette"></div>
 
     <div class="hero-center">
-        <span class="eyebrow">COMPUTER DESIGNER</span>
-        <h1>{% if lang == 'en' %}Visualizations, animations and 3D environments that <em>sell the project</em>.{% else %}Wizualizacje, animacje i środowiska 3D, które <em>sprzedają projekt</em>.{% endif %}</h1>
-        <p class="hero-lead">{% if lang == 'en' %}I design and produce 3D products of every kind: visualizations, animations, virtual mockups and interactive environments, from idea to finished material.{% else %}Projektuję i produkuję szeroko rozumiane produkty 3D: wizualizacje, animacje, makiety wirtualne i interaktywne środowiska, od pomysłu po gotowy materiał.{% endif %}</p>
+        <h1 class="hero-brand-title">View Is</h1>
+        <div class="hero-spec-line">
+            <span>Fotorealizm 3D</span>
+            <span class="hero-dot">&bull;</span>
+            <span>Środowiska czasu rzeczywistego</span>
+            <span class="hero-dot">&bull;</span>
+            <span class="hero-spec-dark">automatyzacja projektowa</span>
+        </div>
+        <p class="hero-lead">
+            {% if lang == 'en' %}
+            Virtual environments, dedicated data pipelines and real-time interactive graphics for investment and industry.
+            {% else %}
+            Środowiska wirtualne, dedykowane potoki danych oraz interaktywna grafika czasu rzeczywistego dla inwestycji i przemysłu.
+            {% endif %}
+        </p>
         <div class="hero-cta">
             <a class="btn btn-primary" href="{% if lang == 'en' %}{% url 'portfolio_en' %}{% else %}{% url 'portfolio' %}{% endif %}">{% if lang == 'en' %}View portfolio{% else %}Zobacz portfolio{% endif %}</a>
             <a class="btn btn-ghost" href="#contact">{% if lang == 'en' %}Request a quote{% else %}Zapytaj o wycenę{% endif %}</a>
@@ -58,7 +74,19 @@
         </div>
         <div class="featured">
             {% for m in featured %}
-            <a class="reveal" style="--d:{{ forloop.counter0|add:0 }}0ms" href="{% if lang == 'en' %}{% url 'portfolio_en' %}{% else %}{% url 'portfolio' %}{% endif %}"><img src="{{ m.display_url }}" alt="{{ m.name|default:'Projekt' }}" loading="lazy"></a>
+            <div class="featured-item reveal" style="--d:{{ forloop.counter0 }}0ms" onclick="{% if m.media_type == 'album' %}openAlbumPreview({{ m.id }}){% else %}openItemPreview({{ m.id }}){% endif %}">
+                <img src="{{ m.display_url }}" alt="{{ m.name|default:'Projekt' }}" loading="lazy">
+                <div class="featured-overlay">
+                    <span class="featured-open-btn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="15 3 21 3 21 9"></polyline>
+                            <polyline points="9 21 3 21 3 15"></polyline>
+                            <line x1="21" y1="3" x2="14" y2="10"></line>
+                            <line x1="3" y1="21" x2="10" y2="14"></line>
+                        </svg>
+                    </span>
+                </div>
+            </div>
             {% endfor %}
         </div>
         <div class="center-cta"><a class="btn btn-ghost" href="{% if lang == 'en' %}{% url 'portfolio_en' %}{% else %}{% url 'portfolio' %}{% endif %}">{% if lang == 'en' %}Full portfolio{% else %}Całe portfolio{% endif %} &rarr;</a></div>
@@ -94,4 +122,20 @@
         </div>
     </div>
 </section>
+
+<script>
+window.mediaItems = [
+{% for item in media_items %}{% if item.file %}
+  {
+    id: {{ item.id }},
+    url: "{% if item.media_type == 'image' %}{{ item.display_url }}{% else %}{{ item.file.url }}{% endif %}",
+    thumb: "{% if item.media_type == 'image' %}{{ item.display_url }}{% elif item.thumbnail %}{{ item.thumbnail.url }}{% else %}{{ item.file.url }}{% endif %}",
+    type: "{{ item.media_type }}",
+    category: "{{ item.get_category_display|default:item.category }}",
+    hdr: "{% if item.hdr_setting %}{{ item.hdr_setting.file.url }}{% endif %}",
+    parentId: {{ item.parent_album_id|default:"null" }}
+  }{% if not forloop.last %},{% endif %}
+{% endif %}{% endfor %}
+];
+</script>
 {% endblock %}

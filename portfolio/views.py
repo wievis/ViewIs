@@ -1,3 +1,4 @@
+from django.db.models import Q
 import os
 import json
 import logging
@@ -29,14 +30,25 @@ def _localize(a, lang):
 
 def home(request, lang='pl'):
     featured = []
+    media_items = []
     try:
         qs = Media.objects.filter(parent_album__isnull=True, featured=True).order_by('order', '-created')
         featured = list(qs[:6])
         if not featured:
             featured = list(Media.objects.filter(parent_album__isnull=True).order_by('order', '-created')[:6])
+        f_ids = [m.id for m in featured]
+        media_items = list(Media.objects.filter(
+            Q(id__in=f_ids) | Q(parent_album_id__in=f_ids),
+            file__isnull=False
+        ).exclude(file='').select_related('hdr_setting').order_by('parent_album__order', 'order'))
     except Exception:
         logger.exception('home: nie udalo sie pobrac realizacji')
-    return render(request, 'home.html', {'featured': featured, 'lang': lang, 'section': 'home'})
+    return render(request, 'home.html', {
+        'featured': featured,
+        'media_items': media_items,
+        'lang': lang,
+        'section': 'home'
+    })
 
 def portfolio(request, lang='pl'):
     top_level_media = list(Media.objects.filter(parent_album__isnull=True).order_by('order').prefetch_related('children'))

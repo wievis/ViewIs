@@ -2,23 +2,45 @@ let currentGroup = [];
 let currentGroupIndex = 0;
 let lbTouchStartX = 0;
 let lbTouchStartY = 0;
+let progressInterval = null;
+let currentProgress = 0;
 
-function setLoader(progress) {
+function startLoader() {
     const bar = document.getElementById('lb-progress-bar');
     if (!bar) return;
-    if (progress === null) {
-        bar.style.opacity = '0';
-        setTimeout(() => { bar.style.width = '0%'; }, 200);
-        return;
-    }
+    clearInterval(progressInterval);
+    currentProgress = 14;
     bar.style.opacity = '1';
-    bar.style.width = Math.min(100, Math.max(0, progress)) + '%';
-    if (progress >= 100) {
+    bar.style.transition = 'width 0.35s cubic-bezier(0.1, 0.7, 0.1, 1), opacity 0.25s ease';
+    bar.style.width = currentProgress + '%';
+    progressInterval = setInterval(() => {
+        if (currentProgress < 75) {
+            currentProgress += (75 - currentProgress) * 0.08;
+            bar.style.width = currentProgress.toFixed(1) + '%';
+        }
+    }, 140);
+}
+
+function completeLoader() {
+    clearInterval(progressInterval);
+    const bar = document.getElementById('lb-progress-bar');
+    if (!bar) return;
+    bar.style.transition = 'width 0.22s ease-out, opacity 0.3s ease';
+    bar.style.width = '100%';
+    setTimeout(() => {
+        bar.style.opacity = '0';
         setTimeout(() => {
-            bar.style.opacity = '0';
-            setTimeout(() => { bar.style.width = '0%'; }, 250);
-        }, 250);
-    }
+            bar.style.width = '0%';
+        }, 300);
+    }, 220);
+}
+
+function resetLoader() {
+    clearInterval(progressInterval);
+    const bar = document.getElementById('lb-progress-bar');
+    if (!bar) return;
+    bar.style.opacity = '0';
+    bar.style.width = '0%';
 }
 
 function openLightboxByAlbum(albumId) {
@@ -71,7 +93,7 @@ function closeLightbox() {
     document.body.style.overflow = '';
     const content = document.querySelector('.lightbox-content');
     if (content) content.innerHTML = '';
-    setLoader(null);
+    resetLoader();
 }
 
 function changePhoto(direction) {
@@ -94,11 +116,7 @@ function renderActiveItem() {
 
     const counter = document.getElementById('lb-counter');
     if (counter) {
-        if (currentGroup.length > 1) {
-            counter.textContent = `${currentGroupIndex + 1} / ${currentGroup.length}`;
-        } else {
-            counter.textContent = '1 / 1';
-        }
+        counter.textContent = currentGroup.length > 1 ? `${currentGroupIndex + 1} / ${currentGroup.length}` : '1 / 1';
     }
 
     const badge = document.getElementById('lb-badge');
@@ -106,19 +124,21 @@ function renderActiveItem() {
         badge.textContent = item.category || (item.type === 'model3d' ? '3D MODEL' : (item.type === 'video' ? 'ANIMACJA' : 'WIZUALIZACJA'));
     }
 
+    const cluster = document.getElementById('lb-status-cluster');
     const statusText = document.getElementById('lb-status-text');
     const tagEngine = document.getElementById('lb-tag-engine');
-    if (statusText) {
-        if (item.type === 'model3d') {
-            statusText.textContent = 'OBRÓT • ZOOM • PAN';
-            if (tagEngine) tagEngine.textContent = 'WEBGL // 3D';
-        } else if (item.type === 'video') {
-            statusText.textContent = 'ODTWARZANIE WIDEO';
-            if (tagEngine) tagEngine.textContent = 'H.264 // MP4';
-        } else {
-            statusText.textContent = '← → NAWIGACJA • ESC ZAMKNIJ';
-            if (tagEngine) tagEngine.textContent = 'FULL-RES RENDER';
+
+    if (item.type === 'model3d') {
+        if (cluster) cluster.style.display = 'inline-flex';
+        if (statusText) statusText.style.display = 'none';
+        if (tagEngine) tagEngine.textContent = 'WEBGL // 3D';
+    } else {
+        if (cluster) cluster.style.display = 'none';
+        if (statusText) {
+            statusText.style.display = 'inline-flex';
+            statusText.textContent = item.type === 'video' ? 'ODTWARZANIE WIDEO' : '← → NAWIGACJA • ESC ZAMKNIJ';
         }
+        if (tagEngine) tagEngine.textContent = item.type === 'video' ? 'H.264 // MP4' : 'FULL-RES RENDER';
     }
 
     renderThumbnails();
@@ -135,14 +155,14 @@ function renderActiveItem() {
     if (!content) return;
     content.innerHTML = '';
 
-    setLoader(30);
+    startLoader();
 
     if (item.type === 'image') {
         const img = document.createElement('img');
         img.src = item.url;
         img.alt = '';
-        img.onload = () => setLoader(100);
-        img.onerror = () => setLoader(null);
+        img.onload = () => completeLoader();
+        img.onerror = () => resetLoader();
         content.appendChild(img);
     } else if (item.type === 'video') {
         const video = document.createElement('video');
@@ -150,9 +170,15 @@ function renderActiveItem() {
         video.controls = true;
         video.autoplay = true;
         video.playsInline = true;
-        video.oncanplay = () => setLoader(100);
+        video.oncanplay = () => completeLoader();
         content.appendChild(video);
     } else if (item.type === 'model3d') {
+        const wf = document.createElement('div');
+        wf.className = 'lb-wireframe-loader';
+        wf.id = 'lb-wireframe-loader';
+        wf.innerHTML = '<div class="lb-wireframe-cube"><div class="lb-cube-face"></div><div class="lb-cube-face"></div><div class="lb-cube-face"></div></div><span class="lb-wireframe-text">ŁADOWANIE SIATKI GEOMETRII...</span>';
+        content.appendChild(wf);
+
         const viewer = document.createElement('model-viewer');
         viewer.src = item.url;
         if (item.hdr) viewer.setAttribute('environment-image', item.hdr);
@@ -160,11 +186,28 @@ function renderActiveItem() {
         viewer.setAttribute('auto-rotate', '');
         viewer.setAttribute('shadow-intensity', '1.2');
         viewer.setAttribute('interaction-prompt', 'none');
+        viewer.style.opacity = '0';
+        viewer.style.transition = 'opacity 0.4s ease';
+
         viewer.addEventListener('progress', e => {
             const p = Math.round((e.detail.totalProgress || 0) * 100);
-            setLoader(p);
+            if (p > currentProgress) {
+                currentProgress = p;
+                const bar = document.getElementById('lb-progress-bar');
+                if (bar) bar.style.width = p + '%';
+            }
         });
-        viewer.addEventListener('load', () => setLoader(100));
+
+        viewer.addEventListener('load', () => {
+            completeLoader();
+            const w = document.getElementById('lb-wireframe-loader');
+            if (w) {
+                w.style.opacity = '0';
+                setTimeout(() => w.remove(), 350);
+            }
+            viewer.style.opacity = '1';
+        });
+
         content.appendChild(viewer);
     }
 }
