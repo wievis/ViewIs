@@ -10,8 +10,8 @@
   <DefaultLocale>pl-PL</DefaultLocale>
   <DisplayName DefaultValue="ViewIs MEP Link"/>
   <Description DefaultValue="Podglad 3D modeli IFC powiazany z arkuszem Excel"/>
-  <IconUrl DefaultValue="https://www.viewis.pl/static/icon.png"/>
-  <HighResolutionIconUrl DefaultValue="https://www.viewis.pl/static/icon.png"/>
+  <IconUrl DefaultValue="https://www.viewis.pl/static/image/icon-32.png?v=3"/>
+  <HighResolutionIconUrl DefaultValue="https://www.viewis.pl/static/image/icon-80.png?v=3"/>
   <SupportUrl DefaultValue="https://www.viewis.pl/mep/"/>
   <AppDomains>
     <AppDomain>https://www.viewis.pl</AppDomain>
@@ -41,9 +41,9 @@
               <Group id="ViewIsMepGroup">
                 <Label resid="T"/>
                 <Icon>
-                  <bt:Image size="16" resid="I"/>
-                  <bt:Image size="32" resid="I"/>
-                  <bt:Image size="80" resid="I"/>
+                  <bt:Image size="16" resid="I16"/>
+                  <bt:Image size="32" resid="I32"/>
+                  <bt:Image size="80" resid="I80"/>
                 </Icon>
                 <Control xsi:type="Button" id="ViewIsMepButton">
                   <Label resid="T"/>
@@ -52,9 +52,9 @@
                     <Description resid="D"/>
                   </Supertip>
                   <Icon>
-                    <bt:Image size="16" resid="I"/>
-                    <bt:Image size="32" resid="I"/>
-                    <bt:Image size="80" resid="I"/>
+                    <bt:Image size="16" resid="I16"/>
+                    <bt:Image size="32" resid="I32"/>
+                    <bt:Image size="80" resid="I80"/>
                   </Icon>
                   <Action xsi:type="ShowTaskpane">
                     <TaskpaneId>ViewIsMepPane</TaskpaneId>
@@ -69,7 +69,9 @@
     </Hosts>
     <Resources>
       <bt:Images>
-        <bt:Image id="I" DefaultValue="https://www.viewis.pl/static/icon.png"/>
+        <bt:Image id="I16" DefaultValue="https://www.viewis.pl/static/image/icon-16.png?v=3"/>
+        <bt:Image id="I32" DefaultValue="https://www.viewis.pl/static/image/icon-32.png?v=3"/>
+        <bt:Image id="I80" DefaultValue="https://www.viewis.pl/static/image/icon-80.png?v=3"/>
       </bt:Images>
       <bt:Urls>
         <bt:Url id="P" DefaultValue="https://www.viewis.pl/mep/panel/"/>
