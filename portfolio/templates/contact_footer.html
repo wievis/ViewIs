@@ -3,7 +3,7 @@
         <div class="reveal">
             <span class="eyebrow">{% if lang == 'en' %}Contact{% else %}Kontakt{% endif %}</span>
             <h2 class="h2">{% if lang == 'en' %}Have a project? Let's talk.{% else %}Masz projekt? Porozmawiajmy.{% endif %}</h2>
-            <p class="lead">{% if lang == 'en' %}Tell me what you need: a visualization, animation, virtual environment or a tool. I'll reply with a quote and a proposed approach.{% else %}Opisz, czego potrzebujesz: wizualizacji, animacji, środowiska wirtualnego lub narzędzia. Odpowiem wyceną i propozycją podejścia.{% endif %}</p>
+            <p class="lead">{% if lang == 'en' %}Tell me what you need: IFC/BIM quantitative audit, MEP takeoff, CAD automation or a 3D visualization. I will reply with a detailed approach and quote.{% else %}Napisz, czego potrzebujesz: audytu spójności IFC, przedmiaru MEP do wyceny, automatyzacji CAD lub wizualizacji. Odpowiem wyceną i propozycją podejścia.{% endif %}</p>
             <ul class="contact-list">
                 <li><span>E-mail</span><a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a></li>
                 {% if CONTACT_PHONE %}<li><span>{% if lang == 'en' %}Phone{% else %}Telefon{% endif %}</span><a href="tel:{{ CONTACT_PHONE|cut:' ' }}">{{ CONTACT_PHONE }}</a></li>{% endif %}
@@ -20,7 +20,15 @@
                 <input type="text" name="last_name" placeholder="{% if lang == 'en' %}Last name{% else %}Nazwisko{% endif %}">
             </div>
             <input type="email" name="email" placeholder="{% if lang == 'en' %}E-mail address{% else %}Adres e-mail{% endif %}" required>
-            <textarea name="message" rows="5" placeholder="{% if lang == 'en' %}Tell me about your project{% else %}Opowiedz o swoim projekcie{% endif %}" required></textarea>
+            <div style="margin-bottom: 2px;">
+                <select name="topic" style="width:100%; background:transparent; border:1px solid var(--line); border-radius:12px; padding:14px 18px; color:inherit; font:inherit; font-size:0.95rem;">
+                    <option value="Audyt IFC & Przedmiar MEP" style="background:var(--surface); color:var(--text);">{% if lang == 'en' %}IFC Audit & MEP Takeoff (SAN / LFT / ELE){% else %}Audyt IFC & Przedmiar MEP (SAN / LFT / ELE){% endif %}</option>
+                    <option value="Automatyzacja CAD / DWG Pipeline" style="background:var(--surface); color:var(--text);">{% if lang == 'en' %}CAD / DWG Data Extraction & Pipeline{% else %}Automatyzacja CAD / Ekstrakcja danych z DWG{% endif %}</option>
+                    <option value="Wizualizacje / Unreal Engine / Web3D" style="background:var(--surface); color:var(--text);">{% if lang == 'en' %}Visualizations / Unreal Engine / Web 3D{% else %}Wizualizacje / Unreal Engine / Web 3D{% endif %}</option>
+                    <option value="Inny temat" style="background:var(--surface); color:var(--text);">{% if lang == 'en' %}Other topic{% else %}Inny temat{% endif %}</option>
+                </select>
+            </div>
+            <textarea name="message" rows="5" placeholder="{% if lang == 'en' %}Tell me about your project, deadline or requirements{% else %}Opowiedz o projekcie, obiekcie lub terminie składania oferty{% endif %}" required></textarea>
             <label class="consent">
                 <input type="checkbox" required>
                 <span>{% if lang == 'en' %}I agree to my personal data being processed so that you can reply to my message.{% else %}Wyrażam zgodę na przetwarzanie moich danych osobowych w celu prowadzenia korespondencji.{% endif %}</span>

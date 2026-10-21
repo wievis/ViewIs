@@ -98,7 +98,8 @@ def kontakt(request, lang='pl'):
             return JsonResponse({'status': 'error', 'message': 'Brak klucza RESEND_API_KEY na Railway.'})
 
         target_email = os.environ.get('CONTACT_EMAIL', 'kontakt@viewis.pl')
-        full_body = f"Imię i nazwisko: {first_name} {last_name}\nEmail kontaktowy: {email}\n\nWiadomość:\n{message}"
+        topic = request.POST.get("topic", "").strip()
+        full_body = f"Temat: {topic}\nImię i nazwisko: {first_name} {last_name}\nEmail kontaktowy: {email}\n\nWiadomość:\n{message}"
 
         payload = {
             "from": "ViewIs <kontakt@viewis.pl>",
