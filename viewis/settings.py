@@ -71,17 +71,18 @@ STORAGES = {
         "BACKEND": "storages.backends.s3.S3Storage",
     },
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.StaticFilesStorage",
+        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
     },
 }
+WHITENOISE_USE_FINDERS = True
 
 MEDIA_URL = '/media/'
-IMAGEKIT_DEFAULT_CACHEFILE_STRATEGY = 'imagekit.cachefiles.strategies.Optimistic'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://*.railway.app', 
-    'https://viewis.pl', 
+    'https://*.railway.app',
+    'https://*.vercel.app',
+    'https://viewis.pl',
     'https://www.viewis.pl'
 ]
 
@@ -92,8 +93,7 @@ AWS_S3_ENDPOINT_URL = os.environ.get('R2_ENDPOINT_URL')
 AWS_S3_CUSTOM_DOMAIN = os.environ.get('R2_CUSTOM_DOMAIN')
 AWS_QUERYSTRING_AUTH = False
 
-PREPEND_WWW = True
-
+PREPEND_WWW = os.environ.get("PREPEND_WWW", "False") == "True"
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.hostinger.com'

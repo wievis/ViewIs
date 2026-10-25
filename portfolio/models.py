@@ -1,13 +1,13 @@
 from django.db import models
 from django.utils import timezone
-from imagekit.models import ImageSpecField
-from imagekit.processors import ResizeToFit
 
 
 class HDRSetting(models.Model):
     name = models.CharField(max_length=100)
     file = models.FileField(upload_to='hdr/')
-    def __str__(self): return self.name
+
+    def __str__(self):
+        return self.name
 
 
 class Media(models.Model):
@@ -27,12 +27,6 @@ class Media(models.Model):
 
     name = models.CharField(max_length=200, blank=True)
     file = models.FileField(upload_to='media/', null=True, blank=True)
-    compressed_image = ImageSpecField(
-        source='file',
-        processors=[ResizeToFit(2500, 2500)],
-        format='WEBP',
-        options={'quality': 85}
-    )
     media_type = models.CharField(max_length=10, choices=TYPES, default='image')
     category = models.CharField(max_length=10, choices=CATEGORIES, blank=True, default='')
     featured = models.BooleanField(default=False, help_text='Pokaż na stronie głównej')
@@ -48,9 +42,12 @@ class Media(models.Model):
     def save(self, *args, **kwargs):
         if self.file:
             ext = self.file.name.split('.')[-1].lower()
-            if ext in ['jpg', 'jpeg', 'png', 'gif', 'webp']: self.media_type = 'image'
-            elif ext in ['mp4', 'webm', 'mov']: self.media_type = 'video'
-            elif ext in ['glb', 'gltf']: self.media_type = 'model3d'
+            if ext in ['jpg', 'jpeg', 'png', 'gif', 'webp']:
+                self.media_type = 'image'
+            elif ext in ['mp4', 'webm', 'mov']:
+                self.media_type = 'video'
+            elif ext in ['glb', 'gltf']:
+                self.media_type = 'model3d'
         elif not self.file and not self.parent_album:
             self.media_type = 'album'
         super().save(*args, **kwargs)
@@ -63,11 +60,6 @@ class Media(models.Model):
                 if first_child:
                     return first_child.display_url
             return ''
-        if self.media_type == 'image':
-            try:
-                return self.compressed_image.url
-            except Exception:
-                pass
         return self.file.url
 
     def __str__(self):
