@@ -33,8 +33,8 @@
 .pane-h{display:flex;align-items:center;padding:10px 14px;font-weight:600;border-bottom:1px solid #334155;height:38px}
 .pane-h small{margin-left:auto;font-weight:400;color:#94a3b8}
 
-.xl-pane button{background:#2563eb;border:0;color:#fff;padding:5px 10px;border-radius:4px;cursor:pointer;font:600 11px "Segoe UI",system-ui,sans-serif}
-.xl-pane button:hover{filter:brightness(1.15)}
+.xl-pane button{background:#1e293b;border:1px solid #475569;color:#38bdf8;padding:5px 10px;border-radius:4px;cursor:pointer;font:600 11px "Segoe UI",system-ui,sans-serif;transition:all 0.15s ease}
+.xl-pane button:hover{background:#2563eb;color:#fff;border-color:#2563eb}
 .xl-pane button.sec{background:#334155}
 .xl-cv{position:relative;flex:1;min-height:260px;background:#0b1120}
 .xl-cv canvas{display:block;width:100%;height:100%}
@@ -42,12 +42,16 @@
 #xl-wire{position:absolute;right:8px;top:8px;width:32px;height:32px;padding:0;display:flex;align-items:center;justify-content:center;background:rgba(15,23,42,.88);border:1px solid #334155;color:#38bdf8}
 #xl-wire.on{background:#2563eb;color:#fff}
 #xl-msg{position:absolute;inset:0;display:none;align-items:center;justify-content:center;text-align:center;padding:28px;color:#94a3b8;font-size:12px;line-height:1.6;background:radial-gradient(circle at center,#111c33,#0b1120)}
-.pane-nav{display:flex;flex-direction:column;gap:6px;padding:8px;border-top:1px solid #334155}
+
+.pane-nav{display:flex;flex-direction:column;gap:8px;padding:10px 12px;border-top:1px solid #334155;background:#0f172a}
 .pane-nav .r{display:flex;gap:6px;align-items:center}
-.pane-nav .r button{flex:1}
-#pane-row{font-size:11px;color:#cbd5e1}
-#nav-el{display:none;justify-content:center;align-items:center;gap:10px;font-weight:600;font-size:11px}
-#nav-el button{flex:none;width:28px;padding:4px 0}
+.pane-nav .r button{flex:1;height:28px}
+#pane-row{font-size:11px;color:#cbd5e1;font-weight:600}
+
+#nav-el{display:none;align-items:center;justify-content:space-between;background:#1e293b;border:1px solid #334155;padding:4px 8px;border-radius:6px}
+#nav-el span{font-size:11px;font-weight:700;color:#f8fafc}
+#nav-el button{width:28px;height:26px;padding:0;display:flex;align-items:center;justify-content:center;font-size:12px}
+
 #xl-card{border-top:1px solid #334155;padding:10px 14px;max-height:190px;overflow-y:auto;font-size:11px;color:#cbd5e1;line-height:1.5}
 #xl-card .cls{display:inline-block;background:rgba(56,189,248,.15);color:#38bdf8;border:1px solid rgba(56,189,248,.3);border-radius:4px;padding:1px 7px;font-size:10px;font-weight:700}
 #xl-card .nm{color:#fff;font-weight:600;font-size:13px;margin:4px 0}
@@ -140,7 +144,11 @@
           <div class="pane-nav">
             <div id="pane-row">RZĄD: – / –</div>
             <div class="r"><button type="button" id="b-prev">▲ Poprzedni wiersz</button><button type="button" id="b-next">▼ Następny wiersz</button></div>
-            <div id="nav-el"><button type="button" id="e-prev" aria-label="Poprzedni element">❮</button><span id="nav-counter">1 / 1</span><button type="button" id="e-next" aria-label="Następny element">❯</button></div>
+            <div id="nav-el">
+              <button type="button" id="e-prev" title="Poprzedni odcinek w grupie (←)">❮</button>
+              <span id="nav-counter">Odcinek: 1 / 1</span>
+              <button type="button" id="e-next" title="Następny odcinek w grupie (→)">❯</button>
+            </div>
           </div>
           <div id="xl-card"></div>
         </aside>
@@ -340,6 +348,17 @@
     $('pane-row').textContent = t;
   }
 
+  function updateElementNav() {
+    var row = curRow();
+    var navEl = $('nav-el');
+    if (!row || !row.guids || row.guids.length <= 1) {
+      navEl.style.display = 'none';
+      return;
+    }
+    navEl.style.display = 'flex';
+    $('nav-counter').textContent = 'Odcinek: ' + (sel.idx + 1) + ' / ' + row.guids.length;
+  }
+
   function sums() {
     var L = 0, A = 0, O = 0;
     rows.forEach(function (r) { L += (r.len || 0); A += (r.area || 0); O += (r.order_area || 0); });
@@ -353,9 +372,24 @@
     sel.idx = k || 0;
     if (i >= 0) {
       var tr = $('xl-tb').children[i];
-      if (tr) tr.classList.add('active-row');
+      if (tr) {
+        tr.classList.add('active-row');
+        var gr = $('xl-grid'), t = tr.offsetTop, h = tr.offsetHeight;
+        if (t - 48 < gr.scrollTop) gr.scrollTop = t - 48;
+        else if (t + h > gr.scrollTop + gr.clientHeight) gr.scrollTop = t + h - gr.clientHeight;
+      }
     }
-    labelRow(); render3D();
+    labelRow();
+    updateElementNav();
+    render3D();
+  }
+
+  function nextElementInGroup(delta) {
+    var row = curRow();
+    if (!row || !row.guids || row.guids.length <= 1) return;
+    sel.idx = (sel.idx + delta + row.guids.length) % row.guids.length;
+    updateElementNav();
+    render3D();
   }
 
   function renderCard(row, g) {
@@ -402,7 +436,7 @@
       boxHelper.setFromObject(e.node);
       boxHelper.visible = true;
       zoomToFit(e.box);
-      setBadge('Wyizolowano: ' + (row.sec || '') + ' mm', '#4ade80');
+      setBadge('Wyizolowano: ' + (row.sec || '') + ' mm (' + (sel.idx + 1) + '/' + row.guids.length + ')', '#4ade80');
     } else {
       boxHelper.visible = false;
       setBadge('Element poza modelem', '#fbbf24');
@@ -427,7 +461,16 @@
   });
   $('b-prev').addEventListener('click', function () { if (sel.row > 0) selectRow(sel.row - 1, 0); });
   $('b-next').addEventListener('click', function () { if (sel.row < rows.length - 1) selectRow(sel.row + 1, 0); });
+  $('e-prev').addEventListener('click', function () { nextElementInGroup(-1); });
+  $('e-next').addEventListener('click', function () { nextElementInGroup(1); });
   $('xl-wire').addEventListener('click', function () { wire = !wire; this.classList.toggle('on', wire); render3D(); });
+
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowLeft') { e.preventDefault(); nextElementInGroup(-1); }
+    else if (e.key === 'ArrowRight') { e.preventDefault(); nextElementInGroup(1); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); if (sel.row > 0) selectRow(sel.row - 1, 0); }
+    else if (e.key === 'ArrowDown') { e.preventDefault(); if (sel.row < rows.length - 1) selectRow(sel.row + 1, 0); }
+  });
 
   // Inicjalizacja
   init3D();
