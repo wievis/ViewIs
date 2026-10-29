@@ -8,7 +8,8 @@ from collections import defaultdict
 EXTENSIONS = (".py", ".json", ".xml", ".html", ".css", ".js", ".svg", ".txt")
 IGNORED_DIRS = {
     ".git", ".venv", "venv", "__pycache__", ".idea", ".vscode",
-    ".qodo", "node_modules", "tests", "migrations", "management"
+    ".qodo", "node_modules", "tests", "migrations", "management",
+    "staticfiles", "staticfiles_build"
 }
 
 MEP_FILES = {
@@ -33,6 +34,12 @@ def should_include_file(file_name, mep_only):
     return not is_mep
 
 
+def is_ignored_dir(full_path, root_dir):
+    rel = os.path.relpath(full_path, root_dir).replace("\\", "/")
+    parts = rel.split("/")
+    return any(p in IGNORED_DIRS for p in parts) or rel in IGNORED_DIRS
+
+
 def copy_to_clipboard(text):
     try:
         subprocess.run(["pbcopy"], input=text.encode("utf-8"), check=True)
@@ -51,12 +58,12 @@ def read_file(path):
         return f.read()
 
 
-def build_tree(directory, mep_only=False, prefix=""):
+def build_tree(directory, root_dir, mep_only=False, prefix=""):
     entries = []
     for name in os.listdir(directory):
         full = os.path.join(directory, name)
         if os.path.isdir(full):
-            if name in IGNORED_DIRS:
+            if is_ignored_dir(full, root_dir):
                 continue
             entries.append((0, name, full))
         else:
@@ -71,7 +78,7 @@ def build_tree(directory, mep_only=False, prefix=""):
         if is_file:
             valid_entries.append((is_file, name, full, []))
         else:
-            sub = build_tree(full, mep_only=mep_only, prefix=prefix)
+            sub = build_tree(full, root_dir, mep_only=mep_only, prefix=prefix)
             if not mep_only or sub:
                 valid_entries.append((is_file, name, full, sub))
 
@@ -83,14 +90,14 @@ def build_tree(directory, mep_only=False, prefix=""):
         else:
             lines.append(f"{prefix}{connector}{name}/")
             extension = "    " if last else "│   "
-            lines.extend(build_tree(full, mep_only=mep_only, prefix=prefix + extension))
+            lines.extend(build_tree(full, root_dir, mep_only=mep_only, prefix=prefix + extension))
     return lines
 
 
 def run_tree(root_dir, mep_only=False):
     mode_info = " (Tylko wtyczka MEP)" if mep_only else " (Bez wtyczki MEP)"
     lines = [f"{os.path.basename(root_dir)}/{mode_info}"]
-    lines.extend(build_tree(root_dir, mep_only=mep_only))
+    lines.extend(build_tree(root_dir, root_dir, mep_only=mep_only))
     copy_to_clipboard("\n".join(lines))
     print(f"Drzewko{mode_info} skopiowane do schowka.")
 
@@ -101,7 +108,7 @@ def run_report(root_dir, mep_only=False):
     output = [f"======== {os.path.basename(root_dir)}{mode_info} =========\n\n\n"]
 
     for current_root, dirs, files in os.walk(root_dir):
-        dirs[:] = [d for d in dirs if d not in IGNORED_DIRS]
+        dirs[:] = [d for d in dirs if not is_ignored_dir(os.path.join(current_root, d), root_dir)]
 
         matched = [
             f for f in sorted(files)
@@ -136,7 +143,7 @@ def run_length(root_dir, mep_only=False):
     per_ext = defaultdict(lambda: [0, 0, 0])
 
     for current_root, dirs, files in os.walk(root_dir):
-        dirs[:] = [d for d in dirs if d not in IGNORED_DIRS]
+        dirs[:] = [d for d in dirs if not is_ignored_dir(os.path.join(current_root, d), root_dir)]
 
         for file_name in files:
             if not file_name.lower().endswith(EXTENSIONS):
