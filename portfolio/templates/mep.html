@@ -6,21 +6,12 @@
 {% block extra_head %}
 {% include 'eng_styles.html' %}
 <style>
-.xl{--g:#107c41;border:1px solid #1f2937;border-radius:10px;overflow:hidden;background:#fff;color:#201f1e;font:12px/1.4 "Segoe UI",system-ui,sans-serif;display:flex;flex-direction:column;height:min(720px,88vh);outline:none;box-shadow:0 24px 60px rgba(0,0,0,.35)}
+.xl{border:1px solid #1f2937;border-radius:10px;overflow:hidden;background:#fff;color:#201f1e;font:12px/1.4 "Segoe UI",system-ui,sans-serif;display:flex;flex-direction:column;height:min(720px,88vh);outline:none;box-shadow:0 24px 60px rgba(0,0,0,.35)}
 .xl:focus-visible{box-shadow:0 0 0 2px var(--accent)}
 .xl *{box-sizing:border-box}
-.xl-title{background:var(--g);color:#fff;display:flex;align-items:center;gap:10px;padding-left:12px;height:32px;flex-shrink:0}
-.xl-title .logo{width:16px;height:16px;border-radius:2px;background:#fff;color:var(--g);font-weight:800;font-size:11px;line-height:16px;text-align:center}
-.xl-title .t{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.xl-title .wc{display:flex}
-.xl-title .wc span{width:44px;text-align:center;line-height:32px}
-.xl-title .wc span:last-child:hover{background:#c42b1c}
+
 .xl-body{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) 420px}
 .xl-sheet{display:flex;flex-direction:column;min-width:0;min-height:0;border-right:1px solid #d1d1d1}
-.xl-fbar{display:flex;align-items:center;gap:8px;padding:3px 8px;border-bottom:1px solid #d1d1d1;flex-shrink:0}
-.xl-fbar #xl-name{width:64px;border:1px solid #c8c8c8;padding:1px 6px;text-align:center}
-.xl-fbar i{color:var(--g);font-weight:700}
-.xl-fbar #xl-fx{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:Consolas,monospace}
 
 .xl-grid{flex:1;overflow:auto;min-height:0;background:#fff}
 .xl-grid table{table-layout:fixed;width:max-content;min-width:100%;border-collapse:separate;border-spacing:0}
@@ -32,17 +23,16 @@
 .xl-grid .n{text-align:right;font-variant-numeric:tabular-nums}
 .xl-grid tbody tr{cursor:cell}
 .xl-grid tbody tr:hover td{background:#f1f8f3}
-.xl-grid tbody tr.active-row td{background:#cfe8d8 !important;box-shadow:inset 0 2px 0 var(--g),inset 0 -2px 0 var(--g)}
-.xl-grid tbody tr.active-row td.rn{background:var(--g);color:#fff}
+.xl-grid tbody tr.active-row td{background:#cfe8d8 !important;box-shadow:inset 0 2px 0 #107c41,inset 0 -2px 0 #107c41}
+.xl-grid tbody tr.active-row td.rn{background:#107c41;color:#fff}
 .xl-grid .empty{padding:28px;text-align:center;color:#777;white-space:normal}
 
 .xl-status{display:flex;gap:18px;align-items:center;background:#f3f3f3;border-top:1px solid #d1d1d1;padding:4px 10px;color:#444;font-size:11.5px;flex-shrink:0}
 .xl-status .sp{flex:1}
 .xl-pane{background:#0f172a;color:#f8fafc;display:flex;flex-direction:column;min-width:0;min-height:0}
-.pane-h{display:flex;align-items:center;padding:8px 12px;font-weight:600;border-bottom:1px solid #334155}
+.pane-h{display:flex;align-items:center;padding:10px 14px;font-weight:600;border-bottom:1px solid #334155;height:38px}
 .pane-h small{margin-left:auto;font-weight:400;color:#94a3b8}
-.pane-bar{display:flex;gap:6px;padding:8px;border-bottom:1px solid #1e293b}
-.pane-bar input{flex:1;min-width:0;background:#020617;border:1px solid #1e293b;color:#fff;padding:5px 8px;border-radius:4px;font-size:11px;outline:none}
+
 .xl-pane button{background:#2563eb;border:0;color:#fff;padding:5px 10px;border-radius:4px;cursor:pointer;font:600 11px "Segoe UI",system-ui,sans-serif}
 .xl-pane button:hover{filter:brightness(1.15)}
 .xl-pane button.sec{background:#334155}
@@ -112,14 +102,8 @@
     <div class="xl" id="xl" tabindex="0"
          data-glb="{% static 'models/digitalhub_lft.glb' %}"
          data-meta="{% static 'models/digitalhub_lft_meta.json' %}">
-      <div class="xl-title">
-        <span class="logo">X</span>
-        <span class="t">218_20201208DigitalHub_LFT.xlsx - Excel [ViewIs MEP Link]</span>
-        <span class="wc"><span>&#8212;</span><span>&#9744;</span><span>&#10005;</span></span>
-      </div>
       <div class="xl-body">
         <section class="xl-sheet">
-          <div class="xl-fbar"><span id="xl-name">A1</span><i>fx</i><span id="xl-fx"></span></div>
           <div class="xl-grid" id="xl-grid">
             <table>
               <colgroup>
@@ -146,11 +130,6 @@
 
         <aside class="xl-pane">
           <div class="pane-h">ViewIs MEP Link <small>Podgląd 3D</small></div>
-          <div class="pane-bar">
-            <input type="text" id="xl-guid" placeholder="Wklej GlobalId..." autocomplete="off" spellcheck="false">
-            <button type="button" id="xl-find">Podświetl</button>
-            <button type="button" id="xl-reset" class="sec">Reset</button>
-          </div>
           <div class="xl-cv" id="xl-cv">
             <span id="xl-badge">Ładowanie modelu 3D...</span>
             <button type="button" id="xl-wire" title="Wireframe / Bryła" aria-label="Wireframe / Bryła">
@@ -361,12 +340,6 @@
     $('pane-row').textContent = t;
   }
 
-  function fbar() {
-    var r = curRow();
-    $('xl-name').textContent = r ? 'I' + (sel.row + 2) : 'A1';
-    $('xl-fx').textContent = r ? '=ROUNDUP(H' + (sel.row + 2) + '*(1+I' + (sel.row + 2) + '), 2)' : '';
-  }
-
   function sums() {
     var L = 0, A = 0, O = 0;
     rows.forEach(function (r) { L += (r.len || 0); A += (r.area || 0); O += (r.order_area || 0); });
@@ -382,7 +355,7 @@
       var tr = $('xl-tb').children[i];
       if (tr) tr.classList.add('active-row');
     }
-    fbar(); labelRow(); render3D();
+    labelRow(); render3D();
   }
 
   function renderCard(row, g) {
@@ -454,7 +427,6 @@
   });
   $('b-prev').addEventListener('click', function () { if (sel.row > 0) selectRow(sel.row - 1, 0); });
   $('b-next').addEventListener('click', function () { if (sel.row < rows.length - 1) selectRow(sel.row + 1, 0); });
-  $('xl-reset').addEventListener('click', function () { selectRow(-1); if(fullBox) zoomToFit(fullBox); });
   $('xl-wire').addEventListener('click', function () { wire = !wire; this.classList.toggle('on', wire); render3D(); });
 
   // Inicjalizacja
