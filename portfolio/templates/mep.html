@@ -34,9 +34,6 @@
 .xl-grid tbody tr.active-row td{background:#cfe8d8 !important;box-shadow:inset 0 2px 0 var(--g),inset 0 -2px 0 var(--g)}
 .xl-grid tbody tr.active-row td.rn{background:var(--g);color:#fff}
 .xl-grid .empty{padding:28px;text-align:center;color:#777;white-space:normal}
-.xl-tabs{display:flex;gap:2px;padding:4px 8px 0;background:#f3f3f3;border-top:1px solid #d1d1d1;overflow-x:auto;flex-shrink:0}
-.xl-tabs button{border:0;background:#e6e6e6;padding:6px 14px;font:inherit;cursor:pointer;border-bottom:3px solid var(--c);border-radius:0 0 4px 4px;white-space:nowrap;color:#444}
-.xl-tabs button.on{background:#fff;font-weight:600;color:var(--c);box-shadow:0 0 0 1px #d1d1d1}
 .xl-status{display:flex;gap:18px;align-items:center;background:#f3f3f3;border-top:1px solid #d1d1d1;padding:4px 10px;color:#444;font-size:11.5px;flex-shrink:0}
 .xl-status .sp{flex:1}
 .xl-pane{background:#0f172a;color:#f8fafc;display:flex;flex-direction:column;min-width:0;min-height:0}
@@ -130,7 +127,6 @@
               <tbody id="xl-tb"></tbody>
             </table>
           </div>
-          <div class="xl-tabs" id="xl-tabs"></div>
           <div class="xl-status"><span>Gotowe</span><span id="xl-row">RZĄD: – / –</span><span class="sp"></span><span id="xl-sum"></span></div>
         </section>
 
@@ -195,8 +191,8 @@
   function setBadge(t, c) { var b = $('xl-badge'); if(b){ b.textContent = t; b.style.color = c || '#94a3b8'; } }
 
   var GLB = root.dataset.glb, META = root.dataset.meta;
-  var sheets = [], detailsMap = {};
-  var sel = { sheet: 0, row: -1, idx: 0 };
+  var rows = [], detailsMap = {};
+  var sel = { row: -1, idx: 0 };
   var wire = false, tw = null, visible = true, ready3d = false;
   var scene, camera, renderer, controls, boxHelper, fullBox = null;
   var allMeshes = [], elems = {};
@@ -320,29 +316,23 @@
     goGuid(hit.object.userData.guid);
   }
 
-  function renderTabs() {
-    $('xl-tabs').innerHTML = sheets.map(function (s, i) {
-      return '<button type="button" data-i="' + i + '" class="' + (i === sel.sheet ? 'on' : '') + '" style="--c:' + s.color + '">' + s.title + '</button>';
-    }).join('');
-  }
-
   function renderTable() {
-    var s = sheets[sel.sheet], tb = $('xl-tb');
-    if (!s || !s.rows.length) {
-      tb.innerHTML = '<tr><td colspan="10" class="empty">Brak danych w tym arkuszu.</td></tr>';
+    var tb = $('xl-tb');
+    if (!rows.length) {
+      tb.innerHTML = '<tr><td colspan="10" class="empty">Brak danych w arkuszu.</td></tr>';
       return;
     }
-    tb.innerHTML = s.rows.map(function (r, i) {
+    tb.innerHTML = rows.map(function (r, i) {
       return '<tr data-i="' + i + '"><td class="rn">' + (i + 2) + '</td><td class="n">' + r.lp + '</td><td>' + r.storey + '</td><td>' + r.system +
         '</td><td>' + r.sec + '</td><td class="n">' + r.count + '</td><td class="n">' + fmt(r.len) + '</td><td class="n">' + fmt(r.area) +
         '</td><td class="n">' + r.allowance + '%</td><td class="n"><b>' + fmt(r.order_area) + '</b></td></tr>';
     }).join('');
   }
 
-  function curRow() { var s = sheets[sel.sheet]; return s && sel.row >= 0 ? s.rows[sel.row] : null; }
+  function curRow() { return sel.row >= 0 ? rows[sel.row] : null; }
 
   function labelRow() {
-    var s = sheets[sel.sheet], n = s ? s.rows.length : 0;
+    var n = rows.length;
     var t = 'RZĄD: ' + (sel.row >= 0 ? sel.row + 1 : '–') + ' / ' + n;
     $('xl-row').textContent = t;
     $('pane-row').textContent = t;
@@ -355,8 +345,8 @@
   }
 
   function sums() {
-    var s = sheets[sel.sheet], L = 0, A = 0, O = 0;
-    if (s) s.rows.forEach(function (r) { L += (r.len || 0); A += (r.area || 0); O += (r.order_area || 0); });
+    var L = 0, A = 0, O = 0;
+    rows.forEach(function (r) { L += (r.len || 0); A += (r.area || 0); O += (r.order_area || 0); });
     $('xl-sum').textContent = 'Σ długość: ' + fmt(L) + ' m   |   Σ netto: ' + fmt(A) + ' m²   |   Σ z naddatkiem: ' + fmt(O) + ' m²';
   }
 
@@ -370,12 +360,6 @@
       if (tr) tr.classList.add('active-row');
     }
     fbar(); labelRow(); render3D();
-  }
-
-  function switchSheet(k) {
-    if (!sheets[k]) return;
-    sel.sheet = k; sel.row = -1; sel.idx = 0;
-    renderTabs(); renderTable(); fbar(); labelRow(); sums(); render3D();
   }
 
   function renderCard(row, g) {
@@ -430,14 +414,11 @@
   }
 
   function goGuid(g) {
-    for (var sIdx = 0; sIdx < sheets.length; sIdx++) {
-      for (var rIdx = 0; rIdx < sheets[sIdx].rows.length; rIdx++) {
-        var k = (sheets[sIdx].rows[rIdx].guids || []).indexOf(g);
-        if (k >= 0) {
-          if (sIdx !== sel.sheet) switchSheet(sIdx);
-          selectRow(rIdx, k);
-          return true;
-        }
+    for (var rIdx = 0; rIdx < rows.length; rIdx++) {
+      var k = (rows[rIdx].guids || []).indexOf(g);
+      if (k >= 0) {
+        selectRow(rIdx, k);
+        return true;
       }
     }
     return false;
@@ -448,12 +429,8 @@
     var tr = e.target.closest('tr');
     if (tr && tr.dataset.i != null) selectRow(+tr.dataset.i, 0);
   });
-  $('xl-tabs').addEventListener('click', function (e) {
-    var b = e.target.closest('button');
-    if (b) switchSheet(+b.dataset.i);
-  });
   $('b-prev').addEventListener('click', function () { if (sel.row > 0) selectRow(sel.row - 1, 0); });
-  $('b-next').addEventListener('click', function () { var s = sheets[sel.sheet]; if (s && sel.row < s.rows.length - 1) selectRow(sel.row + 1, 0); });
+  $('b-next').addEventListener('click', function () { if (sel.row < rows.length - 1) selectRow(sel.row + 1, 0); });
   $('xl-reset').addEventListener('click', function () { selectRow(-1); if(fullBox) zoomToFit(fullBox); });
   $('xl-wire').addEventListener('click', function () { wire = !wire; this.classList.toggle('on', wire); render3D(); });
 
@@ -468,8 +445,36 @@
 
   Promise.all([metaP, glbP]).then(function (res) {
     var json = res[0], gltf = res[1];
-    if (json && json.sheets) {
-      sheets = json.sheets;
+    if (json) {
+      var sourceRows = [];
+      if (json.sheets && json.sheets.length) {
+        var foundSheet = json.sheets.find(s => s.name === "LFT_Kanaly_Prostokatne") || json.sheets[0];
+        sourceRows = foundSheet.rows || [];
+      } else if (Array.isArray(json.rows)) {
+        sourceRows = json.rows;
+      }
+
+      // Bezpośrednie wyliczenie kolumn w locie (odporne na braki w starych plikach JSON)
+      rows = sourceRows.map(function(r, idx) {
+        var gList = r.guids || [];
+        var count = r.count != null ? r.count : gList.length;
+        var area = Number(r.area || 0);
+        var allowance = r.allowance != null ? r.allowance : 10;
+        var order_area = r.order_area != null ? r.order_area : Math.round(area * (1 + allowance / 100) * 100) / 100;
+        return {
+          lp: idx + 1,
+          storey: r.storey || '—',
+          system: r.system || '—',
+          sec: r.sec || '—',
+          count: count,
+          len: Number(r.len || 0),
+          area: area,
+          allowance: allowance,
+          order_area: order_area,
+          guids: gList
+        };
+      });
+
       detailsMap = json.details || {};
     }
     if (gltf) {
@@ -477,7 +482,6 @@
       ready3d = true;
       setBadge('Model 3D gotowy', '#4ade80');
     }
-    renderTabs();
     renderTable();
     sums();
     labelRow();
