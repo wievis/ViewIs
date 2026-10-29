@@ -1,6 +1,6 @@
 <style>
 .contact-section .eng-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
-.contact-section .eng-chip{font:500 .66rem var(--mono);letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--line);padding:5px 10px;color:var(--muted)}
+.contact-section .eng-chip{font:500 .72rem var(--mono);letter-spacing:.04em;border:1px solid var(--line);padding:6px 11px;color:var(--muted)}
 .contact-section .eng-chip b{color:var(--accent);font-weight:500}
 .contact-section .contact-list a{font-family:var(--mono);font-size:1rem}
 .contact-section .form input[type=text],.contact-section .form input[type=email],.contact-section .form textarea,.contact-section .form select{border-radius:2px}
@@ -12,14 +12,12 @@
 <section class="contact-section" id="contact">
     <div class="container contact-grid">
         <div class="reveal">
-            <span class="eyebrow">{% if lang == 'en' %}CONTACT // START WITH A SAMPLE{% else %}KONTAKT // ZACZNIJ OD PRÓBKI{% endif %}</span>
-            <h2 class="h2" style="font-family:var(--sans);font-weight:500;letter-spacing:-.02em">{% if lang == 'en' %}Send test files. Get a binding quote.{% else %}Prześlij pliki testowe. Otrzymasz wiążącą wycenę.{% endif %}</h2>
-            <p class="lead">{% if lang == 'en' %}Start with a sample. Send test files to {{ CONTACT_EMAIL }} or use the form. You will receive the quote and the deadline within 60–90 minutes.{% else %}Zacznij od próbki. Wyślij pliki testowe na {{ CONTACT_EMAIL }} lub przez formularz. Wycenę i termin otrzymasz w 60–90 minut.{% endif %}</p>
+            <span class="eyebrow">{% if lang == 'en' %}Contact{% else %}Kontakt{% endif %}</span>
+            <h2 class="h2" style="font-family:var(--sans);font-weight:500;letter-spacing:-.02em">{% if lang == 'en' %}Send files for analysis. You will get a quote and a deadline within 1–2 hours.{% else %}Prześlij pliki do analizy. Wycenę i termin otrzymasz w 1–2 godziny.{% endif %}</h2>
             <div class="eng-chips">
-                <span class="eng-chip">{% if lang == 'en' %}Reply{% else %}Odpowiedź{% endif %} <b>1–2 h</b></span>
-                <span class="eng-chip">{% if lang == 'en' %}Sample + quote{% else %}Próbka + wycena{% endif %} <b>60–90 min</b></span>
-                <span class="eng-chip">{% if lang == 'en' %}Result package{% else %}Pakiet wynikowy{% endif %} <b>24–48 h</b></span>
-                <span class="eng-chip">{% if lang == 'en' %}Data{% else %}Dane{% endif %} <b>{% if lang == 'en' %}local · deleted after 14 days{% else %}lokalnie · usunięcie po 14 dniach{% endif %}</b></span>
+                <span class="eng-chip">{% if lang == 'en' %}Response{% else %}Odpowiedź{% endif %}: <b>1–2 h</b></span>
+                <span class="eng-chip">{% if lang == 'en' %}Result package{% else %}Pakiet wynikowy{% endif %}: <b>24–48 h</b></span>
+                <span class="eng-chip">{% if lang == 'en' %}Confidentiality{% else %}Poufność{% endif %}: <b>{% if lang == 'en' %}100% local · NDA on request · deletion after 14 days{% else %}100% lokalnie · NDA na życzenie · usunięcie po 14 dniach{% endif %}</b></span>
             </div>
             <ul class="contact-list">
                 <li><span>E-mail</span><a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a></li>
@@ -37,12 +35,11 @@
             </div>
             <input type="email" name="email" placeholder="{% if lang == 'en' %}E-mail address{% else %}Adres e-mail{% endif %}" required>
             <select name="topic" aria-label="{% if lang == 'en' %}Subject{% else %}Temat{% endif %}">
-                <option value="Przedmiary IFC / CAD">{% if lang == 'en' %}IFC / CAD takeoffs{% else %}Przedmiary IFC / CAD{% endif %}</option>
-                <option value="Walidacja PSet / EIR">{% if lang == 'en' %}PSet / EIR validation{% else %}Walidacja PSet / EIR{% endif %}</option>
-                <option value="Delta rewizji modelu i rysunków">{% if lang == 'en' %}Model and drawing revision delta{% else %}Delta rewizji modelu i rysunków{% endif %}</option>
-                <option value="Geodane ULDK / NMT">{% if lang == 'en' %}Geodata ULDK / DTM{% else %}Geodane ULDK / NMT{% endif %}</option>
-                <option value="Makieta 3D / wizualizacje">{% if lang == 'en' %}3D mockup / visualizations{% else %}Makieta 3D / wizualizacje{% endif %}</option>
-                <option value="Automatyzacja arkuszy">{% if lang == 'en' %}Spreadsheet automation{% else %}Automatyzacja arkuszy{% endif %}</option>
+                <option value="Przedmiar instalacji (IFC / DWG)">{% if lang == 'en' %}Installation takeoff (IFC / DWG){% else %}Przedmiar instalacji (IFC / DWG){% endif %}</option>
+                <option value="Narzędzie / Automatyzacja Excela">{% if lang == 'en' %}Excel tool / automation{% else %}Narzędzie / Automatyzacja Excela{% endif %}</option>
+                <option value="Delta rewizji (porównanie wersji v1 vs v2)">{% if lang == 'en' %}Revision delta (comparing v1 vs v2){% else %}Delta rewizji (porównanie wersji v1 vs v2){% endif %}</option>
+                <option value="Audyt i naprawa modelu IFC">{% if lang == 'en' %}IFC model audit and repair{% else %}Audyt i naprawa modelu IFC{% endif %}</option>
+                <option value="Makieta cyfrowa / Prezentacja 3D">{% if lang == 'en' %}Digital mockup / 3D presentation{% else %}Makieta cyfrowa / Prezentacja 3D{% endif %}</option>
                 <option value="Inny temat">{% if lang == 'en' %}Other topic{% else %}Inny temat{% endif %}</option>
             </select>
             <textarea name="message" rows="5" placeholder="{% if lang == 'en' %}Describe the task: file formats (IFC/DWG/XLSX), scope, floors, deadline{% else %}Opisz zadanie: formaty plików (IFC/DWG/XLSX), zakres, kondygnacje, termin{% endif %}" required></textarea>
@@ -50,7 +47,7 @@
                 <input type="checkbox" required>
                 <span>{% if lang == 'en' %}I agree to my personal data being processed so that you can reply to my message.{% else %}Wyrażam zgodę na przetwarzanie moich danych osobowych w celu prowadzenia korespondencji.{% endif %}</span>
             </label>
-            <button type="submit" class="btn btn-primary">{% if lang == 'en' %}Send files for a quote{% else %}Wyślij do wyceny{% endif %}</button>
+            <button type="submit" class="btn btn-primary">{% if lang == 'en' %}Send message{% else %}Wyślij wiadomość{% endif %}</button>
             <div class="form-status" role="status" aria-live="polite"></div>
         </form>
     </div>

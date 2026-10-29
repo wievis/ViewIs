@@ -10,7 +10,7 @@
         <nav class="site-nav" id="site-nav" aria-label="Menu">
             <a href="{% if lang == 'en' %}{% url 'portfolio_en' %}{% else %}{% url 'portfolio' %}{% endif %}" class="{% if section == 'portfolio' %}active{% endif %}">Portfolio</a>
             <a href="{% if lang == 'en' %}{% url 'articles_en' %}{% else %}{% url 'articles' %}{% endif %}" class="{% if section == 'articles' %}active{% endif %}">{% if lang == 'en' %}Articles{% else %}Artykuły{% endif %}</a>
-            <a href="{% if lang == 'en' %}{% url 'mep_landing_en' %}{% else %}{% url 'mep_landing' %}{% endif %}" class="{% if section == 'mep' %}active{% endif %}">MEP</a>
+            <a href="{% if lang == 'en' %}{% url 'mep_landing_en' %}{% else %}{% url 'mep_landing' %}{% endif %}" class="{% if section == 'mep' %}active{% endif %}">{% if lang == 'en' %}Quantity Takeoffs{% else %}Przedmiary{% endif %}</a>
             <a href="{% if lang == 'en' %}{% url 'about_en' %}{% else %}{% url 'about' %}{% endif %}" class="{% if section == 'about' %}active{% endif %}">{% if lang == 'en' %}About{% else %}O mnie{% endif %}</a>
             <a href="{% if lang == 'en' %}{% url 'kontakt_en' %}{% else %}{% url 'kontakt' %}{% endif %}" class="{% if section == 'kontakt' %}active{% endif %}">{% if lang == 'en' %}Contact{% else %}Kontakt{% endif %}</a>
         </nav>

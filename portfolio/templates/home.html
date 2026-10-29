@@ -1,76 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}{% if lang == 'en' %}ViewIs | BIM/CAD data engineering: IFC and CAD takeoffs in 24–48 h{% else %}ViewIs | Inżynieria danych BIM/CAD: przedmiary IFC i CAD w 24–48 h{% endif %}{% endblock %}
-{% block meta_description %}{% if lang == 'en' %}IFC and CAD takeoffs, revision deltas, geodata and spreadsheet automation. Free sample and quote in 60–90 minutes.{% else %}Przedmiary z IFC i CAD, delta rewizji, geodane i automatyzacja arkuszy. Bezpłatna próbka i wycena w 60–90 minut.{% endif %}{% endblock %}
+{% block title %}{% if lang == 'en' %}ViewIs | Quantity takeoffs and data from IFC and CAD in 24–48 h{% else %}ViewIs | Przedmiary i dane z IFC i CAD w 24–48 h{% endif %}{% endblock %}
+{% block meta_description %}{% if lang == 'en' %}Takeoffs from IFC and CAD, revision deltas, geodata and Excel automation for contractors, design offices and estimators.{% else %}Przedmiary z IFC i CAD, rejestr zmian, geodane i automatyzacja Excela dla wykonawców, biur projektowych i kosztorysantów.{% endif %}{% endblock %}
 
 {% block extra_head %}
 <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
-<style>
-.eng{--pos:#4ade80;--neg:#f87171}
-html.light-mode .eng{--pos:#15803d;--neg:#b91c1c}
-.eng .btn{border-radius:2px}
-.eng h1,.eng h2,.eng h3{font-family:var(--sans)}
-.eng-lbl{font:500 .68rem var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
-
-.eng-hero{padding:clamp(30px,5vw,60px) 0 0;border-bottom:1px solid var(--line);background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:44px 44px}
-.eng-bar{display:flex;flex-wrap:wrap;gap:8px 24px;font:.68rem var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-.eng-bar i{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--pos);margin-right:8px;box-shadow:0 0 8px var(--pos)}
-.eng-hero-grid{display:grid;grid-template-columns:1.3fr .9fr;gap:44px;align-items:start;margin-top:34px}
-.eng-hero h1{font-weight:500;font-size:clamp(2rem,4.2vw,3.5rem);line-height:1.08;letter-spacing:-.025em;margin:16px 0 18px;max-width:20ch}
-.eng-hero .lead{margin-bottom:28px}
-.eng-cta{display:flex;gap:12px;flex-wrap:wrap}
-
-.eng-panel{background:var(--bg);border:1px solid var(--line)}
-.eng-ph{display:flex;justify-content:space-between;gap:10px;padding:10px 14px;border-bottom:1px solid var(--line);font:.66rem var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-.eng-kv{display:grid;grid-template-columns:auto 1fr;font:.76rem/1.5 var(--mono)}
-.eng-kv dt,.eng-kv dd{padding:8px 14px;border-bottom:1px solid var(--line)}
-.eng-kv dt{color:var(--accent);letter-spacing:.1em;border-right:1px solid var(--line)}
-.eng-kv dd{margin:0}
-.eng-panel .eng-kv>:nth-last-child(-n+2){border-bottom:0}
-.eng-flow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:12px 14px;border-top:1px solid var(--line);font:.66rem var(--mono);color:var(--muted)}
-.eng-flow b{font-weight:500;color:var(--text);border:1px solid var(--line);padding:3px 7px}
-
-.eng-sla{display:grid;grid-template-columns:repeat(3,1fr);margin-top:44px;border:1px solid var(--line);border-bottom:0;background:var(--bg)}
-.eng-sla>div{padding:20px 22px 22px;border-right:1px solid var(--line)}
-.eng-sla>div:last-child{border-right:0}
-.eng-sla strong{display:block;font:500 clamp(1.6rem,3vw,2.3rem) var(--mono);letter-spacing:-.03em;margin:10px 0 4px}
-.eng-sla small{color:var(--muted);font-size:.82rem}
-
-.eng-s{padding:clamp(48px,7vw,88px) 0;border-bottom:1px solid var(--line)}
-.eng-h{margin-bottom:34px}
-.eng-h h2{font-weight:500;font-size:clamp(1.6rem,3vw,2.4rem);line-height:1.12;letter-spacing:-.02em;margin:12px 0;max-width:26ch}
-.eng-h .lead{margin:0}
-
-.eng-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
-.eng-grid.c2{grid-template-columns:repeat(2,1fr)}
-.eng-cell{background:var(--bg);padding:24px 22px;display:flex;flex-direction:column;transition:background .25s}
-.eng-cell:hover{background:var(--surface)}
-.eng-cell h3{font-weight:500;font-size:1.2rem;line-height:1.25;margin:12px 0 8px}
-.eng-cell p{color:var(--muted);font-size:.9rem;margin-bottom:18px;flex:1}
-.eng-cell .eng-kv{margin:auto -22px -24px;border-top:1px solid var(--line)}
-.eng-cell .eng-kv>:nth-last-child(-n+2){border-bottom:0}
-
-.eng-ex{margin-bottom:40px}
-.eng-ex:last-child{margin-bottom:0}
-.eng-cap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;margin-bottom:10px}
-.eng-tw{overflow-x:auto;background:var(--surface);border:1px solid var(--line)}
-.eng-fx{display:flex;gap:12px;padding:8px 14px;border-bottom:1px solid var(--line);font:.72rem var(--mono);color:var(--muted)}
-.eng-fx b{color:var(--accent);font-weight:500}
-.eng-fx span{color:var(--text)}
-.eng-tbl{width:100%;border-collapse:collapse;font:.76rem var(--mono);white-space:nowrap}
-.eng-tbl th,.eng-tbl td{padding:9px 14px;text-align:left;border-bottom:1px solid var(--line)}
-.eng-tbl th{color:var(--muted);font-weight:500;letter-spacing:.08em;text-transform:uppercase;font-size:.64rem}
-.eng-tbl .n{text-align:right;font-variant-numeric:tabular-nums}
-.eng-tbl .na{color:var(--muted)}
-.eng-tbl tbody tr:hover{background:color-mix(in srgb,var(--accent) 9%,transparent)}
-.eng-tbl tfoot td{font-weight:600;border-top:1px solid var(--accent);border-bottom:0;cursor:help}
-.eng-tbl td.up{color:var(--pos);background:color-mix(in srgb,var(--pos) 12%,transparent)}
-.eng-tbl td.dn{color:var(--neg);background:color-mix(in srgb,var(--neg) 12%,transparent)}
-.eng-note{margin-top:10px;font:.7rem/1.5 var(--mono);color:var(--muted)}
-
-@media(max-width:900px){.eng-hero-grid{grid-template-columns:1fr;gap:30px}.eng-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:600px){.eng-sla,.eng-grid,.eng-grid.c2{grid-template-columns:1fr}.eng-sla>div{border-right:0;border-bottom:1px solid var(--line)}}
-</style>
+{% include 'eng_styles.html' %}
 {% endblock %}
 
 {% block content %}
@@ -78,41 +13,29 @@ html.light-mode .eng{--pos:#15803d;--neg:#b91c1c}
 
 <section class="eng-hero">
   <div class="container">
-    <div class="eng-bar">
-      <span><i></i>{% if lang == 'en' %}STATUS: ACCEPTING REQUESTS{% else %}STATUS: PRZYJMUJEMY ZAPYTANIA{% endif %}</span>
-      <span>REV: 2026-10</span>
-      <span>SLA: 1–2 h</span>
-      <span>{% if lang == 'en' %}LOCAL PROCESSING // NO CLOUD{% else %}PRZETWARZANIE LOKALNE // BEZ CHMURY{% endif %}</span>
-    </div>
-
     <div class="eng-hero-grid">
       <div>
-        <span class="eng-lbl">{% if lang == 'en' %}BIM/CAD DATA ENGINEERING // COST-ESTIMATION SYSTEMS // REAL-TIME 3D{% else %}INŻYNIERIA DANYCH BIM/CAD // SYSTEMY KOSZTORYSOWE // 3D REAL-TIME{% endif %}</span>
+        <span class="eng-lbl">{% if lang == 'en' %}BIM/CAD data engineering{% else %}Inżynieria danych BIM/CAD{% endif %}</span>
         <h1>{% if lang == 'en' %}Model and drawing data, estimate-ready in 24–48 hours.{% else %}Dane z modelu i rysunku, gotowe do kosztorysu w 24–48 godzin.{% endif %}</h1>
-        <p class="lead">{% if lang == 'en' %}IFC and CAD takeoffs, revision deltas, geodata and spreadsheet automation for contractors, design offices and estimating departments.{% else %}Przedmiary z IFC i CAD, delta rewizji, geodane oraz automatyzacja arkuszy dla wykonawców, biur projektowych i działów wycen.{% endif %}</p>
+        <p class="lead">{% if lang == 'en' %}Takeoffs from IFC and CAD, revision deltas, geodata and spreadsheet automation for contractors, design offices and estimating departments.{% else %}Przedmiary z IFC i CAD, rejestr zmian, geodane oraz automatyzacja arkuszy dla wykonawców, biur projektowych i działów wycen.{% endif %}</p>
         <div class="eng-cta">
-          <a class="btn btn-primary" href="#contact">{% if lang == 'en' %}Send test files for a quote{% else %}Prześlij pliki testowe do wyceny{% endif %} &rarr;</a>
-          <a class="btn btn-ghost" href="#domains">{% if lang == 'en' %}Specification &amp; Tools{% else %}Specyfikacja &amp; Narzędzia{% endif %}</a>
+          <a class="btn btn-primary" href="#contact">{% if lang == 'en' %}Send files for analysis{% else %}Prześlij pliki do analizy{% endif %} &rarr;</a>
+          <a class="btn btn-ghost" href="#domains">{% if lang == 'en' %}What we do{% else %}Zakres usług{% endif %}</a>
         </div>
       </div>
-
-      <aside class="eng-panel" aria-label="{% if lang == 'en' %}Service parameters{% else %}Parametry usługi{% endif %}">
-        <div class="eng-ph"><span>SPEC // VIEWIS-QTO</span><span>REV: 2026-10</span></div>
+      <aside class="eng-panel">
         <dl class="eng-kv">
-          <dt>INPUT</dt><dd>IFC 2x3 · IFC4 · DWG · DXF · XLSX · CSV</dd>
-          <dt>OUTPUT</dt><dd>XLSX ({% if lang == 'en' %}live formulas{% else %}aktywne formuły{% endif %}) · CSV · DXF · GeoJSON · IFC</dd>
-          <dt>GUID</dt><dd>{% if lang == 'en' %}rows linked to the element GUID{% else %}pozycje powiązane z GUID elementu{% endif %}</dd>
-          <dt>{% if lang == 'en' %}QUOTE{% else %}WYCENA{% endif %}</dt><dd>{% if lang == 'en' %}binding fixed fee after geometry verification{% else %}wiążąca, ryczałtowa, po weryfikacji geometrii{% endif %}</dd>
-          <dt>{% if lang == 'en' %}DATA{% else %}DANE{% endif %}</dt><dd>{% if lang == 'en' %}local workstation, no cloud{% else %}lokalnie na stacji roboczej, bez chmury{% endif %}</dd>
+          <dt>{% if lang == 'en' %}Input{% else %}Wejście{% endif %}</dt><dd>IFC 2x3 · IFC4 · DWG · DXF · XLSX · CSV</dd>
+          <dt>{% if lang == 'en' %}Output{% else %}Wynik{% endif %}</dt><dd>{% if lang == 'en' %}Excel with live formulas · CSV · DXF · IFC{% else %}Excel z aktywnymi formułami · CSV · DXF · IFC{% endif %}</dd>
+          <dt>{% if lang == 'en' %}Quote{% else %}Wycena{% endif %}</dt><dd>{% if lang == 'en' %}fixed, after we check your files{% else %}stała, po sprawdzeniu Twoich plików{% endif %}</dd>
         </dl>
-        <div class="eng-flow"><b>IFC / DWG</b>&rarr;<b>{% if lang == 'en' %}GEOMETRY CHECK{% else %}WERYFIKACJA GEOMETRII{% endif %}</b>&rarr;<b>XLSX + SUMA + GUID</b></div>
       </aside>
     </div>
 
     <div class="eng-sla">
-      <div><span class="eng-lbl">01 / {% if lang == 'en' %}REQUEST RESPONSE{% else %}ODPOWIEDŹ NA ZAPYTANIE{% endif %}</span><strong>1–2 h</strong><small>{% if lang == 'en' %}From receipt of your message.{% else %}Od otrzymania wiadomości.{% endif %}</small></div>
-      <div><span class="eng-lbl">02 / {% if lang == 'en' %}FREE SAMPLE &amp; QUOTE{% else %}BEZPŁATNA PRÓBKA I WYCENA{% endif %}</span><strong>60–90 min</strong><small>{% if lang == 'en' %}A slice of one floor or 10% of the data.{% else %}Wycinek 1 kondygnacji lub 10% danych.{% endif %}</small></div>
-      <div><span class="eng-lbl">03 / {% if lang == 'en' %}RESULT PACKAGE{% else %}PAKIET WYNIKOWY{% endif %}</span><strong>24–48 h</strong><small>{% if lang == 'en' %}Workbooks with live formulas.{% else %}Arkusze z aktywnymi formułami.{% endif %}</small></div>
+      <div><span class="eng-lbl">01 / {% if lang == 'en' %}Response time{% else %}Czas odpowiedzi{% endif %}</span><strong>1–2 h</strong><small>{% if lang == 'en' %}Quick contact and a first check of your files.{% else %}Szybki kontakt i wstępna weryfikacja plików.{% endif %}</small></div>
+      <div><span class="eng-lbl">02 / {% if lang == 'en' %}Result package{% else %}Pakiet wynikowy{% endif %}</span><strong>24–48 h</strong><small>{% if lang == 'en' %}A finished, checked workbook with formulas.{% else %}Gotowy, sprawdzony arkusz z formułami.{% endif %}</small></div>
+      <div><span class="eng-lbl">03 / {% if lang == 'en' %}Confidentiality &amp; NDA{% else %}Poufność &amp; standard NDA{% endif %}</span><strong>Offline / {% if lang == 'en' %}GDPR{% else %}RODO{% endif %}</strong><small>{% if lang == 'en' %}Local processing in an isolated environment; documented data destruction after 14 days.{% else %}Przetwarzanie lokalne w izolowanym środowisku; protokolarne niszczenie danych po 14 dniach.{% endif %}</small></div>
     </div>
   </div>
 </section>
@@ -120,48 +43,34 @@ html.light-mode .eng{--pos:#15803d;--neg:#b91c1c}
 <section class="eng-s" id="domains">
   <div class="container">
     <div class="eng-h">
-      <span class="eyebrow">{% if lang == 'en' %}DOMAINS // SPECIFICATION &amp; TOOLS{% else %}DOMENY // SPECYFIKACJA &amp; NARZĘDZIA{% endif %}</span>
-      <h2>{% if lang == 'en' %}Six engineering domains, one data standard.{% else %}Sześć domen inżynieryjnych, jeden standard danych.{% endif %}</h2>
-      <p class="lead">{% if lang == 'en' %}Every task is quoted as a binding fixed fee once we have checked the geometry of your files. No hourly guesswork.{% else %}Każde zadanie wyceniamy ryczałtem, wiążąco, po weryfikacji geometrii Twoich plików. Bez szacowania godzin.{% endif %}</p>
+      <h2>{% if lang == 'en' %}Six areas of work.{% else %}Sześć obszarów pracy.{% endif %}</h2>
+      <p class="lead">{% if lang == 'en' %}Each task is quoted at a fixed price once we have checked your files.{% else %}Każde zadanie wyceniamy ryczałtem, po sprawdzeniu Twoich plików.{% endif %}</p>
     </div>
-
     <div class="eng-grid">
-      <article class="eng-cell reveal">
-        <span class="eng-lbl">DOMENA 01 //</span>
-        <h3>{% if lang == 'en' %}MEP engineering and takeoffs{% else %}Inżynieria MEP i przedmiary{% endif %}</h3>
-        <p>{% if lang == 'en' %}Installation quantities and volumes from a model or drawing: pipework, ducts, fittings, sheet-metal takeoff per DIN 18379.{% else %}Ilości instalacji i kubatura z modelu lub rysunku: rurociągi, kanały, armatura, obmiar blachy wg DIN 18379.{% endif %}</p>
-        <dl class="eng-kv"><dt>IN</dt><dd>IFC 2x3 · IFC4 · DWG</dd><dt>OUT</dt><dd>{% if lang == 'en' %}XLSX with formulas + GUID{% else %}XLSX z formułami + GUID{% endif %}</dd></dl>
-      </article>
-      <article class="eng-cell reveal" style="--d:.05s">
-        <span class="eng-lbl">DOMENA 02 //</span>
-        <h3>{% if lang == 'en' %}PSet and EIR validation{% else %}Walidacja PSet i EIR{% endif %}</h3>
-        <p>{% if lang == 'en' %}Attribute audit, storey assignment, classification and parameter repair against your EIR.{% else %}Audyt atrybutów, przypisanie do kondygnacji, klasyfikacje oraz naprawa parametrów zgodnie z EIR.{% endif %}</p>
-        <dl class="eng-kv"><dt>IN</dt><dd>IFC + {% if lang == 'en' %}EIR rules{% else %}reguły EIR{% endif %}</dd><dt>OUT</dt><dd>{% if lang == 'en' %}repaired IFC · XLSX (audit){% else %}IFC poprawiony · XLSX (audyt){% endif %}</dd></dl>
-      </article>
-      <article class="eng-cell reveal" style="--d:.1s">
-        <span class="eng-lbl">DOMENA 03 //</span>
-        <h3>{% if lang == 'en' %}Model and drawing revision delta{% else %}Delta rewizji modelu i rysunków{% endif %}</h3>
-        <p>{% if lang == 'en' %}Change register v1 vs v2: lengths, volumes, and lists of added and removed elements.{% else %}Rejestr zmian v1 vs v2: metraż, kubatura, wykaz elementów dodanych i usuniętych.{% endif %}</p>
-        <dl class="eng-kv"><dt>IN</dt><dd>IFC v1, v2 · DWG/DXF</dd><dt>OUT</dt><dd>{% if lang == 'en' %}XLSX (change register){% else %}XLSX (rejestr zmian){% endif %}</dd></dl>
-      </article>
-      <article class="eng-cell reveal">
-        <span class="eng-lbl">DOMENA 04 //</span>
-        <h3>{% if lang == 'en' %}Geodata and 3D terrain{% else %}Geodane i NMT 3D{% endif %}</h3>
-        <p>{% if lang == 'en' %}Parcel outlines from ULDK/TERYT, 3D meshes and LiDAR DTM heightmaps for CAD, GIS and real-time engines.{% else %}Obrysy działek z ULDK/TERYT, siatka 3D i heightmapy z NMT LiDAR pod CAD, GIS i silniki.{% endif %}</p>
-        <dl class="eng-kv"><dt>IN</dt><dd>TERYT · ASC · XYZ</dd><dt>OUT</dt><dd>DXF EPSG:2180 · GeoJSON · RAW/PNG 16-bit</dd></dl>
-      </article>
-      <article class="eng-cell reveal" style="--d:.05s">
-        <span class="eng-lbl">DOMENA 05 //</span>
-        <h3>{% if lang == 'en' %}Spreadsheet engineering and automation{% else %}Inżynieria arkuszy i automatyzacja{% endif %}</h3>
-        <p>{% if lang == 'en' %}Custom Python pipelines, batch extraction from DWG, ERP integrations.{% else %}Dedykowane potoki w Pythonie, batch ekstrakcja z DWG, integracje ERP.{% endif %}</p>
-        <dl class="eng-kv"><dt>IN</dt><dd>XLSX · CSV · DWG · XML</dd><dt>OUT</dt><dd>XLSX · CSV · {% if lang == 'en' %}.exe tool{% else %}aplikacja .exe{% endif %}</dd></dl>
-      </article>
-      <article class="eng-cell reveal" style="--d:.1s">
-        <span class="eng-lbl">DOMENA 06 //</span>
-        <h3>{% if lang == 'en' %}Digital mockups and 3D presentations{% else %}Cyfrowe makiety i prezentacje 3D{% endif %}</h3>
-        <p>{% if lang == 'en' %}Investment mockups with unit status driven from Excel, machine layout verification, WebGL/UE5 configurators.{% else %}Makiety inwestycji ze statusem lokali z Excela, weryfikacja layoutu maszyn, konfiguratory WebGL/UE5.{% endif %}</p>
-        <dl class="eng-kv"><dt>IN</dt><dd>IFC · STEP · GLB + XLSX</dd><dt>OUT</dt><dd>WebGL · UE5</dd></dl>
-      </article>
+      <article class="eng-cell"><span class="eng-lbl">01 /</span>
+        <h3>{% if lang == 'en' %}MEP takeoffs{% else %}Przedmiary instalacji (MEP){% endif %}</h3>
+        <p>{% if lang == 'en' %}Takeoffs of ventilation ducts, pipework and fittings from IFC models and DWG drawings.{% else %}Obmiary kanałów wentylacyjnych, rurociągów i armatury z modeli IFC oraz rysunków DWG.{% endif %}</p>
+        <dl class="eng-kv"><dt>IN</dt><dd>IFC · DWG</dd><dt>OUT</dt><dd>{% if lang == 'en' %}Excel with formulas{% else %}Arkusz Excel z formułami{% endif %}</dd></dl></article>
+      <article class="eng-cell"><span class="eng-lbl">02 /</span>
+        <h3>{% if lang == 'en' %}IFC model audit and repair{% else %}Audyt i naprawa modeli IFC{% endif %}</h3>
+        <p>{% if lang == 'en' %}Filling in missing parameters, fixing storeys and checking against the investor's requirements.{% else %}Uzupełnianie brakujących parametrów, poprawa kondygnacji i weryfikacja pod wytyczne inwestora.{% endif %}</p>
+        <dl class="eng-kv"><dt>IN</dt><dd>{% if lang == 'en' %}IFC + investor requirements{% else %}IFC + wytyczne inwestora{% endif %}</dd><dt>OUT</dt><dd>{% if lang == 'en' %}Repaired IFC · report{% else %}Poprawiony IFC · raport{% endif %}</dd></dl></article>
+      <article class="eng-cell"><span class="eng-lbl">03 /</span>
+        <h3>{% if lang == 'en' %}Change register and revision delta{% else %}Rejestr zmian i delta rewizji{% endif %}</h3>
+        <p>{% if lang == 'en' %}Exactly what changed in the quantities between version 1 and version 2 of a project.{% else %}Co dokładnie zmieniło się w ilościach między wersją 1 a 2 projektu.{% endif %}</p>
+        <dl class="eng-kv"><dt>IN</dt><dd>{% if lang == 'en' %}Versions 1 and 2 (IFC / DWG){% else %}Wersja 1 i 2 (IFC / DWG){% endif %}</dd><dt>OUT</dt><dd>{% if lang == 'en' %}Change register in Excel{% else %}Rejestr zmian w Excelu{% endif %}</dd></dl></article>
+      <article class="eng-cell"><span class="eng-lbl">04 /</span>
+        <h3>{% if lang == 'en' %}Parcels and 3D terrain{% else %}Działki i teren 3D{% endif %}</h3>
+        <p>{% if lang == 'en' %}Cadastral boundaries from Geoportal (ULDK) and a 3D terrain model from elevation data (DTM).{% else %}Granice ewidencyjne z Geoportalu (ULDK) oraz model 3D terenu z wysokościówki (NMT).{% endif %}</p>
+        <dl class="eng-kv"><dt>IN</dt><dd>{% if lang == 'en' %}Parcel numbers · DTM data{% else %}Numery działek · dane NMT{% endif %}</dd><dt>OUT</dt><dd>{% if lang == 'en' %}DXF · GeoJSON · 3D terrain model{% else %}DXF · GeoJSON · model 3D terenu{% endif %}</dd></dl></article>
+      <article class="eng-cell"><span class="eng-lbl">05 /</span>
+        <h3>{% if lang == 'en' %}Excel tools and automation{% else %}Narzędzia i automatyzacja Excela{% endif %}</h3>
+        <p>{% if lang == 'en' %}We build custom tools and programs that automate any repetitive work in Excel, CAD and databases. Merging hundreds of files, cleaning registers, automatic reports and .exe programs that run with one click, no installation.{% else %}Tworzymy dedykowane narzędzia i programy automatyzujące każdą powtarzalną pracę w Excelu, CAD i bazach danych. Scalanie setek plików, czyszczenie rejestrów, automatyczne raporty i programy (.exe) działające jednym kliknięciem bez instalacji.{% endif %}</p>
+        <dl class="eng-kv"><dt>IN</dt><dd>{% if lang == 'en' %}Excel files (.xlsx) · CSV · DWG · databases{% else %}Pliki Excel (.xlsx) · CSV · DWG · Bazy danych{% endif %}</dd><dt>OUT</dt><dd>{% if lang == 'en' %}Finished report · custom program (.exe) · script{% else %}Gotowy raport · Dedykowany program (.exe) · Skrypt{% endif %}</dd></dl></article>
+      <article class="eng-cell"><span class="eng-lbl">06 /</span>
+        <h3>{% if lang == 'en' %}Digital and 3D mockups{% else %}Makiety cyfrowe i 3D{% endif %}</h3>
+        <p>{% if lang == 'en' %}Virtual investment mockups linked to unit availability in Excel, layout verification and WebGL.{% else %}Wirtualne makiety inwestycji zintegrowane ze stanem lokali w Excelu, weryfikacja layoutu i WebGL.{% endif %}</p>
+        <dl class="eng-kv"><dt>IN</dt><dd>{% if lang == 'en' %}3D model + Excel with unit status{% else %}Model 3D + Excel ze stanem lokali{% endif %}</dd><dt>OUT</dt><dd>{% if lang == 'en' %}Mockup in the browser (WebGL){% else %}Makieta w przeglądarce (WebGL){% endif %}</dd></dl></article>
     </div>
   </div>
 </section>
@@ -169,76 +78,62 @@ html.light-mode .eng{--pos:#15803d;--neg:#b91c1c}
 <section class="eng-s" id="results">
   <div class="container">
     <div class="eng-h">
-      <span class="eyebrow">{% if lang == 'en' %}RESULT SAMPLES // SHEET STRUCTURE{% else %}PRZYKŁADY WYNIKU // STRUKTURA ARKUSZA{% endif %}</span>
-      <h2>{% if lang == 'en' %}This is what the result package looks like.{% else %}Tak wygląda pakiet wynikowy.{% endif %}</h2>
-      <p class="lead">{% if lang == 'en' %}Structure from a test model. We adapt the column layout to your estimating system.{% else %}Struktura na modelu testowym. Układ kolumn dopasowujemy do Twojego systemu kosztorysowego.{% endif %}</p>
+      <h2>{% if lang == 'en' %}What the result looks like.{% else %}Tak wygląda wynik.{% endif %}</h2>
+      <p class="lead">{% if lang == 'en' %}Real data from a ventilation takeoff and a project revision. We adapt the column layout to your estimating system.{% else %}Rzeczywiste dane z przedmiaru wentylacji i rewizji projektu. Układ kolumn dopasowujemy do Twojego systemu kosztorysowego.{% endif %}</p>
     </div>
 
-    <div class="eng-ex reveal">
-      <div class="eng-cap"><span class="eng-lbl">{% if lang == 'en' %}A / QUANTITY TAKEOFF FROM THE IFC MODEL{% else %}A / ZESTAWIENIE ILOŚCI Z MODELU IFC{% endif %}</span><span class="eng-lbl" style="color:var(--muted)">zestawienie_ilosci.xlsx · REV: 2026-10</span></div>
+    <div class="eng-ex">
+      <span class="eng-lbl">{% if lang == 'en' %}A. Ventilation duct schedule (takeoff from IFC){% else %}A. Zestawienie kanałów wentylacyjnych (przedmiar z IFC){% endif %}</span>
       <div class="eng-tw">
-        <div class="eng-fx"><b>fx</b><span>=SUMA(G2:G6)</span></div>
-        <table class="eng-tbl" data-qto>
+        <div class="eng-fx"><b>H7</b><b>fx</b><span>={% if lang == 'en' %}SUM{% else %}SUMA{% endif %}(H2:H6)</span></div>
+        <table class="eng-tbl">
           <thead><tr>
-            <th>{% if lang == 'en' %}Level{% else %}Poziom{% endif %}</th><th>{% if lang == 'en' %}IFC class{% else %}Klasa IFC{% endif %}</th><th>{% if lang == 'en' %}Type{% else %}Typ{% endif %}</th><th>{% if lang == 'en' %}Material{% else %}Materiał{% endif %}</th>
-            <th class="n">{% if lang == 'en' %}Qty{% else %}Szt.{% endif %}</th><th class="n">{% if lang == 'en' %}Length [m]{% else %}Długość [m]{% endif %}</th><th class="n">{% if lang == 'en' %}Area [m²]{% else %}Powierzchnia [m²]{% endif %}</th>
+            <th>{% if lang == 'en' %}Floor{% else %}Kondygnacja{% endif %}</th><th>{% if lang == 'en' %}System{% else %}System{% endif %}</th><th>{% if lang == 'en' %}Section [mm]{% else %}Przekrój [mm]{% endif %}</th>
+            <th class="n">{% if lang == 'en' %}Qty{% else %}Ilość{% endif %}</th><th class="n">{% if lang == 'en' %}Length [m]{% else %}Długość [m]{% endif %}</th><th class="n">{% if lang == 'en' %}Area [m²]{% else %}Powierzchnia [m²]{% endif %}</th>
+            <th class="n">{% if lang == 'en' %}Allowance{% else %}Naddatek{% endif %}</th><th class="n">{% if lang == 'en' %}Total with allowance [m²]{% else %}Razem z naddatkiem [m²]{% endif %}</th>
           </tr></thead>
           <tbody>
-            <tr><td>{% if lang == 'en' %}Ground{% else %}Parter{% endif %}</td><td>IfcSlab</td><td class="na">—</td><td>{% if lang == 'en' %}Concrete C25/30{% else %}Beton C25/30{% endif %}</td><td class="n" data-v="1" data-d="0">1</td><td class="n" data-v="0">0,00</td><td class="n" data-v="28">28,00</td></tr>
-            <tr><td>{% if lang == 'en' %}Ground{% else %}Parter{% endif %}</td><td>IfcWall</td><td>{% if lang == 'en' %}Ext. wall 30 cm{% else %}Ściana zewn. 30 cm{% endif %}</td><td>{% if lang == 'en' %}Brick{% else %}Cegła{% endif %}</td><td class="n" data-v="4" data-d="0">4</td><td class="n" data-v="21">21,00</td><td class="n" data-v="63">63,00</td></tr>
-            <tr><td>{% if lang == 'en' %}Ground{% else %}Parter{% endif %}</td><td>IfcWindow</td><td>{% if lang == 'en' %}Window 120x150{% else %}Okno 120x150{% endif %}</td><td class="na">—</td><td class="n" data-v="1" data-d="0">1</td><td class="n" data-v="0">0,00</td><td class="n" data-v="1.8">1,80</td></tr>
-            <tr><td>{% if lang == 'en' %}Ground{% else %}Parter{% endif %}</td><td>IfcDoor</td><td>{% if lang == 'en' %}Door 90x210{% else %}Drzwi 90x210{% endif %}</td><td class="na">—</td><td class="n" data-v="2" data-d="0">2</td><td class="n" data-v="0">0,00</td><td class="n" data-v="0">0,00</td></tr>
-            <tr><td>{% if lang == 'en' %}Floor 1{% else %}Piętro 1{% endif %}</td><td>IfcWall</td><td class="na">—</td><td class="na">—</td><td class="n" data-v="1" data-d="0">1</td><td class="n" data-v="5">5,00</td><td class="n" data-v="14">14,00</td></tr>
+            <tr><td>{% if lang == 'en' %}Ground{% else %}Parter{% endif %}</td><td>{% if lang == 'en' %}Exhaust{% else %}Wywiew{% endif %}</td><td>400x350</td><td class="n">2 {% if lang == 'en' %}pcs{% else %}szt.{% endif %}</td><td class="n">3.81</td><td class="n">5.72</td><td class="n">10%</td><td class="n">6.29</td></tr>
+            <tr><td>{% if lang == 'en' %}Ground{% else %}Parter{% endif %}</td><td>{% if lang == 'en' %}Exhaust{% else %}Wywiew{% endif %}</td><td>315x315</td><td class="n">1 {% if lang == 'en' %}pc{% else %}szt.{% endif %}</td><td class="n">4.36</td><td class="n">5.49</td><td class="n">10%</td><td class="n">6.04</td></tr>
+            <tr><td>{% if lang == 'en' %}Ground{% else %}Parter{% endif %}</td><td>{% if lang == 'en' %}Exhaust{% else %}Wywiew{% endif %}</td><td>500x250</td><td class="n">2 {% if lang == 'en' %}pcs{% else %}szt.{% endif %}</td><td class="n">1.30</td><td class="n">1.94</td><td class="n">10%</td><td class="n">2.13</td></tr>
+            <tr><td>{% if lang == 'en' %}Floor 1{% else %}Piętro 1{% endif %}</td><td>{% if lang == 'en' %}Supply{% else %}Nawiew{% endif %}</td><td>250x250</td><td class="n">9 {% if lang == 'en' %}pcs{% else %}szt.{% endif %}</td><td class="n">41.59</td><td class="n">41.59</td><td class="n">10%</td><td class="n">45.75</td></tr>
+            <tr><td>{% if lang == 'en' %}Floor 1{% else %}Piętro 1{% endif %}</td><td>{% if lang == 'en' %}Supply{% else %}Nawiew{% endif %}</td><td>200x200</td><td class="n">13 {% if lang == 'en' %}pcs{% else %}szt.{% endif %}</td><td class="n">37.24</td><td class="n">29.79</td><td class="n">10%</td><td class="n">32.77</td></tr>
           </tbody>
           <tfoot><tr>
-            <td colspan="4">{% if lang == 'en' %}TOTAL (SUM formula){% else %}RAZEM (formuła SUMA){% endif %}</td>
-            <td class="n" data-col="4" data-l="E" data-d="0">9</td><td class="n" data-col="5" data-l="F" data-d="2">26,00</td><td class="n" data-col="6" data-l="G" data-d="2">106,80</td>
+            <td colspan="3">{% if lang == 'en' %}TOTAL (live SUM formula){% else %}RAZEM (aktywna formuła SUMA){% endif %}</td>
+            <td class="n">27 {% if lang == 'en' %}pcs{% else %}szt.{% endif %}</td><td class="n">88.30 m</td><td class="n">84.53 m²</td><td class="n">—</td><td class="n">92.98 m²</td>
           </tr></tfoot>
         </table>
       </div>
-      <p class="eng-note">{% if lang == 'en' %}"—" = no data in the model; the item goes to the gap-list sheet instead of being skipped. Hover the TOTAL row to see the formula.{% else %}„—” = brak danych w modelu; pozycja trafia do arkusza listy braków, nie jest pomijana. Najedź na wiersz RAZEM, aby zobaczyć formułę.{% endif %}</p>
     </div>
 
-    <div class="eng-ex reveal">
-      <div class="eng-cap"><span class="eng-lbl">{% if lang == 'en' %}B / CHANGE REGISTER, DELTA v1 &rarr; v2{% else %}B / REJESTR ZMIAN, DELTA v1 &rarr; v2{% endif %}</span><span class="eng-lbl" style="color:var(--muted)">rejestr_zmian_v1_v2.xlsx · REV: 2026-10</span></div>
+    <div class="eng-ex">
+      <span class="eng-lbl">{% if lang == 'en' %}B. Change register: version 1 &rarr; version 2{% else %}B. Rejestr zmian: wersja 1 &rarr; wersja 2{% endif %}</span>
       <div class="eng-tw">
         <table class="eng-tbl">
           <thead><tr>
-            <th>{% if lang == 'en' %}IFC class{% else %}Klasa IFC{% endif %}</th><th>{% if lang == 'en' %}Type{% else %}Typ{% endif %}</th><th>GUID</th>
-            <th class="n">{% if lang == 'en' %}Qty v1{% else %}Szt. było{% endif %}</th><th class="n">{% if lang == 'en' %}Qty v2{% else %}Szt. jest{% endif %}</th>
-            <th class="n">{% if lang == 'en' %}Length v1 [m]{% else %}Długość było [m]{% endif %}</th><th class="n">{% if lang == 'en' %}Length v2 [m]{% else %}Długość jest [m]{% endif %}</th><th class="n">{% if lang == 'en' %}Change{% else %}Zmiana{% endif %}</th>
+            <th>{% if lang == 'en' %}Element / Section{% else %}Element / Przekrój{% endif %}</th><th>{% if lang == 'en' %}Floor{% else %}Kondygnacja{% endif %}</th>
+            <th class="n">{% if lang == 'en' %}Version 1 (previous){% else %}Wersja 1 (poprzednia){% endif %}</th><th class="n">{% if lang == 'en' %}Version 2 (current){% else %}Wersja 2 (aktualna){% endif %}</th><th class="n">{% if lang == 'en' %}Difference (delta){% else %}Różnica (Delta){% endif %}</th>
           </tr></thead>
           <tbody>
-            <tr><td>IfcWall</td><td>{% if lang == 'en' %}Ext. wall 30 cm{% else %}Ściana zewn. 30 cm{% endif %}</td><td class="na">2gH7vN0Kz9Tq4WcLx3bA8d</td><td class="n" data-v="4" data-d="0">4</td><td class="n" data-v="4" data-d="0">4</td><td class="n" data-v="21">21,00</td><td class="n" data-v="21.5">21,50</td><td class="n up">{% if lang == 'en' %}+0.50 m{% else %}+0,50 m{% endif %}</td></tr>
-            <tr><td>IfcWindow</td><td>{% if lang == 'en' %}Window 120x150{% else %}Okno 120x150{% endif %}</td><td class="na">1pD5mR8Yy2UeF6sJk0QnZt</td><td class="n" data-v="1" data-d="0">1</td><td class="n" data-v="2" data-d="0">2</td><td class="n" data-v="0">0,00</td><td class="n" data-v="0">0,00</td><td class="n up">{% if lang == 'en' %}+1 pc.{% else %}+1 szt.{% endif %}</td></tr>
-            <tr><td>IfcDoor</td><td>{% if lang == 'en' %}Door 90x210{% else %}Drzwi 90x210{% endif %}</td><td class="na">0Xa9cB3Vw7EoH1tGi4LrMf</td><td class="n" data-v="2" data-d="0">2</td><td class="n" data-v="1" data-d="0">1</td><td class="n" data-v="0">0,00</td><td class="n" data-v="0">0,00</td><td class="n dn">{% if lang == 'en' %}−1 pc.{% else %}−1 szt.{% endif %}</td></tr>
+            <tr><td>{% if lang == 'en' %}Rectangular duct 250x250{% else %}Kanał prostokątny 250x250{% endif %}</td><td>{% if lang == 'en' %}Floor 1{% else %}Piętro 1{% endif %}</td><td class="n">35.20 m²</td><td class="n">45.75 m²</td><td class="n"><span class="up">+10.55 m² (+30.0%)</span></td></tr>
+            <tr><td>{% if lang == 'en' %}Rectangular duct 200x200{% else %}Kanał prostokątny 200x200{% endif %}</td><td>{% if lang == 'en' %}Floor 1{% else %}Piętro 1{% endif %}</td><td class="n">32.77 m²</td><td class="n">32.77 m²</td><td class="n"><span class="na">0.00 m² ({% if lang == 'en' %}no change{% else %}bez zmian{% endif %})</span></td></tr>
+            <tr><td>{% if lang == 'en' %}Rectangular duct 400x350{% else %}Kanał prostokątny 400x350{% endif %}</td><td>{% if lang == 'en' %}Ground{% else %}Parter{% endif %}</td><td class="n">8.40 m²</td><td class="n">6.29 m²</td><td class="n"><span class="dn">-2.11 m² (-25.1%)</span></td></tr>
           </tbody>
         </table>
       </div>
-      <p class="eng-note">{% if lang == 'en' %}Added, removed and changed elements go to separate sheets, each keyed by GUID. GUIDs shown are illustrative.{% else %}Dodane, usunięte i zmienione elementy trafiają do osobnych arkuszy z identyfikatorem GUID. Pokazane GUID są przykładowe.{% endif %}</p>
+      <p class="eng-note">{% if lang == 'en' %}Added, removed and changed elements go to separate sheets, each with the element GUID.{% else %}Elementy dodane, usunięte i zmienione trafiają do osobnych arkuszy z identyfikatorem GUID.{% endif %}</p>
     </div>
   </div>
 </section>
 
 <section class="eng-s" id="quality">
   <div class="container">
-    <div class="eng-h">
-      <span class="eyebrow">{% if lang == 'en' %}QUALITY STANDARD // OPERATIONAL SECURITY{% else %}STANDARD JAKOŚCI // BEZPIECZEŃSTWO OPERACYJNE{% endif %}</span>
-      <h2>{% if lang == 'en' %}Every number can be checked.{% else %}Każdą liczbę można sprawdzić.{% endif %}</h2>
-    </div>
-    <div class="eng-grid c2">
-      <div class="eng-cell reveal"><span class="eng-lbl">Q-01</span><h3>{% if lang == 'en' %}Live formulas{% else %}Aktywne formuły{% endif %}</h3><p>{% if lang == 'en' %}No hand-typed numbers: editable formulas with the link hierarchy preserved.{% else %}Brak liczb wpisywanych ręcznie: edytowalne formuły i zachowana hierarchia powiązań.{% endif %}</p></div>
-      <div class="eng-cell reveal" style="--d:.05s"><span class="eng-lbl">Q-02</span><h3>{% if lang == 'en' %}1:1 control totals{% else %}Sumy kontrolne 1:1{% endif %}</h3><p>{% if lang == 'en' %}The TOTAL row can be reconciled one-to-one with the 3D solid.{% else %}Wiersz RAZEM weryfikowalny 1:1 z bryłą 3D.{% endif %}</p></div>
-      <div class="eng-cell reveal"><span class="eng-lbl">Q-03</span><h3>{% if lang == 'en' %}Anomaly register{% else %}Rejestr anomalii{% endif %}</h3><p>{% if lang == 'en' %}Elements without source data go to a separate sheet. Errors are never skipped silently.{% else %}Elementy bez danych źródłowych trafiają do osobnego arkusza. Brak cichego pomijania błędów.{% endif %}</p></div>
-      <div class="eng-cell reveal" style="--d:.05s">
-        <span class="eng-lbl">Q-04</span><h3>{% if lang == 'en' %}Data confidentiality{% else %}Poufność danych{% endif %}</h3>
-        <p>{% if lang == 'en' %}Your files never leave the workstation.{% else %}Twoje pliki nie opuszczają stacji roboczej.{% endif %}</p>
-        <dl class="eng-kv">
-          <dt>{% if lang == 'en' %}PROCESSING{% else %}PRZETWARZANIE{% endif %}</dt><dd>{% if lang == 'en' %}100% local, no cloud{% else %}100% lokalnie, bez chmury{% endif %}</dd>
-          <dt>NDA</dt><dd>{% if lang == 'en' %}on request{% else %}na życzenie{% endif %}</dd>
-          <dt>{% if lang == 'en' %}DELETION{% else %}USUNIĘCIE{% endif %}</dt><dd>{% if lang == 'en' %}automatic after 14 days{% else %}automatycznie po 14 dniach{% endif %}</dd>
-        </dl>
-      </div>
+    <div class="eng-h"><h2>{% if lang == 'en' %}Every number can be checked.{% else %}Każdą liczbę można sprawdzić.{% endif %}</h2></div>
+    <div class="eng-grid">
+      <div class="eng-cell"><h3>{% if lang == 'en' %}Live formulas{% else %}Aktywne formuły{% endif %}</h3><p>{% if lang == 'en' %}No hand-typed numbers. You can edit the workbook and it recalculates.{% else %}Brak liczb wpisywanych ręcznie. Arkusz możesz edytować, a on się przelicza.{% endif %}</p></div>
+      <div class="eng-cell"><h3>{% if lang == 'en' %}1:1 control totals{% else %}Sumy kontrolne 1:1{% endif %}</h3><p>{% if lang == 'en' %}The TOTAL row can be reconciled with the 3D model.{% else %}Wiersz RAZEM da się zestawić z modelem 3D.{% endif %}</p></div>
+      <div class="eng-cell"><h3>{% if lang == 'en' %}Anomaly register{% else %}Rejestr anomalii{% endif %}</h3><p>{% if lang == 'en' %}Elements without data go to a separate sheet. No error is skipped silently.{% else %}Elementy bez danych trafiają do osobnego arkusza. Żaden błąd nie jest pomijany po cichu.{% endif %}</p></div>
     </div>
   </div>
 </section>
@@ -247,7 +142,6 @@ html.light-mode .eng{--pos:#15803d;--neg:#b91c1c}
 <section class="eng-s" id="realizacje">
   <div class="container">
     <div class="eng-h">
-      <span class="eyebrow">{% if lang == 'en' %}PORTFOLIO // 3D VISUALIZATIONS &amp; PROJECTS{% else %}PORTFOLIO // WIZUALIZACJE &amp; REALIZACJE 3D{% endif %}</span>
       <h2 style="max-width:34ch">{% if lang == 'en' %}Spatial geometry, real-time engines and investment-grade photorealism{% else %}Geometria przestrzenna, silniki czasu rzeczywistego i fotorealizm inwestycyjny{% endif %}</h2>
     </div>
     <div class="featured">
@@ -288,26 +182,5 @@ window.mediaItems = [
   }{% if not forloop.last %},{% endif %}
 {% endif %}{% endfor %}
 ];
-
-(function () {
-  var loc = document.documentElement.lang === 'en' ? 'en-US' : 'pl-PL';
-  var fmt = function (v, d) { return v.toLocaleString(loc, { minimumFractionDigits: d, maximumFractionDigits: d }); };
-  document.querySelectorAll('.eng-tbl').forEach(function (t) {
-    t.querySelectorAll('td[data-v]').forEach(function (td) {
-      td.textContent = fmt(parseFloat(td.dataset.v), td.dataset.d === undefined ? 2 : +td.dataset.d);
-    });
-    if (!t.hasAttribute('data-qto')) return;
-    var fx = t.parentNode.querySelector('.eng-fx span');
-    var rows = t.tBodies[0].rows;
-    t.querySelectorAll('tfoot td[data-col]').forEach(function (td) {
-      var s = 0;
-      for (var i = 0; i < rows.length; i++) s += parseFloat(rows[i].cells[+td.dataset.col].dataset.v || 0);
-      td.textContent = fmt(s, +td.dataset.d);
-      td.addEventListener('mouseenter', function () {
-        if (fx) fx.textContent = (loc === 'pl-PL' ? '=SUMA(' : '=SUM(') + td.dataset.l + '2:' + td.dataset.l + (rows.length + 1) + ')';
-      });
-    });
-  });
-})();
 </script>
 {% endblock %}

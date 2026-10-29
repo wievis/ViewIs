@@ -1,335 +1,107 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Audyt IFC & Przedmiary MEP (QTO/BOQ) | ViewIs{% endblock %}
-{% block body_class %}theme-mep{% endblock %}
+{% block title %}{% if lang == 'en' %}Quantity takeoffs from IFC and DWG | ViewIs{% else %}Przedmiary z IFC i DWG | ViewIs{% endif %}{% endblock %}
+{% block meta_description %}{% if lang == 'en' %}Takeoffs of ducts, pipework and fittings from IFC models and DWG drawings, with live formulas, 1:1 balance and installation allowances.{% else %}Przedmiary kanałów, rurociągów i armatury z modeli IFC i rysunków DWG: aktywne formuły, bilans 1:1 i naddatki montażowe.{% endif %}{% endblock %}
 
 {% block extra_head %}
-<style>
-  .mep-hero-grid {
-    display: grid;
-    grid-template-columns: 1.15fr 0.85fr;
-    gap: 48px;
-    align-items: center;
-    padding-top: clamp(40px, 6vw, 70px);
-    padding-bottom: 40px;
-  }
-  .mep-hero-lead {
-    font-size: 1.12rem;
-    line-height: 1.65;
-    color: var(--muted);
-    margin: 18px 0 28px;
-    max-width: 58ch;
-  }
-  .mep-badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 18px;
-  }
-  .mep-pill {
-    font-family: var(--mono);
-    font-size: 0.68rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--accent);
-    background: rgba(56, 189, 248, 0.08);
-    border: 1px solid rgba(56, 189, 248, 0.25);
-    padding: 4px 12px;
-    border-radius: 999px;
-  }
-  .mep-video-frame {
-    position: relative;
-    border-radius: 16px;
-    overflow: hidden;
-    background: #0f172a;
-    border: 1px solid rgba(56, 189, 248, 0.25);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-    aspect-ratio: 16 / 10;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .mep-video-frame video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-  .mep-video-placeholder {
-    padding: 32px;
-    text-align: center;
-    color: #94a3b8;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-  }
-  .mep-video-placeholder .icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: rgba(56, 189, 248, 0.12);
-    color: var(--accent);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .service-cards {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    margin: 40px 0 70px;
-  }
-  .service-card {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    padding: 32px 26px;
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.3s ease, border-color 0.3s ease;
-  }
-  .service-card:hover {
-    transform: translateY(-4px);
-    border-color: var(--accent);
-  }
-  .service-card h3 {
-    font-family: var(--serif);
-    font-size: 1.55rem;
-    font-weight: 500;
-    margin: 14px 0 10px;
-    color: var(--text);
-  }
-  .service-card p {
-    color: var(--muted);
-    font-size: 0.94rem;
-    line-height: 1.6;
-    flex: 1;
-  }
-  .service-card ul {
-    margin-top: 14px;
-    padding-left: 18px;
-    color: #cbd5e1;
-    font-size: 0.88rem;
-    display: grid;
-    gap: 6px;
-  }
-  .cta-box {
-    background: radial-gradient(circle at 80% 20%, rgba(56,189,248,0.12), transparent 50%), var(--surface);
-    border: 1px solid rgba(56, 189, 248, 0.25);
-    border-radius: 20px;
-    padding: 44px 38px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 32px;
-    flex-wrap: wrap;
-    margin-bottom: 60px;
-  }
-  .cta-box h3 {
-    font-family: var(--serif);
-    font-size: 1.9rem;
-    margin-bottom: 6px;
-  }
-  .cta-box p {
-    color: var(--muted);
-    max-width: 52ch;
-    font-size: 0.98rem;
-  }
-  @media (max-width: 900px) {
-    .mep-hero-grid { grid-template-columns: 1fr; gap: 32px; }
-    .service-cards { grid-template-columns: 1fr; }
-  }
-</style>
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+{% include 'eng_styles.html' %}
 {% endblock %}
 
 {% block content %}
-<section class="container mep-hero-grid">
-  <div>
-    <div class="mep-badges">
-      <span class="mep-pill">Inżynieria danych BIM</span>
-      <span class="mep-pill">OpenBIM &middot; IFC4 / IFC2x3</span>
-      <span class="mep-pill">Deterministyczne QTO / BOQ</span>
-    </div>
-    <h1 class="display" style="font-size: clamp(2.3rem, 4.4vw, 3.8rem); line-height: 1.1;">
-      {% if lang == 'en' %}
-      Independent IFC Audits &amp; MEP Quantity Takeoffs
-      {% else %}
-      Niezależny Audyt Modeli IFC &amp; Przedmiary MEP
-      {% endif %}
-    </h1>
-    <p class="mep-hero-lead">
-      {% if lang == 'en' %}
-      We eliminate pricing errors, duplicated 3D geometry and missing properties in sanitary and HVAC models. Get structured BOQ/RFQ workbooks with 100% balance integrity.
-      {% else %}
-      Eliminujemy ryzyko błędów ofertowych, zduplikowaną geometrię i braki w specyfikacjach modeli instalacyjnych (SAN / LFT). Dostarczamy zweryfikowane arkusze kosztorysowe i zamówieniowe ze stuprocentową zgodnością bilansu.
-      {% endif %}
-    </p>
-    <div style="display: flex; gap: 14px; flex-wrap: wrap;">
-      <a href="#contact" class="btn btn-primary">
-        {% if lang == 'en' %}Request an audit quote{% else %}Zleć audyt / wycenę{% endif %} &rarr;
-      </a>
-      <a href="#addin-section" class="btn btn-ghost">
-        {% if lang == 'en' %}Free Add-in (ViewIs MEP Link){% else %}Opcjonalna wtyczka podglądu{% endif %}
-      </a>
-    </div>
-  </div>
+<div class="eng">
 
-  <div class="mep-video-frame">
-    <video autoplay loop muted playsinline poster="{% static 'image/icon-80.png' %}" onerror="this.style.display='none'; document.getElementById('v-ph').style.display='flex';">
-      <source src="{% static 'video/mep-demo.mp4' %}" type="video/mp4">
-    </video>
-    <div class="mep-video-placeholder" id="v-ph" style="display:none;">
-      <div class="icon">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+<section class="eng-hero">
+  <div class="container">
+    <div class="eng-hero-grid" style="padding-bottom:clamp(40px,6vw,76px)">
+      <div>
+        <span class="eng-lbl">{% if lang == 'en' %}Quantity takeoffs{% else %}Przedmiary{% endif %}</span>
+        <h1>{% if lang == 'en' %}Takeoffs from IFC models and DWG drawings.{% else %}Przedmiary z modeli IFC i rysunków DWG.{% endif %}</h1>
+        <p class="lead">{% if lang == 'en' %}Ducts, pipework and fittings measured into a workbook with live formulas. Every line is tied to a model element, and the total matches the 3D geometry.{% else %}Kanały, rurociągi i armatura obmierzone w arkuszu z aktywnymi formułami. Każda pozycja jest powiązana z elementem modelu, a suma zgadza się z geometrią 3D.{% endif %}</p>
+        <div class="eng-cta">
+          <a class="btn btn-primary" href="#contact">{% if lang == 'en' %}Send files for analysis{% else %}Prześlij pliki do analizy{% endif %} &rarr;</a>
+          <a class="btn btn-ghost" href="#addin">{% if lang == 'en' %}Excel add-in{% else %}Dodatek do Excela{% endif %}</a>
+        </div>
       </div>
-      <strong style="color:#ffffff; font-size:15px;">Live 3D &harr; Excel Integration</strong>
-      <p style="font-size:13px; margin:0; max-width:34ch;">
-        {% if lang == 'en' %}Clicking a row in Excel instantly highlights and isolates elements in 3D.{% else %}Wybór wiersza w Excelu natychmiast izoluje i podświetla element w modelu 3D.{% endif %}
-      </p>
+      <aside class="eng-panel">
+        <dl class="eng-kv">
+          <dt>{% if lang == 'en' %}Input{% else %}Wejście{% endif %}</dt><dd>IFC 2x3 · IFC4 · DWG · DXF</dd>
+          <dt>{% if lang == 'en' %}Output{% else %}Wynik{% endif %}</dt><dd>{% if lang == 'en' %}Excel with formulas and element GUID{% else %}Excel z formułami i GUID elementu{% endif %}</dd>
+          <dt>{% if lang == 'en' %}Balance{% else %}Bilans{% endif %}</dt><dd>{% if lang == 'en' %}1:1 with the model{% else %}1:1 z modelem{% endif %}</dd>
+          <dt>{% if lang == 'en' %}Delivery{% else %}Termin{% endif %}</dt><dd>24–48 h</dd>
+        </dl>
+      </aside>
     </div>
   </div>
 </section>
 
-<section class="container" style="padding-top:20px;">
-  <div class="section-head reveal" style="margin-bottom:28px;">
-    <span class="eyebrow">{% if lang == 'en' %}Core Capabilities{% else %}Zakres usług inżynierskich{% endif %}</span>
-    <h2 class="h2">{% if lang == 'en' %}What we deliver for General Contractors &amp; Estimators{% else %}Co realnie przygotowujemy dla działów ofertowania i wykonawców{% endif %}</h2>
-  </div>
-
-  <div class="service-cards">
-    <div class="service-card reveal">
-      <span class="t-num">01</span>
-      <h3>{% if lang == 'en' %}Geometry &amp; Quality Audit{% else %}Audyt geometrii i spójności IFC{% endif %}</h3>
-      <p>
-        {% if lang == 'en' %}
-        Full technical scan of the BIM model: detecting overlapping segments, unextruded profiles, missing fittings and orphan runs.
-        {% else %}
-        Kompleksowy skan techniczny modeli instalacyjnych: detekcja zdublowanych siatek, odcinków bez ekstruzji, brakujących trójników na kolizjach osi oraz rur poza układem.
-        {% endif %}
-      </p>
-      <ul>
-        <li>{% if lang == 'en' %}1:1 Balance Sheet (model vs report){% else %}Bilans kompletności 1:1 (w modelu vs w raporcie){% endif %}</li>
-        <li>{% if lang == 'en' %}Deduplication of overlapping solids{% else %}Automatyczna deduplikacja nakładających się brył{% endif %}</li>
-        <li>{% if lang == 'en' %}Audit log with GlobalId anchors{% else %}Rejestr anomalii z bezpośrednimi kluczami GlobalId{% endif %}</li>
-      </ul>
+<section class="eng-s">
+  <div class="container">
+    <div class="eng-h"><h2>{% if lang == 'en' %}Fewer tender errors.{% else %}Mniej błędów w ofercie.{% endif %}</h2></div>
+    <div class="eng-grid">
+      <div class="eng-cell"><h3>{% if lang == 'en' %}No hidden model errors{% else %}Błędy modelu nie trafiają do oferty{% endif %}</h3><p>{% if lang == 'en' %}We catch duplicated solids, segments without extrusion, missing tees and pipes outside the system before they reach your price.{% else %}Wychwytujemy zdublowane bryły, odcinki bez wyciągnięcia, brakujące trójniki i rury poza układem, zanim trafią do wyceny.{% endif %}</p></div>
+      <div class="eng-cell"><h3>{% if lang == 'en' %}1:1 balance{% else %}Bilans 1:1{% endif %}</h3><p>{% if lang == 'en' %}Item counts and lengths in the workbook match the model. The TOTAL row can be checked against the 3D geometry, and gaps go to a separate anomaly sheet.{% else %}Liczba pozycji i długości w arkuszu zgadzają się z modelem. Wiersz RAZEM można sprawdzić na geometrii 3D, a braki trafiają do osobnego arkusza anomalii.{% endif %}</p></div>
+      <div class="eng-cell"><h3>{% if lang == 'en' %}Installation allowances{% else %}Naddatki montażowe{% endif %}</h3><p>{% if lang == 'en' %}Cutting and waste allowances are calculated by formula, separately for each system. Change a value and the workbook recalculates.{% else %}Naddatki na cięcie i odpad liczone formułą, osobno dla każdego systemu. Zmieniasz wartość, a arkusz przelicza się sam.{% endif %}</p></div>
     </div>
-
-    <div class="service-card reveal" style="--d:.06s">
-      <span class="t-num">02</span>
-      <h3>{% if lang == 'en' %}Commercial Takeoff &amp; RFQ{% else %}Zestawienia RFQ i przedmiary BOQ{% endif %}</h3>
-      <p>
-        {% if lang == 'en' %}
-        Mapping extracted lengths and counts to commercial manufacturer catalogs, standard sizing and procurement waste allowances.
-        {% else %}
-        Przeniesienie surowej geometrii na typoszeregi rynkowe producentów (DN, przekroje blachy) wraz z dynamicznymi naddatkami montażowymi.
-        {% endif %}
-      </p>
-      <ul>
-        <li>{% if lang == 'en' %}Duct sheet metal area [m²] (DIN 18379){% else %}Powierzchnia blachy kanałów [m²] wg DIN 18379{% endif %}</li>
-        <li>{% if lang == 'en' %}Piping by system &amp; floor [m]{% else %}Rurociągi z podziałem na kondygnacje i układy trasy{% endif %}</li>
-        <li>{% if lang == 'en' %}Excel formulas linking takeoffs to RFQ{% else %}Formuły łączące arkusze szczegółowe z zapytaniem RFQ{% endif %}</li>
-      </ul>
-    </div>
-
-    <div class="service-card reveal" style="--d:.12s">
-      <span class="t-num">03</span>
-      <h3>{% if lang == 'en' %}CAD &amp; Data Pipeline Automation{% else %}Automatyzacja CAD/BIM &amp; Pipeline{% endif %}</h3>
-      <p>
-        {% if lang == 'en' %}
-        Custom data extractors from legacy 2D DWG drawings or complex IFC schemas straight into your internal estimating and ERP workflows.
-        {% else %}
-        Dedykowane mosty wymiany danych: masowy eksport długości i bloków z dokumentacji płaskiej 2D DWG lub niestandardowych schematów IFC wprost do baz kosztorysowych.
-        {% endif %}
-      </p>
-      <ul>
-        <li>{% if lang == 'en' %}Fast DWG/DXF batch quantity extraction{% else %}Masowe zliczanie tras i armatury z DWG/DXF{% endif %}</li>
-        <li>{% if lang == 'en' %}Python &amp; AutoLISP custom routines{% else %}Autorskie skrypty w Pythonie i AutoLISP{% endif %}</li>
-        <li>{% if lang == 'en' %}Norma PRO / Excel custom exporters{% else %}Struktury danych zgodne z arkuszami wycenowymi{% endif %}</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="cta-box reveal">
-    <div>
-      <h3>{% if lang == 'en' %}Have a live tender model to audit?{% else %}Wyceniasz obiekt kubaturowy lub przemysłowy?{% endif %}</h3>
-      <p>
-        {% if lang == 'en' %}
-        Send over a sample floor or the full IFC/DWG files. We will run a test audit and return a verified quantitative reconciliation.
-        {% else %}
-        Prześlij plik IFC lub rzut DWG jednej kondygnacji. Bezpłatnie wykonamy próbny audyt spójności geometrii i przygotujemy wzorcowy arkusz zestawienia.
-        {% endif %}
-      </p>
-    </div>
-    <a href="#contact" class="btn btn-primary" style="white-space:nowrap;">
-      {% if lang == 'en' %}Contact for trial audit{% else %}Zamów audyt próbny{% endif %} &rarr;
-    </a>
   </div>
 </section>
 
-<section class="container section" id="addin-section" style="padding-top:20px; border-top: 1px solid var(--line);">
-  <div class="section-head reveal" style="margin-bottom:32px;">
-    <span class="eyebrow">{% if lang == 'en' %}Inspection Tooling{% else %}Opcjonalne narzędzie wspierające{% endif %}</span>
-    <h2 class="h2">ViewIs MEP Link (Excel Add-in)</h2>
-    <p class="lead">
-      {% if lang == 'en' %}
-      An optional local add-in for engineers who want to inspect IFC models directly inside their takeoff workbooks. The add-in is not required to benefit from our QTO services &mdash; it is an open companion tool.
-      {% else %}
-      Autorska, otwarta wtyczka umożliwiająca podgląd 3D bezpośrednio w arkuszu kalkulacyjnym. Korzystanie z naszych usług audytu i przedmiarowania nie wymaga instalacji żadnych wtyczek &mdash; gotowe raporty to uniwersalne pliki Excela.
-      {% endif %}
-    </p>
-  </div>
-
-  <div class="two-col">
-    <div class="panel reveal">
-      <h3>{% if lang == 'en' %}Transparent &amp; Secure{% else %}Otwarty i bezpieczny kod{% endif %}</h3>
-      <p style="margin-bottom:14px;">
-        {% if lang == 'en' %}
-        No black-box installers: the package contains an open, readable <code>.bat</code> script (which you can inspect in Notepad) that registers the manifest locally without admin privileges, plus a guide for manual installation.
-        {% else %}
-        Brak nieprzejrzystych instalatorów <code>.exe</code>: paczka zawiera czytelny, otwarty skrypt <code>.bat</code> (możesz podejrzeć każdą komendę w Notatniku), który rejestruje manifest w Excelu bez praw administratora. Dostępna jest również instalacja w 100% manualna.
-        {% endif %}
-      </p>
-      <ul>
-        <li>{% if lang == 'en' %}100% Local processing via WebAssembly (Web-IFC){% else %}Przetwarzanie w 100% w lokalnej pamięci RAM (Web-IFC / WASM){% endif %}</li>
-        <li>{% if lang == 'en' %}Zero cloud uploads &mdash; full commercial confidentiality{% else %}Żadne pliki modeli ani dane przetargowe nie trafiają do chmury{% endif %}</li>
-      </ul>
-      <p style="margin-top:22px;">
-        <a href="{% url 'mep_download_zip' %}" class="btn btn-primary">
-          {% if lang == 'en' %}Download package (.zip){% else %}Pobierz wtyczkę (.zip){% endif %}
-        </a>
-      </p>
-    </div>
-
-    <div class="panel reveal" style="--d:.08s">
-      <h3>{% if lang == 'en' %}Installation Options{% else %}Dwie metody uruchomienia{% endif %}</h3>
-      <ul class="steps-list" style="margin-top:10px;">
-        <li>
-          <span class="step-num">A.</span>
-          <span>
-            <strong>{% if lang == 'en' %}Automatic script:{% else %}Automatyczny skrypt .bat:{% endif %}</strong><br>
-            {% if lang == 'en' %}Extract the zip, inspect <code>instaluj-viewis-mep.bat</code> and run it to add the manifest to Excel trusted catalogs.{% else %}Wypakuj archiwum i uruchom <code>instaluj-viewis-mep.bat</code> (rejestruje katalog manifestów w rejestrze użytkownika).{% endif %}
-          </span>
-        </li>
-        <li>
-          <span class="step-num">B.</span>
-          <span>
-            <strong>{% if lang == 'en' %}Manual setup (No scripts):{% else %}Instalacja manualna (bez skryptów):{% endif %}</strong><br>
-            {% if lang == 'en' %}In Excel: <em>Options &rarr; Trust Center &rarr; Trusted Add-in Catalogs</em> and add the folder containing <code>manifest.xml</code>.{% else %}W Excelu: <em>Opcje &rarr; Centrum zaufania &rarr; Zaufane katalogi dodatków</em> i wskaż folder z plikiem <code>manifest.xml</code>.{% endif %}
-          </span>
-        </li>
-      </ul>
+<section class="eng-s">
+  <div class="container">
+    <div class="eng-h"><h2>{% if lang == 'en' %}How it works in practice.{% else %}Jak to wygląda w pracy.{% endif %}</h2></div>
+    <div class="eng-two">
+      <div class="eng-media">
+        <video autoplay loop muted playsinline><source src="{% static 'video/mep-demo.mp4' %}" type="video/mp4"></video>
+        <p class="eng-empty">{% if lang == 'en' %}Recording: selecting a row in Excel and isolating the installation in the 3D view.{% else %}Nagranie: wybór wiersza w Excelu i izolowanie instalacji w podglądzie 3D.{% endif %}</p>
+      </div>
+      <ol class="eng-steps">
+        <li>{% if lang == 'en' %}Select a row in the Excel workbook.{% else %}Wybierasz wiersz w arkuszu Excel.{% endif %}</li>
+        <li>{% if lang == 'en' %}The add-in isolates that element in the 3D view.{% else %}Dodatek izoluje ten element w podglądzie 3D.{% endif %}</li>
+        <li>{% if lang == 'en' %}You check the geometry and quantity before the line goes into your bid.{% else %}Sprawdzasz geometrię i ilość, zanim pozycja trafi do oferty.{% endif %}</li>
+      </ol>
     </div>
   </div>
-
-  <p class="quote reveal" style="margin-top:70px;">
-    {% if lang == 'en' %}
-    Traceable quantities. Every line item in your estimate is tied to verified spatial geometry.
-    <small>FORM FOLLOWS FUNCTION &middot; ACCURACY MATTERS</small>
-    {% else %}
-    Deterministyczny bilans. Każdy wiersz kosztorysu powiązany z fizycznie zweryfikowaną geometrią.
-    <small>FORMA PODĄŻA ZA FUNKCJĄ &middot; BEZWZGLĘDNA DOKŁADNOŚĆ</small>
-    {% endif %}
-  </p>
 </section>
+
+<section class="eng-s">
+  <div class="container">
+    <div class="eng-h">
+      <h2>{% if lang == 'en' %}Rotate the model, see the isolated ventilation run.{% else %}Obróć model i zobacz wyizolowaną trasę wentylacji.{% endif %}</h2>
+      <p class="lead">{% if lang == 'en' %}Drag to rotate, scroll to zoom. The view runs entirely in your browser.{% else %}Przeciągnij, aby obracać, przewiń, aby przybliżyć. Podgląd działa w całości w Twojej przeglądarce.{% endif %}</p>
+    </div>
+    <div class="eng-media" style="aspect-ratio:21/9;min-height:300px">
+      <model-viewer src="{% static 'models/mep-wentylacja.glb' %}" alt="{% if lang == 'en' %}Isolated ventilation run{% else %}Wyizolowana trasa wentylacji{% endif %}" camera-controls auto-rotate shadow-intensity="1" interaction-prompt="none"></model-viewer>
+      <p class="eng-empty">{% if lang == 'en' %}The demo model is being prepared.{% else %}Model demonstracyjny w przygotowaniu.{% endif %}</p>
+    </div>
+  </div>
+</section>
+
+<section class="eng-s" id="addin">
+  <div class="container">
+    <div class="eng-two" style="align-items:start">
+      <div>
+        <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);line-height:1.12;margin-bottom:14px">ViewIs MEP Link</h2>
+        <p class="lead" style="margin-bottom:24px">{% if lang == 'en' %}A free Excel add-in for previewing IFC models inside your takeoff workbook. You do not need it to use our services: finished reports are ordinary Excel files.{% else %}Darmowy dodatek do Excela, który pokazuje model IFC bezpośrednio w arkuszu przedmiaru. Nie jest potrzebny, aby korzystać z naszych usług: gotowe raporty to zwykłe pliki Excela.{% endif %}</p>
+        <a href="{% url 'mep_download_zip' %}" class="btn btn-primary">{% if lang == 'en' %}Download add-in (.zip){% else %}Pobierz dodatek (.zip){% endif %}</a>
+      </div>
+      <aside class="eng-panel">
+        <dl class="eng-kv">
+          <dt>{% if lang == 'en' %}Processing{% else %}Przetwarzanie{% endif %}</dt><dd>{% if lang == 'en' %}local (WebAssembly), no cloud{% else %}lokalnie (WebAssembly), bez chmury{% endif %}</dd>
+          <dt>{% if lang == 'en' %}Install A{% else %}Instalacja A{% endif %}</dt><dd>{% if lang == 'en' %}open .bat script you can read in Notepad, no admin rights{% else %}otwarty skrypt .bat do podejrzenia w Notatniku, bez praw administratora{% endif %}</dd>
+          <dt>{% if lang == 'en' %}Install B{% else %}Instalacja B{% endif %}</dt><dd>{% if lang == 'en' %}manual: Excel &rarr; Options &rarr; Trust Center &rarr; Trusted Add-in Catalogs, point to the folder with manifest.xml{% else %}ręcznie: Excel &rarr; Opcje &rarr; Centrum zaufania &rarr; Zaufane katalogi dodatków, wskaż folder z manifest.xml{% endif %}</dd>
+        </dl>
+      </aside>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<script>
+document.querySelectorAll('.eng-media').forEach(function (m) {
+  var v = m.querySelector('model-viewer'), s = m.querySelector('source');
+  if (v) v.addEventListener('error', function () { m.classList.add('empty'); });
+  if (s) s.addEventListener('error', function () { m.classList.add('empty'); });
+});
+</script>
 {% endblock %}
