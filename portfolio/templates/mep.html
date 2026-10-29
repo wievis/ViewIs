@@ -29,8 +29,6 @@
 .xl-grid thead tr:last-child th{top:24px;background:#e2efda;color:#1b3d27;font-weight:600;text-align:left}
 .xl-grid .rn{background:#f3f3f3;color:#666;text-align:center;width:38px;padding:2px 4px}
 .xl-grid .n{text-align:right;font-variant-numeric:tabular-nums}
-.xl-grid .mono{font-family:Consolas,monospace;font-size:11px}
-.xl-grid .more{color:var(--g);font-weight:600}
 .xl-grid tbody tr{cursor:cell}
 .xl-grid tbody tr:hover td{background:#f1f8f3}
 .xl-grid tbody tr.active-row td{background:#cfe8d8 !important;box-shadow:inset 0 2px 0 var(--g),inset 0 -2px 0 var(--g)}
@@ -55,7 +53,6 @@
 #xl-wire{position:absolute;right:8px;top:8px;width:32px;height:32px;padding:0;display:flex;align-items:center;justify-content:center;background:rgba(15,23,42,.88);border:1px solid #334155;color:#38bdf8}
 #xl-wire.on{background:#2563eb;color:#fff}
 #xl-msg{position:absolute;inset:0;display:none;align-items:center;justify-content:center;text-align:center;padding:28px;color:#94a3b8;font-size:12px;line-height:1.6;background:radial-gradient(circle at center,#111c33,#0b1120)}
-#xl-msg code{color:#38bdf8;font-size:11px}
 .pane-nav{display:flex;flex-direction:column;gap:6px;padding:8px;border-top:1px solid #334155}
 .pane-nav .r{display:flex;gap:6px;align-items:center}
 .pane-nav .r button{flex:1}
@@ -64,8 +61,7 @@
 #nav-el button{flex:none;width:28px;padding:4px 0}
 #xl-card{border-top:1px solid #334155;padding:10px 14px;max-height:190px;overflow-y:auto;font-size:11px;color:#cbd5e1;line-height:1.5}
 #xl-card .cls{display:inline-block;background:rgba(56,189,248,.15);color:#38bdf8;border:1px solid rgba(56,189,248,.3);border-radius:4px;padding:1px 7px;font-size:10px;font-weight:700}
-#xl-card .nm{color:#fff;font-weight:600;font-size:12px;margin:4px 0}
-#xl-card .mono{font-family:Consolas,monospace;font-size:10px;word-break:break-all}
+#xl-card .nm{color:#fff;font-weight:600;font-size:13px;margin:4px 0}
 #xl-card .mut{color:#94a3b8}
 #xl-card .pr{display:flex;justify-content:space-between;gap:10px;padding:2px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
 #xl-card .pr span{color:#94a3b8}
@@ -128,8 +124,8 @@
           <div class="xl-grid" id="xl-grid">
             <table>
               <thead>
-                <tr><th class="rn"></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th><th>G</th></tr>
-                <tr><th class="rn">1</th><th>Lp.</th><th>Kondygnacja</th><th>System</th><th>Przekrój / Wymiar</th><th>Długość [m]</th><th>Powierzchnia [m²]</th><th>GlobalId</th></tr>
+                <tr><th class="rn"></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th><th>G</th><th>H</th><th>I</th></tr>
+                <tr><th class="rn">1</th><th>Lp.</th><th>Kondygnacja</th><th>System instalacyjny</th><th>Przekrój katalogowy [mm]</th><th>Liczba odcinków [szt.]</th><th>Długość łączna [m]</th><th>Powierzchnia łączna [m²]</th><th>Naddatek montażowy [%]</th><th>Zapotrzebowanie z naddatkiem [m²]</th></tr>
               </thead>
               <tbody id="xl-tb"></tbody>
             </table>
@@ -333,14 +329,13 @@
   function renderTable() {
     var s = sheets[sel.sheet], tb = $('xl-tb');
     if (!s || !s.rows.length) {
-      tb.innerHTML = '<tr><td colspan="8" class="empty">Brak danych w tym arkuszu.</td></tr>';
+      tb.innerHTML = '<tr><td colspan="10" class="empty">Brak danych w tym arkuszu.</td></tr>';
       return;
     }
     tb.innerHTML = s.rows.map(function (r, i) {
-      var gText = r.guids && r.guids.length ? r.guids[0] : '—';
-      var extra = (r.guids && r.guids.length > 1) ? ' <span class="more">+' + (r.guids.length - 1) + '</span>' : '';
       return '<tr data-i="' + i + '"><td class="rn">' + (i + 2) + '</td><td class="n">' + r.lp + '</td><td>' + r.storey + '</td><td>' + r.system +
-        '</td><td>' + r.sec + '</td><td class="n">' + (r.len ? fmt(r.len) : (r.pcs ? r.pcs + ' szt.' : '—')) + '</td><td class="n">' + (r.area ? fmt(r.area) : '—') + '</td><td class="mono">' + gText + extra + '</td></tr>';
+        '</td><td>' + r.sec + '</td><td class="n">' + r.count + '</td><td class="n">' + fmt(r.len) + '</td><td class="n">' + fmt(r.area) +
+        '</td><td class="n">' + r.allowance + '%</td><td class="n"><b>' + fmt(r.order_area) + '</b></td></tr>';
     }).join('');
   }
 
@@ -355,14 +350,14 @@
 
   function fbar() {
     var r = curRow();
-    $('xl-name').textContent = r ? 'G' + (sel.row + 2) : 'A1';
-    $('xl-fx').textContent = r && r.guids ? r.guids[sel.idx] : '';
+    $('xl-name').textContent = r ? 'I' + (sel.row + 2) : 'A1';
+    $('xl-fx').textContent = r ? '=ROUNDUP(G' + (sel.row + 2) + '*(1+H' + (sel.row + 2) + '), 2)' : '';
   }
 
   function sums() {
-    var s = sheets[sel.sheet], L = 0, A = 0;
-    if (s) s.rows.forEach(function (r) { L += (r.len || 0); A += (r.area || 0); });
-    $('xl-sum').textContent = 'Σ długość: ' + fmt(L) + ' m   |   Σ powierzchnia: ' + fmt(A) + ' m²';
+    var s = sheets[sel.sheet], L = 0, A = 0, O = 0;
+    if (s) s.rows.forEach(function (r) { L += (r.len || 0); A += (r.area || 0); O += (r.order_area || 0); });
+    $('xl-sum').textContent = 'Σ długość: ' + fmt(L) + ' m   |   Σ netto: ' + fmt(A) + ' m²   |   Σ z naddatkiem: ' + fmt(O) + ' m²';
   }
 
   function selectRow(i, k) {
@@ -383,24 +378,29 @@
     renderTabs(); renderTable(); fbar(); labelRow(); sums(); render3D();
   }
 
-  function renderCard(g) {
+  function renderCard(row, g) {
     var el = $('xl-card');
-    if (!g) { el.innerHTML = '<div class="mut">Wybierz wiersz w arkuszu lub kliknij element w modelu 3D.</div>'; return; }
-    var det = detailsMap[g] || [];
-    var h = '<div class="cls">IFC Element</div><div class="nm">' + g + '</div>';
+    if (!row) { el.innerHTML = '<div class="mut">Wybierz wiersz w arkuszu lub kliknij element w modelu 3D.</div>'; return; }
+    var det = (g && detailsMap[g]) ? detailsMap[g] : [];
+    var h = '<div class="cls">Kanał prostokątny</div><div class="nm">' + row.sec + ' mm (' + row.system + ')</div>';
+    h += '<div class="pr"><span>Kondygnacja</span><b>' + row.storey + '</b></div>';
+    h += '<div class="pr"><span>Liczba odcinków w pozycji</span><b>' + row.count + ' szt.</b></div>';
+    h += '<div class="pr"><span>Długość łączna</span><b>' + fmt(row.len) + ' m</b></div>';
+    h += '<div class="pr"><span>Powierzchnia blachy</span><b>' + fmt(row.area) + ' m²</b></div>';
+    h += '<div class="pr"><span>Zapotrzebowanie (+10%)</span><b style="color:var(--pos)">' + fmt(row.order_area) + ' m²</b></div>';
     if (det.length) {
       det.forEach(function(p) {
-        h += '<div class="pr"><span>' + p[0] + '</span><b>' + p[1] + '</b></div>';
+        if (!/Identyfikator|GlobalId/i.test(p[0])) {
+          h += '<div class="pr"><span>' + p[0] + '</span><b>' + p[1] + '</b></div>';
+        }
       });
-    } else {
-      h += '<div class="mut">Brak dodatkowych atrybutów.</div>';
     }
     el.innerHTML = h;
   }
 
   function render3D() {
     var row = curRow(), g = (row && row.guids) ? row.guids[sel.idx] : null;
-    renderCard(g);
+    renderCard(row, g);
     if (!ready3d) return;
 
     allMeshes.forEach(function (m) {
@@ -422,10 +422,10 @@
       boxHelper.setFromObject(e.node);
       boxHelper.visible = true;
       zoomToFit(e.box);
-      setBadge('Podświetlono element', '#4ade80');
+      setBadge('Wyizolowano: ' + (row.sec || '') + ' mm', '#4ade80');
     } else {
       boxHelper.visible = false;
-      setBadge('Element poza bryłą 3D', '#fbbf24');
+      setBadge('Element poza modelem', '#fbbf24');
     }
   }
 
