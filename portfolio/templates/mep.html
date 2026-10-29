@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block title %}{% if lang == 'en' %}Quantity takeoffs from IFC and DWG | ViewIs{% else %}Przedmiary z IFC i DWG | ViewIs{% endif %}{% endblock %}
+{% block meta_description %}{% if lang == 'en' %}Takeoffs of ducts, pipework and fittings from IFC models and DWG drawings, with live formulas, 1:1 balance and installation allowances.{% else %}Przedmiary kanałów, rurociągów i armatury z modeli IFC i rysunków DWG: aktywne formuły, bilans 1:1 i naddatki montażowe.{% endif %}{% endblock %}
 
 {% block extra_head %}
 {% include 'eng_styles.html' %}
@@ -19,30 +21,20 @@
 .xl-fbar #xl-name{width:64px;border:1px solid #c8c8c8;padding:1px 6px;text-align:center}
 .xl-fbar i{color:var(--g);font-weight:700}
 .xl-fbar #xl-fx{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:Consolas,monospace}
+
 .xl-grid{flex:1;overflow:auto;min-height:0;background:#fff}
-.xl-grid table{border-collapse:separate;border-spacing:0;min-width:100%}
-.xl-grid th,.xl-grid td{border-right:1px solid #e1e1e1;border-bottom:1px solid #e1e1e1;padding:3px 8px;white-space:nowrap;height:24px}
+.xl-grid table{table-layout:fixed;width:max-content;min-width:100%;border-collapse:separate;border-spacing:0}
+.xl-grid th,.xl-grid td{border-right:1px solid #e1e1e1;border-bottom:1px solid #e1e1e1;padding:3px 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;height:24px}
 .xl-grid thead th{position:sticky;background:#f3f3f3;color:#555;font-weight:400;text-align:center;z-index:2}
 .xl-grid thead tr:first-child th{top:0}
 .xl-grid thead tr:last-child th{top:24px;background:#e2efda;color:#1b3d27;font-weight:600;text-align:left}
-.xl-grid .rn{background:#f3f3f3;color:#666;text-align:center;width:38px;padding:2px 4px}
+.xl-grid .rn{background:#f3f3f3;color:#666;text-align:center}
 .xl-grid .n{text-align:right;font-variant-numeric:tabular-nums}
 .xl-grid tbody tr{cursor:cell}
 .xl-grid tbody tr:hover td{background:#f1f8f3}
 .xl-grid tbody tr.active-row td{background:#cfe8d8 !important;box-shadow:inset 0 2px 0 var(--g),inset 0 -2px 0 var(--g)}
 .xl-grid tbody tr.active-row td.rn{background:var(--g);color:#fff}
 .xl-grid .empty{padding:28px;text-align:center;color:#777;white-space:normal}
-
-.xl-grid th:nth-child(1), .xl-grid td:nth-child(1) { width: 38px; min-width: 38px; max-width: 38px; }
-.xl-grid th:nth-child(2), .xl-grid td:nth-child(2) { width: 44px; min-width: 44px; }
-.xl-grid th:nth-child(3), .xl-grid td:nth-child(3) { width: 210px; min-width: 210px; }
-.xl-grid th:nth-child(4), .xl-grid td:nth-child(4) { width: 150px; min-width: 100px; }
-.xl-grid th:nth-child(5), .xl-grid td:nth-child(5) { width: 175px; min-width: 100px; }
-.xl-grid th:nth-child(6), .xl-grid td:nth-child(6) { width: 155px; min-width: 50px; }
-.xl-grid th:nth-child(7), .xl-grid td:nth-child(7) { width: 135px; min-width: 80px; }
-.xl-grid th:nth-child(8), .xl-grid td:nth-child(8) { width: 165px; min-width: 80px; }
-.xl-grid th:nth-child(9), .xl-grid td:nth-child(9) { width: 165px; min-width: 80px; }
-.xl-grid th:nth-child(10), .xl-grid td:nth-child(10) { width: 215px; min-width: 80px; }
 
 .xl-status{display:flex;gap:18px;align-items:center;background:#f3f3f3;border-top:1px solid #d1d1d1;padding:4px 10px;color:#444;font-size:11.5px;flex-shrink:0}
 .xl-status .sp{flex:1}
@@ -130,9 +122,21 @@
           <div class="xl-fbar"><span id="xl-name">A1</span><i>fx</i><span id="xl-fx"></span></div>
           <div class="xl-grid" id="xl-grid">
             <table>
+              <colgroup>
+                <col style="width: 38px;">
+                <col style="width: 44px;">
+                <col style="width: 210px;">
+                <col style="width: 100px;">
+                <col style="width: 100px;">
+                <col style="width: 50px;">
+                <col style="width: 80px;">
+                <col style="width: 80px;">
+                <col style="width: 80px;">
+                <col style="width: 80px;">
+              </colgroup>
               <thead>
                 <tr><th class="rn"></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th><th>G</th><th>H</th><th>I</th></tr>
-                <tr><th class="rn">1</th><th>Lp.</th><th>Kondygnacja</th><th>System instalacyjny</th><th>Przekrój katalogowy [mm]</th><th>Liczba odcinków [szt.]</th><th>Długość łączna [m]</th><th>Powierzchnia łączna [m²]</th><th>Naddatek montażowy [%]</th><th>Zapotrzebowanie z naddatkiem [m²]</th></tr>
+                <tr><th class="rn">1</th><th>Lp.</th><th>Kondygnacja</th><th>System</th><th>Przekrój [mm]</th><th>Szt.</th><th>Długość [m]</th><th>Pow. [m²]</th><th>Naddatek</th><th>Razem [m²]</th></tr>
               </thead>
               <tbody id="xl-tb"></tbody>
             </table>
@@ -333,9 +337,18 @@
       return;
     }
     tb.innerHTML = rows.map(function (r, i) {
-      return '<tr data-i="' + i + '"><td class="rn">' + (i + 2) + '</td><td class="n">' + r.lp + '</td><td>' + r.storey + '</td><td>' + r.system +
-        '</td><td>' + r.sec + '</td><td class="n">' + r.count + '</td><td class="n">' + fmt(r.len) + '</td><td class="n">' + fmt(r.area) +
-        '</td><td class="n">' + r.allowance + '%</td><td class="n"><b>' + fmt(r.order_area) + '</b></td></tr>';
+      return '<tr data-i="' + i + '">' +
+        '<td class="rn">' + (i + 2) + '</td>' +
+        '<td class="n">' + r.lp + '</td>' +
+        '<td title="' + r.storey + '">' + r.storey + '</td>' +
+        '<td title="' + r.system + '">' + r.system + '</td>' +
+        '<td title="' + r.sec + '">' + r.sec + '</td>' +
+        '<td class="n">' + r.count + '</td>' +
+        '<td class="n">' + fmt(r.len) + '</td>' +
+        '<td class="n">' + fmt(r.area) + '</td>' +
+        '<td class="n">' + r.allowance + '%</td>' +
+        '<td class="n"><b>' + fmt(r.order_area) + '</b></td>' +
+        '</tr>';
     }).join('');
   }
 
@@ -351,7 +364,7 @@
   function fbar() {
     var r = curRow();
     $('xl-name').textContent = r ? 'I' + (sel.row + 2) : 'A1';
-    $('xl-fx').textContent = r ? '=ROUNDUP(G' + (sel.row + 2) + '*(1+H' + (sel.row + 2) + '), 2)' : '';
+    $('xl-fx').textContent = r ? '=ROUNDUP(H' + (sel.row + 2) + '*(1+I' + (sel.row + 2) + '), 2)' : '';
   }
 
   function sums() {
@@ -464,13 +477,12 @@
         sourceRows = json.rows;
       }
 
-      // Bezpośrednie wyliczenie kolumn w locie (odporne na braki w starych plikach JSON)
       rows = sourceRows.map(function(r, idx) {
         var gList = r.guids || [];
-        var count = r.count != null ? r.count : gList.length;
+        var count = (r.count != null && !isNaN(r.count)) ? Number(r.count) : gList.length;
         var area = Number(r.area || 0);
-        var allowance = r.allowance != null ? r.allowance : 10;
-        var order_area = r.order_area != null ? r.order_area : Math.round(area * (1 + allowance / 100) * 100) / 100;
+        var allowance = 10;
+        var order_area = Math.round(area * 1.10 * 100) / 100;
         return {
           lp: idx + 1,
           storey: r.storey || '—',
