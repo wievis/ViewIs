@@ -2,6 +2,7 @@
 {% load static %}
 {% block title %}404 | {% if lang == 'en' %}Not Found{% else %}Nie znaleziono{% endif %}{% endblock %}
 {% block footer_contact %}{% endblock %}
+{% block robots %}noindex, nofollow{% endblock %}
 {% block content %}
 <div class="container err-wrap">
     <div class="err-code">404</div>

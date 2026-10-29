@@ -1,8 +1,6 @@
 {% extends 'base.html' %}
 {% block body_class %}theme-articles{% endblock %}
 {% load static md %}
-{% block title %}{{ a.d_title }} | Computer Designer{% endblock %}
-{% block meta_description %}{{ a.d_lead|default:a.d_title|truncatechars:155 }}{% endblock %}
 {% block content %}
 <article>
     <header class="article-head">

@@ -3,30 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Maciej Wielgosz | Computer Designer{% endblock %}</title>
+    <title>{% block title %}{{ seo.title|default:"ViewIs | Computer Designer" }}{% endblock %}</title>
     <script>document.documentElement.classList.add('js');try{if(localStorage.getItem('theme')==='light')document.documentElement.classList.add('light-mode')}catch(e){}</script>
 
-    <link rel="canonical" href="https://www.viewis.pl{{ request.path }}">
-    <meta name="description" content="{% block meta_description %}{% if lang == 'en' %}Portfolio of 3D projects: visualizations, animations and virtual environments.{% else %}Portfolio projektów 3D: wizualizacje, animacje, środowiska i makiety wirtualne.{% endif %}{% endblock %}">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.viewis.pl{{ request.path }}">
-    <meta property="og:title" content="{% block og_title %}Maciej Wielgosz - Computer Designer Portfolio{% endblock %}">
-    <meta property="og:description" content="{% if lang == 'en' %}3D visualizations, virtual environments and digital tools. See my latest work.{% else %}Projekty 3D, wizualizacje i design. Zobacz moje najnowsze realizacje.{% endif %}">
+    <meta name="robots" content="{% block robots %}index, follow, max-image-preview:large, max-snippet:-1{% endblock %}">
+    {% if seo.canonical %}<link rel="canonical" href="{{ seo.canonical }}">{% endif %}
+    {% if seo.url_pl %}<link rel="alternate" hreflang="pl" href="{{ seo.url_pl }}">
+    <link rel="alternate" hreflang="en" href="{{ seo.url_en }}">
+    <link rel="alternate" hreflang="x-default" href="{{ seo.url_pl }}">{% endif %}
+    <meta name="description" content="{% block meta_description %}{{ seo.description }}{% endblock %}">
+    <meta name="author" content="Maciej Wielgosz">
+    <meta property="og:type" content="{{ seo.og_type|default:'website' }}">
+    <meta property="og:site_name" content="ViewIs">
+    <meta property="og:locale" content="{% if lang == 'en' %}en_US{% else %}pl_PL{% endif %}">
+    <meta property="og:locale:alternate" content="{% if lang == 'en' %}pl_PL{% else %}en_US{% endif %}">
+    {% if seo.canonical %}<meta property="og:url" content="{{ seo.canonical }}">{% endif %}
+    <meta property="og:title" content="{% block og_title %}{{ seo.og_title|default:'ViewIs | Computer Designer' }}{% endblock %}">
+    <meta property="og:description" content="{{ seo.description }}">
     <meta property="og:image" content="https://www.viewis.pl{% static 'CEO-background-1200-630.jpg' %}">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="{{ seo.image_alt|default:'ViewIs' }}">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Maciej Wielgosz | Computer Designer">
+    <meta name="twitter:title" content="{{ seo.og_title|default:'ViewIs | Computer Designer' }}">
+    <meta name="twitter:description" content="{{ seo.description }}">
     <meta name="twitter:image" content="https://www.viewis.pl{% static 'CEO-background-1200-630.jpg' %}">
-
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org/",
-      "@type": "Person",
-      "name": "Maciej Wielgosz",
-      "url": "https://www.viewis.pl",
-      "jobTitle": "Computer Designer",
-      "description": "{% if lang == 'en' %}Portfolio of 3D projects and visualizations.{% else %}Portfolio projektów 3D i wizualizacji.{% endif %}"
-    }
-    </script>
+    <meta name="twitter:image:alt" content="{{ seo.image_alt|default:'ViewIs' }}">
+    {% if seo.jsonld %}<script type="application/ld+json">{{ seo.jsonld|safe }}</script>{% endif %}
 
     <link rel="icon" type="image/x-icon" href="{% static 'image/viewis_logo.ico' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
