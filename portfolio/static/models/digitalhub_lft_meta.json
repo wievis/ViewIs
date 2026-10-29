@@ -11,8 +11,11 @@
           "storey": "Kondygnacja -1 (Piwnica / Garaż)",
           "system": "Czerpnia",
           "sec": "800x800",
+          "count": 3,
           "len": 14.78,
           "area": 47.34,
+          "allowance": 10,
+          "order_area": 52.07,
           "guids": [
             "1LkD6nM$z5mRhks0V_NBYL",
             "1LkD6nM$z5mRhks0V_NBd$",
@@ -24,8 +27,11 @@
           "storey": "Kondygnacja -1 (Piwnica / Garaż)",
           "system": "Nawiew",
           "sec": "700x700",
+          "count": 2,
           "len": 28.36,
           "area": 79.4,
+          "allowance": 10,
+          "order_area": 87.34,
           "guids": [
             "0Q5MmehFrFp8w7cVe9Oiel",
             "0wM9v407v8Zw29KkfkYLg1"
@@ -36,8 +42,11 @@
           "storey": "Kondygnacja -1 (Piwnica / Garaż)",
           "system": "Nawiew",
           "sec": "600x600",
+          "count": 3,
           "len": 10.89,
           "area": 26.15,
+          "allowance": 10,
+          "order_area": 28.77,
           "guids": [
             "0Q5MmehFrFp8w7cVe9OjTT",
             "0Q5MmehFrFp8w7cVe9OiX1",
@@ -49,8 +58,11 @@
           "storey": "Kondygnacja -1 (Piwnica / Garaż)",
           "system": "Nawiew",
           "sec": "800x800",
+          "count": 2,
           "len": 0.79,
           "area": 2.54,
+          "allowance": 10,
+          "order_area": 2.79,
           "guids": [
             "0Q5MmehFrFp8w7cVe9OjSQ",
             "0Q5MmehFrFp8w7cVe9OjSE"
@@ -61,8 +73,11 @@
           "storey": "Kondygnacja -1 (Piwnica / Garaż)",
           "system": "Wyrzut",
           "sec": "800x800",
+          "count": 2,
           "len": 24.24,
           "area": 77.57,
+          "allowance": 10,
+          "order_area": 85.33,
           "guids": [
             "1LkD6nM$z5mRhks0V_NBhq",
             "1LkD6nM$z5mRhks0V_NBgr"
@@ -73,8 +88,11 @@
           "storey": "Kondygnacja -1 (Piwnica / Garaż)",
           "system": "Wywiew",
           "sec": "700x700",
+          "count": 2,
           "len": 22.48,
           "area": 62.94,
+          "allowance": 10,
+          "order_area": 69.23,
           "guids": [
             "0Q5MmehFrFp8w7cVe9Oisf",
             "0Q5MmehFrFp8w7cVe9Oivd"
@@ -85,8 +103,11 @@
           "storey": "Kondygnacja -1 (Piwnica / Garaż)",
           "system": "Wywiew",
           "sec": "600x600",
+          "count": 3,
           "len": 9.86,
           "area": 23.65,
+          "allowance": 10,
+          "order_area": 26.02,
           "guids": [
             "0Q5MmehFrFp8w7cVe9OilQ",
             "0Q5MmehFrFp8w7cVe9Oirp",
@@ -98,8 +119,11 @@
           "storey": "Kondygnacja -1 (Piwnica / Garaż)",
           "system": "Wywiew",
           "sec": "800x800",
+          "count": 2,
           "len": 0.87,
           "area": 2.78,
+          "allowance": 10,
+          "order_area": 3.06,
           "guids": [
             "0Q5MmehFrFp8w7cVe9Oikj",
             "0Q5MmehFrFp8w7cVe9OikO"
@@ -110,8 +134,11 @@
           "storey": "Kondygnacja 0 (Parter)",
           "system": "Nawiew",
           "sec": "250x250",
+          "count": 10,
           "len": 30.34,
           "area": 30.34,
+          "allowance": 10,
+          "order_area": 33.37,
           "guids": [
             "1dYj5uD219LwenrqEveN56",
             "1dYj5uD219LwenrqEveN7m",
@@ -130,8 +157,11 @@
           "storey": "Kondygnacja 0 (Parter)",
           "system": "Nawiew",
           "sec": "200x200",
+          "count": 12,
           "len": 35.97,
           "area": 28.78,
+          "allowance": 10,
+          "order_area": 31.66,
           "guids": [
             "1dYj5uD219LwenrqEveMbi",
             "0IU610uqLBi9PW0cPG4ERE",
@@ -152,8 +182,11 @@
           "storey": "Kondygnacja 0 (Parter)",
           "system": "Nawiew",
           "sec": "150x150",
+          "count": 23,
           "len": 44.15,
           "area": 26.5,
+          "allowance": 10,
+          "order_area": 29.15,
           "guids": [
             "1dYj5uD219LwenrqEveMQI",
             "2BKTjMLsL5B9Bo3z8msI8A",
@@ -185,8 +218,11 @@
           "storey": "Kondygnacja 0 (Parter)",
           "system": "Nawiew",
           "sec": "600x350",
+          "count": 3,
           "len": 12.97,
           "area": 24.64,
+          "allowance": 10,
+          "order_area": 27.1,
           "guids": [
             "0whK6vVjP3v8pDjTik37As",
             "0lZKoXAgzA6Rk8Qc$GfIbz",
@@ -198,8 +234,11 @@
           "storey": "Kondygnacja 0 (Parter)",
           "system": "Nawiew",
           "sec": "500x350",
+          "count": 3,
           "len": 11.16,
           "area": 18.96,
+          "allowance": 10,
+          "order_area": 20.86,
           "guids": [
             "3i3rN1c3D3eg6DaIQb0cFo",
             "3i3rN1c3D3eg6DaIQb0cFj",
@@ -211,8 +250,11 @@
           "storey": "Kondygnacja 0 (Parter)",
           "system": "Nawiew",
           "sec": "300x300",
+          "count": 3,
           "len": 11.61,
           "area": 13.94,
+          "allowance": 10,
+          "order_area": 15.33,
           "guids": [
             "0IU610uqLBi9PW0cPG4Ev9",
             "0IU610uqLBi9PW0cPG4Evn",
@@ -224,8 +266,11 @@
           "storey": "Kondygnacja 0 (Parter)",
           "system": "Nawiew",
           "sec": "350x350",
+          "count": 3,
           "len": 7.91,
           "area": 11.08,
+          "allowance": 10,
+          "order_area": 12.19,
           "guids": [
             "0IU610uqLBi9PW0cPG4Ewg",
             "0IU610uqLBi9PW0cPG4Etc",
@@ -237,8 +282,11 @@
           "storey": "Kondygnacja 0 (Parter)",
           "system": "Nawiew",
           "sec": "315x315",
+          "count": 2,
           "len": 8.13,
           "area": 10.24,
+          "allowance": 10,
+          "order_area": 11.26,
           "guids": [
             "2BKTjMLsL5B9Bo3z8msIO2",
             "05P5eSkMnEyfF437pdDY_B"
@@ -249,8 +297,11 @@
           "storey": "Kondygnacja 0 (Parter)",
           "system": "Nawiew",
           "sec": "160x160",
+          "count": 1,
           "len": 12.02,
           "area": 7.69,
+          "allowance": 10,
+          "order_area": 8.46,
           "guids": [
             "2oO_IFrqjBfgpcYD4TzMkD"
           ]
@@ -260,8 +311,11 @@
           "storey": "Kondygnacja 0 (Parter)",
           "system": "Nawiew",
           "sec": "400x350",
+          "count": 2,
           "len": 3.54,
           "area": 5.31,
+          "allowance": 10,
+          "order_area": 5.84,
           "guids": [
             "0IU610uqLBi9PW0cPG4EsK",
             "332o6Ols1FoxttAWqlQ$SL"
@@ -272,8 +326,11 @@
           "storey": "Kondygnacja 0 (Parter)",
           "system": "Nawiew",
           "sec": "450x350",
+          "count": 2,
           "len": 1.46,
           "area": 2.33,
+          "allowance": 10,
+          "order_area": 2.56,
           "guids": [
             "0whK6vVjP3v8pDjTik37A_",
             "2oO_IFrqjBfgpcYD4TzMPT"
@@ -284,8 +341,11 @@
           "storey": "Kondygnacja 0 (Parter)",
           "system": "Wywiew",
           "sec": "600x400",
+          "count": 4,
           "len": 10.69,
           "area": 21.38,
+          "allowance": 10,
+          "order_area": 23.52,
           "guids": [
             "1322J0ISf6URX21vHH1JEM",
             "1322J0ISf6URX21vHH1JQO",
@@ -298,8 +358,11 @@
           "storey": "Kondygnacja 0 (Parter)",
           "system": "Wywiew",
           "sec": "200x200",
+          "count": 9,
           "len": 25.1,
           "area": 20.07,
+          "allowance": 10,
+          "order_area": 22.08,
           "guids": [
             "0c1FHN6HX87et_1ddJRUxp",
             "0c1FHN6HX87et_1ddJRUrm",
@@ -317,8 +380,11 @@
           "storey": "Kondygnacja 0 (Parter)",
           "system": "Wywiew",
           "sec": "250x250",
+          "count": 8,
           "len": 18.61,
           "area": 18.61,
+          "allowance": 10,
+          "order_area": 20.47,
           "guids": [
             "0jjsQn84n8Kxjn0f6ZCJ9F",
             "2PZgK8ybP5Sx3H2BEEEioN",
@@ -335,8 +401,11 @@
           "storey": "Kondygnacja 0 (Parter)",
           "system": "Wywiew",
           "sec": "300x300",
+          "count": 4,
           "len": 14.55,
           "area": 17.45,
+          "allowance": 10,
+          "order_area": 19.2,
           "guids": [
             "2PZgK8ybP5Sx3H2BEEEim6",
             "3RBOjLYBX7JAOdbaXQxocy",
@@ -349,8 +418,11 @@
           "storey": "Kondygnacja 0 (Parter)",
           "system": "Wywiew",
           "sec": "150x150",
+          "count": 12,
           "len": 25.4,
           "area": 15.22,
+          "allowance": 10,
+          "order_area": 16.74,
           "guids": [
             "10C_rblBX0hgjaxWsauG58",
             "0jjsQn84n8Kxjn0f6ZCJlz",
@@ -371,8 +443,11 @@
           "storey": "Kondygnacja 0 (Parter)",
           "system": "Wywiew",
           "sec": "450x350",
+          "count": 2,
           "len": 7.31,
           "area": 11.68,
+          "allowance": 10,
+          "order_area": 12.85,
           "guids": [
             "0jjsQn84n8Kxjn0f6ZCIuu",
             "39$_YW1C14yAam0qRZGzpi"
@@ -383,8 +458,11 @@
           "storey": "Kondygnacja 0 (Parter)",
           "system": "Wywiew",
           "sec": "700x400",
+          "count": 2,
           "len": 5.28,
           "area": 11.62,
+          "allowance": 10,
+          "order_area": 12.78,
           "guids": [
             "10C_rblBX0hgjaxWsauGa$",
             "1322J0ISf6URX21vHH1JhP"
@@ -395,8 +473,11 @@
           "storey": "Kondygnacja 0 (Parter)",
           "system": "Wywiew",
           "sec": "350x350",
+          "count": 4,
           "len": 5.81,
           "area": 8.12,
+          "allowance": 10,
+          "order_area": 8.93,
           "guids": [
             "2PZgK8ybP5Sx3H2BEEEi1k",
             "3RBOjLYBX7JAOdbaXQxou0",
@@ -409,8 +490,11 @@
           "storey": "Kondygnacja 0 (Parter)",
           "system": "Wywiew",
           "sec": "400x350",
+          "count": 2,
           "len": 3.81,
           "area": 5.72,
+          "allowance": 10,
+          "order_area": 6.29,
           "guids": [
             "2PZgK8ybP5Sx3H2BEEEi9K",
             "3Qp81pQsTDCBuGWcRK7VjZ"
@@ -421,8 +505,11 @@
           "storey": "Kondygnacja 0 (Parter)",
           "system": "Wywiew",
           "sec": "315x315",
+          "count": 1,
           "len": 4.36,
           "area": 5.49,
+          "allowance": 10,
+          "order_area": 6.04,
           "guids": [
             "3RBOjLYBX7JAOdbaXQxogo"
           ]
@@ -432,8 +519,11 @@
           "storey": "Kondygnacja 0 (Parter)",
           "system": "Wywiew",
           "sec": "500x250",
+          "count": 2,
           "len": 1.3,
           "area": 1.94,
+          "allowance": 10,
+          "order_area": 2.13,
           "guids": [
             "1322J0ISf6URX21vHH1GkN",
             "1322J0ISf6URX21vHH1Gov"
@@ -444,8 +534,11 @@
           "storey": "Kondygnacja 0 (Parter)",
           "system": "Wywiew",
           "sec": "350x300",
+          "count": 2,
           "len": 0.67,
           "area": 0.87,
+          "allowance": 10,
+          "order_area": 0.96,
           "guids": [
             "0jjsQn84n8Kxjn0f6ZCJNL",
             "1322J0ISf6URX21vHH1JIM"
@@ -456,8 +549,11 @@
           "storey": "Kondygnacja +1 (Piętro 1)",
           "system": "Nawiew",
           "sec": "250x250",
+          "count": 9,
           "len": 41.59,
           "area": 41.59,
+          "allowance": 10,
+          "order_area": 45.75,
           "guids": [
             "2jx2Vysjb2cxO7V2OSc2F9",
             "0vtaUD40P76QIoSOlMNlu5",
@@ -475,8 +571,11 @@
           "storey": "Kondygnacja +1 (Piętro 1)",
           "system": "Nawiew",
           "sec": "200x200",
+          "count": 13,
           "len": 37.24,
           "area": 29.79,
+          "allowance": 10,
+          "order_area": 32.77,
           "guids": [
             "2jx2Vysjb2cxO7V2OSc2FB",
             "2jx2Vysjb2cxO7V2OSc2FD",
@@ -498,8 +597,11 @@
           "storey": "Kondygnacja +1 (Piętro 1)",
           "system": "Nawiew",
           "sec": "150x150",
+          "count": 31,
           "len": 46.47,
           "area": 27.89,
+          "allowance": 10,
+          "order_area": 30.68,
           "guids": [
             "2jx2Vysjb2cxO7V2OSc2FF",
             "2jx2Vysjb2cxO7V2OSc2F1",
@@ -539,8 +641,11 @@
           "storey": "Kondygnacja +1 (Piętro 1)",
           "system": "Nawiew",
           "sec": "500x350",
+          "count": 3,
           "len": 14.73,
           "area": 25.04,
+          "allowance": 10,
+          "order_area": 27.54,
           "guids": [
             "3qrv_E7FrB3QaLzyiiZa5c",
             "1a9fkGNITEw9uzOqc3Q13_",
@@ -552,8 +657,11 @@
           "storey": "Kondygnacja +1 (Piętro 1)",
           "system": "Nawiew",
           "sec": "450x350",
+          "count": 4,
           "len": 14.93,
           "area": 23.88,
+          "allowance": 10,
+          "order_area": 26.27,
           "guids": [
             "3qrv_E7FrB3QaLzyiiZa1z",
             "3qrv_E7FrB3QaLzyiiZawj",
@@ -566,8 +674,11 @@
           "storey": "Kondygnacja +1 (Piętro 1)",
           "system": "Nawiew",
           "sec": "400x350",
+          "count": 3,
           "len": 11.09,
           "area": 16.64,
+          "allowance": 10,
+          "order_area": 18.3,
           "guids": [
             "3qrv_E7FrB3QaLzyiiZaAT",
             "3qrv_E7FrB3QaLzyiiZaAa",
@@ -579,8 +690,11 @@
           "storey": "Kondygnacja +1 (Piętro 1)",
           "system": "Nawiew",
           "sec": "600x600",
+          "count": 1,
           "len": 5.31,
           "area": 12.74,
+          "allowance": 10,
+          "order_area": 14.01,
           "guids": [
             "2$Y8t649D0_QTajdlpndZv"
           ]
@@ -590,8 +704,11 @@
           "storey": "Kondygnacja +1 (Piętro 1)",
           "system": "Nawiew",
           "sec": "300x300",
+          "count": 2,
           "len": 7.67,
           "area": 9.2,
+          "allowance": 10,
+          "order_area": 10.12,
           "guids": [
             "3Xp5J0zTr9bOvidPFESSiT",
             "3Xp5J0zTr9bOvidPFESSiC"
@@ -602,8 +719,11 @@
           "storey": "Kondygnacja +1 (Piętro 1)",
           "system": "Nawiew",
           "sec": "600x350",
+          "count": 1,
           "len": 2.39,
           "area": 4.54,
+          "allowance": 10,
+          "order_area": 4.99,
           "guids": [
             "0wM9v407v8Zw29KkfkYLhO"
           ]
@@ -613,8 +733,11 @@
           "storey": "Kondygnacja +1 (Piętro 1)",
           "system": "Nawiew",
           "sec": "315x315",
+          "count": 1,
           "len": 3.58,
           "area": 4.51,
+          "allowance": 10,
+          "order_area": 4.96,
           "guids": [
             "3qrv_E7FrB3QaLzyiiZaEq"
           ]
@@ -624,8 +747,11 @@
           "storey": "Kondygnacja +1 (Piętro 1)",
           "system": "Nawiew",
           "sec": "350x350",
+          "count": 1,
           "len": 1.1,
           "area": 1.54,
+          "allowance": 10,
+          "order_area": 1.69,
           "guids": [
             "228tqHHQ99SwGm2W6FUNbf"
           ]
@@ -635,8 +761,11 @@
           "storey": "Kondygnacja +1 (Piętro 1)",
           "system": "Nawiew",
           "sec": "160x160",
+          "count": 2,
           "len": 0.98,
           "area": 0.63,
+          "allowance": 10,
+          "order_area": 0.69,
           "guids": [
             "228tqHHQ99SwGm2W6FUGoK",
             "228tqHHQ99SwGm2W6FUGpM"
@@ -647,8 +776,11 @@
           "storey": "Kondygnacja +1 (Piętro 1)",
           "system": "Wywiew",
           "sec": "500x350",
+          "count": 6,
           "len": 14.97,
           "area": 25.43,
+          "allowance": 10,
+          "order_area": 27.97,
           "guids": [
             "1ZdLBqerv6gggWo6Cv2TS6",
             "10P5NIu2X3LOh4MVKX2wiy",
@@ -663,8 +795,11 @@
           "storey": "Kondygnacja +1 (Piętro 1)",
           "system": "Wywiew",
           "sec": "150x150",
+          "count": 13,
           "len": 26.77,
           "area": 16.04,
+          "allowance": 10,
+          "order_area": 17.64,
           "guids": [
             "2jx2Vysjb2cxO7V2OSc2tE",
             "2jx2Vysjb2cxO7V2OSc28X",
@@ -686,8 +821,11 @@
           "storey": "Kondygnacja +1 (Piętro 1)",
           "system": "Wywiew",
           "sec": "200x200",
+          "count": 9,
           "len": 19.66,
           "area": 15.73,
+          "allowance": 10,
+          "order_area": 17.3,
           "guids": [
             "2jx2Vysjb2cxO7V2OSc28d",
             "2jx2Vysjb2cxO7V2OSc29S",
@@ -705,8 +843,11 @@
           "storey": "Kondygnacja +1 (Piętro 1)",
           "system": "Wywiew",
           "sec": "350x350",
+          "count": 6,
           "len": 10.95,
           "area": 15.33,
+          "allowance": 10,
+          "order_area": 16.86,
           "guids": [
             "2jx2Vysjb2cxO7V2OSc28q",
             "2jx2Vysjb2cxO7V2OSc2EX",
@@ -721,8 +862,11 @@
           "storey": "Kondygnacja +1 (Piętro 1)",
           "system": "Wywiew",
           "sec": "700x700",
+          "count": 1,
           "len": 4.62,
           "area": 12.94,
+          "allowance": 10,
+          "order_area": 14.23,
           "guids": [
             "2$Y8t649D0_QTajdlpndbT"
           ]
@@ -732,8 +876,11 @@
           "storey": "Kondygnacja +1 (Piętro 1)",
           "system": "Wywiew",
           "sec": "400x350",
+          "count": 3,
           "len": 8.18,
           "area": 12.26,
+          "allowance": 10,
+          "order_area": 13.49,
           "guids": [
             "1xDQY1ds13H984chykW3_U",
             "0jtDHSSkj4_OFGECwGB765",
@@ -745,8 +892,11 @@
           "storey": "Kondygnacja +1 (Piętro 1)",
           "system": "Wywiew",
           "sec": "600x600",
+          "count": 1,
           "len": 4.66,
           "area": 11.18,
+          "allowance": 10,
+          "order_area": 12.3,
           "guids": [
             "2$Y8t649D0_QTajdlpndZe"
           ]
@@ -756,8 +906,11 @@
           "storey": "Kondygnacja +1 (Piętro 1)",
           "system": "Wywiew",
           "sec": "250x250",
+          "count": 7,
           "len": 10.2,
           "area": 10.2,
+          "allowance": 10,
+          "order_area": 11.22,
           "guids": [
             "2jx2Vysjb2cxO7V2OSc28r",
             "2M7aPuGRzEyA70nxPW$eJx",
@@ -773,8 +926,11 @@
           "storey": "Kondygnacja +1 (Piętro 1)",
           "system": "Wywiew",
           "sec": "450x350",
+          "count": 2,
           "len": 4.36,
           "area": 6.97,
+          "allowance": 10,
+          "order_area": 7.67,
           "guids": [
             "3lQxc8zx9Fb9uJgkwXw5xB",
             "0wM9v407v8Zw29KkfkYIb$"
@@ -785,8 +941,11 @@
           "storey": "Kondygnacja +1 (Piętro 1)",
           "system": "Wywiew",
           "sec": "315x315",
+          "count": 4,
           "len": 4.16,
           "area": 5.26,
+          "allowance": 10,
+          "order_area": 5.79,
           "guids": [
             "1xDQY1ds13H984chykW21Z",
             "1xDQY1ds13H984chykW21Q",
@@ -799,8 +958,11 @@
           "storey": "Kondygnacja +1 (Piętro 1)",
           "system": "Wywiew",
           "sec": "300x300",
+          "count": 3,
           "len": 4.19,
           "area": 5.03,
+          "allowance": 10,
+          "order_area": 5.53,
           "guids": [
             "2M7aPuGRzEyA70nxPW$ejv",
             "3lQxc8zx9Fb9uJgkwXw5a_",
@@ -812,3481 +974,13 @@
           "storey": "Kondygnacja +1 (Piętro 1)",
           "system": "Wywiew",
           "sec": "160x160",
+          "count": 1,
           "len": 1.81,
           "area": 1.16,
+          "allowance": 10,
+          "order_area": 1.28,
           "guids": [
             "2T7wIgZ7LFghrG4Hz4mv6i"
-          ]
-        }
-      ]
-    },
-    {
-      "name": "LFT_Kanaly_Spiro",
-      "title": "Kanały spiro",
-      "color": "#1D4ED8",
-      "rows": [
-        {
-          "lp": 1,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "d160",
-          "len": 21.75,
-          "area": 0.0,
-          "guids": [
-            "0IU610uqLBi9PW0cPG4EXn",
-            "0IU610uqLBi9PW0cPG4En_",
-            "0whK6vVjP3v8pDjTik37Ti",
-            "0whK6vVjP3v8pDjTik37RK",
-            "0whK6vVjP3v8pDjTik37HD",
-            "0whK6vVjP3v8pDjTik37xI",
-            "39kOV1505ERgw2qI1_5FH2",
-            "39kOV1505ERgw2qI1_5FGq",
-            "39kOV1505ERgw2qI1_5F2e",
-            "2oO_IFrqjBfgpcYD4TzMl2",
-            "2oO_IFrqjBfgpcYD4TzMCj"
-          ]
-        }
-      ]
-    },
-    {
-      "name": "LFT_Ksztaltki",
-      "title": "Kształtki wentylacyjne",
-      "color": "#0F766E",
-      "rows": [
-        {
-          "lp": 1,
-          "storey": "Kondygnacja -1 (Piwnica / Garaż)",
-          "system": "Wyrzut",
-          "sec": "Kolano prostokątne 800x800 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 5,
-          "guids": [
-            "1LkD6nM$z5mRhks0V_NBf8",
-            "1LkD6nM$z5mRhks0V_NBfE",
-            "1LkD6nM$z5mRhks0V_NBex",
-            "2$Y8t649D0_QTajdlpnddT",
-            "3pZtahKSHFPB_xPlmuXdWm"
-          ]
-        },
-        {
-          "lp": 2,
-          "storey": "Kondygnacja -1 (Piwnica / Garaż)",
-          "system": "Czerpnia",
-          "sec": "Kolano prostokątne 800x800 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 4,
-          "guids": [
-            "1LkD6nM$z5mRhks0V_NBY2",
-            "1LkD6nM$z5mRhks0V_NBYD",
-            "1LkD6nM$z5mRhks0V_NBdd",
-            "1LkD6nM$z5mRhks0V_NBa1"
-          ]
-        },
-        {
-          "lp": 3,
-          "storey": "Kondygnacja -1 (Piwnica / Garaż)",
-          "system": "Nawiew",
-          "sec": "Kolano prostokątne 600x600 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 3,
-          "guids": [
-            "2$Y8t649D0_QTajdlpndr9",
-            "0wM9v407v8Zw29KkfkYL$K",
-            "0wM9v407v8Zw29KkfkYL$I"
-          ]
-        },
-        {
-          "lp": 4,
-          "storey": "Kondygnacja -1 (Piwnica / Garaż)",
-          "system": "Nawiew",
-          "sec": "Kolano prostokątne 800x800 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 3,
-          "guids": [
-            "0Q5MmehFrFp8w7cVe9OjS2",
-            "0Q5MmehFrFp8w7cVe9OjV$",
-            "3pZtahKSHFPB_xPlmuXdXr"
-          ]
-        },
-        {
-          "lp": 5,
-          "storey": "Kondygnacja -1 (Piwnica / Garaż)",
-          "system": "Wywiew",
-          "sec": "Kolano prostokątne 600x600 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 3,
-          "guids": [
-            "2$Y8t649D0_QTajdlpndok",
-            "0wM9v407v8Zw29KkfkYLWU",
-            "0wM9v407v8Zw29KkfkYLWS"
-          ]
-        },
-        {
-          "lp": 6,
-          "storey": "Kondygnacja -1 (Piwnica / Garaż)",
-          "system": "Wywiew",
-          "sec": "Kolano prostokątne 700x700 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 3,
-          "guids": [
-            "03yA$B7yP6BhT8dvTJ$GV7",
-            "0wM9v407v8Zw29KkfkYLYG",
-            "0wM9v407v8Zw29KkfkYLYU"
-          ]
-        },
-        {
-          "lp": 7,
-          "storey": "Kondygnacja -1 (Piwnica / Garaż)",
-          "system": "Wywiew",
-          "sec": "Kolano prostokątne 800x800 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 3,
-          "guids": [
-            "0Q5MmehFrFp8w7cVe9OikW",
-            "0Q5MmehFrFp8w7cVe9OikN",
-            "0Q5MmehFrFp8w7cVe9OikG"
-          ]
-        },
-        {
-          "lp": 8,
-          "storey": "Kondygnacja -1 (Piwnica / Garaż)",
-          "system": "Nawiew",
-          "sec": "Przejście prostokątne 700x700 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 2,
-          "guids": [
-            "0wM9v407v8Zw29KkfkYLwI",
-            "0wM9v407v8Zw29KkfkYL_x"
-          ]
-        },
-        {
-          "lp": 9,
-          "storey": "Kondygnacja -1 (Piwnica / Garaż)",
-          "system": "Czerpnia",
-          "sec": "Przejście prostokątne 800x800 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "1LkD6nM$z5mRhks0V_NByo"
-          ]
-        },
-        {
-          "lp": 10,
-          "storey": "Kondygnacja -1 (Piwnica / Garaż)",
-          "system": "Nawiew",
-          "sec": "Kolano prostokątne 700x700 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "0wM9v407v8Zw29KkfkYLbE"
-          ]
-        },
-        {
-          "lp": 11,
-          "storey": "Kondygnacja -1 (Piwnica / Garaż)",
-          "system": "Nawiew",
-          "sec": "Przejście prostokątne 600x600 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "0Q5MmehFrFp8w7cVe9OiXF"
-          ]
-        },
-        {
-          "lp": 12,
-          "storey": "Kondygnacja -1 (Piwnica / Garaż)",
-          "system": "Nawiew",
-          "sec": "Przejście prostokątne 800x800 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "3pZtahKSHFPB_xPlmuXdXs"
-          ]
-        },
-        {
-          "lp": 13,
-          "storey": "Kondygnacja -1 (Piwnica / Garaż)",
-          "system": "Nawiew",
-          "sec": "Trójnik prostokątny 700x700 / 600x600 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "0Q5MmehFrFp8w7cVe9OjS4"
-          ]
-        },
-        {
-          "lp": 14,
-          "storey": "Kondygnacja -1 (Piwnica / Garaż)",
-          "system": "Wyrzut",
-          "sec": "Przejście prostokątne 800x800 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "3pZtahKSHFPB_xPlmuXdWt"
-          ]
-        },
-        {
-          "lp": 15,
-          "storey": "Kondygnacja -1 (Piwnica / Garaż)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokątne 600x600 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "0wM9v407v8Zw29KkfkYLW2"
-          ]
-        },
-        {
-          "lp": 16,
-          "storey": "Kondygnacja -1 (Piwnica / Garaż)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokątne 700x700 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "0wM9v407v8Zw29KkfkYLZp"
-          ]
-        },
-        {
-          "lp": 17,
-          "storey": "Kondygnacja -1 (Piwnica / Garaż)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokątne 800x800 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "1LkD6nM$z5mRhks0V_NBzs"
-          ]
-        },
-        {
-          "lp": 18,
-          "storey": "Kondygnacja -1 (Piwnica / Garaż)",
-          "system": "Wywiew",
-          "sec": "Trójnik prostokątny 800x800 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "0Q5MmehFrFp8w7cVe9OikP"
-          ]
-        },
-        {
-          "lp": 19,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Przejście prostokąt/koło 150x150 / Ø125 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 21,
-          "guids": [
-            "2BKTjMLsL5B9Bo3z8msI3T",
-            "0dmh2m3vH5mQ0UwUb8oUaC",
-            "0dmh2m3vH5mQ0UwUb8oUli",
-            "3zerYVfpL39fVUkQaZYNRy",
-            "3DJPFzlqTBoO2m$tTNbZPR",
-            "1WRqAvBgb8Gh_458RxsKKC",
-            "1AdyslRUr92A5EAFDSih5R",
-            "1AdyslRUr92A5EAFDSih5e",
-            "1AdyslRUr92A5EAFDSih30",
-            "1AdyslRUr92A5EAFDSih3D",
-            "1AdyslRUr92A5EAFDSihnG",
-            "1AdyslRUr92A5EAFDSihnd",
-            "3i3rN1c3D3eg6DaIQb0cLz",
-            "3i3rN1c3D3eg6DaIQb0cLP",
-            "3i3rN1c3D3eg6DaIQb0cWm",
-            "3i3rN1c3D3eg6DaIQb0cdf",
-            "3i3rN1c3D3eg6DaIQb0chm",
-            "3i3rN1c3D3eg6DaIQb0cgd",
-            "1PCGowDOj9Ax$qOvhQRvyk",
-            "1PCGowDOj9Ax$qOvhQRvmh",
-            "1PCGowDOj9Ax$qOvhQRvj7"
-          ]
-        },
-        {
-          "lp": 20,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokąt/koło 150x150 / Ø125 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 21,
-          "guids": [
-            "0c1FHN6HX87et_1ddJRU$N",
-            "0c1FHN6HX87et_1ddJRUsh",
-            "2PZgK8ybP5Sx3H2BEEEiiz",
-            "17ZOHyHTH6BQr3YSrxMcfn",
-            "17ZOHyHTH6BQr3YSrxMciy",
-            "17ZOHyHTH6BQr3YSrxMcmu",
-            "17ZOHyHTH6BQr3YSrxMco2",
-            "39$_YW1C14yAam0qRZGyVQ",
-            "39$_YW1C14yAam0qRZGzRh",
-            "1PCGowDOj9Ax$qOvhQRv27",
-            "1322J0ISf6URX21vHH1G1O",
-            "1322J0ISf6URX21vHH1G9H",
-            "1322J0ISf6URX21vHH1GL1",
-            "1322J0ISf6URX21vHH1GGq",
-            "1322J0ISf6URX21vHH1Jkb",
-            "1322J0ISf6URX21vHH1JtY",
-            "1y2qzlMzfBz9ABsEG$6nUv",
-            "3Qp81pQsTDCBuGWcRK7VyA",
-            "3Qp81pQsTDCBuGWcRK7Vnf",
-            "3Qp81pQsTDCBuGWcRK7VsY",
-            "2GeE70dYX1nvHQdkvBizaJ"
-          ]
-        },
-        {
-          "lp": 21,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Przejście okrągłe Ø160 / Ø125 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 12,
-          "guids": [
-            "0IU610uqLBi9PW0cPG4EYQ",
-            "0IU610uqLBi9PW0cPG4Ept",
-            "0whK6vVjP3v8pDjTik37UT",
-            "0whK6vVjP3v8pDjTik37jB",
-            "0whK6vVjP3v8pDjTik37jb",
-            "0whK6vVjP3v8pDjTik37xw",
-            "0whK6vVjP3v8pDjTik34CE",
-            "39kOV1505ERgw2qI1_5FPk",
-            "39kOV1505ERgw2qI1_5FCF",
-            "2oO_IFrqjBfgpcYD4TzM$j",
-            "2oO_IFrqjBfgpcYD4TzMDV",
-            "2oO_IFrqjBfgpcYD4TzMPy"
-          ]
-        },
-        {
-          "lp": 22,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Przejście prostokątne 200x200 / 150x150 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 12,
-          "guids": [
-            "2BKTjMLsL5B9Bo3z8msI7N",
-            "1AdyslRUr92A5EAFDSihOG",
-            "1AdyslRUr92A5EAFDSihQZ",
-            "1AdyslRUr92A5EAFDSihru",
-            "1AdyslRUr92A5EAFDSihqF",
-            "3i3rN1c3D3eg6DaIQb0cLy",
-            "3i3rN1c3D3eg6DaIQb0cLO",
-            "3i3rN1c3D3eg6DaIQb0cWt",
-            "3i3rN1c3D3eg6DaIQb0cde",
-            "3i3rN1c3D3eg6DaIQb0cht",
-            "3i3rN1c3D3eg6DaIQb0cgc",
-            "1PCGowDOj9Ax$qOvhQRvpM"
-          ]
-        },
-        {
-          "lp": 23,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Kolano prostokątne 150x150 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 11,
-          "guids": [
-            "0c1FHN6HX87et_1ddJRUzu",
-            "2PZgK8ybP5Sx3H2BEEEizl",
-            "17ZOHyHTH6BQr3YSrxMcfT",
-            "1DDCgUJ8n5hf3Sry0b20kk",
-            "39$_YW1C14yAam0qRZGzP_",
-            "39$_YW1C14yAam0qRZGzPt",
-            "1322J0ISf6URX21vHH1HsE",
-            "1322J0ISf6URX21vHH1Jk1",
-            "1y2qzlMzfBz9ABsEG$6EeP",
-            "1y2qzlMzfBz9ABsEG$6nHg",
-            "3Qp81pQsTDCBuGWcRK7U5L"
-          ]
-        },
-        {
-          "lp": 24,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Króciec przyłączeniowy 200x200 / 150x150 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 7,
-          "guids": [
-            "0c1FHN6HX87et_1ddJRUsj",
-            "2PZgK8ybP5Sx3H2BEEEijO",
-            "17ZOHyHTH6BQr3YSrxMci4",
-            "39$_YW1C14yAam0qRZGyVr",
-            "1322J0ISf6URX21vHH1G16",
-            "1y2qzlMzfBz9ABsEG$6nUx",
-            "3Qp81pQsTDCBuGWcRK7Vy4"
-          ]
-        },
-        {
-          "lp": 25,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokąt/koło Ø125 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 7,
-          "guids": [
-            "0jjsQn84n8Kxjn0f6ZCJXI",
-            "2PZgK8ybP5Sx3H2BEEEiw7",
-            "1DDCgUJ8n5hf3Sry0b20zU",
-            "1322J0ISf6URX21vHH1Hff",
-            "1322J0ISf6URX21vHH1HpT",
-            "1y2qzlMzfBz9ABsEG$6nHf",
-            "3Qp81pQsTDCBuGWcRK7U51"
-          ]
-        },
-        {
-          "lp": 26,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokątne 200x200 / 150x150 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 7,
-          "guids": [
-            "0c1FHN6HX87et_1ddJRUx2",
-            "17ZOHyHTH6BQr3YSrxMcfS",
-            "1DDCgUJ8n5hf3Sry0b20kl",
-            "39$_YW1C14yAam0qRZGy2Y",
-            "1322J0ISf6URX21vHH1GC$",
-            "1y2qzlMzfBz9ABsEG$6nGO",
-            "3Qp81pQsTDCBuGWcRK7V_Q"
-          ]
-        },
-        {
-          "lp": 27,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Przejście prostokątne 250x250 / 200x200 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 6,
-          "guids": [
-            "2BKTjMLsL5B9Bo3z8msICH",
-            "1AdyslRUr92A5EAFDSih1C",
-            "0JV3InQaz9UBog62O3UPwL",
-            "3i3rN1c3D3eg6DaIQb0cT5",
-            "3i3rN1c3D3eg6DaIQb0cYR",
-            "1PCGowDOj9Ax$qOvhQRvpG"
-          ]
-        },
-        {
-          "lp": 28,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Trójnik prostokątny 200x200 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 5,
-          "guids": [
-            "1AdyslRUr92A5EAFDSihVi",
-            "1AdyslRUr92A5EAFDSihBA",
-            "3i3rN1c3D3eg6DaIQb0cMU",
-            "3i3rN1c3D3eg6DaIQb0cZU",
-            "3i3rN1c3D3eg6DaIQb0caH"
-          ]
-        },
-        {
-          "lp": 29,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Króciec przyłączeniowy 250x250 / 150x150 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 5,
-          "guids": [
-            "17ZOHyHTH6BQr3YSrxMcmC",
-            "1322J0ISf6URX21vHH1G9V",
-            "1322J0ISf6URX21vHH1GLE",
-            "3Qp81pQsTDCBuGWcRK7Vnh",
-            "3Qp81pQsTDCBuGWcRK7VrS"
-          ]
-        },
-        {
-          "lp": 30,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokąt/koło 150x100 / Ø125 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 5,
-          "guids": [
-            "1DDCgUJ8n5hf3Sry0b20ld",
-            "3RBOjLYBX7JAOdbaXQxopa",
-            "3RBOjLYBX7JAOdbaXQxo43",
-            "39$_YW1C14yAam0qRZGyAD",
-            "39$_YW1C14yAam0qRZGyDm"
-          ]
-        },
-        {
-          "lp": 31,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Kolano okrągłe Ø160 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 4,
-          "guids": [
-            "0JV3InQaz9UBog62O3UPgs",
-            "0JV3InQaz9UBog62O3UPhQ",
-            "0JV3InQaz9UBog62O3UPl4",
-            "0JV3InQaz9UBog62O3UP_Q"
-          ]
-        },
-        {
-          "lp": 32,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Króciec przyłączeniowy 250x250 / 150x150 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 4,
-          "guids": [
-            "3zerYVfpL39fVUkQaZYNRI",
-            "1AdyslRUr92A5EAFDSih06",
-            "1AdyslRUr92A5EAFDSih0c",
-            "1PCGowDOj9Ax$qOvhQRvmb"
-          ]
-        },
-        {
-          "lp": 33,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokątne 250x250 / 200x200 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 4,
-          "guids": [
-            "0c1FHN6HX87et_1ddJRUrv",
-            "17ZOHyHTH6BQr3YSrxMca5",
-            "1322J0ISf6URX21vHH1G9y",
-            "3Qp81pQsTDCBuGWcRK7V_P"
-          ]
-        },
-        {
-          "lp": 34,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Króciec przyłączeniowy 200x200 / 150x150 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 3,
-          "guids": [
-            "0dmh2m3vH5mQ0UwUb8oUdi",
-            "0dmh2m3vH5mQ0UwUb8oUlB",
-            "1PCGowDOj9Ax$qOvhQRvnR"
-          ]
-        },
-        {
-          "lp": 35,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Nakładka siodłowa 200x200 / Ø160 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 3,
-          "guids": [
-            "0whK6vVjP3v8pDjTik37p$",
-            "39kOV1505ERgw2qI1_5FCd",
-            "2oO_IFrqjBfgpcYD4TzM$f"
-          ]
-        },
-        {
-          "lp": 36,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Przejście prostokąt/koło 200x200 / Ø160 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 3,
-          "guids": [
-            "0JV3InQaz9UBog62O3UPgq",
-            "0JV3InQaz9UBog62O3UPhO",
-            "0JV3InQaz9UBog62O3UPlA"
-          ]
-        },
-        {
-          "lp": 37,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Przejście prostokąt/koło 250x250 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 3,
-          "guids": [
-            "332o6Ols1FoxttAWqlQ$Mh",
-            "332o6Ols1FoxttAWqlQ$DO",
-            "332o6Ols1FoxttAWqlQ$my"
-          ]
-        },
-        {
-          "lp": 38,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokątne 300x300 / 250x250 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 3,
-          "guids": [
-            "17ZOHyHTH6BQr3YSrxMcaQ",
-            "1322J0ISf6URX21vHH1GM_",
-            "3Qp81pQsTDCBuGWcRK7Vf9"
-          ]
-        },
-        {
-          "lp": 39,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokątne 600x400 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 3,
-          "guids": [
-            "1322J0ISf6URX21vHH1JAZ",
-            "1322J0ISf6URX21vHH1JRh",
-            "3Qp81pQsTDCBuGWcRK7VRC"
-          ]
-        },
-        {
-          "lp": 40,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Kolano prostokątne 150x150 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 2,
-          "guids": [
-            "2BKTjMLsL5B9Bo3z8msI4_",
-            "1PCGowDOj9Ax$qOvhQRvzr"
-          ]
-        },
-        {
-          "lp": 41,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Kolano prostokątne 250x250 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 2,
-          "guids": [
-            "0JV3InQaz9UBog62O3UOMH",
-            "332o6Ols1FoxttAWqlQ$FA"
-          ]
-        },
-        {
-          "lp": 42,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Kolano prostokątne 500x350 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 2,
-          "guids": [
-            "3i3rN1c3D3eg6DaIQb0cFr",
-            "332o6Ols1FoxttAWqlQ$SJ"
-          ]
-        },
-        {
-          "lp": 43,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Króciec przyłączeniowy 600x350 / 200x200 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 2,
-          "guids": [
-            "2oO_IFrqjBfgpcYD4TzMIH",
-            "2oO_IFrqjBfgpcYD4TzMIl"
-          ]
-        },
-        {
-          "lp": 44,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Nakładka siodłowa 350x350 / Ø160 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 2,
-          "guids": [
-            "0IU610uqLBi9PW0cPG4EpR",
-            "0whK6vVjP3v8pDjTik37Tv"
-          ]
-        },
-        {
-          "lp": 45,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Przejście prostokątne 300x300 / 250x250 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 2,
-          "guids": [
-            "2BKTjMLsL5B9Bo3z8msIDb",
-            "0JV3InQaz9UBog62O3UOMM"
-          ]
-        },
-        {
-          "lp": 46,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Przejście prostokątne 400x350 / 350x350 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 2,
-          "guids": [
-            "1AdyslRUr92A5EAFDSihdp",
-            "332o6Ols1FoxttAWqlQ$Ef"
-          ]
-        },
-        {
-          "lp": 47,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Przejście prostokątne 600x350 / 500x350 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 2,
-          "guids": [
-            "1AdyslRUr92A5EAFDSiinV",
-            "3i3rN1c3D3eg6DaIQb0ciF"
-          ]
-        },
-        {
-          "lp": 48,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Króciec przyłączeniowy 300x300 / 150x150 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 2,
-          "guids": [
-            "17ZOHyHTH6BQr3YSrxMcoM",
-            "1322J0ISf6URX21vHH1GGo"
-          ]
-        },
-        {
-          "lp": 49,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Nakładka siodłowa 600x400 / Ø125 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 2,
-          "guids": [
-            "1322J0ISf6URX21vHH1GV8",
-            "1322J0ISf6URX21vHH1GVi"
-          ]
-        },
-        {
-          "lp": 50,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokątne 150x150 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 2,
-          "guids": [
-            "2PZgK8ybP5Sx3H2BEEEizk",
-            "1y2qzlMzfBz9ABsEG$6EhZ"
-          ]
-        },
-        {
-          "lp": 51,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokątne 250x250 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 2,
-          "guids": [
-            "1322J0ISf6URX21vHH1G9z",
-            "3Qp81pQsTDCBuGWcRK7VqW"
-          ]
-        },
-        {
-          "lp": 52,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokątne 350x350 / 200x200 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 2,
-          "guids": [
-            "1DDCgUJ8n5hf3Sry0b20iy",
-            "39$_YW1C14yAam0qRZGz_T"
-          ]
-        },
-        {
-          "lp": 53,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokątne 700x400 / 600x400 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 2,
-          "guids": [
-            "1322J0ISf6URX21vHH1Jbv",
-            "1322J0ISf6URX21vHH1JhG"
-          ]
-        },
-        {
-          "lp": 54,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Trójnik prostokątny 400x350 / 350x350 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 2,
-          "guids": [
-            "2PZgK8ybP5Sx3H2BEEEi54",
-            "39$_YW1C14yAam0qRZGy2S"
-          ]
-        },
-        {
-          "lp": 55,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Kolano prostokątne 300x300 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "1AdyslRUr92A5EAFDSihbN"
-          ]
-        },
-        {
-          "lp": 56,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Kolano prostokątne 315x315 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "3i3rN1c3D3eg6DaIQb0cEL"
-          ]
-        },
-        {
-          "lp": 57,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Kolano prostokątne 500x350 / 400x350 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "332o6Ols1FoxttAWqlQ$SQ"
-          ]
-        },
-        {
-          "lp": 58,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Kolano prostokątne 500x400 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "0wM9v407v8Zw29KkfkYLki"
-          ]
-        },
-        {
-          "lp": 59,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Kolano prostokątne 600x350 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "0lZKoXAgzA6Rk8Qc$GfIbq"
-          ]
-        },
-        {
-          "lp": 60,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Króciec przyłączeniowy 300x300 / 150x150 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "3DJPFzlqTBoO2m$tTNbZPa"
-          ]
-        },
-        {
-          "lp": 61,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Króciec przyłączeniowy 300x300 / 200x200 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "39kOV1505ERgw2qI1_5EGV"
-          ]
-        },
-        {
-          "lp": 62,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Króciec przyłączeniowy 315x315 / 150x150 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "1WRqAvBgb8Gh_458RxsKJq"
-          ]
-        },
-        {
-          "lp": 63,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Króciec przyłączeniowy 350x350 / 250x250 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "332o6Ols1FoxttAWqlQ$mw"
-          ]
-        },
-        {
-          "lp": 64,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Króciec przyłączeniowy 400x350 / 250x250 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "332o6Ols1FoxttAWqlQ$DN"
-          ]
-        },
-        {
-          "lp": 65,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Króciec przyłączeniowy 500x350 / 200x200 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "1AdyslRUr92A5EAFDSihBl"
-          ]
-        },
-        {
-          "lp": 66,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Króciec przyłączeniowy 500x350 / 250x250 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "1AdyslRUr92A5EAFDSih19"
-          ]
-        },
-        {
-          "lp": 67,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Króciec przyłączeniowy 600x600 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "1AdyslRUr92A5EAFDSiinX"
-          ]
-        },
-        {
-          "lp": 68,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Króciec przyłączeniowy 700x700 / 700x400 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "0wM9v407v8Zw29KkfkYLTe"
-          ]
-        },
-        {
-          "lp": 69,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Nakładka siodłowa 160x160 / Ø125 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "2oO_IFrqjBfgpcYD4TzM79"
-          ]
-        },
-        {
-          "lp": 70,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Nakładka siodłowa 200x200 / Ø150 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "0IU610uqLBi9PW0cPG4EM3"
-          ]
-        },
-        {
-          "lp": 71,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Nakładka siodłowa 250x250 / Ø160 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "2oO_IFrqjBfgpcYD4TzMPu"
-          ]
-        },
-        {
-          "lp": 72,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Nakładka siodłowa 400x350 / Ø160 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "0whK6vVjP3v8pDjTik37jF"
-          ]
-        },
-        {
-          "lp": 73,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Nakładka siodłowa 450x350 / Ø160 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "0whK6vVjP3v8pDjTik37HQ"
-          ]
-        },
-        {
-          "lp": 74,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Przejście okrągłe Ø150 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "0IU610uqLBi9PW0cPG4EM0"
-          ]
-        },
-        {
-          "lp": 75,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Przejście prostokąt/koło 160x160 / Ø160 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "0JV3InQaz9UBog62O3UP_O"
-          ]
-        },
-        {
-          "lp": 76,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Przejście prostokątne 200x200 / 160x160 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "0JV3InQaz9UBog62O3UPx6"
-          ]
-        },
-        {
-          "lp": 77,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Przejście prostokątne 200x200 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "2BKTjMLsL5B9Bo3z8msI8W"
-          ]
-        },
-        {
-          "lp": 78,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Przejście prostokątne 315x315 / 300x300 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "2BKTjMLsL5B9Bo3z8msIMQ"
-          ]
-        },
-        {
-          "lp": 79,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Przejście prostokątne 350x350 / 250x250 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "332o6Ols1FoxttAWqlQ$Ed"
-          ]
-        },
-        {
-          "lp": 80,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Przejście prostokątne 350x350 / 300x300 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "1AdyslRUr92A5EAFDSihaK"
-          ]
-        },
-        {
-          "lp": 81,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Przejście prostokątne 350x350 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "1AdyslRUr92A5EAFDSihdA"
-          ]
-        },
-        {
-          "lp": 82,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Przejście prostokątne 450x350 / 250x250 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "0JV3InQaz9UBog62O3UPwR"
-          ]
-        },
-        {
-          "lp": 83,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Przejście prostokątne 450x350 / 400x350 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "1AdyslRUr92A5EAFDSihdq"
-          ]
-        },
-        {
-          "lp": 84,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Przejście prostokątne 500x350 / 250x250 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "3i3rN1c3D3eg6DaIQb0cHo"
-          ]
-        },
-        {
-          "lp": 85,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Przejście prostokątne 500x350 / 315x315 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "3i3rN1c3D3eg6DaIQb0cEK"
-          ]
-        },
-        {
-          "lp": 86,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Przejście prostokątne 500x400 / 500x350 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "0wM9v407v8Zw29KkfkYLL_"
-          ]
-        },
-        {
-          "lp": 87,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Przejście prostokątne 600x350 / 200x200 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "3i3rN1c3D3eg6DaIQb0cpE"
-          ]
-        },
-        {
-          "lp": 88,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Przejście prostokątne 600x350 / 500x400 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "0wM9v407v8Zw29KkfkYLkk"
-          ]
-        },
-        {
-          "lp": 89,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Trójnik prostokątny 250x250 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "3i3rN1c3D3eg6DaIQb0cIn"
-          ]
-        },
-        {
-          "lp": 90,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Trójnik prostokątny 500x350 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "3i3rN1c3D3eg6DaIQb0cFF"
-          ]
-        },
-        {
-          "lp": 91,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Trójnik prostokątny 600x350 / 450x350 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "2oO_IFrqjBfgpcYD4TzMNx"
-          ]
-        },
-        {
-          "lp": 92,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Trójnik prostokątny 600x350 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "3i3rN1c3D3eg6DaIQb0ckp"
-          ]
-        },
-        {
-          "lp": 93,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Nawiew",
-          "sec": "Trójnik prostokątny 700x400 / 500x400 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "332o6Ols1FoxttAWqlQ$MR"
-          ]
-        },
-        {
-          "lp": 94,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Kolano prostokątne 150x150 / 150x100 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "3RBOjLYBX7JAOdbaXQxoxW"
-          ]
-        },
-        {
-          "lp": 95,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Kolano prostokątne 200x200 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "1DDCgUJ8n5hf3Sry0b20ix"
-          ]
-        },
-        {
-          "lp": 96,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Kolano prostokątne 250x250 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "3Qp81pQsTDCBuGWcRK7Vth"
-          ]
-        },
-        {
-          "lp": 97,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Kolano prostokątne 300x300 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "1322J0ISf6URX21vHH1JSd"
-          ]
-        },
-        {
-          "lp": 98,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Kolano prostokątne 400x300 / 350x300 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "1322J0ISf6URX21vHH1JXq"
-          ]
-        },
-        {
-          "lp": 99,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Kolano prostokątne 500x250 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "1322J0ISf6URX21vHH1JFh"
-          ]
-        },
-        {
-          "lp": 100,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Króciec przyłączeniowy 200x200 / 150x100 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "1DDCgUJ8n5hf3Sry0b20lf"
-          ]
-        },
-        {
-          "lp": 101,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Króciec przyłączeniowy 250x250 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "0jjsQn84n8Kxjn0f6ZCJXk"
-          ]
-        },
-        {
-          "lp": 102,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Króciec przyłączeniowy 315x315 / 150x100 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "3Qp81pQsTDCBuGWcRK7UO6"
-          ]
-        },
-        {
-          "lp": 103,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Króciec przyłączeniowy 350x350 / 150x100 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "3Qp81pQsTDCBuGWcRK7UdC"
-          ]
-        },
-        {
-          "lp": 104,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Króciec przyłączeniowy 350x350 / 300x300 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "17ZOHyHTH6BQr3YSrxMcZd"
-          ]
-        },
-        {
-          "lp": 105,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Króciec przyłączeniowy 400x350 / 150x100 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "3Qp81pQsTDCBuGWcRK7Ucc"
-          ]
-        },
-        {
-          "lp": 106,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Króciec przyłączeniowy 450x350 / 150x150 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "2GeE70dYX1nvHQdkvBizaL"
-          ]
-        },
-        {
-          "lp": 107,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Króciec przyłączeniowy 600x400 / 150x150 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "1PCGowDOj9Ax$qOvhQRv30"
-          ]
-        },
-        {
-          "lp": 108,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Króciec przyłączeniowy 600x400 / 500x250 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "1322J0ISf6URX21vHH1JAk"
-          ]
-        },
-        {
-          "lp": 109,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Króciec przyłączeniowy 600x600 / 600x400 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "3Qp81pQsTDCBuGWcRK7VRF"
-          ]
-        },
-        {
-          "lp": 110,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Króciec przyłączeniowy 700x400 / 150x150 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "1322J0ISf6URX21vHH1Jta"
-          ]
-        },
-        {
-          "lp": 111,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Króciec przyłączeniowy 700x700 / 700x400 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "0wM9v407v8Zw29KkfkYLUw"
-          ]
-        },
-        {
-          "lp": 112,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Nakładka siodłowa 300x300 / Ø150 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "3Qp81pQsTDCBuGWcRK7VeR"
-          ]
-        },
-        {
-          "lp": 113,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Nakładka siodłowa 450x350 / Ø125 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "0jjsQn84n8Kxjn0f6ZCJBJ"
-          ]
-        },
-        {
-          "lp": 114,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Przejście okrągłe Ø150 / Ø125 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "3Qp81pQsTDCBuGWcRK7VeG"
-          ]
-        },
-        {
-          "lp": 115,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokątne 200x200 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "0c1FHN6HX87et_1ddJRUrx"
-          ]
-        },
-        {
-          "lp": 116,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokątne 250x200 / 200x200 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "1y2qzlMzfBz9ABsEG$6nNa"
-          ]
-        },
-        {
-          "lp": 117,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokątne 315x315 / 300x300 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "3Qp81pQsTDCBuGWcRK7Vg3"
-          ]
-        },
-        {
-          "lp": 118,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokątne 350x350 / 150x150 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "39$_YW1C14yAam0qRZGzcv"
-          ]
-        },
-        {
-          "lp": 119,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokątne 350x350 / 315x315 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "3Qp81pQsTDCBuGWcRK7VhL"
-          ]
-        },
-        {
-          "lp": 120,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokątne 400x150 / 150x150 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "1322J0ISf6URX21vHH1Ji0"
-          ]
-        },
-        {
-          "lp": 121,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokątne 400x250 / 250x250 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "1y2qzlMzfBz9ABsEG$6Eyt"
-          ]
-        },
-        {
-          "lp": 122,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokątne 400x300 / 300x300 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "1322J0ISf6URX21vHH1JSc"
-          ]
-        },
-        {
-          "lp": 123,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokątne 400x350 / 350x350 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "3Qp81pQsTDCBuGWcRK7VhK"
-          ]
-        },
-        {
-          "lp": 124,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokątne 450x350 / 350x300 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "39$_YW1C14yAam0qRZGzpB"
-          ]
-        },
-        {
-          "lp": 125,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokątne 450x350 / 400x350 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "2PZgK8ybP5Sx3H2BEEEi5o"
-          ]
-        },
-        {
-          "lp": 126,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokątne 600x350 / 250x250 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "05qtLYa_fCvuNA$g6CMON_"
-          ]
-        },
-        {
-          "lp": 127,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokątne 600x350 / 450x350 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "0jjsQn84n8Kxjn0f6ZCJU4"
-          ]
-        },
-        {
-          "lp": 128,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Trójnik prostokątny 250x250 / 250x200 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "1y2qzlMzfBz9ABsEG$6Elu"
-          ]
-        },
-        {
-          "lp": 129,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Trójnik prostokątny 350x350 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "39$_YW1C14yAam0qRZGzhp"
-          ]
-        },
-        {
-          "lp": 130,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Trójnik prostokątny 450x350 / 350x350 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "39$_YW1C14yAam0qRZGze3"
-          ]
-        },
-        {
-          "lp": 131,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Trójnik prostokątny 600x350 / 350x300 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "0jjsQn84n8Kxjn0f6ZCJHb"
-          ]
-        },
-        {
-          "lp": 132,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Trójnik prostokątny 600x400 / 350x300 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "1322J0ISf6URX21vHH1JMM"
-          ]
-        },
-        {
-          "lp": 133,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Trójnik prostokątny 700x400 / 400x150 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "1322J0ISf6URX21vHH1JcF"
-          ]
-        },
-        {
-          "lp": 134,
-          "storey": "Kondygnacja 0 (Parter)",
-          "system": "Wywiew",
-          "sec": "Trójnik prostokątny 700x400 / 600x400 / 400x250 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "1y2qzlMzfBz9ABsEG$6Epg"
-          ]
-        },
-        {
-          "lp": 135,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Nawiew",
-          "sec": "Przejście prostokąt/koło 150x150 / Ø125 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 31,
-          "guids": [
-            "2jx2Vysjb2cxO7V2OSc2F5",
-            "2jx2Vysjb2cxO7V2OSc2Fu",
-            "2jx2Vysjb2cxO7V2OSc2F$",
-            "2jx2Vysjb2cxO7V2OSc2Ff",
-            "3nl4fMJK96oAYIRxPkahvc",
-            "0vtaUD40P76QIoSOlMNlsv",
-            "0vtaUD40P76QIoSOlMNleO",
-            "0vtaUD40P76QIoSOlMNldG",
-            "0vtaUD40P76QIoSOlMNlUD",
-            "1mk18BBqjCgw0nNhOZtlkI",
-            "1mk18BBqjCgw0nNhOZtlly",
-            "1mk18BBqjCgw0nNhOZtkVu",
-            "1mk18BBqjCgw0nNhOZtkSr",
-            "3qrv_E7FrB3QaLzyiiZayI",
-            "228tqHHQ99SwGm2W6FUNRn",
-            "228tqHHQ99SwGm2W6FUNPt",
-            "228tqHHQ99SwGm2W6FUNj1",
-            "228tqHHQ99SwGm2W6FUNYB",
-            "228tqHHQ99SwGm2W6FUNpB",
-            "1OxwXlTnf1_8OqbV8A58d6",
-            "1a9fkGNITEw9uzOqc3Q1td",
-            "1a9fkGNITEw9uzOqc3Q1_U",
-            "1a9fkGNITEw9uzOqc3Q1kA",
-            "1a9fkGNITEw9uzOqc3Q1Ns",
-            "1a9fkGNITEw9uzOqc3Q1O_",
-            "1a9fkGNITEw9uzOqc3Q16b",
-            "1a9fkGNITEw9uzOqc3Q0g9",
-            "1a9fkGNITEw9uzOqc3Q0Gt",
-            "1a9fkGNITEw9uzOqc3Q02X",
-            "2EvkpiZz9BWfc7m_jaQOCX",
-            "3Y0fp0_BvFFPea1GebNBaq"
-          ]
-        },
-        {
-          "lp": 136,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokąt/koło 150x150 / Ø125 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 22,
-          "guids": [
-            "2jx2Vysjb2cxO7V2OSc28Y",
-            "2jx2Vysjb2cxO7V2OSc29Q",
-            "2jx2Vysjb2cxO7V2OSc299",
-            "2M7aPuGRzEyA70nxPW$eQh",
-            "2M7aPuGRzEyA70nxPW$eP3",
-            "2M7aPuGRzEyA70nxPW$eyx",
-            "2M7aPuGRzEyA70nxPW$erC",
-            "2M7aPuGRzEyA70nxPW$eml",
-            "1ZdLBqerv6gggWo6Cv2Tqm",
-            "1ZdLBqerv6gggWo6Cv2Tw7",
-            "10P5NIu2X3LOh4MVKX2wgD",
-            "0uSCKvNIbDLBgNu3ZbQzrT",
-            "0uSCKvNIbDLBgNu3ZbQzxn",
-            "0uSCKvNIbDLBgNu3ZbQzue",
-            "0uSCKvNIbDLBgNu3ZbQy0R",
-            "0uSCKvNIbDLBgNu3ZbQy6U",
-            "1a9fkGNITEw9uzOqc3Q7wh",
-            "0jtDHSSkj4_OFGECwGB6U3",
-            "0jtDHSSkj4_OFGECwGB6UR",
-            "0jtDHSSkj4_OFGECwGB6ED",
-            "0jtDHSSkj4_OFGECwGB68K",
-            "2EvkpiZz9BWfc7m_jaQOBs"
-          ]
-        },
-        {
-          "lp": 137,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Nawiew",
-          "sec": "Przejście prostokątne 200x200 / 150x150 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 12,
-          "guids": [
-            "2jx2Vysjb2cxO7V2OSc2FE",
-            "0vtaUD40P76QIoSOlMNlsu",
-            "0vtaUD40P76QIoSOlMNleQ",
-            "1mk18BBqjCgw0nNhOZtlkJ",
-            "1mk18BBqjCgw0nNhOZtllz",
-            "1mk18BBqjCgw0nNhOZtkVw",
-            "1mk18BBqjCgw0nNhOZtkSt",
-            "228tqHHQ99SwGm2W6FUNRo",
-            "228tqHHQ99SwGm2W6FUNPn",
-            "228tqHHQ99SwGm2W6FUNYr",
-            "1a9fkGNITEw9uzOqc3Q0gV",
-            "1a9fkGNITEw9uzOqc3Q0Gu"
-          ]
-        },
-        {
-          "lp": 138,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Kolano prostokątne 150x150 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 7,
-          "guids": [
-            "2jx2Vysjb2cxO7V2OSc28a",
-            "2M7aPuGRzEyA70nxPW$eKJ",
-            "1ZdLBqerv6gggWo6Cv2Tw4",
-            "0jtDHSSkj4_OFGECwGB6Sc",
-            "0jtDHSSkj4_OFGECwGB6G7",
-            "2EvkpiZz9BWfc7m_jaQO4D",
-            "2EvkpiZz9BWfc7m_jaQO44"
-          ]
-        },
-        {
-          "lp": 139,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokąt/koło 150x125 / Ø125 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 7,
-          "guids": [
-            "2M7aPuGRzEyA70nxPW$epu",
-            "1xDQY1ds13H984chykW3ru",
-            "1xDQY1ds13H984chykW3ou",
-            "1ciqUgnSz5ceGyQRZ_P2HF",
-            "07XLgL2IP9LfE15w0TLREQ",
-            "07XLgL2IP9LfE15w0TLRG8",
-            "2_vf44$wX6pAYh2KrlY5d6"
-          ]
-        },
-        {
-          "lp": 140,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Nawiew",
-          "sec": "Króciec przyłączeniowy 250x250 / 150x150 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 6,
-          "guids": [
-            "3nl4fMJK96oAYIRxPkahvn",
-            "0vtaUD40P76QIoSOlMNldM",
-            "0vtaUD40P76QIoSOlMNlUp",
-            "228tqHHQ99SwGm2W6FUNps",
-            "1a9fkGNITEw9uzOqc3Q0DT",
-            "3Y0fp0_BvFFPea1GebNBat"
-          ]
-        },
-        {
-          "lp": 141,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Nawiew",
-          "sec": "Trójnik prostokątny 200x200 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 6,
-          "guids": [
-            "0vtaUD40P76QIoSOlMNlsI",
-            "1mk18BBqjCgw0nNhOZtlYY",
-            "1mk18BBqjCgw0nNhOZtkKb",
-            "228tqHHQ99SwGm2W6FUNF5",
-            "228tqHHQ99SwGm2W6FUNFh",
-            "1a9fkGNITEw9uzOqc3Q0j0"
-          ]
-        },
-        {
-          "lp": 142,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Nawiew",
-          "sec": "Kolano prostokątne 200x200 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 5,
-          "guids": [
-            "0vtaUD40P76QIoSOlMNi54",
-            "0vtaUD40P76QIoSOlMNi5p",
-            "3qrv_E7FrB3QaLzyiiZaB8",
-            "3qrv_E7FrB3QaLzyiiZaAB",
-            "1a9fkGNITEw9uzOqc3Q0FY"
-          ]
-        },
-        {
-          "lp": 143,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokątne 200x200 / 150x150 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 5,
-          "guids": [
-            "2jx2Vysjb2cxO7V2OSc28c",
-            "2M7aPuGRzEyA70nxPW$eKk",
-            "1ZdLBqerv6gggWo6Cv2TwT",
-            "1ciqUgnSz5ceGyQRZ_P2by",
-            "0jtDHSSkj4_OFGECwGB6G4"
-          ]
-        },
-        {
-          "lp": 144,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Nawiew",
-          "sec": "Króciec przyłączeniowy 450x350 / 150x150 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 4,
-          "guids": [
-            "3qrv_E7FrB3QaLzyiiZayS",
-            "1a9fkGNITEw9uzOqc3Q1kQ",
-            "1a9fkGNITEw9uzOqc3Q16Z",
-            "2EvkpiZz9BWfc7m_jaQOC$"
-          ]
-        },
-        {
-          "lp": 145,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Nawiew",
-          "sec": "Przejście prostokątne 250x250 / 200x200 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 4,
-          "guids": [
-            "2jx2Vysjb2cxO7V2OSc2FA",
-            "0vtaUD40P76QIoSOlMNlQt",
-            "228tqHHQ99SwGm2W6FUNeB",
-            "1a9fkGNITEw9uzOqc3Q0Fa"
-          ]
-        },
-        {
-          "lp": 146,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Króciec przyłączeniowy 200x200 / 150x150 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 4,
-          "guids": [
-            "2jx2Vysjb2cxO7V2OSc29T",
-            "2jx2Vysjb2cxO7V2OSc29N",
-            "2M7aPuGRzEyA70nxPW$eTO",
-            "1ZdLBqerv6gggWo6Cv2Tr1"
-          ]
-        },
-        {
-          "lp": 147,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Nawiew",
-          "sec": "Kolano prostokątne 250x250 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 3,
-          "guids": [
-            "0vtaUD40P76QIoSOlMNlvV",
-            "228tqHHQ99SwGm2W6FUGyy",
-            "228tqHHQ99SwGm2W6FUGzq"
-          ]
-        },
-        {
-          "lp": 148,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Kolano prostokątne 200x200 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 3,
-          "guids": [
-            "2M7aPuGRzEyA70nxPW$e7U",
-            "1ciqUgnSz5ceGyQRZ_P2IE",
-            "0jtDHSSkj4_OFGECwGB6Qz"
-          ]
-        },
-        {
-          "lp": 149,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Króciec przyłączeniowy 250x250 / 150x150 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 3,
-          "guids": [
-            "2M7aPuGRzEyA70nxPW$e_2",
-            "2M7aPuGRzEyA70nxPW$erL",
-            "0uSCKvNIbDLBgNu3ZbQzrJ"
-          ]
-        },
-        {
-          "lp": 150,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Króciec przyłączeniowy 350x350 / 150x150 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 3,
-          "guids": [
-            "0uSCKvNIbDLBgNu3ZbQzvd",
-            "0uSCKvNIbDLBgNu3ZbQy0I",
-            "0jtDHSSkj4_OFGECwGB6EF"
-          ]
-        },
-        {
-          "lp": 151,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokątne 250x250 / 200x200 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 3,
-          "guids": [
-            "2M7aPuGRzEyA70nxPW$eJm",
-            "1ciqUgnSz5ceGyQRZ_P2I9",
-            "0jtDHSSkj4_OFGECwGB6jb"
-          ]
-        },
-        {
-          "lp": 152,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokątne 250x250 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 3,
-          "guids": [
-            "2M7aPuGRzEyA70nxPW$eiA",
-            "3lQxc8zx9Fb9uJgkwXw5b7",
-            "1ciqUgnSz5ceGyQRZ_P2Zb"
-          ]
-        },
-        {
-          "lp": 153,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokątne 300x300 / 250x250 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 3,
-          "guids": [
-            "2M7aPuGRzEyA70nxPW$ejs",
-            "3lQxc8zx9Fb9uJgkwXw5bT",
-            "1ciqUgnSz5ceGyQRZ_P2WK"
-          ]
-        },
-        {
-          "lp": 154,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokątne 400x350 / 350x350 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 3,
-          "guids": [
-            "1xDQY1ds13H984chykW3_J",
-            "0jtDHSSkj4_OFGECwGB6zR",
-            "0jtDHSSkj4_OFGECwGB6hF"
-          ]
-        },
-        {
-          "lp": 155,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Nawiew",
-          "sec": "Kolano prostokątne 150x150 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 2,
-          "guids": [
-            "2jx2Vysjb2cxO7V2OSc2F0",
-            "1a9fkGNITEw9uzOqc3Q0DR"
-          ]
-        },
-        {
-          "lp": 156,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Nawiew",
-          "sec": "Króciec przyłączeniowy 200x200 / 150x150 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 2,
-          "guids": [
-            "2jx2Vysjb2cxO7V2OSc2F7",
-            "2jx2Vysjb2cxO7V2OSc2Fw"
-          ]
-        },
-        {
-          "lp": 157,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Nawiew",
-          "sec": "Króciec przyłączeniowy 400x350 / 150x150 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 2,
-          "guids": [
-            "1a9fkGNITEw9uzOqc3Q1$r",
-            "1a9fkGNITEw9uzOqc3Q1Nq"
-          ]
-        },
-        {
-          "lp": 158,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Nawiew",
-          "sec": "Przejście prostokąt/koło 160x160 / Ø125 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 2,
-          "guids": [
-            "228tqHHQ99SwGm2W6FUNA7",
-            "228tqHHQ99SwGm2W6FUNAj"
-          ]
-        },
-        {
-          "lp": 159,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Nawiew",
-          "sec": "Przejście prostokątne 250x250 / 160x160 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 2,
-          "guids": [
-            "228tqHHQ99SwGm2W6FUNA_",
-            "228tqHHQ99SwGm2W6FUNB$"
-          ]
-        },
-        {
-          "lp": 160,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Nawiew",
-          "sec": "Przejście prostokątne 450x350 / 400x350 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 2,
-          "guids": [
-            "3qrv_E7FrB3QaLzyiiZa07",
-            "1a9fkGNITEw9uzOqc3Q1Je"
-          ]
-        },
-        {
-          "lp": 161,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Nawiew",
-          "sec": "Przejście prostokątne 500x350 / 450x350 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 2,
-          "guids": [
-            "1OxwXlTnf1_8OqbV8A58li",
-            "1a9fkGNITEw9uzOqc3Q1Jg"
-          ]
-        },
-        {
-          "lp": 162,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Nawiew",
-          "sec": "Trójnik prostokątny 500x350 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 2,
-          "guids": [
-            "1a9fkGNITEw9uzOqc3Q1IX",
-            "1a9fkGNITEw9uzOqc3Q13X"
-          ]
-        },
-        {
-          "lp": 163,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Kolano prostokątne 315x315 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 2,
-          "guids": [
-            "1xDQY1ds13H984chykW21L",
-            "0jtDHSSkj4_OFGECwGB73t"
-          ]
-        },
-        {
-          "lp": 164,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Kolano prostokątne 500x350 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 2,
-          "guids": [
-            "2EvkpiZz9BWfc7m_jaQOA8",
-            "0wM9v407v8Zw29KkfkYLcI"
-          ]
-        },
-        {
-          "lp": 165,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Króciec przyłączeniowy 250x250 / 150x125 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 2,
-          "guids": [
-            "1ciqUgnSz5ceGyQRZ_P2HD",
-            "07XLgL2IP9LfE15w0TLREO"
-          ]
-        },
-        {
-          "lp": 166,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Króciec przyłączeniowy 300x300 / 150x125 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 2,
-          "guids": [
-            "2M7aPuGRzEyA70nxPW$eof",
-            "07XLgL2IP9LfE15w0TLRG6"
-          ]
-        },
-        {
-          "lp": 167,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Króciec przyłączeniowy 500x350 / 150x150 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 2,
-          "guids": [
-            "10P5NIu2X3LOh4MVKX2wg3",
-            "2EvkpiZz9BWfc7m_jaQO46"
-          ]
-        },
-        {
-          "lp": 168,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokąt/koło 160x160 / Ø125 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 2,
-          "guids": [
-            "3lQxc8zx9Fb9uJgkwXw5pI",
-            "0uSCKvNIbDLBgNu3ZbQztf"
-          ]
-        },
-        {
-          "lp": 169,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokąt/koło Ø125 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 2,
-          "guids": [
-            "2jx2Vysjb2cxO7V2OSc28k",
-            "0uSCKvNIbDLBgNu3ZbQyA9"
-          ]
-        },
-        {
-          "lp": 170,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokątne 315x315 / 300x300 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 2,
-          "guids": [
-            "2M7aPuGRzEyA70nxPW$ejT",
-            "1ciqUgnSz5ceGyQRZ_P2Wn"
-          ]
-        },
-        {
-          "lp": 171,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokątne 350x350 / 315x315 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 2,
-          "guids": [
-            "1xDQY1ds13H984chykW3_i",
-            "0jtDHSSkj4_OFGECwGB6zQ"
-          ]
-        },
-        {
-          "lp": 172,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokątne 350x350 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 2,
-          "guids": [
-            "3lQxc8zx9Fb9uJgkwXw5aC",
-            "0jtDHSSkj4_OFGECwGB6nq"
-          ]
-        },
-        {
-          "lp": 173,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokątne 500x350 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 2,
-          "guids": [
-            "3lQxc8zx9Fb9uJgkwXw5xP",
-            "2EvkpiZz9BWfc7m_jaQOAk"
-          ]
-        },
-        {
-          "lp": 174,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Czerpnia",
-          "sec": "Kolano prostokątne 800x800 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "1LkD6nM$z5mRhks0V_NBa0"
-          ]
-        },
-        {
-          "lp": 175,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Nawiew",
-          "sec": "Kolano prostokątne 400x350 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "3qrv_E7FrB3QaLzyiiZaAZ"
-          ]
-        },
-        {
-          "lp": 176,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Nawiew",
-          "sec": "Kolano prostokątne 500x350 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "3Y0fp0_BvFFPea1GebNKQU"
-          ]
-        },
-        {
-          "lp": 177,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Nawiew",
-          "sec": "Kolano prostokątne 600x350 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "0wM9v407v8Zw29KkfkYIWS"
-          ]
-        },
-        {
-          "lp": 178,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Nawiew",
-          "sec": "Króciec przyłączeniowy 300x300 / 150x150 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "2jx2Vysjb2cxO7V2OSc2Fq"
-          ]
-        },
-        {
-          "lp": 179,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Nawiew",
-          "sec": "Króciec przyłączeniowy 315x315 / 200x200 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "3qrv_E7FrB3QaLzyiiZaBD"
-          ]
-        },
-        {
-          "lp": 180,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Nawiew",
-          "sec": "Króciec przyłączeniowy 400x350 / 200x200 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "3qrv_E7FrB3QaLzyiiZaA9"
-          ]
-        },
-        {
-          "lp": 181,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Nawiew",
-          "sec": "Króciec przyłączeniowy 500x350 / 150x150 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "1OxwXlTnf1_8OqbV8A58cs"
-          ]
-        },
-        {
-          "lp": 182,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Nawiew",
-          "sec": "Przejście prostokątne 150x150 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "228tqHHQ99SwGm2W6FUNj2"
-          ]
-        },
-        {
-          "lp": 183,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Nawiew",
-          "sec": "Przejście prostokątne 200x200 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "2jx2Vysjb2cxO7V2OSc2FC"
-          ]
-        },
-        {
-          "lp": 184,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Nawiew",
-          "sec": "Przejście prostokątne 250x250 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "0vtaUD40P76QIoSOlMNlQs"
-          ]
-        },
-        {
-          "lp": 185,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Nawiew",
-          "sec": "Przejście prostokątne 300x300 / 150x150 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "1a9fkGNITEw9uzOqc3Q1tc"
-          ]
-        },
-        {
-          "lp": 186,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Nawiew",
-          "sec": "Przejście prostokątne 300x300 / 250x250 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "2jx2Vysjb2cxO7V2OSc2F8"
-          ]
-        },
-        {
-          "lp": 187,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Nawiew",
-          "sec": "Przejście prostokątne 315x315 / 250x250 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "3qrv_E7FrB3QaLzyiiZaEz"
-          ]
-        },
-        {
-          "lp": 188,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Nawiew",
-          "sec": "Przejście prostokątne 350x350 / 200x200 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "228tqHHQ99SwGm2W6FUNpe"
-          ]
-        },
-        {
-          "lp": 189,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Nawiew",
-          "sec": "Przejście prostokątne 350x350 / 250x250 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "228tqHHQ99SwGm2W6FUNop"
-          ]
-        },
-        {
-          "lp": 190,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Nawiew",
-          "sec": "Przejście prostokątne 400x350 / 300x300 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "1a9fkGNITEw9uzOqc3Q1m$"
-          ]
-        },
-        {
-          "lp": 191,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Nawiew",
-          "sec": "Przejście prostokątne 400x350 / 315x315 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "3qrv_E7FrB3QaLzyiiZaE$"
-          ]
-        },
-        {
-          "lp": 192,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Nawiew",
-          "sec": "Przejście prostokątne 450x350 / 250x250 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "1OxwXlTnf1_8OqbV8A59GR"
-          ]
-        },
-        {
-          "lp": 193,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Nawiew",
-          "sec": "Przejście prostokątne 450x350 / 350x350 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "1OxwXlTnf1_8OqbV8A59Jn"
-          ]
-        },
-        {
-          "lp": 194,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Nawiew",
-          "sec": "Przejście prostokątne 450x350 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "3qrv_E7FrB3QaLzyiiZawm"
-          ]
-        },
-        {
-          "lp": 195,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Nawiew",
-          "sec": "Przejście prostokątne 500x350 / 150x150 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "1a9fkGNITEw9uzOqc3Q1Uf"
-          ]
-        },
-        {
-          "lp": 196,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Nawiew",
-          "sec": "Przejście prostokątne 500x350 / 250x250 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "1a9fkGNITEw9uzOqc3Q079"
-          ]
-        },
-        {
-          "lp": 197,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Nawiew",
-          "sec": "Przejście prostokątne 600x350 / 450x350 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "2EvkpiZz9BWfc7m_jaQOCM"
-          ]
-        },
-        {
-          "lp": 198,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Nawiew",
-          "sec": "Przejście prostokątne 600x350 / 500x350 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "1OxwXlTnf1_8OqbV8A58eX"
-          ]
-        },
-        {
-          "lp": 199,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Nawiew",
-          "sec": "Przejście prostokątne 600x600 / 500x350 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "0wM9v407v8Zw29KkfkYIg6"
-          ]
-        },
-        {
-          "lp": 200,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Nawiew",
-          "sec": "Przejście prostokątne 700x700 / 600x350 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "0wM9v407v8Zw29KkfkYLj9"
-          ]
-        },
-        {
-          "lp": 201,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Nawiew",
-          "sec": "Trójnik prostokątny 250x250 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "228tqHHQ99SwGm2W6FUG$C"
-          ]
-        },
-        {
-          "lp": 202,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Nawiew",
-          "sec": "Trójnik prostokątny 300x300 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "1a9fkGNITEw9uzOqc3Q2E3"
-          ]
-        },
-        {
-          "lp": 203,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Nawiew",
-          "sec": "Trójnik prostokątny 350x350 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "228tqHHQ99SwGm2W6FUNwA"
-          ]
-        },
-        {
-          "lp": 204,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Nawiew",
-          "sec": "Trójnik prostokątny 450x350 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "1OxwXlTnf1_8OqbV8A59Ne"
-          ]
-        },
-        {
-          "lp": 205,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Nawiew",
-          "sec": "Trójnik prostokątny 600x350 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "3qrv_E7FrB3QaLzyiiZamj"
-          ]
-        },
-        {
-          "lp": 206,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Kolano okrągłe Ø125 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "1a9fkGNITEw9uzOqc3Q0A_"
-          ]
-        },
-        {
-          "lp": 207,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Kolano prostokątne 160x160 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "3lQxc8zx9Fb9uJgkwXw5pG"
-          ]
-        },
-        {
-          "lp": 208,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Kolano prostokątne 450x350 / 400x350 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "0wM9v407v8Zw29KkfkYId3"
-          ]
-        },
-        {
-          "lp": 209,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Króciec przyłączeniowy 250x250 / 160x160 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "0uSCKvNIbDLBgNu3ZbQznr"
-          ]
-        },
-        {
-          "lp": 210,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Króciec przyłączeniowy 250x250 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "2jx2Vysjb2cxO7V2OSc28j"
-          ]
-        },
-        {
-          "lp": 211,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Króciec przyłączeniowy 300x300 / 150x150 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "0uSCKvNIbDLBgNu3ZbQznP"
-          ]
-        },
-        {
-          "lp": 212,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Króciec przyłączeniowy 315x315 / 150x125 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "2_vf44$wX6pAYh2KrlY5d4"
-          ]
-        },
-        {
-          "lp": 213,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Króciec przyłączeniowy 315x315 / 150x150 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "2M7aPuGRzEyA70nxPW$epc"
-          ]
-        },
-        {
-          "lp": 214,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Króciec przyłączeniowy 350x350 / 150x125 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "1xDQY1ds13H984chykW3sP"
-          ]
-        },
-        {
-          "lp": 215,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Króciec przyłączeniowy 400x350 / 150x125 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "1xDQY1ds13H984chykW3pY"
-          ]
-        },
-        {
-          "lp": 216,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Króciec przyłączeniowy 400x350 / 150x150 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "0jtDHSSkj4_OFGECwGB68M"
-          ]
-        },
-        {
-          "lp": 217,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Króciec przyłączeniowy 450x350 / 150x150 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "0uSCKvNIbDLBgNu3ZbQy2K"
-          ]
-        },
-        {
-          "lp": 218,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Króciec przyłączeniowy 500x350 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "0uSCKvNIbDLBgNu3ZbQyA2"
-          ]
-        },
-        {
-          "lp": 219,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Nakładka siodłowa 150x150 / Ø125 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "1a9fkGNITEw9uzOqc3Q7$X"
-          ]
-        },
-        {
-          "lp": 220,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Nakładka siodłowa 350x350 / Ø125 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "0jtDHSSkj4_OFGECwGB6tl"
-          ]
-        },
-        {
-          "lp": 221,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Nakładka siodłowa 400x350 / Ø125 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "0jtDHSSkj4_OFGECwGB7AJ"
-          ]
-        },
-        {
-          "lp": 222,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Nakładka siodłowa 500x350 / Ø125 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "0uSCKvNIbDLBgNu3ZbQyVb"
-          ]
-        },
-        {
-          "lp": 223,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokątne 150x150 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "0jtDHSSkj4_OFGECwGB6He"
-          ]
-        },
-        {
-          "lp": 224,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokątne 200x200 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "2jx2Vysjb2cxO7V2OSc29U"
-          ]
-        },
-        {
-          "lp": 225,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokątne 250x250 / 160x160 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "3lQxc8zx9Fb9uJgkwXw5b8"
-          ]
-        },
-        {
-          "lp": 226,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokątne 350x200 / 200x200 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "1ZdLBqerv6gggWo6Cv2TnZ"
-          ]
-        },
-        {
-          "lp": 227,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokątne 350x350 / 300x300 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "3lQxc8zx9Fb9uJgkwXw5ar"
-          ]
-        },
-        {
-          "lp": 228,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokątne 450x350 / 200x200 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "0jtDHSSkj4_OFGECwGB6Qp"
-          ]
-        },
-        {
-          "lp": 229,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokątne 450x350 / 350x350 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "3lQxc8zx9Fb9uJgkwXw5xh"
-          ]
-        },
-        {
-          "lp": 230,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokątne 450x350 / 400x350 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "0jtDHSSkj4_OFGECwGB6Xy"
-          ]
-        },
-        {
-          "lp": 231,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokątne 500x350 / 400x350 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "1ZdLBqerv6gggWo6Cv2T0v"
-          ]
-        },
-        {
-          "lp": 232,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokątne 500x350 / 450x350 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "3lQxc8zx9Fb9uJgkwXw5x2"
-          ]
-        },
-        {
-          "lp": 233,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokątne 600x350 / 250x250 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "0jtDHSSkj4_OFGECwGB6ja"
-          ]
-        },
-        {
-          "lp": 234,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokątne 600x350 / 400x350 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "0jtDHSSkj4_OFGECwGB6lL"
-          ]
-        },
-        {
-          "lp": 235,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokątne 600x600 / 450x350 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "0wM9v407v8Zw29KkfkYId1"
-          ]
-        },
-        {
-          "lp": 236,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Przejście prostokątne 700x700 / 500x350 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "0wM9v407v8Zw29KkfkYLcK"
-          ]
-        },
-        {
-          "lp": 237,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Trójnik prostokątny 200x200 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "0jtDHSSkj4_OFGECwGB6HF"
-          ]
-        },
-        {
-          "lp": 238,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Trójnik prostokątny 450x350 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "0jtDHSSkj4_OFGECwGB6dU"
-          ]
-        },
-        {
-          "lp": 239,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Trójnik prostokątny 500x350 / 350x200 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "1ZdLBqerv6gggWo6Cv2T2Y"
-          ]
-        },
-        {
-          "lp": 240,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Trójnik prostokątny 500x350 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "2EvkpiZz9BWfc7m_jaQO8r"
-          ]
-        },
-        {
-          "lp": 241,
-          "storey": "Kondygnacja +1 (Piętro 1)",
-          "system": "Wywiew",
-          "sec": "Trójnik prostokątny 600x350 / 350x350 mm",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "0jtDHSSkj4_OFGECwGB6mT"
-          ]
-        }
-      ]
-    },
-    {
-      "name": "LFT_Bilans",
-      "title": "Bilans kompletności",
-      "color": "#475569",
-      "rows": [
-        {
-          "lp": 1,
-          "storey": "IfcDuctSegment",
-          "system": "W modelu: 594 szt.",
-          "sec": "W raporcie: 273 szt.",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 273,
-          "guids": [
-            "1LkD6nM$z5mRhks0V_NBYL",
-            "1LkD6nM$z5mRhks0V_NBd$",
-            "1LkD6nM$z5mRhks0V_NBcJ",
-            "1LkD6nM$z5mRhks0V_NBhq",
-            "1LkD6nM$z5mRhks0V_NBgr",
-            "0Q5MmehFrFp8w7cVe9OjTT",
-            "0Q5MmehFrFp8w7cVe9OjSQ",
-            "0Q5MmehFrFp8w7cVe9OjSE",
-            "0Q5MmehFrFp8w7cVe9OiX1",
-            "0Q5MmehFrFp8w7cVe9OibJ",
-            "0Q5MmehFrFp8w7cVe9Oiel",
-            "0Q5MmehFrFp8w7cVe9OilQ",
-            "0Q5MmehFrFp8w7cVe9Oikj",
-            "0Q5MmehFrFp8w7cVe9OikO",
-            "0Q5MmehFrFp8w7cVe9Oirp",
-            "0Q5MmehFrFp8w7cVe9Oisf",
-            "0Q5MmehFrFp8w7cVe9Oivd",
-            "10C_rblBX0hgjaxWsauG58",
-            "10C_rblBX0hgjaxWsauGa$",
-            "1dYj5uD219LwenrqEveN56",
-            "1dYj5uD219LwenrqEveN7m",
-            "1dYj5uD219LwenrqEveMbi",
-            "1dYj5uD219LwenrqEveMQI",
-            "0IU610uqLBi9PW0cPG4ERE",
-            "0IU610uqLBi9PW0cPG4EXn",
-            "0IU610uqLBi9PW0cPG4Ev9",
-            "0IU610uqLBi9PW0cPG4Evn",
-            "0IU610uqLBi9PW0cPG4Ewg",
-            "0IU610uqLBi9PW0cPG4En_",
-            "0IU610uqLBi9PW0cPG4Etc"
-          ]
-        },
-        {
-          "lp": 2,
-          "storey": "IfcDuctFitting",
-          "system": "W modelu: 538 szt.",
-          "sec": "W raporcie: 538 szt.",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 538,
-          "guids": [
-            "1LkD6nM$z5mRhks0V_NBzs",
-            "1LkD6nM$z5mRhks0V_NByo",
-            "1LkD6nM$z5mRhks0V_NBY2",
-            "1LkD6nM$z5mRhks0V_NBYD",
-            "1LkD6nM$z5mRhks0V_NBdd",
-            "1LkD6nM$z5mRhks0V_NBa1",
-            "1LkD6nM$z5mRhks0V_NBa0",
-            "1LkD6nM$z5mRhks0V_NBf8",
-            "1LkD6nM$z5mRhks0V_NBfE",
-            "1LkD6nM$z5mRhks0V_NBex",
-            "0Q5MmehFrFp8w7cVe9OjS4",
-            "0Q5MmehFrFp8w7cVe9OjS2",
-            "0Q5MmehFrFp8w7cVe9OjV$",
-            "0Q5MmehFrFp8w7cVe9OiXF",
-            "0Q5MmehFrFp8w7cVe9OikW",
-            "0Q5MmehFrFp8w7cVe9OikP",
-            "0Q5MmehFrFp8w7cVe9OikN",
-            "0Q5MmehFrFp8w7cVe9OikG",
-            "03yA$B7yP6BhT8dvTJ$GV7",
-            "0IU610uqLBi9PW0cPG4EM3",
-            "0IU610uqLBi9PW0cPG4EM0",
-            "0IU610uqLBi9PW0cPG4EYQ",
-            "0IU610uqLBi9PW0cPG4EpR",
-            "0IU610uqLBi9PW0cPG4Ept",
-            "0whK6vVjP3v8pDjTik37Tv",
-            "0whK6vVjP3v8pDjTik37UT",
-            "0whK6vVjP3v8pDjTik37HQ",
-            "0whK6vVjP3v8pDjTik37jB",
-            "0whK6vVjP3v8pDjTik37jF",
-            "0whK6vVjP3v8pDjTik37jb"
-          ]
-        },
-        {
-          "lp": 3,
-          "storey": "IfcAirTerminal",
-          "system": "W modelu: 148 szt.",
-          "sec": "W raporcie: 148 szt.",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 148,
-          "guids": [
-            "2jfPwJ7fP3WfBkHCTOooRK",
-            "2jfPwJ7fP3WfBkHCTOooRM",
-            "03yA$B7yP6BhT8dvTJ$GqN",
-            "03yA$B7yP6BhT8dvTJ$GDC",
-            "03yA$B7yP6BhT8dvTJ$GDc",
-            "03yA$B7yP6BhT8dvTJ$G5s",
-            "03yA$B7yP6BhT8dvTJ$GQP",
-            "03yA$B7yP6BhT8dvTJ$GQK",
-            "03yA$B7yP6BhT8dvTJ$GK0",
-            "03yA$B7yP6BhT8dvTJ$GKv",
-            "33LHvKw7n5VOooYSuD9kRR",
-            "33LHvKw7n5VOooYSuD9Xlz",
-            "33LHvKw7n5VOooYSuD9XWq",
-            "33LHvKw7n5VOooYSuD9XZ5",
-            "33LHvKw7n5VOooYSuD9XZd",
-            "33LHvKw7n5VOooYSuD9XYF",
-            "33LHvKw7n5VOooYSuD9XbB",
-            "33LHvKw7n5VOooYSuD9Xa9",
-            "33LHvKw7n5VOooYSuD9XaU",
-            "33LHvKw7n5VOooYSuD9XaW",
-            "33LHvKw7n5VOooYSuD9XdA",
-            "33LHvKw7n5VOooYSuD9XdS",
-            "2oO_IFrqjBfgpcYD4TzM$s",
-            "2oO_IFrqjBfgpcYD4TzM7v",
-            "3qKjy37Xj5WA5IoTmUAllk",
-            "3qKjy37Xj5WA5IoTmUAlfM",
-            "3qKjy37Xj5WA5IoTmUAlfD",
-            "3qKjy37Xj5WA5IoTmUAlf0",
-            "3qKjy37Xj5WA5IoTmUAlgn",
-            "3qKjy37Xj5WA5IoTmUAlgY"
-          ]
-        },
-        {
-          "lp": 4,
-          "storey": "IfcFlowController",
-          "system": "W modelu: 18 szt.",
-          "sec": "W raporcie: 18 szt.",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 18,
-          "guids": [
-            "2jfPwJ7fP3WfBkHCTOojNW",
-            "2jfPwJ7fP3WfBkHCTOojvi",
-            "2jfPwJ7fP3WfBkHCTOojdT",
-            "2jfPwJ7fP3WfBkHCTOooT$",
-            "2jfPwJ7fP3WfBkHCTOooSt",
-            "2$Y8t649D0_QTajdlpndTL",
-            "2$Y8t649D0_QTajdlpndXG",
-            "2$Y8t649D0_QTajdlpndwP",
-            "2$Y8t649D0_QTajdlpnd$t",
-            "2$Y8t649D0_QTajdlpnc2F",
-            "2$Y8t649D0_QTajdlpnc2u",
-            "2$Y8t649D0_QTajdlpnc74",
-            "0wM9v407v8Zw29KkfkYLKB",
-            "0wM9v407v8Zw29KkfkYLTu",
-            "0wM9v407v8Zw29KkfkYL1V",
-            "3Qp81pQsTDCBuGWcRK7VSW",
-            "3NVCCMC2bDM9xy7TVIQY3n",
-            "3NVCCMC2bDM9xy7TVIQY3d"
-          ]
-        },
-        {
-          "lp": 5,
-          "storey": "IfcFan",
-          "system": "W modelu: 2 szt.",
-          "sec": "W raporcie: 2 szt.",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 2,
-          "guids": [
-            "03Vo9IXXn9pPeCD9ZrAaif",
-            "1nSyvCoUP9XfITB7TrLCuo"
-          ]
-        },
-        {
-          "lp": 6,
-          "storey": "IfcCoil",
-          "system": "W modelu: 2 szt.",
-          "sec": "W raporcie: 2 szt.",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 2,
-          "guids": [
-            "2jfPwJ7fP3WfBkHCTOoj1S",
-            "2jfPwJ7fP3WfBkHCTOoj3q"
-          ]
-        },
-        {
-          "lp": 7,
-          "storey": "IfcDuctSilencer",
-          "system": "W modelu: 2 szt.",
-          "sec": "W raporcie: 2 szt.",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 2,
-          "guids": [
-            "2jfPwJ7fP3WfBkHCTOojpS",
-            "2jfPwJ7fP3WfBkHCTOoje_"
-          ]
-        },
-        {
-          "lp": 8,
-          "storey": "IfcFilter",
-          "system": "W modelu: 2 szt.",
-          "sec": "W raporcie: 2 szt.",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 2,
-          "guids": [
-            "2jfPwJ7fP3WfBkHCTOojJJ",
-            "2jfPwJ7fP3WfBkHCTOooHW"
-          ]
-        },
-        {
-          "lp": 9,
-          "storey": "IfcAirToAirHeatRecovery",
-          "system": "W modelu: 1 szt.",
-          "sec": "W raporcie: 1 szt.",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "2jfPwJ7fP3WfBkHCTOojVu"
-          ]
-        },
-        {
-          "lp": 10,
-          "storey": "IfcHumidifier",
-          "system": "W modelu: 1 szt.",
-          "sec": "W raporcie: 1 szt.",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "3pZtahKSHFPB_xPlmuXbZq"
-          ]
-        },
-        {
-          "lp": 11,
-          "storey": "IfcInterceptor",
-          "system": "W modelu: 1 szt.",
-          "sec": "W raporcie: 1 szt.",
-          "len": 0.0,
-          "area": 0.0,
-          "pcs": 1,
-          "guids": [
-            "2jfPwJ7fP3WfBkHCTOojBT"
           ]
         }
       ]
