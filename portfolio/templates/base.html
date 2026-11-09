@@ -35,7 +35,7 @@
     <link rel="icon" type="image/x-icon" href="{% static 'image/viewis_logo.ico' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="{% static 'tokens.css' %}">
     <link rel="stylesheet" href="{% static 'base.css' %}">
@@ -43,8 +43,8 @@
     <link rel="stylesheet" href="{% static 'switch.css' %}">
     <link rel="stylesheet" href="{% static 'lightbox.css' %}">
     <link rel="stylesheet" href="{% static 'site.css' %}">
+    <link rel="stylesheet" href="{% static 'blueprint.css' %}">
 
-    
     {% block extra_head %}{% endblock %}
 </head>
 <body class="{% block body_class %}{% endblock %}">
@@ -56,14 +56,24 @@
     {% block footer_contact %}{% include 'contact_footer.html' %}{% endblock %}
 
     <footer class="site-footer">
-        <div class="container footer-inner">
-            <span>&copy; {% now "Y" %} Maciej Wielgosz &middot; {% if lang == 'en' %}Designed &amp; Developed by Maciej Wielgosz{% else %}Projekt i realizacja: Maciej Wielgosz{% endif %}</span>
-            <nav>
-                <a href="{% if lang == 'en' %}{% url 'portfolio_en' %}{% else %}{% url 'portfolio' %}{% endif %}">Portfolio</a>
-                <a href="{% if lang == 'en' %}{% url 'articles_en' %}{% else %}{% url 'articles' %}{% endif %}">{% if lang == 'en' %}Articles{% else %}Artykuły{% endif %}</a>
-                <a href="{% if lang == 'en' %}{% url 'mep_landing_en' %}{% else %}{% url 'mep_landing' %}{% endif %}">MEP</a>
-                <a href="{% if lang == 'en' %}{% url 'about_en' %}{% else %}{% url 'about' %}{% endif %}">{% if lang == 'en' %}About{% else %}O mnie{% endif %}</a>
-            </nav>
+        <div class="ruler"></div>
+        <div class="container">
+            <dl class="tb">
+                <div><dt>{% if lang == 'en' %}CONTRACTOR{% else %}WYKONAWCA{% endif %}</dt><dd>ViewIs<br>Maciej Wielgosz</dd></div>
+                <div><dt>{% if lang == 'en' %}CONTACT{% else %}KONTAKT{% endif %}</dt><dd>{{ CONTACT_EMAIL }}<br>{{ CONTACT_PHONE|default:"+48 519 133 055" }}</dd></div>
+                <div><dt>WWW · {% if lang == 'en' %}MODE{% else %}TRYB{% endif %}</dt><dd>www.viewis.pl<br>{% if lang == 'en' %}100% remote{% else %}Usługi w 100% zdalne{% endif %}</dd></div>
+                <div><dt>{% if lang == 'en' %}DOCUMENT{% else %}DOKUMENT{% endif %}</dt><dd>VW-KUI-2026-11<br>{% if lang == 'en' %}REV.{% else %}REW.{% endif %} 2026-11 · A</dd></div>
+                <div><dt>SHA-256 Σ</dt><dd>48A7 E0B2 55C4 E114<br>820F 8B15 0B7F 0B79</dd></div>
+            </dl>
+            <div class="footer-inner">
+                <span>&copy; {% now "Y" %} Maciej Wielgosz &middot; {% if lang == 'en' %}Designed &amp; Developed by Maciej Wielgosz{% else %}Projekt i realizacja: Maciej Wielgosz{% endif %}</span>
+                <nav>
+                    <a href="{% if lang == 'en' %}{% url 'portfolio_en' %}{% else %}{% url 'portfolio' %}{% endif %}">Portfolio</a>
+                    <a href="{% if lang == 'en' %}{% url 'articles_en' %}{% else %}{% url 'articles' %}{% endif %}">{% if lang == 'en' %}Articles{% else %}Artykuły{% endif %}</a>
+                    <a href="{% if lang == 'en' %}{% url 'mep_landing_en' %}{% else %}{% url 'mep_landing' %}{% endif %}">MEP</a>
+                    <a href="{% if lang == 'en' %}{% url 'about_en' %}{% else %}{% url 'about' %}{% endif %}">{% if lang == 'en' %}About{% else %}O mnie{% endif %}</a>
+                </nav>
+            </div>
         </div>
     </footer>
 
