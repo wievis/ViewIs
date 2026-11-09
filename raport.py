@@ -5,7 +5,7 @@ import argparse
 import subprocess
 from collections import defaultdict
 
-EXTENSIONS = (".py", ".json", ".xml", ".html", ".css", ".js", ".svg", ".txt")
+EXTENSIONS = (".py", ".xml", ".html", ".css", ".js", ".svg", ".txt")
 IGNORED_DIRS = {
     ".git", ".venv", "venv", "__pycache__", ".idea", ".vscode",
     ".qodo", "node_modules", "tests", "migrations", "management",
