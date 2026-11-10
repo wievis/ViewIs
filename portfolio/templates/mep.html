@@ -94,32 +94,6 @@
   </div>
 </section>
 
-<section class="eng-s" id="procedury">
-  <div class="container">
-
-    <table class="xtbl">
-      <thead><tr>
-        <th>ID</th><th>{% if lang == 'en' %}Procedure{% else %}Procedura{% endif %}</th>
-        <th class="io-col">IN</th><th class="io-col">OUT</th><th style="text-align:right">PLN</th>
-      </tr></thead>
-      <tbody>
-      {% for g in procedure_groups %}
-        <tr class="grp"><th colspan="5"><span class="id">{{ g.id }}</span><span class="gname">{{ g.name }}</span><span class="sub">{{ g.volume }}</span></th></tr>
-        {% for p in g.items %}
-        <tr id="{{ p.id|lower }}">
-          <th scope="row" class="id">{{ p.id }}</th>
-          <td><span class="name">{{ p.name }}</span><span class="sub">{{ p.desc }}</span></td>
-          <td class="io io-col">{{ p.inp }}</td>
-          <td class="io io-col">{{ p.out }}</td>
-          <td class="pr">{% if p.price_from %}{{ p.price_from }}{% else %}—{% endif %}</td>
-        </tr>
-        {% endfor %}
-      {% endfor %}
-      </tbody>
-    </table>
-  </div>
-</section>
-
 <section class="eng-s" id="demo">
   <div class="container">
     <div class="eng-h">
