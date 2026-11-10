@@ -306,7 +306,9 @@ a.cut:hover, a.cut:focus-visible { --bs: var(--accent); background: var(--surfac
 body.light-mode .lb-btn-icon:hover, body.light-mode .lb-nav:hover { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
 
 .about-grid { align-items: start; }
-.about-grid > :first-child { position: sticky; top: calc(var(--header-h) + var(--s-5)); }
+@media (min-width: 901px) {
+  .about-grid > :first-child { position: sticky; top: calc(var(--header-h) + var(--s-5)); }
+}
 .portrait { border: var(--bw-rule) solid var(--rule); background: var(--surface); font-family: var(--font-display); }
 .portrait img { filter: none; }
 .marks { position: relative; }
