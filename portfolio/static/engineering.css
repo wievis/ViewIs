@@ -67,7 +67,8 @@ body:not(.page-home) .site-header,
 .checkbox.lang-toggle::after, .checkbox.lang-toggle:checked::after { display: none; }
 
 .page-rail {
-  position: fixed; left: 0; top: var(--header-h); bottom: 0; width: 14px; z-index: 20; pointer-events: none;
+  position: fixed; left: 0; top: var(--header-h); width: 14px; z-index: 20; pointer-events: none;
+  overflow: hidden;
   border-right: var(--bw) solid var(--line);
   background:
     repeating-linear-gradient(to bottom, var(--tick) 0 1px, transparent 1px 8px)  right / 6px  100% no-repeat,
@@ -422,4 +423,4 @@ pre.code, pre.vscode-lisp { margin: 0; padding: 16px 18px; overflow: auto; max-h
 .tb { border: var(--bw-rule) solid var(--rule); }
 .tb > div { border-right-color: var(--line-strong); }
 .tb dt { color: var(--accent-text); }
-.site-footer { position: relative; z-index: 30; border-top: var(--bw-heavy) solid var(--rule); background: var(--bg); box-shadow: 0 100vh 0 100vh var(--bg); }
+.site-footer { position: relative; z-index: 30; border-top: var(--bw-heavy) solid var(--rule); background: var(--bg); }
