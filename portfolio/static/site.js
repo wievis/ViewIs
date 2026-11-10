@@ -17,13 +17,16 @@
             const headerH = header ? header.offsetHeight : 64;
             const docH = document.documentElement.scrollHeight;
             const maxScroll = Math.max(1, docH - winH);
-            const progress = Math.min(1, Math.max(0, y / maxScroll));
 
-            const footerTop = footer.getBoundingClientRect().top;
-            const currentRailH = Math.max(0, Math.min(winH, footerTop) - headerH);
+            const footerRect = footer.getBoundingClientRect();
+            const currentRailH = Math.max(0, Math.min(winH, footerRect.top) - headerH);
             pageRail.style.height = currentRailH + "px";
 
-            const barH = progress * currentRailH;
+            // Docelowa wysokosc szyny, gdy strona jest przewinieta do samego konca
+            const finalRailH = Math.max(0, winH - footer.offsetHeight - headerH);
+
+            // Stale, jednostajne tempo paska w pixelach na jednostke scrolla
+            const barH = Math.min(currentRailH, (y / maxScroll) * finalRailH);
             pageRail.style.setProperty('--rail-h', barH + "px");
         }
 
