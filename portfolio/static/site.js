@@ -13,10 +13,15 @@
         if (header) header.classList.toggle('solid', y > 40);
 
         if (pageRail && footer) {
-            const footerTop = footer.getBoundingClientRect().top + y;
-            const maxScroll = Math.max(1, footerTop - window.innerHeight);
+            const docH = document.documentElement.scrollHeight;
+            const winH = window.innerHeight;
+            const maxScroll = Math.max(1, docH - winH);
             const progress = Math.min(1, Math.max(0, y / maxScroll));
             pageRail.style.setProperty('--rail-progress', progress);
+
+            const footerRect = footer.getBoundingClientRect();
+            const overlap = Math.max(0, winH - footerRect.top);
+            pageRail.style.bottom = overlap + "px";
         }
 
         if (!heroBackdrop) return;
