@@ -308,7 +308,7 @@ body.light-mode .lb-btn-icon:hover, body.light-mode .lb-nav:hover { background: 
 .about-grid { align-items: start; }
 .about-grid > :first-child { position: sticky; top: calc(var(--header-h) + var(--s-5)); }
 .portrait { border: var(--bw-rule) solid var(--rule); background: var(--surface); font-family: var(--font-display); }
-.portrait img { filter: grayscale(1) contrast(1.05); }
+.portrait img { filter: none; }
 .marks { position: relative; }
 .marks::before, .marks::after { content: ""; position: absolute; width: 14px; height: 14px; pointer-events: none; z-index: 2; }
 .marks::before { top: -1px; left: -1px; border-top: 2px solid var(--signal); border-left: 2px solid var(--signal); }
