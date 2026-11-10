@@ -5,9 +5,20 @@
     const heroMedia = document.getElementById('hero-media');
     const heroScrollDim = document.getElementById('hero-scroll-dim');
 
+    const pageRail = document.querySelector('.page-rail');
+    const footer = document.querySelector('.site-footer');
+
     const onScroll = () => {
         const y = window.scrollY;
         if (header) header.classList.toggle('solid', y > 40);
+
+        if (pageRail && footer) {
+            const footerTop = footer.getBoundingClientRect().top + y;
+            const maxScroll = Math.max(1, footerTop - window.innerHeight);
+            const progress = Math.min(1, Math.max(0, y / maxScroll));
+            pageRail.style.setProperty('--rail-progress', progress);
+        }
+
         if (!heroBackdrop) return;
 
         const vh = window.innerHeight;
