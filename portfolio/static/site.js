@@ -5,7 +5,7 @@
     const heroMedia = document.getElementById('hero-media');
     const heroScrollDim = document.getElementById('hero-scroll-dim');
 
-    const pageRail = document.querySelector('.page-rail');
+        const pageRail = document.querySelector('.page-rail');
     const footer = document.querySelector('.site-footer');
 
     const onScroll = () => {
@@ -15,21 +15,16 @@
         if (pageRail && footer) {
             const winH = window.innerHeight;
             const headerH = header ? header.offsetHeight : 64;
+            const footerRect = footer.getBoundingClientRect();
 
-            // Dystans scrolla do momentu gdy gorna linia stopki dotknie dolu ekranu
-            const footerTopDoc = footer.getBoundingClientRect().top + y;
-            const targetScroll = Math.max(1, footerTopDoc - winH);
-
-            // Progres od 0.0 do 1.0 osiagany w calosci PRZED wejsciem na stopke
+            const maxTrackH = winH - headerH;
+            const targetScroll = Math.max(1, footerRect.top + y - winH);
             const progress = Math.min(1, Math.max(0, y / targetScroll));
 
-            // Szyna konczy sie na linii stopki (nie wnika w nia)
-            const footerTopViewport = footer.getBoundingClientRect().top;
-            const currentRailH = Math.max(0, Math.min(winH, footerTopViewport) - headerH);
-            pageRail.style.height = currentRailH + "px";
+            const currentRailH = Math.max(0, Math.min(maxTrackH, footerRect.top - headerH));
+            const barH = Math.min(currentRailH, progress * maxTrackH);
 
-            // Dlugosc paska: przy progress = 1 (widoczna stopka) ma dokladnie 100% szyny
-            const barH = progress * currentRailH;
+            pageRail.style.height = currentRailH + "px";
             pageRail.style.setProperty('--rail-h', barH + "px");
         }
 
