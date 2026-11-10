@@ -75,12 +75,14 @@ body:not(.page-home) .site-header,
     repeating-linear-gradient(to bottom, var(--tick) 0 1px, transparent 1px 40px) right / 12px 100% no-repeat;
 }
 .page-rail::after {
-  content: ""; position: absolute; left: 0; top: 0; width: 4px; height: 100%;
-  background: var(--accent); transform: scaleY(0); transform-origin: top;
+  content: ""; position: absolute; left: 0; top: 0; width: 4px;
+  height: var(--rail-h, 0px);
+  background: var(--accent);
 }
 .page-rail::after {
-  transform: scaleY(var(--rail-progress, 0));
-  will-change: transform;
+  content: ""; position: absolute; left: 0; top: 0; width: 4px;
+  height: var(--rail-h, 0px);
+  background: var(--accent);
 }
 @media (max-width: 1100px) { .page-rail { display: none; } }
 

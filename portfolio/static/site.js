@@ -15,19 +15,16 @@
         if (pageRail && footer) {
             const winH = window.innerHeight;
             const headerH = header ? header.offsetHeight : 64;
-            const footerRect = footer.getBoundingClientRect();
-            
-            // Wysokosc szyny: maksymalnie do gory stopki, nie nizej
-            const visibleBottom = Math.min(winH, footerRect.top);
-            const railH = Math.max(0, visibleBottom - headerH);
-            pageRail.style.height = railH + "px";
-
-            // Maksymalny scroll roboczy: cala strona bez stopki
             const docH = document.documentElement.scrollHeight;
-            const footerH = footer.offsetHeight;
-            const maxScroll = Math.max(1, docH - footerH - winH);
+            const maxScroll = Math.max(1, docH - winH);
             const progress = Math.min(1, Math.max(0, y / maxScroll));
-            pageRail.style.setProperty('--rail-progress', progress);
+
+            const footerTop = footer.getBoundingClientRect().top;
+            const currentRailH = Math.max(0, Math.min(winH, footerTop) - headerH);
+            pageRail.style.height = currentRailH + "px";
+
+            const barH = progress * currentRailH;
+            pageRail.style.setProperty('--rail-h', barH + "px");
         }
 
         if (!heroBackdrop) return;
