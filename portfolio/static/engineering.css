@@ -286,7 +286,7 @@ a.cut:hover, a.cut:focus-visible { --bs: var(--accent); background: var(--surfac
 .portfolio-card:hover { transform: none; box-shadow: none; border-color: var(--accent); }
 .portfolio-card:hover .card-media-wrapper img,
 .portfolio-card:hover .card-media-wrapper video { transform: scale(1.02); }
-.card-media-wrapper { border-bottom: var(--bw) solid var(--line-strong); background: var(--surface-2); }
+.card-media-wrapper { border-bottom: 0; background: var(--surface-2); }
 .card-badge { top: 0; right: 0; border-radius: 0; border: 0; border-left: var(--bw) solid var(--line-strong); border-bottom: var(--bw) solid var(--line-strong);
   background: var(--bg); backdrop-filter: none; color: var(--text); }
 .card-badge.card-badge-id { right: auto; left: 0; border-left: 0; border-right: var(--bw) solid var(--line-strong); color: var(--accent-text); }
