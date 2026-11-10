@@ -3,7 +3,6 @@
 
 {% block extra_head %}
 <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
-{% include 'eng_styles.html' %}
 {% endblock %}
 
 {% block content %}
@@ -14,7 +13,7 @@
     <div class="eng-hero-grid">
       <div>
         <span class="eng-lbl">{% if lang == 'en' %}BIM/CAD data engineering{% else %}Inżynieria danych BIM/CAD{% endif %}</span>
-        <h1>{% if lang == 'en' %}Model and drawing data, estimate-ready in 24–48 hours.{% else %}Dane z modelu i rysunku, gotowe do kosztorysu w 24–48 godzin.{% endif %}</h1>
+        <h1>{% if lang == 'en' %}Model and drawing data, estimate-ready in 24–48 hours<i class="dot">.</i>{% else %}Dane z modelu i rysunku, gotowe do kosztorysu w 24–48 godzin<i class="dot">.</i>{% endif %}</h1>
         <p class="lead">{% if lang == 'en' %}Takeoffs from IFC and CAD, revision deltas, geodata and spreadsheet automation for contractors, design offices and estimating departments.{% else %}Przedmiary z IFC i CAD, rejestr zmian, geodane oraz automatyzacja arkuszy dla wykonawców, biur projektowych i działów wycen.{% endif %}</p>
         <div class="eng-cta">
           <a class="btn btn-primary" href="#contact">{% if lang == 'en' %}Send files for analysis{% else %}Prześlij pliki do analizy{% endif %} &rarr;</a>
@@ -22,6 +21,23 @@
         </div>
       </div>
       <aside class="eng-panel">
+        <svg class="sect" viewBox="0 0 360 356" role="img" aria-label="{% if lang == 'en' %}Pipe cross-section, Ø 28{% else %}Przekrój rury Ø 28{% endif %}">
+          <defs>
+            <pattern id="hatch" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+              <path d="M0 0v5" stroke="currentColor" stroke-width="1"/>
+            </pattern>
+          </defs>
+          <path class="dimg" d="M80 64v30M280 64v30"/>
+          <path class="dimg draw" pathLength="1" d="M80 80H280"/>
+          <path class="dimh" d="M80 80l10-4v8zM280 80l-10-4v8z"/>
+          <text class="t" x="180" y="56" text-anchor="middle">Ø 28</text>
+          <path class="cl" d="M180 66v266M46 215h268"/>
+          <path class="wall fade" fill-rule="evenodd" d="M80 215a100 100 0 1 0 200 0a100 100 0 1 0 -200 0zM96 215a84 84 0 1 0 168 0a84 84 0 1 0 -168 0z"/>
+          <circle class="edge draw" pathLength="1" cx="180" cy="215" r="100"/>
+          <circle class="edge draw" pathLength="1" cx="180" cy="215" r="84"/>
+          <text class="cap" x="314" y="340" text-anchor="end">{% if lang == 'en' %}SECTION A–A{% else %}PRZEKRÓJ A–A{% endif %}</text>
+          <text class="cap" x="314" y="352" text-anchor="end">{% if lang == 'en' %}SCALE 2:1{% else %}SKALA 2:1{% endif %}</text>
+        </svg>
         <dl class="eng-kv">
           <dt>{% if lang == 'en' %}Input{% else %}Wejście{% endif %}</dt><dd>IFC 2x3 · IFC4 · DWG · DXF · XLSX · CSV</dd>
           <dt>{% if lang == 'en' %}Output{% else %}Wynik{% endif %}</dt><dd>{% if lang == 'en' %}Excel with live formulas · CSV · DXF · IFC{% else %}Excel z aktywnymi formułami · CSV · DXF · IFC{% endif %}</dd>
@@ -31,9 +47,26 @@
     </div>
 
     <div class="eng-sla">
-      <div><span class="eng-lbl">01 / {% if lang == 'en' %}Response time{% else %}Czas odpowiedzi{% endif %}</span><strong>1–2 h</strong><small>{% if lang == 'en' %}Quick contact and a first check of your files.{% else %}Szybki kontakt i wstępna weryfikacja plików.{% endif %}</small></div>
-      <div><span class="eng-lbl">02 / {% if lang == 'en' %}Result package{% else %}Pakiet wynikowy{% endif %}</span><strong>24–48 h</strong><small>{% if lang == 'en' %}A finished, checked workbook with formulas.{% else %}Gotowy, sprawdzony arkusz z formułami.{% endif %}</small></div>
-      <div><span class="eng-lbl">03 / {% if lang == 'en' %}Confidentiality &amp; NDA{% else %}Poufność &amp; standard NDA{% endif %}</span><strong>Offline / {% if lang == 'en' %}GDPR{% else %}RODO{% endif %}</strong><small>{% if lang == 'en' %}Local processing in an isolated environment; documented data destruction after 14 days.{% else %}Przetwarzanie lokalne w izolowanym środowisku; protokolarne niszczenie danych po 14 dniach.{% endif %}</small></div>
+      <div>
+        <span class="eng-lbl">01 · {% if lang == 'en' %}Quote{% else %}Wycena{% endif %}</span>
+        <strong class="fig">1–2<sup>h</sup></strong>
+        <small>{% if lang == 'en' %}Fixed price after a first check of your files.{% else %}Cena ryczałtowa po wstępnym sprawdzeniu plików.{% endif %}</small>
+      </div>
+      <div>
+        <span class="eng-lbl">02 · {% if lang == 'en' %}Delivery{% else %}Wydanie{% endif %}</span>
+        <strong class="fig">24–48<sup>h</sup></strong>
+        <small>{% if lang == 'en' %}A checked workbook with live formulas.{% else %}Sprawdzony arkusz z aktywnymi formułami.{% endif %}</small>
+      </div>
+      <div>
+        <span class="eng-lbl">03 · {% if lang == 'en' %}Data deletion{% else %}Usunięcie danych{% endif %}</span>
+        <strong class="fig">14<sup>{% if lang == 'en' %}days{% else %}dni{% endif %}</sup></strong>
+        <small>{% if lang == 'en' %}Local processing, deletion after the order closes.{% else %}Przetwarzanie lokalne, usunięcie po zamknięciu zlecenia.{% endif %}</small>
+      </div>
+    </div>
+    <div class="assure">
+      <div><span class="ico"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span>NDA / DPA</div>
+      <div><span class="ico"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="11"/><path d="M9 20h6M12 16v4"/></svg></span>{% if lang == 'en' %}Local processing{% else %}Przetwarzanie lokalne{% endif %}</div>
+      <div><span class="ico"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6z"/><path d="M9.5 9.5l5 5M14.5 9.5l-5 5"/></svg></span>{% if lang == 'en' %}Deleted after 14 days{% else %}Usunięcie po 14 dniach{% endif %}</div>
     </div>
   </div>
 </section>
@@ -44,31 +77,117 @@
       <h2>{% if lang == 'en' %}Six areas of work.{% else %}Sześć obszarów pracy.{% endif %}</h2>
       <p class="lead">{% if lang == 'en' %}Each task is quoted at a fixed price once we have checked your files.{% else %}Każde zadanie wyceniamy ryczałtem, po sprawdzeniu Twoich plików.{% endif %}</p>
     </div>
-    <div class="eng-grid">
-      <article class="eng-cell"><span class="eng-lbl">01 /</span>
+    <div class="cut-grid">
+      <article class="eng-cell cut" id="d-01">
+        <div class="cell-h">
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M12 12l8-4.5M12 12L4 7.5M12 12v9"/></svg></span>
+          <span class="id">D-01</span>
+        </div>
         <h3>{% if lang == 'en' %}MEP takeoffs{% else %}Przedmiary instalacji (MEP){% endif %}</h3>
         <p>{% if lang == 'en' %}Takeoffs of ventilation ducts, pipework and fittings from IFC models and DWG drawings.{% else %}Obmiary kanałów wentylacyjnych, rurociągów i armatury z modeli IFC oraz rysunków DWG.{% endif %}</p>
-        <dl class="eng-kv"><dt>IN</dt><dd>IFC · DWG</dd><dt>OUT</dt><dd>{% if lang == 'en' %}Excel with formulas{% else %}Arkusz Excel z formułami{% endif %}</dd></dl></article>
-      <article class="eng-cell"><span class="eng-lbl">02 /</span>
+        <dl class="eng-kv"><dt>IN</dt><dd>IFC · DWG</dd><dt>OUT</dt><dd>{% if lang == 'en' %}Excel with formulas{% else %}Arkusz Excel z formułami{% endif %}</dd></dl>
+      </article>
+
+      <article class="eng-cell cut" id="d-02">
+        <div class="cell-h">
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></span>
+          <span class="id">D-02</span>
+        </div>
         <h3>{% if lang == 'en' %}IFC model audit and repair{% else %}Audyt i naprawa modeli IFC{% endif %}</h3>
         <p>{% if lang == 'en' %}Filling in missing parameters, fixing storeys and checking against the investor's requirements.{% else %}Uzupełnianie brakujących parametrów, poprawa kondygnacji i weryfikacja pod wytyczne inwestora.{% endif %}</p>
-        <dl class="eng-kv"><dt>IN</dt><dd>{% if lang == 'en' %}IFC + investor requirements{% else %}IFC + wytyczne inwestora{% endif %}</dd><dt>OUT</dt><dd>{% if lang == 'en' %}Repaired IFC · report{% else %}Poprawiony IFC · raport{% endif %}</dd></dl></article>
-      <article class="eng-cell"><span class="eng-lbl">03 /</span>
-        <h3>{% if lang == 'en' %}Change register and revision delta{% else %}Rejestr zmian i delta rewizji{% endif %}</h3>
+        <dl class="eng-kv"><dt>IN</dt><dd>{% if lang == 'en' %}IFC + requirements{% else %}IFC + wytyczne{% endif %}</dd><dt>OUT</dt><dd>{% if lang == 'en' %}Repaired IFC · report{% else %}Poprawiony IFC · raport{% endif %}</dd></dl>
+      </article>
+
+      <article class="eng-cell cut" id="d-03">
+        <div class="cell-h">
+          <span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 6 12 12 16 14"/></svg></span>
+          <span class="id">D-03</span>
+        </div>
+        <h3>{% if lang == 'en' %}Change register &amp; revision delta{% else %}Rejestr zmian i delta rewizji{% endif %}</h3>
         <p>{% if lang == 'en' %}Exactly what changed in the quantities between version 1 and version 2 of a project.{% else %}Co dokładnie zmieniło się w ilościach między wersją 1 a 2 projektu.{% endif %}</p>
-        <dl class="eng-kv"><dt>IN</dt><dd>{% if lang == 'en' %}Versions 1 and 2 (IFC / DWG){% else %}Wersja 1 i 2 (IFC / DWG){% endif %}</dd><dt>OUT</dt><dd>{% if lang == 'en' %}Change register in Excel{% else %}Rejestr zmian w Excelu{% endif %}</dd></dl></article>
-      <article class="eng-cell"><span class="eng-lbl">04 /</span>
+        <dl class="eng-kv"><dt>IN</dt><dd>{% if lang == 'en' %}Versions 1 &amp; 2{% else %}Wersja 1 i 2{% endif %}</dd><dt>OUT</dt><dd>{% if lang == 'en' %}Change register in Excel{% else %}Rejestr zmian w Excelu{% endif %}</dd></dl>
+      </article>
+
+      <article class="eng-cell cut" id="d-04">
+        <div class="cell-h">
+          <span class="ico"><svg viewBox="0 0 24 24"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg></span>
+          <span class="id">D-04</span>
+        </div>
         <h3>{% if lang == 'en' %}Parcels and 3D terrain{% else %}Działki i teren 3D{% endif %}</h3>
         <p>{% if lang == 'en' %}Cadastral boundaries from Geoportal (ULDK) and a 3D terrain model from elevation data (DTM).{% else %}Granice ewidencyjne z Geoportalu (ULDK) oraz model 3D terenu z wysokościówki (NMT).{% endif %}</p>
-        <dl class="eng-kv"><dt>IN</dt><dd>{% if lang == 'en' %}Parcel numbers · DTM data{% else %}Numery działek · dane NMT{% endif %}</dd><dt>OUT</dt><dd>{% if lang == 'en' %}DXF · GeoJSON · 3D terrain model{% else %}DXF · GeoJSON · model 3D terenu{% endif %}</dd></dl></article>
-      <article class="eng-cell"><span class="eng-lbl">05 /</span>
+        <dl class="eng-kv"><dt>IN</dt><dd>{% if lang == 'en' %}Parcels · DTM{% else %}Działki · NMT{% endif %}</dd><dt>OUT</dt><dd>DXF · GeoJSON · 3D</dd></dl>
+      </article>
+
+      <article class="eng-cell cut" id="d-05">
+        <div class="cell-h">
+          <span class="ico"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><line x1="4" y1="10" x2="20" y2="10"/><line x1="10" y1="4" x2="10" y2="20"/></svg></span>
+          <span class="id">D-05</span>
+        </div>
         <h3>{% if lang == 'en' %}Excel tools and automation{% else %}Narzędzia i automatyzacja Excela{% endif %}</h3>
-        <p>{% if lang == 'en' %}We build custom tools and programs that automate any repetitive work in Excel, CAD and databases. Merging hundreds of files, cleaning registers, automatic reports and .exe programs that run with one click, no installation.{% else %}Tworzymy dedykowane narzędzia i programy automatyzujące każdą powtarzalną pracę w Excelu, CAD i bazach danych. Scalanie setek plików, czyszczenie rejestrów, automatyczne raporty i programy (.exe) działające jednym kliknięciem bez instalacji.{% endif %}</p>
-        <dl class="eng-kv"><dt>IN</dt><dd>{% if lang == 'en' %}Excel files (.xlsx) · CSV · DWG · databases{% else %}Pliki Excel (.xlsx) · CSV · DWG · Bazy danych{% endif %}</dd><dt>OUT</dt><dd>{% if lang == 'en' %}Finished report · custom program (.exe) · script{% else %}Gotowy raport · Dedykowany program (.exe) · Skrypt{% endif %}</dd></dl></article>
-      <article class="eng-cell"><span class="eng-lbl">06 /</span>
+        <p>{% if lang == 'en' %}We build custom tools and programs that automate any repetitive work in Excel, CAD and databases.{% else %}Tworzymy dedykowane narzędzia i programy automatyzujące każdą powtarzalną pracę w Excelu, CAD i bazach danych.{% endif %}</p>
+        <dl class="eng-kv"><dt>IN</dt><dd>XLSX · CSV · DWG</dd><dt>OUT</dt><dd>{% if lang == 'en' %}Report · .exe tool · script{% else %}Raport · Program (.exe) · Skrypt{% endif %}</dd></dl>
+      </article>
+
+      <article class="eng-cell cut" id="d-06">
+        <div class="cell-h">
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></span>
+          <span class="id">D-06</span>
+        </div>
         <h3>{% if lang == 'en' %}Digital and 3D mockups{% else %}Makiety cyfrowe i 3D{% endif %}</h3>
         <p>{% if lang == 'en' %}Virtual investment mockups linked to unit availability in Excel, layout verification and WebGL.{% else %}Wirtualne makiety inwestycji zintegrowane ze stanem lokali w Excelu, weryfikacja layoutu i WebGL.{% endif %}</p>
-        <dl class="eng-kv"><dt>IN</dt><dd>{% if lang == 'en' %}3D model + Excel with unit status{% else %}Model 3D + Excel ze stanem lokali{% endif %}</dd><dt>OUT</dt><dd>{% if lang == 'en' %}Mockup in the browser (WebGL){% else %}Makieta w przeglądarce (WebGL){% endif %}</dd></dl></article>
+        <dl class="eng-kv"><dt>IN</dt><dd>3D + XLSX</dd><dt>OUT</dt><dd>WebGL · Mockup 3D</dd></dl>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="eng-s" id="roles">
+  <div class="container">
+    <header class="sec-head">
+      <div class="row lbl"><span><b>02</b> {% if lang == 'en' %}Who it is for{% else %}Dla kogo{% endif %}</span><span>R-01 — R-04</span></div>
+      <h2>{% if lang == 'en' %}Four roles, one source of numbers.{% else %}Cztery role, jedno źródło liczb.{% endif %}</h2>
+    </header>
+    <div class="cut-grid cut-grid--2">
+      <article class="cut role">
+        <div class="role-h">
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M9 11h7M9 15h5"/></svg></span>
+          <div><span class="id">R-01</span><h3>{% if lang == 'en' %}Bidding contractors{% else %}Wykonawcy ofertujący{% endif %}</h3></div>
+        </div>
+        <div class="role-cols">
+          <div><span class="lbl">{% if lang == 'en' %}Risk{% else %}Ryzyko{% endif %}</span>{% if lang == 'en' %}An investor's takeoff you cannot verify before the bid deadline.{% else %}Obmiar inwestora, którego nie da się sprawdzić przed terminem oferty.{% endif %}</div>
+          <div class="gain"><span class="lbl">{% if lang == 'en' %}Result{% else %}Wynik{% endif %}</span>{% if lang == 'en' %}Your own takeoff from the model, reconciled with theirs.{% else %}Własny obmiar z modelu, zestawiony z przedmiarem inwestora.{% endif %}</div>
+        </div>
+      </article>
+      <article class="cut role">
+        <div class="role-h">
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></span>
+          <div><span class="id">R-02</span><h3>{% if lang == 'en' %}Site managers{% else %}Kierownicy budów{% endif %}</h3></div>
+        </div>
+        <div class="role-cols">
+          <div><span class="lbl">{% if lang == 'en' %}Risk{% else %}Ryzyko{% endif %}</span>{% if lang == 'en' %}Ordering materials based on unverified floor plan drawings.{% else %}Zamawianie materiałów na podstawie niezweryfikowanych rzutów.{% endif %}</div>
+          <div class="gain"><span class="lbl">{% if lang == 'en' %}Result{% else %}Wynik{% endif %}</span>{% if lang == 'en' %}Bills of materials with installation allowances per floor.{% else %}Zestawienia z naddatkami montażowymi rozbite na kondygnacje.{% endif %}</div>
+        </div>
+      </article>
+      <article class="cut role">
+        <div class="role-h">
+          <span class="ico"><svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></span>
+          <div><span class="id">R-03</span><h3>{% if lang == 'en' %}Specialist subcontractors{% else %}Wykonawcy branżowi (HVAC){% endif %}</h3></div>
+        </div>
+        <div class="role-cols">
+          <div><span class="lbl">{% if lang == 'en' %}Risk{% else %}Ryzyko{% endif %}</span>{% if lang == 'en' %}Manual takeoff from PDF or DWG taking days of engineering time.{% else %}Ręczny obmiar z PDF lub DWG trwający dniami w Excelu.{% endif %}</div>
+          <div class="gain"><span class="lbl">{% if lang == 'en' %}Result{% else %}Wynik{% endif %}</span>{% if lang == 'en' %}Automated takeoffs and duct surface area totals in 24–48 h.{% else %}Zautomatyzowane obmiary blachy i rur gotowe w 24–48 godzin.{% endif %}</div>
+        </div>
+      </article>
+      <article class="cut role">
+        <div class="role-h">
+          <span class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></span>
+          <div><span class="id">R-04</span><h3>{% if lang == 'en' %}Design &amp; BIM offices{% else %}Biura projektowe i BIM{% endif %}</h3></div>
+        </div>
+        <div class="role-cols">
+          <div><span class="lbl">{% if lang == 'en' %}Risk{% else %}Ryzyko{% endif %}</span>{% if lang == 'en' %}IFC model errors and missing classification tags rejected by the investor.{% else %}Błędy w strukturze IFC i brakujące parametry odrzucone przez zamawiającego.{% endif %}</div>
+          <div class="gain"><span class="lbl">{% if lang == 'en' %}Result{% else %}Wynik{% endif %}</span>{% if lang == 'en' %}Audited, repaired models and revision change logs.{% else %}Audyt, naprawa parametrów i precyzyjny rejestr rewizji.{% endif %}</div>
+        </div>
+      </article>
     </div>
   </div>
 </section>
@@ -88,7 +207,7 @@
           <thead><tr>
             <th>{% if lang == 'en' %}Floor{% else %}Kondygnacja{% endif %}</th><th>{% if lang == 'en' %}System{% else %}System{% endif %}</th><th>{% if lang == 'en' %}Section [mm]{% else %}Przekrój [mm]{% endif %}</th>
             <th class="n">{% if lang == 'en' %}Qty{% else %}Ilość{% endif %}</th><th class="n">{% if lang == 'en' %}Length [m]{% else %}Długość [m]{% endif %}</th><th class="n">{% if lang == 'en' %}Area [m²]{% else %}Powierzchnia [m²]{% endif %}</th>
-            <th class="n">{% if lang == 'en' %}Allowance{% else %}Naddatek{% endif %}</th><th class="n">{% if lang == 'en' %}Total with allowance [m²]{% else %}Razem z naddatkiem [m²]{% endif %}</th>
+            <th class="n">{% if lang == 'en' %}Allowance{% else %}Naddatek{% endif %}</th><th class="n is-ref">{% if lang == 'en' %}Total with allowance [m²]{% else %}Razem z naddatkiem [m²]{% endif %}</th>
           </tr></thead>
           <tbody>
             <tr><td>{% if lang == 'en' %}Ground{% else %}Parter{% endif %}</td><td>{% if lang == 'en' %}Exhaust{% else %}Wywiew{% endif %}</td><td>400x350</td><td class="n">2 {% if lang == 'en' %}pcs{% else %}szt.{% endif %}</td><td class="n">3.81</td><td class="n">5.72</td><td class="n">10%</td><td class="n">6.29</td></tr>

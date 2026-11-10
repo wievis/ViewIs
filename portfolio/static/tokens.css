@@ -1,31 +1,97 @@
 :root {
-  --bg: #171310;
-  --surface: #1c1815;
-  --surface-2: #261f19;
-  --line: rgba(244, 239, 234, .16);
-  --text: #f4efea;
-  --muted: #a39a90;
-  --accent: #c86d44;
-  --accent-ink: #1c1815;
-  --sage: #7fa992;
-  --signal: #ff4f00;
+  /* ---- 1. PRYMITYWY (stałe, wprost z kolofonu PDF) ------------------------ */
+  --paper:    #f4efea;   /* PAPIER   – tło arkusza                          */
+  --paper-2:  #ebe4dc;   /* paski, nagłówki tabel, „szare” pola           */
+  --ink:      #1c1815;   /* ATRAMENT – struktura: ramki, linie, bloki     */
+  --copper:   #c86d44;   /* MIEDŹ    – identyfikatory, wymiarowanie, akcent */
+  --sage:     #4f7965;   /* SZAŁWIA  – wynik / „co dostajesz” / zaznaczenie */
+  --signal:   #ff4f00;   /* SYGNAŁ   – alarm, stan aktywny, focus (oszczędnie) */
+
+  /* ---- 2. SEMANTYKA · tryb ciemny (obecny domyślny) ----------------------- */
+  --bg:           #171310;
+  --surface:      #1c1815;
+  --surface-2:    #261f19;
+  --text:         #f4efea;
+  --muted:        #a39a90;
+  --line:         rgba(244, 239, 234, .16);   /* linia włosowa             */
+  --line-strong:  rgba(244, 239, 234, .34);   /* linie rzędów tabeli       */
+  --rule:         rgba(244, 239, 234, .70);   /* gruba linia konstrukcyjna */
+  --tick:         rgba(244, 239, 234, .24);   /* podziałki linijki         */
+  --accent:       #c86d44;
+  --accent-text:  #c86d44;                    /* miedź do małego tekstu (≈5:1 na --bg) */
+  --accent-ink:   #1c1815;                    /* tekst na miedzianym tle   */
+  --ok:           #7fa992;                    /* szałwia rozjaśniona pod ciemne tło */
+  --ok-text:      #8fb9a2;
+  --alert:        #ff6a2b;
+  --block-bg:     #261f19;                    /* „czarny blok” z arkusza 01/04 */
+  --block-fg:     #f4efea;
+  --code-bg:      #1c1815;
+  --code-fg:      #e8e1d8;
+
+  /* ---- 3. TYPOGRAFIA ------------------------------------------------------- */
+  --font-display: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-text:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, 'Courier New', monospace;
+  --serif: var(--font-display);
+  --sans:  var(--font-text);
+  --mono:  var(--font-mono);
+
+  --fs-xs:   .68rem;
+  --fs-sm:   .84rem;
+  --fs-base: 1rem;
+  --fs-lead: 1.125rem;
+  --fs-h3:   1.25rem;
+  --fs-h2:   clamp(1.75rem, 3.2vw, 2.6rem);
+  --fs-h1:   clamp(2.3rem, 5vw, 4.2rem);
+  --fs-fig:  clamp(2.8rem, 6vw, 4.8rem);
+  --tracking-display: -.045em;
+  --tracking-label:    .1em;
+
+  /* ---- 4. ODSTĘPY (siatka 4 px) -------------------------------------------- */
+  --s-1: 4px;  --s-2: 8px;  --s-3: 12px; --s-4: 16px;
+  --s-5: 24px; --s-6: 32px; --s-7: 48px; --s-8: 64px; --s-9: 96px;
+  --gutter: 28px;
   --header-h: 64px;
-  --serif: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --mono: 'JetBrains Mono', 'Courier New', monospace;
-  --ease: cubic-bezier(.23, 1, .32, 1);
-  --radius: 0px;
   --maxw: 1240px;
+
+  /* ---- 5. OBRAMOWANIA, KĄTY, CIENIE ---------------------------------------- */
+  --bw:        1px;
+  --bw-rule:  1.5px;
+  --bw-heavy: 2px;
+  --radius:    0px;
+  --chamfer:  14px;
+  --shadow:    none;
+  --focus:    2px solid var(--signal);
+
+  /* ---- 6. RUCH --------------------------------------------------------------- */
+  --ease: cubic-bezier(.23, 1, .32, 1);
+  --dur:  .25s;
+
+  /* ---- 7. TEKSTURA: znaczniki „+” (siatka rejestracyjna z tła PDF) ---------- */
+  --cross: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Cpath d='M32 27v10M27 32h10' stroke='%23f4efea' stroke-opacity='.14' stroke-width='1' fill='none'/%3E%3C/svg%3E");
 }
-html.light-mode, body.light-mode {
-  --bg: #f4efea;
-  --surface: #fbf8f5;
-  --surface-2: #ebe4dc;
-  --line: rgba(28, 24, 21, .22);
-  --text: #1c1815;
-  --muted: #6b625a;
-  --accent: #b4572f;
-  --accent-ink: #ffffff;
-  --sage: #4f7965;
-  --signal: #e64600;
+
+/* ---- Tryb jasny = „papier” z PDF ------------------------------------------- */
+html.light-mode,
+body.light-mode {
+  --bg:          var(--paper);
+  --surface:      #faf7f3;
+  --surface-2:    var(--paper-2);
+  --text:         var(--ink);
+  --muted:        #6b625a;
+  --line:         rgba(28, 24, 21, .16);
+  --line-strong: rgba(28, 24, 21, .42);
+  --rule:         var(--ink);
+  --tick:         rgba(28, 24, 21, .30);
+  --accent:       #c86d44;
+  --accent-text: #a34b26;
+  --accent-ink:  #1c1815;
+  --ok:          #4f7965;
+  --ok-text:     #3f6652;
+  --alert:        #e64600;
+  --block-bg:    #1c1815;
+  --block-fg:    #f4efea;
+  --sage:        #4f7965;
+  --signal:      #e64600;
+  --cross: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Cpath d='M32 27v10M27 32h10' stroke='%231c1815' stroke-opacity='.16' stroke-width='1' fill='none'/%3E%3C/svg%3E");
 }

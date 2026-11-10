@@ -1,257 +1,69 @@
-{% extends 'base.html' %}
-{% block body_class %}theme-articles{% endblock %}
+{% extends 'articles/_split.html' %}
 {% load static %}
 
-{% block content %}
-<section style="position: relative; z-index: 10; min-height: 85vh; padding-top: 140px; padding-bottom: 80px;">
-  <div style="max-width: 1240px; margin: 0 auto; padding: 0 24px;">
-    
-    <nav style="margin-bottom: 24px; font-size: 13px;">
-      <a href="{{ art_base }}" style="color: #38bdf8; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
-        {% if lang == 'en' %}← All articles{% else %}← Wszystkie artykuły{% endif %}
-      </a>
-    </nav>
-
-    <header style="margin-bottom: 32px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 24px;">
-      <div style="display: flex; gap: 8px; align-items: center; font-size: 12px; margin-bottom: 12px; flex-wrap: wrap;">
-        <span style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); padding: 3px 10px; border-radius: 20px; font-weight: 600;">{{ article.category }}</span>
-        {% for t in article.tags %}
-          <span style="background: rgba(148, 163, 184, 0.12); color: #cbd5e1; border: 1px solid rgba(148, 163, 184, 0.25); padding: 3px 9px; border-radius: 20px; font-size: 11.5px; font-weight: 500;">{{ t }}</span>
-        {% endfor %}
-      </div>
-      <h1 style="font-size: 32px; font-weight: 800; color: #ffffff; line-height: 1.3; margin-bottom: 14px; letter-spacing: -0.02em;">
-        {{ article.title }}
-      </h1>
-      <p style="font-size: 15.5px; color: #94a3b8; line-height: 1.6; max-width: 900px; margin: 0;">
-        {{ article.lead }}
-      </p>
-    </header>
-
-    <div class="split-layout">
-      
-      <div class="split-descriptions">
-        
-        <div class="desc-card">
-          <h2 style="font-size: 19px; font-weight: 700; color: #ffffff; margin-bottom: 10px;">{% if lang == 'en' %}1. Loading your first .lsp file{% else %}1. Pierwsze wczytanie pliku .lsp{% endif %}</h2>
-          <p style="color: #cbd5e1; font-size: 14px; line-height: 1.65; margin-bottom: 14px;">
-            {% if lang == 'en' %}An AutoLISP file is a plain text file with the <code>.lsp</code> extension. To try it out once in an open drawing:{% else %}Plik AutoLISP to czysty plik tekstowy z rozszerzeniem <code>.lsp</code>. Aby go jednorazowo wypróbować w otwartym rysunku:{% endif %}
-          </p>
-          <div style="display: flex; flex-direction: column; gap: 10px;">
-            <div style="background: rgba(15,23,42,0.6); border: 1px solid rgba(255,255,255,0.08); padding: 12px 14px; border-radius: 8px;">
-              <span style="color: #38bdf8; font-weight: 700; font-size: 12px;">{% if lang == 'en' %}Method A (Drag and drop):{% else %}Metoda A (Przeciągnij i upuść):{% endif %}</span>
-              <p style="color: #94a3b8; font-size: 13px; margin: 4px 0 0 0;">{% if lang == 'en' %}Drag the <code>.lsp</code> file from Windows Explorer straight into the drawing area (Model space).{% else %}Upuść plik <code>.lsp</code> z Eksploratora Windows prosto na czarny obszar kreślenia (Model).{% endif %}</p>
-            </div>
-            <div style="background: rgba(15,23,42,0.6); border: 1px solid rgba(255,255,255,0.08); padding: 12px 14px; border-radius: 8px;">
-              <span style="color: #38bdf8; font-weight: 700; font-size: 12px;">{% if lang == 'en' %}Method B (APPLOAD command):{% else %}Metoda B (Polecenie APPLOAD):{% endif %}</span>
-              <p style="color: #94a3b8; font-size: 13px; margin: 4px 0 0 0;">{% if lang == 'en' %}Run the <code>APPLOAD</code> command, select the downloaded file and click <em>Load</em>.{% else %}Wpisz polecenie <code>APPLOAD</code>, wskaż pobrany plik i zatwierdź przyciskiem <em>Load</em>.{% endif %}</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="desc-card">
-          <div class="cmd-badge">{% if lang == 'en' %}AUTOCAD SECURITY{% else %}BEZPIECZEŃSTWO AUTOCAD{% endif %}</div>
-          <h3 style="font-size: 17px; font-weight: 700; color: #38bdf8; margin-bottom: 8px;">{% if lang == 'en' %}2. Configuring Trusted Paths{% else %}2. Konfiguracja Trusted Paths{% endif %}</h3>
-          <p style="color: #cbd5e1; font-size: 14px; line-height: 1.65; margin-bottom: 12px;">
-            {% if lang == 'en' %}By default, AutoCAD blocks scripts from untrusted folders and shows a <em>Security Concern</em> warning. To stop the prompts:{% else %}AutoCAD domyślnie blokuje skrypty z nieautoryzowanych folderów, wyświetlając ostrzeżenie <em>Security Concern</em>. Aby wyeliminować monity:{% endif %}
-          </p>
-          <ol style="margin: 0; padding-left: 18px; color: #94a3b8; font-size: 13.5px; line-height: 1.7;">
-            <li>{% if lang == 'en' %}Run the <code>OPTIONS</code> command (shortcut <code>OP</code>) and open the <strong>Files</strong> tab.{% else %}Wpisz polecenie <code>OPTIONS</code> (skrót <code>OP</code>) i przejdź do zakładki <strong>Files</strong>.{% endif %}</li>
-            <li>{% if lang == 'en' %}Expand the <strong>Trusted Locations</strong> section.{% else %}Rozwiń sekcję <strong>Trusted Locations</strong> (Zaufane lokalizacje).{% endif %}</li>
-            <li>{% if lang == 'en' %}Click <strong>Add...</strong>, then <strong>Browse...</strong> and select your scripts folder.{% else %}Kliknij <strong>Add...</strong>, a następnie <strong>Browse...</strong> i wskaż swój folder na skrypty.{% endif %}</li>
-            <li>{% if lang == 'en' %}<strong>Important:</strong> Add three dots at the end of the path (<code>...</code>), e.g. <code>C:\...\lsp\...</code>, so AutoCAD also trusts all subfolders.{% else %}<strong>Ważne:</strong> Dodaj na końcu ścieżki trzy kropki (<code>...</code>), np. <code>C:\...\lsp\...</code>, aby AutoCAD uznał za zaufane również wszystkie podkatalogi.{% endif %}</li>
-            <li>{% if lang == 'en' %}Click <strong>Apply</strong> and <strong>OK</strong>.{% else %}Kliknij <strong>Apply</strong> i <strong>OK</strong>.{% endif %}</li>
-          </ol>
-        </div>
-
-        <div class="desc-card">
-          <div class="cmd-badge">{% if lang == 'en' %}Command: REGENLISP{% else %}Polecenie: REGENLISP{% endif %}</div>
-          <h3 style="font-size: 17px; font-weight: 700; color: #38bdf8; margin-bottom: 8px;">{% if lang == 'en' %}3. Reloading scripts on the fly{% else %}3. Przeładowywanie skryptów w locie{% endif %}</h3>
-          <p style="color: #cbd5e1; font-size: 14px; line-height: 1.65; margin-bottom: 12px;">
-            {% if lang == 'en' %}Instead of restarting AutoCAD after every code edit, the <code>REGENLISP</code> routine recursively reloads all files in a fraction of a second:{% else %}Zamiast restartować AutoCADa po każdej edycji kodu, procedura <code>REGENLISP</code> rekurencyjnie odświeża wszystkie pliki w ułamku sekundy:{% endif %}
-          </p>
-          
-          <div style="background: rgba(56, 189, 248, 0.08); border-left: 3px solid #38bdf8; padding: 12px 14px; border-radius: 0 8px 8px 0; margin-bottom: 14px;">
-            <strong style="color: #38bdf8; font-size: 13px;">{% if lang == 'en' %}Set your own path in the code:{% else %}Wskaż swoją ścieżkę w kodzie:{% endif %}</strong>
-            <p style="color: #cbd5e1; font-size: 12.5px; margin: 4px 0 0 0; line-height: 1.5;">
-              {% if lang == 'en' %}In the line <code>(setq *path-acad* "...")</code> replace <code>UZYTKOWNIK</code> with your Windows profile name, or give the exact path to the folder where you keep your <code>.lsp</code> files. Remember to use forward slashes <code>/</code> instead of <code>\</code>.{% else %}W linijce <code>(setq *path-acad* "...")</code> zamień <code>UZYTKOWNIK</code> na nazwę swojego profilu w Windowsie lub podaj dokładną ścieżkę do katalogu, w którym trzymasz pliki <code>.lsp</code>. Pamiętaj o ukośnikach <code>/</code> zamiast <code>\</code>.{% endif %}
-            </p>
-          </div>
-
-          <ul style="padding-left: 18px; color: #94a3b8; font-size: 13.5px; line-height: 1.6;">
-            <li>{% if lang == 'en' %}<strong>Excluded folders:</strong> The <code>ignore</code> list skips temporary folders (<code>.git</code>, <code>.venv</code>, <code>archiwum</code>, <code>test</code>).{% else %}<strong>Folder isolation:</strong> Lista <code>ignore</code> pomija foldery tymczasowe (<code>.git</code>, <code>.venv</code>, <code>archiwum</code>, <code>test</code>).{% endif %}</li>
-            <li>{% if lang == 'en' %}<strong>Fault tolerance:</strong> Uses <code>vl-catch-all-apply</code>, so an error in one script does not stop the others from loading.{% else %}<strong>Odporność na awarie:</strong> Wykorzystuje <code>vl-catch-all-apply</code> – błąd w jednym skrypcie nie przerywa ładowania pozostałych.{% endif %}</li>
-          </ul>
-        </div>
-
-        <div class="notice-card" onclick="window.location.href='{{ art_base }}autocad-lisp-narzedzia-przyspieszajace-prace/'">
-          <div style="font-size: 12px; font-weight: 700; color: #38bdf8; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">{% if lang == 'en' %}Next step{% else %}Kolejny krok{% endif %}</div>
-          <h4 style="font-size: 16px; font-weight: 700; color: #ffffff; margin-bottom: 6px;">{% if lang == 'en' %}Features AutoCAD is missing{% else %}Funkcje jakich brakuje w AutoCAD{% endif %}</h4>
-          <p style="font-size: 13.5px; color: #94a3b8; margin: 0; line-height: 1.55;">
-            {% if lang == 'en' %}Once your environment is set up, grab the toolkit: invert selection, area totals and DWT template export →{% else %}Gdy środowisko jest gotowe, pobierz zestaw funkcji: odwracanie zaznaczenia, sumę powierzchni i eksport szablonu DWT →{% endif %}
-          </p>
-        </div>
-
-      </div>
-
-      <div class="split-code">
-        <div class="code-box">
-          <div class="code-header">
-            <span>viewis-autolisp-loader.lsp</span>
-            <div style="display: flex; gap: 8px;">
-              <button class="btn-copy" onclick="copyCode('code-loader', this)">{% if lang == 'en' %}Copy code{% else %}Kopiuj kod{% endif %}</button>
-              <a href="{% static 'lsp/viewis-autolisp-loader.lsp' %}" download class="btn-copy" style="text-decoration:none; display:inline-block;">{% if lang == 'en' %}Download .lsp{% else %}Pobierz .lsp{% endif %}</a>
-            </div>
-          </div>
-          <pre id="code-loader" class="vscode-lisp"><code>{{ loader_code|escape }}</code></pre>
-        </div>
-      </div>
-
+{% block cards %}
+  <div class="cut doc">
+    <h2>{% if lang == 'en' %}1. Loading your first .lsp file{% else %}1. Pierwsze wczytanie pliku .lsp{% endif %}</h2>
+    <p>
+      {% if lang == 'en' %}An AutoLISP file is a plain text file with the <code>.lsp</code> extension. To try it out once in an open drawing:{% else %}Plik AutoLISP to czysty plik tekstowy z rozszerzeniem <code>.lsp</code>. Aby go jednorazowo wypróbować w otwartym rysunku:{% endif %}
+    </p>
+    <div class="method">
+      <span class="lbl">{% if lang == 'en' %}Method A (Drag and drop){% else %}Metoda A (Przeciągnij i upuść){% endif %}</span>
+      <p>{% if lang == 'en' %}Drag the <code>.lsp</code> file from Windows Explorer straight into the drawing area (Model space).{% else %}Upuść plik <code>.lsp</code> z Eksploratora Windows prosto na czarny obszar kreślenia (Model).{% endif %}</p>
     </div>
-
+    <div class="method">
+      <span class="lbl">{% if lang == 'en' %}Method B (APPLOAD command){% else %}Metoda B (Polecenie APPLOAD){% endif %}</span>
+      <p>{% if lang == 'en' %}Run the <code>APPLOAD</code> command, select the downloaded file and click <em>Load</em>.{% else %}Wpisz polecenie <code>APPLOAD</code>, wskaż pobrany plik i zatwierdź przyciskiem <em>Load</em>.{% endif %}</p>
+    </div>
   </div>
-</section>
 
-<style>
-  .split-layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 32px;
-    align-items: start;
-  }
-  @media (max-width: 980px) {
-    .split-layout {
-      grid-template-columns: 1fr;
-    }
-  }
-  .split-descriptions {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  .desc-card {
-    background: #0f172a;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    padding: 24px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  }
-  .cmd-badge {
-    display: inline-block;
-    font-size: 11px;
-    font-family: ui-monospace, SFMono-Regular, monospace;
-    font-weight: 700;
-    color: #38bdf8;
-    background: rgba(56, 189, 248, 0.1);
-    border: 1px solid rgba(56, 189, 248, 0.25);
-    padding: 2px 8px;
-    border-radius: 4px;
-    margin-bottom: 8px;
-  }
-  .notice-card {
-    background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 58, 138, 0.25));
-    border: 1px solid rgba(56, 189, 248, 0.3);
-    border-radius: 12px;
-    padding: 22px;
-    cursor: pointer;
-    transition: transform 0.15s ease, border-color 0.15s ease;
-  }
-  .notice-card:hover {
-    transform: translateY(-2px);
-    border-color: #38bdf8;
-  }
-  .split-code {
-    position: sticky;
-    top: 100px;
-  }
-  .code-box {
-    background: #1e1e1e;
-    border: 1px solid #333333;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  }
-  .code-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #252526;
-    padding: 8px 14px;
-    border-bottom: 1px solid #333333;
-    font-size: 12px;
-    color: #cccccc;
-    font-family: ui-monospace, monospace;
-  }
-  .btn-copy {
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    color: #cccccc;
-    padding: 4px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 11px;
-    transition: all 0.15s ease;
-  }
-  .btn-copy:hover {
-    background: rgba(255, 255, 255, 0.2);
-    color: #fff;
-  }
-  pre.vscode-lisp {
-    margin: 0;
-    padding: 16px;
-    overflow-x: auto;
-    font-family: Consolas, "Courier New", monospace;
-    font-size: 12.5px;
-    line-height: 1.6;
-    max-height: 72vh;
-    color: #d4d4d4;
-  }
+  <div class="cut doc">
+    <span class="cmd">{% if lang == 'en' %}AUTOCAD SECURITY{% else %}BEZPIECZEŃSTWO AUTOCAD{% endif %}</span>
+    <h3>{% if lang == 'en' %}2. Configuring Trusted Paths{% else %}2. Konfiguracja Trusted Paths{% endif %}</h3>
+    <p>
+      {% if lang == 'en' %}By default, AutoCAD blocks scripts from untrusted folders and shows a <em>Security Concern</em> warning. To stop the prompts:{% else %}AutoCAD domyślnie blokuje skrypty z nieautoryzowanych folderów, wyświetlając ostrzeżenie <em>Security Concern</em>. Aby wyeliminować monity:{% endif %}
+    </p>
+    <ol>
+      <li>{% if lang == 'en' %}Run the <code>OPTIONS</code> command (shortcut <code>OP</code>) and open the <strong>Files</strong> tab.{% else %}Wpisz polecenie <code>OPTIONS</code> (skrót <code>OP</code>) i przejdź do zakładki <strong>Files</strong>.{% endif %}</li>
+      <li>{% if lang == 'en' %}Expand the <strong>Trusted Locations</strong> section.{% else %}Rozwiń sekcję <strong>Trusted Locations</strong> (Zaufane lokalizacje).{% endif %}</li>
+      <li>{% if lang == 'en' %}Click <strong>Add...</strong>, then <strong>Browse...</strong> and select your scripts folder.{% else %}Kliknij <strong>Add...</strong>, a następnie <strong>Browse...</strong> i wskaż swój folder na skrypty.{% endif %}</li>
+      <li>{% if lang == 'en' %}<strong>Important:</strong> Add three dots at the end of the path (<code>...</code>), e.g. <code>C:\...\lsp\...</code>, so AutoCAD also trusts all subfolders.{% else %}<strong>Ważne:</strong> Dodaj na końcu ścieżki trzy kropki (<code>...</code>), np. <code>C:\...\lsp\...</code>, aby AutoCAD uznał za zaufane również wszystkie podkatalogi.{% endif %}</li>
+      <li>{% if lang == 'en' %}Click <strong>Apply</strong> and <strong>OK</strong>.{% else %}Kliknij <strong>Apply</strong> i <strong>OK</strong>.{% endif %}</li>
+    </ol>
+  </div>
 
-  .hl-comment { color: #6a9955; font-style: italic; }
-  .hl-keyword { color: #569cd6; font-weight: 600; }
-  .hl-function { color: #dcdcaa; }
-  .hl-string { color: #ce9178; }
-  .hl-number { color: #b5cea8; }
-  .hl-variable { color: #9cdcfe; }
-  .hl-paren { color: #ffd700; }
-</style>
+  <div class="cut doc">
+    <span class="cmd">{% if lang == 'en' %}Command: REGENLISP{% else %}Polecenie: REGENLISP{% endif %}</span>
+    <h3>{% if lang == 'en' %}3. Reloading scripts on the fly{% else %}3. Przeładowywanie skryptów w locie{% endif %}</h3>
+    <p>
+      {% if lang == 'en' %}Instead of restarting AutoCAD after every code edit, the <code>REGENLISP</code> routine recursively reloads all files in a fraction of a second:{% else %}Zamiast restartować AutoCADa po każdej edycji kodu, procedura <code>REGENLISP</code> rekurencyjnie odświeża wszystkie pliki w ułamku sekundy:{% endif %}
+    </p>
+    <div class="note">
+      <span class="lbl">{% if lang == 'en' %}Set your own path in the code{% else %}Wskaż swoją ścieżkę w kodzie{% endif %}</span>
+      <p>{% if lang == 'en' %}In the line <code>(setq *path-acad* "...")</code> replace <code>UZYTKOWNIK</code> with your Windows profile name, or give the exact path to the folder. Remember to use forward slashes <code>/</code>.{% else %}W linijce <code>(setq *path-acad* "...")</code> zamień <code>UZYTKOWNIK</code> na nazwę swojego profilu lub podaj dokładną ścieżkę. Pamiętaj o ukośnikach <code>/</code> zamiast <code>\</code>.{% endif %}</p>
+    </div>
+    <ul>
+      <li>{% if lang == 'en' %}<strong>Excluded folders:</strong> The <code>ignore</code> list skips temporary folders (<code>.git</code>, <code>.venv</code>, <code>archiwum</code>, <code>test</code>).{% else %}<strong>Folder isolation:</strong> Lista <code>ignore</code> pomija foldery tymczasowe (<code>.git</code>, <code>.venv</code>, <code>archiwum</code>, <code>test</code>).{% endif %}</li>
+      <li>{% if lang == 'en' %}<strong>Fault tolerance:</strong> Uses <code>vl-catch-all-apply</code>, so an error in one script does not stop the others from loading.{% else %}<strong>Odporność na awarie:</strong> Wykorzystuje <code>vl-catch-all-apply</code> – błąd w jednym skrypcie nie przerywa ładowania pozostałych.{% endif %}</li>
+    </ul>
+  </div>
 
-<script>
-function copyCode(elementId, btn) {
-  const code = document.getElementById(elementId).innerText;
-  navigator.clipboard.writeText(code).then(() => {
-    const orig = btn.innerText;
-    btn.innerText = "{% if lang == 'en' %}Copied!{% else %}Skopiowano!{% endif %}";
-    btn.style.background = "#059669";
-    setTimeout(() => {
-      btn.innerText = orig;
-      btn.style.background = "rgba(255, 255, 255, 0.08)";
-    }, 2000);
-  });
-}
+  <a class="cut doc" href="{{ art_base }}autocad-lisp-narzedzia-przyspieszajace-prace/">
+    <span class="lbl">{% if lang == 'en' %}Next step{% else %}Kolejny krok{% endif %}</span>
+    <h3>{% if lang == 'en' %}Features AutoCAD is missing{% else %}Funkcje jakich brakuje w AutoCAD{% endif %}</h3>
+    <p>{% if lang == 'en' %}Once your environment is set up, grab the toolkit: invert selection, area totals and DWT template export →{% else %}Gdy środowisko jest gotowe, pobierz zestaw funkcji: odwracanie zaznaczenia, sumę powierzchni i eksport szablonu DWT →{% endif %}</p>
+  </a>
+{% endblock %}
 
-document.addEventListener("DOMContentLoaded", () => {
-  const codeEl = document.getElementById("code-loader");
-  if (!codeEl) return;
-  let text = codeEl.innerText;
-
-  const lines = text.split("\n");
-  const highlighted = lines.map(line => {
-    if (line.trim().startsWith(";")) {
-      return `<span class="hl-comment">${escapeHtml(line)}</span>`;
-    }
-    let res = line.replace(/(".*?")/g, '<span class="hl-string">\$1</span>');
-    res = res.replace(/\b(defun|setq|vl-load-com|princ|foreach|if|not|cond|t|member|append|strcase|strcat)\b/g, '<span class="hl-keyword">\$1</span>');
-    res = res.replace(/\b(vl-directory-files|vl-catch-all-error-p|vl-catch-all-apply|load|boundp|vl-file-directory-p|vl-string-right-trim)\b/g, '<span class="hl-function">\$1</span>');
-    res = res.replace(/(\*path-acad\*)/g, '<span class="hl-variable">\$1</span>');
-    res = res.replace(/([\(\)])/g, '<span class="hl-paren">\$1</span>');
-    return res;
-  }).join("\n");
-
-  codeEl.innerHTML = highlighted;
-});
-
-function escapeHtml(str) {
-  return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-}
-</script>
+{% block code %}
+  <div class="code-box">
+    <div class="code-bar">
+      <span>viewis-autolisp-loader.lsp</span>
+      <div class="code-actions">
+        <button class="btn-copy" onclick="copyCode('code-loader', this)">{% if lang == 'en' %}Copy code{% else %}Kopiuj kod{% endif %}</button>
+        <a href="{% static 'lsp/viewis-autolisp-loader.lsp' %}" download class="btn-copy">.lsp</a>
+      </div>
+    </div>
+    <pre id="code-loader" class="code" data-lang="lsp"><code>{{ loader_code|escape }}</code></pre>
+  </div>
 {% endblock %}

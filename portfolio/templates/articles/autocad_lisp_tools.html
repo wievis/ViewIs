@@ -1,268 +1,72 @@
-{% extends 'base.html' %}
-{% block body_class %}theme-articles{% endblock %}
+{% extends 'articles/_split.html' %}
 {% load static %}
 
-{% block content %}
-<section style="position: relative; z-index: 10; min-height: 85vh; padding-top: 140px; padding-bottom: 80px;">
-  <div style="max-width: 1240px; margin: 0 auto; padding: 0 24px;">
-    
-    <nav style="margin-bottom: 24px; font-size: 13px;">
-      <a href="{{ art_base }}" style="color: #38bdf8; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
-        {% if lang == 'en' %}← All articles{% else %}← Wszystkie artykuły{% endif %}
-      </a>
-    </nav>
-
-    <header style="margin-bottom: 32px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 24px;">
-      <div style="display: flex; gap: 8px; align-items: center; font-size: 12px; margin-bottom: 12px; flex-wrap: wrap;">
-        <span style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); padding: 3px 10px; border-radius: 20px; font-weight: 600;">{{ article.category }}</span>
-        {% for t in article.tags %}
-          <span style="background: rgba(148, 163, 184, 0.12); color: #cbd5e1; border: 1px solid rgba(148, 163, 184, 0.25); padding: 3px 9px; border-radius: 20px; font-size: 11.5px; font-weight: 500;">{{ t }}</span>
-        {% endfor %}
-      </div>
-      <h1 style="font-size: 32px; font-weight: 800; color: #ffffff; line-height: 1.3; margin-bottom: 14px; letter-spacing: -0.02em;">
-        {{ article.title }}
-      </h1>
-      <p style="font-size: 15.5px; color: #94a3b8; line-height: 1.6; max-width: 900px; margin: 0;">
-        {{ article.lead }}
-      </p>
-    </header>
-
-    <div class="split-layout">
-      
-      <div class="split-descriptions">
-        
-        <div class="desc-card">
-          <h2 style="font-size: 19px; font-weight: 700; color: #ffffff; margin-bottom: 10px;">{% if lang == 'en' %}What's in the toolkit{% else %}Architektura zestawu{% endif %}</h2>
-          <p style="color: #cbd5e1; font-size: 14px; line-height: 1.65; margin-bottom: 14px;">
-            {% if lang == 'en' %}The three routines in <code>viewis-cad-tools.lsp</code> work in any standard AutoCAD installation, with no external DLLs and no registry changes.{% else %}Trzy procedury zawarte w pliku <code>viewis-cad-tools.lsp</code> zostały przygotowane tak, by działać w każdym standardowym środowisku AutoCAD bez zewnętrznych bibliotek DLL i bez ingerencji w rejestr systemowy.{% endif %}
-          </p>
-          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-            <a href="{% static 'lsp/viewis-cad-tools.lsp' %}" download class="btn-download">{% if lang == 'en' %}Download viewis-cad-tools.lsp{% else %}Pobierz viewis-cad-tools.lsp{% endif %}</a>
-          </div>
-        </div>
-
-        <div class="desc-card">
-          <div class="cmd-badge">{% if lang == 'en' %}Command: SELECTREVERSE{% else %}Polecenie: SELECTREVERSE{% endif %}</div>
-          <h3 style="font-size: 17px; font-weight: 700; color: #38bdf8; margin-bottom: 8px;">{% if lang == 'en' %}1. Invert selection{% else %}1. Odwrócenie zaznaczenia{% endif %}</h3>
-          <p style="color: #cbd5e1; font-size: 14px; line-height: 1.65; margin-bottom: 10px;">
-            {% if lang == 'en' %}AutoCAD has no simple built-in way to invert the current selection in Model space or in the active layout.{% else %}AutoCAD natywnie nie oferuje prostego odwrócenia aktywnego zbioru wskazań w obszarze Modelu lub bieżącego arkusza (Layout).{% endif %}
-          </p>
-          <ul style="padding-left: 18px; color: #94a3b8; font-size: 13.5px; line-height: 1.6;">
-            <li>{% if lang == 'en' %}Reads the currently selected objects with <code>(ssget "_I")</code>.{% else %}Pobiera aktualnie zaznaczone obiekty przez <code>(ssget "_I")</code>.{% endif %}</li>
-            <li>{% if lang == 'en' %}Gathers every visible entity in the current space (DXF filter 410 = <code>CTAB</code>), skipping hidden objects (DXF code 60 = 1).{% else %}Zbiera wszystkie widoczne elementy z bieżącej przestrzeni (filtr DXF 410 = <code>CTAB</code>) ignorując obiekty ukryte (kod DXF 60 = 1).{% endif %}</li>
-            <li>{% if lang == 'en' %}Builds the difference set and selects it right away, grips included, with <code>sssetfirst</code>.{% else %}Tworzy nowy zbiór różnicowy i natychmiast go aktywuje wraz z uchwytami za pomocą <code>sssetfirst</code>.{% endif %}</li>
-          </ul>
-        </div>
-
-        <div class="desc-card">
-          <div class="cmd-badge">{% if lang == 'en' %}Command: CALCULATEAREA{% else %}Polecenie: CALCULATEAREA{% endif %}</div>
-          <h3 style="font-size: 17px; font-weight: 700; color: #38bdf8; margin-bottom: 8px;">{% if lang == 'en' %}2. Totaling areas{% else %}2. Sumowanie powierzchni{% endif %}</h3>
-          <p style="color: #cbd5e1; font-size: 14px; line-height: 1.65; margin-bottom: 10px;">
-            {% if lang == 'en' %}The standard <code>_AREA</code> command makes you click points one by one, or add single outlines with the <em>Add</em> option.{% else %}Standardowe polecenie <code>_AREA</code> wymaga żmudnego klikania punktów lub pojedynczych konturów z opcją <em>Add</em>.{% endif %}
-          </p>
-          <ul style="padding-left: 18px; color: #94a3b8; font-size: 13.5px; line-height: 1.6;">
-            <li>{% if lang == 'en' %}Filters objects of type <code>*POLYLINE</code>, <code>CIRCLE</code>, <code>HATCH</code> and <code>REGION</code>.{% else %}Filtruje obiekty typu <code>*POLYLINE</code>, <code>CIRCLE</code>, <code>HATCH</code> i <code>REGION</code>.{% endif %}</li>
-            <li>{% if lang == 'en' %}Reads each area through the ActiveX interface (<code>vla-get-property Area</code>), with error handling so damaged geometry doesn't break the run.{% else %}Odpytuje obiekty przez interfejs ActiveX (<code>vla-get-property Area</code>) z pełną izolacją błędów przed uszkodzoną geometrią.{% endif %}</li>
-            <li>{% if lang == 'en' %}Prints the total in m² along with the object count (the default conversion assumes the drawing is in centimeters).{% else %}Wyświetla gotową sumę w m² wraz z licznikiem obiektów (domyślny przelicznik dla rysunków w centymetrach).{% endif %}</li>
-          </ul>
-        </div>
-
-        <div class="desc-card">
-          <div class="cmd-badge">{% if lang == 'en' %}Command: DWT{% else %}Polecenie: DWT{% endif %}</div>
-          <h3 style="font-size: 17px; font-weight: 700; color: #38bdf8; margin-bottom: 8px;">{% if lang == 'en' %}3. Instant DWT template{% else %}3. Natychmiastowy szablon DWT{% endif %}</h3>
-          <p style="color: #cbd5e1; font-size: 14px; line-height: 1.65; margin-bottom: 10px;">
-            {% if lang == 'en' %}Saving a template in CAD normally means clicking through the Save As dialog and picking a format.{% else %}Eksport szablonu w CADzie standardowo zmusza do przeklikiwania dialogów zapisu i wyboru formatu.{% endif %}
-          </p>
-          <ul style="padding-left: 18px; color: #94a3b8; font-size: 13.5px; line-height: 1.6;">
-            <li>{% if lang == 'en' %}Saves the current drawing as <code>VI.dwt</code> in the folder set by the <code>*path-acad*</code> variable (or <code>*path*</code>).{% else %}Zapisuje bieżący stan rysunku jako <code>VI.dwt</code> do katalogu wskazanego zmienną <code>*path-acad*</code> (lub <code>*path*</code>).{% endif %}</li>
-            <li>{% if lang == 'en' %}Checks that the folder exists and creates any missing folders (<code>vl-mkdir</code>).{% else %}Automatycznie weryfikuje istnienie folderu i w razie potrzeby tworzy brakującą strukturę (<code>vl-mkdir</code>).{% endif %}</li>
-            <li>{% if lang == 'en' %}Turns off command echo (<code>CMDECHO = 0</code>) and overwrites the file without confirmation prompts (<code>EXPERT = 2</code>).{% else %}Wycisza komunikaty (<code>CMDECHO = 0</code>) i nadpisuje plik bez irytujących monitów (<code>EXPERT = 2</code>).{% endif %}</li>
-          </ul>
-        </div>
-
-        <div class="notice-card" onclick="window.location.href='{{ art_base }}autolisp-pierwsze-kroki-automatyczne-ladowanie/'">
-          <div style="font-size: 12px; font-weight: 700; color: #38bdf8; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">{% if lang == 'en' %}Related guide{% else %}Powiązany poradnik{% endif %}</div>
-          <h4 style="font-size: 16px; font-weight: 700; color: #ffffff; margin-bottom: 6px;">{% if lang == 'en' %}How to use AutoLISP?{% else %}Jak używać AutoLISP?{% endif %}</h4>
-          <p style="font-size: 13.5px; color: #94a3b8; margin: 0; line-height: 1.55;">
-            {% if lang == 'en' %}See the complete guide to setting up trusted folders (<em>Trusted Locations</em>) and reloading code on the fly with the <code>viewis-autolisp-loader.lsp</code> script →{% else %}Zobacz kompletny poradnik opisujący konfigurację zaufanych folderów (<em>Trusted Locations</em>) oraz automatyczne przeładowywanie kodu w locie skryptem <code>viewis-autolisp-loader.lsp</code> →{% endif %}
-          </p>
-        </div>
-
-      </div>
-
-      <div class="split-code">
-        <div class="code-box">
-          <div class="code-header">
-            <span>viewis-cad-tools.lsp</span>
-            <div style="display: flex; gap: 8px;">
-              <button class="btn-copy" onclick="copyCode('code-unified', this)">{% if lang == 'en' %}Copy code{% else %}Kopiuj kod{% endif %}</button>
-              <a href="{% static 'lsp/viewis-cad-tools.lsp' %}" download class="btn-copy" style="text-decoration:none; display:inline-block;">{% if lang == 'en' %}Download .lsp{% else %}Pobierz .lsp{% endif %}</a>
-            </div>
-          </div>
-          <pre id="code-unified" class="vscode-lisp"><code>{{ unified_code|escape }}</code></pre>
-        </div>
-      </div>
-
+{% block cards %}
+  <div class="cut doc">
+    <h2>{% if lang == 'en' %}What's in the toolkit{% else %}Architektura zestawu{% endif %}</h2>
+    <p>
+      {% if lang == 'en' %}The three routines in <code>viewis-cad-tools.lsp</code> work in any standard AutoCAD installation, with no external DLLs and no registry changes.{% else %}Trzy procedury zawarte w pliku <code>viewis-cad-tools.lsp</code> zostały przygotowane tak, by działać w każdym standardowym środowisku AutoCAD bez zewnętrznych bibliotek DLL i bez ingerencji w rejestr systemowy.{% endif %}
+    </p>
+    <div style="margin-top:14px;">
+      <a href="{% static 'lsp/viewis-cad-tools.lsp' %}" download class="btn-download">{% if lang == 'en' %}Download viewis-cad-tools.lsp{% else %}Pobierz viewis-cad-tools.lsp{% endif %}</a>
     </div>
-
   </div>
-</section>
 
-<style>
-  .split-layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 32px;
-    align-items: start;
-  }
-  @media (max-width: 980px) {
-    .split-layout {
-      grid-template-columns: 1fr;
-    }
-  }
-  .split-descriptions {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  .desc-card {
-    background: #0f172a;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    padding: 24px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  }
-  .cmd-badge {
-    display: inline-block;
-    font-size: 11px;
-    font-family: ui-monospace, SFMono-Regular, monospace;
-    font-weight: 700;
-    color: #38bdf8;
-    background: rgba(56, 189, 248, 0.1);
-    border: 1px solid rgba(56, 189, 248, 0.25);
-    padding: 2px 8px;
-    border-radius: 4px;
-    margin-bottom: 8px;
-  }
-  .notice-card {
-    background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 58, 138, 0.25));
-    border: 1px solid rgba(56, 189, 248, 0.3);
-    border-radius: 12px;
-    padding: 22px;
-    cursor: pointer;
-    transition: transform 0.15s ease, border-color 0.15s ease;
-  }
-  .notice-card:hover {
-    transform: translateY(-2px);
-    border-color: #38bdf8;
-  }
-  .split-code {
-    position: sticky;
-    top: 100px;
-  }
-  .code-box {
-    background: #1e1e1e;
-    border: 1px solid #333333;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  }
-  .code-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #252526;
-    padding: 8px 14px;
-    border-bottom: 1px solid #333333;
-    font-size: 12px;
-    color: #cccccc;
-    font-family: ui-monospace, monospace;
-  }
-  .btn-download {
-    display: inline-flex;
-    align-items: center;
-    background: #0284c7;
-    color: #fff;
-    padding: 8px 16px;
-    border-radius: 6px;
-    font-size: 12px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: background 0.15s ease;
-  }
-  .btn-download:hover { background: #0369a1; }
-  .btn-copy {
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    color: #cccccc;
-    padding: 4px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 11px;
-    transition: all 0.15s ease;
-  }
-  .btn-copy:hover {
-    background: rgba(255, 255, 255, 0.2);
-    color: #fff;
-  }
-  pre.vscode-lisp {
-    margin: 0;
-    padding: 16px;
-    overflow-x: auto;
-    font-family: Consolas, "Courier New", monospace;
-    font-size: 12.5px;
-    line-height: 1.6;
-    max-height: 72vh;
-    color: #d4d4d4;
-  }
+  <div class="cut doc">
+    <span class="cmd">{% if lang == 'en' %}Command: SELECTREVERSE{% else %}Polecenie: SELECTREVERSE{% endif %}</span>
+    <h3>{% if lang == 'en' %}1. Invert selection{% else %}1. Odwrócenie zaznaczenia{% endif %}</h3>
+    <p>
+      {% if lang == 'en' %}AutoCAD has no simple built-in way to invert the current selection in Model space or in the active layout.{% else %}AutoCAD natywnie nie oferuje prostego odwrócenia aktywnego zbioru wskazań w obszarze Modelu lub bieżącego arkusza (Layout).{% endif %}
+    </p>
+    <ul>
+      <li>{% if lang == 'en' %}Reads the currently selected objects with <code>(ssget "_I")</code>.{% else %}Pobiera aktualnie zaznaczone obiekty przez <code>(ssget "_I")</code>.{% endif %}</li>
+      <li>{% if lang == 'en' %}Gathers every visible entity in the current space (DXF filter 410 = <code>CTAB</code>), skipping hidden objects (DXF code 60 = 1).{% else %}Zbiera wszystkie widoczne elementy z bieżącej przestrzeni (filtr DXF 410 = <code>CTAB</code>) ignorując obiekty ukryte (kod DXF 60 = 1).{% endif %}</li>
+      <li>{% if lang == 'en' %}Builds the difference set and selects it right away, grips included, with <code>sssetfirst</code>.{% else %}Tworzy nowy zbiór różnicowy i natychmiast go aktywuje wraz z uchwytami za pomocą <code>sssetfirst</code>.{% endif %}</li>
+    </ul>
+  </div>
 
-  .hl-comment { color: #6a9955; font-style: italic; }
-  .hl-keyword { color: #569cd6; font-weight: 600; }
-  .hl-function { color: #dcdcaa; }
-  .hl-string { color: #ce9178; }
-  .hl-number { color: #b5cea8; }
-  .hl-variable { color: #9cdcfe; }
-  .hl-paren { color: #ffd700; }
-</style>
+  <div class="cut doc">
+    <span class="cmd">{% if lang == 'en' %}Command: CALCULATEAREA{% else %}Polecenie: CALCULATEAREA{% endif %}</span>
+    <h3>{% if lang == 'en' %}2. Totaling areas{% else %}2. Sumowanie powierzchni{% endif %}</h3>
+    <p>
+      {% if lang == 'en' %}The standard <code>_AREA</code> command makes you click points one by one, or add single outlines with the <em>Add</em> option.{% else %}Standardowe polecenie <code>_AREA</code> wymaga żmudnego klikania punktów lub pojedynczych konturów z opcją <em>Add</em>.{% endif %}
+    </p>
+    <ul>
+      <li>{% if lang == 'en' %}Filters objects of type <code>*POLYLINE</code>, <code>CIRCLE</code>, <code>HATCH</code> and <code>REGION</code>.{% else %}Filtruje obiekty typu <code>*POLYLINE</code>, <code>CIRCLE</code>, <code>HATCH</code> i <code>REGION</code>.{% endif %}</li>
+      <li>{% if lang == 'en' %}Reads each area through the ActiveX interface (<code>vla-get-property Area</code>), with error handling so damaged geometry doesn't break the run.{% else %}Odpytuje obiekty przez interfejs ActiveX (<code>vla-get-property Area</code>) z pełną izolacją błędów przed uszkodzoną geometrią.{% endif %}</li>
+      <li>{% if lang == 'en' %}Prints the total in m² along with the object count (the default conversion assumes the drawing is in centimeters).{% else %}Wyświetla gotową sumę w m² wraz z licznikiem obiektów (domyślny przelicznik dla rysunków w centymetrach).{% endif %}</li>
+    </ul>
+  </div>
 
-<script>
-function copyCode(elementId, btn) {
-  const code = document.getElementById(elementId).innerText;
-  navigator.clipboard.writeText(code).then(() => {
-    const orig = btn.innerText;
-    btn.innerText = "{% if lang == 'en' %}Copied!{% else %}Skopiowano!{% endif %}";
-    btn.style.background = "#059669";
-    setTimeout(() => {
-      btn.innerText = orig;
-      btn.style.background = "rgba(255, 255, 255, 0.08)";
-    }, 2000);
-  });
-}
+  <div class="cut doc">
+    <span class="cmd">{% if lang == 'en' %}Command: DWT{% else %}Polecenie: DWT{% endif %}</span>
+    <h3>{% if lang == 'en' %}3. Instant DWT template{% else %}3. Natychmiastowy szablon DWT{% endif %}</h3>
+    <p>
+      {% if lang == 'en' %}Saving a template in CAD normally means clicking through the Save As dialog and picking a format.{% else %}Eksport szablonu w CADzie standardowo zmusza do przeklikiwania dialogów zapisu i wyboru formatu.{% endif %}
+    </p>
+    <ul>
+      <li>{% if lang == 'en' %}Saves the current drawing as <code>VI.dwt</code> in the folder set by the <code>*path-acad*</code> variable (or <code>*path*</code>).{% else %}Zapisuje bieżący stan rysunku jako <code>VI.dwt</code> do katalogu wskazanego zmienną <code>*path-acad*</code> (lub <code>*path*</code>).{% endif %}</li>
+      <li>{% if lang == 'en' %}Checks that the folder exists and creates any missing folders (<code>vl-mkdir</code>).{% else %}Automatycznie weryfikuje istnienie folderu i w razie potrzeby tworzy brakującą strukturę (<code>vl-mkdir</code>).{% endif %}</li>
+      <li>{% if lang == 'en' %}Turns off command echo (<code>CMDECHO = 0</code>) and overwrites the file without confirmation prompts (<code>EXPERT = 2</code>).{% else %}Wycisza komunikaty (<code>CMDECHO = 0</code>) i nadpisuje plik bez irytujących monitów (<code>EXPERT = 2</code>).{% endif %}</li>
+    </ul>
+  </div>
 
-function escapeHtml(str) {
-  return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-}
+  <a class="cut doc" href="{{ art_base }}autolisp-pierwsze-kroki-automatyczne-ladowanie/">
+    <span class="lbl">{% if lang == 'en' %}Related guide{% else %}Powiązany poradnik{% endif %}</span>
+    <h3>{% if lang == 'en' %}How to use AutoLISP?{% else %}Jak używać AutoLISP?{% endif %}</h3>
+    <p>{% if lang == 'en' %}See the complete guide to setting up trusted folders (Trusted Locations) and reloading code on the fly with viewis-autolisp-loader.lsp →{% else %}Zobacz kompletny poradnik opisujący konfigurację zaufanych folderów (Trusted Locations) oraz automatyczne przeładowywanie kodu w locie skryptem viewis-autolisp-loader.lsp →{% endif %}</p>
+  </a>
+{% endblock %}
 
-document.addEventListener("DOMContentLoaded", () => {
-  const codeEl = document.getElementById("code-unified");
-  if (!codeEl) return;
-  const text = codeEl.innerText;
-
-  const lines = text.split(/\r?\n/);
-  const highlighted = lines.map(line => {
-    if (line.trim().startsWith(";")) {
-      return `<span class="hl-comment">${escapeHtml(line)}</span>`;
-    }
-    let res = escapeHtml(line);
-    res = res.replace(/(".*?")/g, '<span class="hl-string">\$1</span>');
-    res = res.replace(/\b(defun|setq|vl-load-com|princ|prompt|if|progn|repeat|while|cond|not|and|or|member|append|itoa|rtos|strcat|strcase)\b/g, '<span class="hl-keyword">\$1</span>');
-    res = res.replace(/\b(ssget|ssadd|sslength|ssname|ssmemb|sssetfirst|getvar|setvar|vlax-ename(?:->|-&gt;)vla-object|vlax-property-available-p|vlax-get-property|vl-string-right-trim|vl-file-directory-p|vl-mkdir|command|vl-catch-all-apply|vl-catch-all-error-p)\b/g, '<span class="hl-function">\$1</span>');
-    res = res.replace(/(\*path-acad\*|\*path\*|CTAB|CMDECHO|EXPERT)/g, '<span class="hl-variable">\$1</span>');
-    res = res.replace(/([\(\)])/g, '<span class="hl-paren">\$1</span>');
-    return res;
-  }).join("\n");
-
-  codeEl.innerHTML = highlighted;
-});
-</script>
+{% block code %}
+  <div class="code-box">
+    <div class="code-bar">
+      <span>viewis-cad-tools.lsp</span>
+      <div class="code-actions">
+        <button class="btn-copy" onclick="copyCode('code-unified', this)">{% if lang == 'en' %}Copy code{% else %}Kopiuj kod{% endif %}</button>
+        <a href="{% static 'lsp/viewis-cad-tools.lsp' %}" download class="btn-copy">.lsp</a>
+      </div>
+    </div>
+    <pre id="code-unified" class="code" data-lang="lsp"><code>{{ unified_code|escape }}</code></pre>
+  </div>
 {% endblock %}

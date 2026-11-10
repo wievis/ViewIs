@@ -101,7 +101,6 @@ SERVICES = {
 KNOWS = ['BIM', 'IFC', 'AutoCAD', 'Revit', 'Unreal Engine', '3ds Max', 'Python', 'AutoLISP',
          'MAXScript', 'Three.js', 'Django', 'Microsoft Excel']
 
-
 def _trim(text, limit=155):
     text = ' '.join((text or '').split())
     if len(text) <= limit:
@@ -109,13 +108,11 @@ def _trim(text, limit=155):
     cut = text[:limit - 1].rsplit(' ', 1)[0].rstrip(' ,.;:-–')
     return cut + '…'
 
-
 def _email(en):
     email = getattr(settings, 'CONTACT_EMAIL', '')
     if en:
         email = os.environ.get('CONTACT_EMAIL_EN') or email
     return email
-
 
 def _build(request):
     match = getattr(request, 'resolver_match', None)
@@ -278,7 +275,6 @@ def _build(request):
         'jsonld': jsonld,
     }
 
-
 def site_info(request):
     path = getattr(request, 'path', '') or ''
     en = path == '/en' or path.startswith('/en/')
@@ -289,9 +285,11 @@ def site_info(request):
         seo = _build(request)
     except Exception:
         seo = {}
+    build_id = (os.environ.get('VERCEL_GIT_COMMIT_SHA') or os.environ.get('RAILWAY_GIT_COMMIT_SHA') or 'dev')[:7]
     return {
         'CONTACT_EMAIL': email,
         'CONTACT_PHONE': getattr(settings, 'CONTACT_PHONE', ''),
         'CONTACT_LOCATION': getattr(settings, 'CONTACT_LOCATION', ''),
         'seo': seo,
+        'BUILD_ID': build_id,
     }

@@ -22,8 +22,8 @@
   left: 0;
   height: 2.5px;
   width: 0%;
-  background: var(--accent, #c9a96e);
-  box-shadow: 0 0 14px var(--accent, #c9a96e);
+  background: var(--accent, #c86d44);
+  box-shadow: 0 0 14px var(--accent, #c86d44);
   z-index: 100;
   opacity: 0;
 }
@@ -86,7 +86,7 @@
 }
 
 .lb-brand-node:hover {
-  color: var(--accent, #c9a96e);
+  color: var(--accent, #c86d44);
 }
 
 .lb-node-sep {
@@ -96,9 +96,9 @@
 }
 
 .lb-badge {
-  background: rgba(201, 169, 110, 0.12);
-  color: var(--accent, #c9a96e);
-  border: 1px solid rgba(201, 169, 110, 0.3);
+  background: rgba(200, 109, 68, 0.12);
+  color: var(--accent, #c86d44);
+  border: 1px solid rgba(200, 109, 68, 0.3);
   font-family: var(--mono, monospace);
   font-size: 0.65rem;
   letter-spacing: 0.18em;
@@ -150,7 +150,7 @@
 .lb-tag-engine {
   font-family: var(--mono, monospace);
   font-size: 0.68rem;
-  color: var(--accent, #c9a96e);
+  color: var(--accent, #c86d44);
   letter-spacing: 0.14em;
   text-transform: uppercase;
 }
@@ -173,9 +173,9 @@
 }
 
 .lb-btn-icon:hover {
-  background: rgba(201, 169, 110, 0.18);
-  border-color: var(--accent, #c9a96e);
-  color: var(--accent, #c9a96e);
+  background: rgba(200, 109, 68, 0.18);
+  border-color: var(--accent, #c86d44);
+  color: var(--accent, #c86d44);
   transform: scale(1.05);
 }
 
@@ -239,8 +239,8 @@
 .lb-cube-face {
   position: absolute;
   inset: 0;
-  border: 1px dashed var(--accent, #c9a96e);
-  box-shadow: 0 0 10px rgba(201, 169, 110, 0.15);
+  border: 1px dashed var(--accent, #c86d44);
+  box-shadow: 0 0 10px rgba(200, 109, 68, 0.15);
 }
 
 .lb-cube-face:nth-child(1) { transform: rotateY(0deg) translateZ(24px); }
@@ -256,7 +256,7 @@
   font-family: var(--mono, monospace);
   font-size: 0.65rem;
   letter-spacing: 0.22em;
-  color: var(--accent, #c9a96e);
+  color: var(--accent, #c86d44);
   text-transform: uppercase;
   animation: pulse-text 1.4s ease-in-out infinite alternate;
 }
@@ -288,9 +288,9 @@
 }
 
 .lb-nav:hover {
-  background: rgba(201, 169, 110, 0.2);
-  border-color: var(--accent, #c9a96e);
-  color: var(--accent, #c9a96e);
+  background: rgba(200, 109, 68, 0.2);
+  border-color: var(--accent, #c86d44);
+  color: var(--accent, #c86d44);
   transform: translateY(-50%) scale(1.06);
 }
 
@@ -335,9 +335,9 @@
 
 .lb-thumb.active {
   opacity: 1;
-  border-color: var(--accent, #c9a96e);
+  border-color: var(--accent, #c86d44);
   transform: scale(1.06);
-  box-shadow: 0 0 10px rgba(201, 169, 110, 0.35);
+  box-shadow: 0 0 10px rgba(200, 109, 68, 0.35);
 }
 
 .lb-thumb img {
@@ -350,7 +350,7 @@
 .lb-thumb-tag {
   font-family: var(--mono, monospace);
   font-size: 0.6rem;
-  color: var(--accent, #c9a96e);
+  color: var(--accent, #c86d44);
 }
 
 @media (max-width: 768px) {
@@ -397,7 +397,7 @@
   font-size: 0.64rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--accent, #c9a96e);
+  color: var(--accent, #c86d44);
 }
 
 .lb-rail-count {
@@ -442,8 +442,8 @@
 
 .lb-proj.active {
   opacity: 1;
-  border-color: var(--accent, #c9a96e);
-  box-shadow: 0 0 12px rgba(201, 169, 110, 0.3);
+  border-color: var(--accent, #c86d44);
+  box-shadow: 0 0 12px rgba(200, 109, 68, 0.3);
   cursor: default;
 }
 
@@ -482,7 +482,7 @@
   font-size: 0.6rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--accent, #c9a96e);
+  color: var(--accent, #c86d44);
 }
 
 @media (max-width: 900px) {
@@ -519,7 +519,7 @@ body.light-mode .lb-btn-icon,
 body.light-mode .lb-nav { background: rgba(0, 0, 0, 0.05); border-color: rgba(0, 0, 0, 0.14); }
 body.light-mode .lb-btn-icon:hover,
 body.light-mode .lb-nav:hover {
-  background: rgba(138, 106, 47, 0.15);
+  background: rgba(180, 87, 47, 0.15);
   border-color: var(--accent);
   color: var(--accent);
 }

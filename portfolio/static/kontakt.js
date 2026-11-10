@@ -17,8 +17,13 @@ document.querySelectorAll('.js-contact-form').forEach(form => {
                 body: new FormData(form),
                 headers: { 'X-CSRFToken': token ? token.value : '', 'X-Requested-With': 'XMLHttpRequest' }
             });
-            if (response.ok) { set(t.ok, 'ok'); form.reset(); }
-            else { set(t.err, 'err'); }
+            const data = await response.json().catch(() => null);
+            if (response.ok && data && data.status === 'ok') {
+                set(t.ok, 'ok');
+                form.reset();
+            } else {
+                set(t.err, 'err');
+            }
         } catch (err) {
             set(t.conn, 'err');
         } finally {

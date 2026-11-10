@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body_class %}theme-articles{% endblock %}
+{% block content %}
+<section class="art">
+  <div class="container">
+    <nav class="art-back"><a href="{{ art_base }}">← {% if lang == 'en' %}All articles{% else %}Wszystkie artykuły{% endif %}</a></nav>
+    <header class="art-head">
+      <div class="art-tags">
+        <span class="tag tag--cat">{{ article.category }}</span>
+        {% for t in article.tags %}<span class="tag">{{ t }}</span>{% endfor %}
+      </div>
+      <h1>{{ article.title }}</h1>
+      <p class="lead">{{ article.lead }}</p>
+    </header>
+    <div class="split">
+      <div class="split-desc">{% block cards %}{% endblock %}</div>
+      <div class="split-code">{% block code %}{% endblock %}</div>
+    </div>
+  </div>
+</section>
+{% endblock %}

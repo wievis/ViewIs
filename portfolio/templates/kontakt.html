@@ -1,9 +1,12 @@
 {% extends 'base.html' %}
-{% load static %}
 {% block content %}
-<section class="page-hero container" style="padding-bottom:10px">
-    <span class="eyebrow">{% if lang == 'en' %}Contact{% else %}Kontakt{% endif %}</span>
-    <h1 class="display">{% if lang == 'en' %}Let's build something together.{% else %}Zbudujmy coś razem.{% endif %}</h1>
-    <p class="lead" style="margin-top:14px">{% if lang == 'en' %}Visualizations, animations, virtual environments, tools. Tell me what you need.{% else %}Wizualizacje, animacje, środowiska wirtualne, narzędzia. Napisz, czego potrzebujesz.{% endif %}</p>
+<section class="page-hero container">
+  <h1 class="display">{% if lang == 'en' %}Files, scope, deadline<i class="dot">.</i>{% else %}Pliki, zakres, termin<i class="dot">.</i>{% endif %}</h1>
+  <p class="lead" style="margin-top:14px">{% if lang == 'en' %}Describe the task below. A fixed quote comes back within 1–2 hours.{% else %}Opisz zadanie poniżej. Wycena ryczałtowa wraca w ciągu 1–2 godzin.{% endif %}</p>
+  <dl class="eng-kv" style="margin-top:32px;max-width:640px;border:1.5px solid var(--rule)">
+    <dt>{% if lang == 'en' %}Send{% else %}Prześlij{% endif %}</dt><dd>IFC · DWG · DXF · XLSX</dd>
+    <dt>{% if lang == 'en' %}Describe{% else %}Opisz{% endif %}</dt><dd>{% if lang == 'en' %}scope · floors · deadline{% else %}zakres · kondygnacje · termin{% endif %}</dd>
+    <dt>{% if lang == 'en' %}Receive{% else %}Otrzymasz{% endif %}</dt><dd>{% if lang == 'en' %}fixed quote, then a workbook{% else %}wycenę ryczałtową, potem arkusz{% endif %}</dd>
+  </dl>
 </section>
 {% endblock %}

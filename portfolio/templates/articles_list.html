@@ -3,55 +3,28 @@
 {% load static %}
 
 {% block content %}
-<section style="position: relative; z-index: 10; min-height: 85vh; padding-top: 140px; padding-bottom: 80px;">
-  <div style="max-width: 920px; margin: 0 auto; padding: 0 24px;">
-    
-    <div style="margin-bottom: 40px; border-bottom: 1px solid rgba(255, 255, 255, 0.12); padding-bottom: 24px;">
-      <h1 style="font-size: 34px; font-weight: 800; color: #ffffff; margin-bottom: 12px; letter-spacing: -0.02em;">{% if lang == 'en' %}Knowledge Base & Tools{% else %}Baza wiedzy & Narzędzia{% endif %}</h1>
-      <p style="font-size: 15px; color: #94a3b8; line-height: 1.6; margin: 0;">{% if lang == 'en' %}Practical scripts, CAD/BIM automation and technical solutions from everyday engineering work.{% else %}Praktyczne skrypty, automatyzacje CAD/BIM oraz techniczne rozwiązania z codziennej praktyki inżynierskiej.{% endif %}</p>
+<section class="art">
+  <div class="container">
+    <div class="sec-head">
+      <div class="row lbl"><span><b>01</b> {% if lang == 'en' %}Knowledge Base{% else %}Baza wiedzy{% endif %}</span><span>REF. A-01 — A-03</span></div>
+      <h2>{% if lang == 'en' %}Knowledge Base &amp; Tools<i class="dot">.</i>{% else %}Baza wiedzy &amp; Narzędzia<i class="dot">.</i>{% endif %}</h2>
+      <p class="lead">{% if lang == 'en' %}Practical scripts, CAD/BIM automation and technical solutions from everyday engineering work.{% else %}Praktyczne skrypty, automatyzacje CAD/BIM oraz techniczne rozwiązania z codziennej praktyki inżynierskiej.{% endif %}</p>
     </div>
 
-    <div style="display: flex; flex-direction: column; gap: 20px;">
+    <table class="xtbl">
+      <thead><tr><th>ID</th><th>{% if lang == 'en' %}Article{% else %}Artykuł{% endif %}</th><th class="io-col">{% if lang == 'en' %}Tags{% else %}Tagi{% endif %}</th></tr></thead>
+      <tbody>
       {% for art in articles %}
-        <article class="article-card" onclick="window.location.href='{{ art_base }}{{ art.slug }}/'">
-          <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 14px; font-size: 12px; flex-wrap: wrap;">
-            <span style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); padding: 3px 10px; border-radius: 20px; font-weight: 600;">{{ art.category }}</span>
-            {% for t in art.tags %}
-              <span style="background: rgba(148, 163, 184, 0.12); color: #cbd5e1; border: 1px solid rgba(148, 163, 184, 0.25); padding: 3px 9px; border-radius: 20px; font-size: 11.5px; font-weight: 500;">{{ t }}</span>
-            {% endfor %}
-          </div>
-          <h2 style="font-size: 21px; font-weight: 700; margin-bottom: 12px; line-height: 1.35;">
-            <a href="{{ art_base }}{{ art.slug }}/" style="color: #ffffff; text-decoration: none;">{{ art.title }}</a>
-          </h2>
-          <p style="font-size: 14.5px; line-height: 1.65; color: #cbd5e1; margin-bottom: 16px;">{{ art.lead }}</p>
-          <div style="display: inline-flex; align-items: center; gap: 6px; color: #38bdf8; font-size: 13.5px; font-weight: 600;">
-            {% if lang == 'en' %}Read the article & get the code{% else %}Czytaj artykuł & kod{% endif %} <span>→</span>
-          </div>
-        </article>
+        <tr>
+          <th scope="row" class="id">A-{{ forloop.counter|stringformat:"02d" }}</th>
+          <td><a href="{{ art_base }}{{ art.slug }}/"><span class="name">{{ art.title }}</span><span class="sub">{{ art.lead }}</span></a></td>
+          <td class="io io-col">{{ art.tags|join:" · " }}</td>
+        </tr>
       {% empty %}
-        <div style="padding: 40px; text-align: center; color: #94a3b8; background: #0f172a; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.08);">
-          {% if lang == 'en' %}No published articles yet.{% else %}Brak opublikowanych artykułów.{% endif %}
-        </div>
+        <tr><td colspan="3" class="sub">{% if lang == 'en' %}No published articles yet.{% else %}Brak opublikowanych artykułów.{% endif %}</td></tr>
       {% endfor %}
-    </div>
-
+      </tbody>
+    </table>
   </div>
 </section>
-
-<style>
-  .article-card {
-    background: #0f172a;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 12px;
-    padding: 26px 28px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-    cursor: pointer;
-    transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
-  }
-  .article-card:hover {
-    transform: translateY(-2px);
-    border-color: rgba(56, 189, 248, 0.4);
-    background: #131d35;
-  }
-</style>
 {% endblock %}

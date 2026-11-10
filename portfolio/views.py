@@ -13,6 +13,7 @@ from django.urls import reverse
 from django.views.decorators.clickjacking import xframe_options_exempt
 from .models import Media, Article
 from .articles_data import get_articles, get_article_by_slug
+from .procedures_data import PROCEDURE_GROUPS
 
 logger = logging.getLogger(__name__)
 
@@ -95,7 +96,7 @@ def kontakt(request, lang='pl'):
 
         resend_api_key = os.environ.get('RESEND_API_KEY')
         if not resend_api_key:
-            return JsonResponse({'status': 'error', 'message': 'Brak klucza RESEND_API_KEY na Railway.'})
+            return JsonResponse({'status': 'error', 'message': 'Błąd konfiguracji poczty.'})
 
         target_email = os.environ.get('CONTACT_EMAIL', 'kontakt@viewis.pl')
         topic = request.POST.get("topic", "").strip()
@@ -123,16 +124,34 @@ def kontakt(request, lang='pl'):
         try:
             with urllib.request.urlopen(req, timeout=8) as resp:
                 return JsonResponse({'status': 'ok', 'message': 'Wiadomość została wysłana!'})
-        except urllib.error.HTTPError as http_err:
-            err_body = http_err.read().decode('utf-8', errors='ignore')
-            return JsonResponse({'status': 'error', 'message': f'Błąd Resend: {err_body}'})
         except Exception as err:
-            return JsonResponse({'status': 'error', 'message': str(err)})
+            logger.error(f"Błąd wysyłki e-mail: {err}")
+            return JsonResponse({'status': 'error', 'message': 'Błąd serwera. Spróbuj ponownie później.'})
 
     return render(request, 'kontakt.html', {'lang': lang, 'section': 'kontakt'})
 
 def mep_landing(request, lang='pl'):
-    return render(request, 'mep.html', {'lang': lang, 'section': 'mep'})
+    groups = []
+    for g in PROCEDURE_GROUPS:
+        grp = dict(g)
+        if lang == 'en':
+            grp['name'] = grp.get('name_en', grp['name'])
+            grp['volume'] = grp.get('volume_en', grp['volume'])
+        items = []
+        for p in g['items']:
+            item = dict(p)
+            if lang == 'en':
+                item['name'] = item.get('name_en', item['name'])
+                item['desc'] = item.get('desc_en', item['desc'])
+            items.append(item)
+        grp['items'] = items
+        groups.append(grp)
+
+    return render(request, 'mep.html', {
+        'lang': lang,
+        'section': 'mep',
+        'procedure_groups': groups
+    })
 
 @xframe_options_exempt
 def mep_panel(request):
@@ -198,7 +217,6 @@ def article_detail(request, slug, lang='pl'):
     ctx = _art_ctx(lang)
     ctx['article'] = article
     static_lsp = os.path.join(os.path.abspath(os.getcwd()), "portfolio", "static", "lsp")
-
     static_ms = os.path.join(os.path.abspath(os.getcwd()), "portfolio", "static", "ms")
 
     if slug == "maxscript-hot-reload-automatyczne-ladowanie":

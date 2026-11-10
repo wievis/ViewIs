@@ -5,12 +5,13 @@
     // ---------- motyw ----------
     let saved = null;
     try { saved = localStorage.getItem('theme'); } catch (e) {}
+    const prefersLight = !window.matchMedia('(prefers-color-scheme: dark)').matches;
     const applyTheme = light => {
         document.documentElement.classList.toggle('light-mode', light);
         document.body.classList.toggle('light-mode', light);
         themeToggles.forEach(t => { t.checked = light; });
     };
-    applyTheme(saved === 'light');
+    applyTheme(saved ? saved === 'light' : prefersLight);
 
     themeToggles.forEach(t => t.addEventListener('change', e => {
         const light = e.target.checked;
@@ -38,7 +39,7 @@
     }
 
     langToggles.forEach(t => t.addEventListener('change', e => {
-        const toEn = !e.target.checked;   // zaznaczony = PL
+        const toEn = !e.target.checked;
         const lbEl = document.getElementById('lightbox');
         const lbActive = lbEl ? lbEl.classList.contains('active') : false;
         const state = { scroll: window.pageYOffset || document.documentElement.scrollTop || 0 };

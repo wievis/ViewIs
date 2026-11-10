@@ -1,19 +1,8 @@
-<style>
-.contact-section .eng-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
-.contact-section .eng-chip{font:500 .72rem var(--mono);letter-spacing:.04em;border:1px solid var(--line);padding:6px 11px;color:var(--muted)}
-.contact-section .eng-chip b{color:var(--accent);font-weight:500}
-.contact-section .contact-list a{font-family:var(--mono);font-size:1rem}
-.contact-section .form input[type=text],.contact-section .form input[type=email],.contact-section .form textarea,.contact-section .form select{border-radius:2px}
-.contact-section .form select{width:100%;background:transparent;border:1px solid var(--line);padding:14px 18px;color:inherit;font:inherit;font-size:.95rem}
-.contact-section .form select:focus{outline:none;border-color:var(--accent)}
-.contact-section .form select option{background:var(--surface);color:var(--text)}
-.contact-section .form .btn{border-radius:2px}
-</style>
 <section class="contact-section" id="contact">
     <div class="container contact-grid">
         <div class="reveal">
             <span class="eyebrow">{% if lang == 'en' %}Contact{% else %}Kontakt{% endif %}</span>
-            <h2 class="h2" style="font-family:var(--sans);font-weight:500;letter-spacing:-.02em">{% if lang == 'en' %}Send files for analysis. You will get a quote and a deadline within 1–2 hours.{% else %}Prześlij pliki do analizy. Wycenę i termin otrzymasz w 1–2 godziny.{% endif %}</h2>
+            <h2 class="h2" style="font-family:var(--sans);font-weight:500;letter-spacing:-.02em">{% if lang == 'en' %}Send files for analysis. You will get a quote and a deadline within 1–2 hours<i class="dot">.</i>{% else %}Prześlij pliki do analizy. Wycenę i termin otrzymasz w 1–2 godziny<i class="dot">.</i>{% endif %}</h2>
             <div class="eng-chips">
                 <span class="eng-chip">{% if lang == 'en' %}Response{% else %}Odpowiedź{% endif %}: <b>1–2 h</b></span>
                 <span class="eng-chip">{% if lang == 'en' %}Result package{% else %}Pakiet wynikowy{% endif %}: <b>24–48 h</b></span>
@@ -29,20 +18,37 @@
         <form action="/kontakt/" method="POST" class="form js-contact-form reveal" style="--d:.1s">
             {% csrf_token %}
             <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
-            <div class="row">
-                <input type="text" name="first_name" placeholder="{% if lang == 'en' %}First name{% else %}Imię{% endif %}">
-                <input type="text" name="last_name" placeholder="{% if lang == 'en' %}Last name{% else %}Nazwisko{% endif %}">
+
+            <div class="field">
+              <label for="f-name">{% if lang == 'en' %}Name{% else %}Imię / nazwisko{% endif %}</label>
+              <div class="pair">
+                <input id="f-name" type="text" name="first_name" autocomplete="given-name" placeholder="{% if lang == 'en' %}First name{% else %}Imię{% endif %}">
+                <input id="f-last" type="text" name="last_name" autocomplete="family-name" placeholder="{% if lang == 'en' %}Last name{% else %}Nazwisko{% endif %}">
+              </div>
             </div>
-            <input type="email" name="email" placeholder="{% if lang == 'en' %}E-mail address{% else %}Adres e-mail{% endif %}" required>
-            <select name="topic" aria-label="{% if lang == 'en' %}Subject{% else %}Temat{% endif %}">
-                <option value="Przedmiar instalacji (IFC / DWG)">{% if lang == 'en' %}Installation takeoff (IFC / DWG){% else %}Przedmiar instalacji (IFC / DWG){% endif %}</option>
-                <option value="Narzędzie / Automatyzacja Excela">{% if lang == 'en' %}Excel tool / automation{% else %}Narzędzie / Automatyzacja Excela{% endif %}</option>
-                <option value="Delta rewizji (porównanie wersji v1 vs v2)">{% if lang == 'en' %}Revision delta (comparing v1 vs v2){% else %}Delta rewizji (porównanie wersji v1 vs v2){% endif %}</option>
-                <option value="Audyt i naprawa modelu IFC">{% if lang == 'en' %}IFC model audit and repair{% else %}Audyt i naprawa modelu IFC{% endif %}</option>
-                <option value="Makieta cyfrowa / Prezentacja 3D">{% if lang == 'en' %}Digital mockup / 3D presentation{% else %}Makieta cyfrowa / Prezentacja 3D{% endif %}</option>
-                <option value="Inny temat">{% if lang == 'en' %}Other topic{% else %}Inny temat{% endif %}</option>
-            </select>
-            <textarea name="message" rows="5" placeholder="{% if lang == 'en' %}Describe the task: file formats (IFC/DWG/XLSX), scope, floors, deadline{% else %}Opisz zadanie: formaty plików (IFC/DWG/XLSX), zakres, kondygnacje, termin{% endif %}" required></textarea>
+
+            <div class="field">
+              <label for="f-mail">E-mail</label>
+              <input id="f-mail" type="email" name="email" autocomplete="email" placeholder="{% if lang == 'en' %}E-mail address{% else %}Adres e-mail{% endif %}" required>
+            </div>
+
+            <div class="field">
+              <label for="f-topic">{% if lang == 'en' %}Subject{% else %}Temat{% endif %}</label>
+              <select id="f-topic" name="topic" aria-label="{% if lang == 'en' %}Subject{% else %}Temat{% endif %}">
+                  <option value="D-01: Przedmiar instalacji (IFC / DWG)">{% if lang == 'en' %}D-01: Installation takeoff (IFC / DWG){% else %}D-01: Przedmiar instalacji (IFC / DWG){% endif %}</option>
+                  <option value="D-05: Narzędzie / Automatyzacja Excela">{% if lang == 'en' %}D-05: Excel tool / automation{% else %}D-05: Narzędzie / Automatyzacja Excela{% endif %}</option>
+                  <option value="D-03: Delta rewizji (porównanie wersji v1 vs v2)">{% if lang == 'en' %}D-03: Revision delta (comparing v1 vs v2){% else %}D-03: Delta rewizji (porównanie wersji v1 vs v2){% endif %}</option>
+                  <option value="D-02: Audyt i naprawa modelu IFC">{% if lang == 'en' %}D-02: IFC model audit and repair{% else %}D-02: Audyt i naprawa modelu IFC{% endif %}</option>
+                  <option value="D-06: Makieta cyfrowa / Prezentacja 3D">{% if lang == 'en' %}D-06: Digital mockup / 3D presentation{% else %}D-06: Makieta cyfrowa / Prezentacja 3D{% endif %}</option>
+                  <option value="Inny temat">{% if lang == 'en' %}Other topic{% else %}Inny temat{% endif %}</option>
+              </select>
+            </div>
+
+            <div class="field field--area">
+              <label for="f-msg">{% if lang == 'en' %}Task{% else %}Zadanie{% endif %}</label>
+              <textarea id="f-msg" name="message" rows="5" placeholder="{% if lang == 'en' %}Describe the task: file formats (IFC/DWG/XLSX), scope, floors, deadline{% else %}Opisz zadanie: formaty plików (IFC/DWG/XLSX), zakres, kondygnacje, termin{% endif %}" required></textarea>
+            </div>
+
             <label class="consent">
                 <input type="checkbox" required>
                 <span>{% if lang == 'en' %}I agree to my personal data being processed so that you can reply to my message.{% else %}Wyrażam zgodę na przetwarzanie moich danych osobowych w celu prowadzenia korespondencji.{% endif %}</span>

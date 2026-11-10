@@ -4,65 +4,64 @@
 {% block meta_description %}{% if lang == 'en' %}Takeoffs of ducts, pipework and fittings from IFC models and DWG drawings, with live formulas, 1:1 balance and installation allowances.{% else %}Przedmiary kanałów, rurociągów i armatury z modeli IFC i rysunków DWG: aktywne formuły, bilans 1:1 i naddatki montażowe.{% endif %}{% endblock %}
 
 {% block extra_head %}
-{% include 'eng_styles.html' %}
 <style>
-.xl{border:1px solid #1f2937;border-radius:10px;overflow:hidden;background:#fff;color:#201f1e;font:12px/1.4 "Segoe UI",system-ui,sans-serif;display:flex;flex-direction:column;height:min(720px,88vh);outline:none;box-shadow:0 24px 60px rgba(0,0,0,.35)}
+.xl{border:var(--bw-rule) solid var(--rule);border-radius:0;overflow:hidden;background:var(--bg);color:var(--text);font:12px/1.4 var(--font-text);display:flex;flex-direction:column;height:min(720px,88vh);outline:none;box-shadow:none}
 .xl:focus-visible{box-shadow:0 0 0 2px var(--accent)}
 .xl *{box-sizing:border-box}
 
 .xl-body{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) 420px}
-.xl-sheet{display:flex;flex-direction:column;min-width:0;min-height:0;border-right:1px solid #d1d1d1}
+.xl-sheet{display:flex;flex-direction:column;min-width:0;min-height:0;border-right:var(--bw-rule) solid var(--rule)}
 
-.xl-grid{flex:1;overflow:auto;min-height:0;background:#fff}
+.xl-grid{flex:1;overflow:auto;min-height:0;background:var(--bg)}
 .xl-grid table{table-layout:fixed;width:max-content;min-width:100%;border-collapse:separate;border-spacing:0}
-.xl-grid th,.xl-grid td{border-right:1px solid #e1e1e1;border-bottom:1px solid #e1e1e1;padding:3px 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;height:24px}
-.xl-grid thead th{position:sticky;background:#f3f3f3;color:#555;font-weight:400;text-align:center;z-index:2}
+.xl-grid th,.xl-grid td{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:3px 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;height:24px}
+.xl-grid thead th{position:sticky;background:var(--surface-2);color:var(--muted);font-weight:400;text-align:center;z-index:2;font-family:var(--font-mono);font-size:11px}
 .xl-grid thead tr:first-child th{top:0}
-.xl-grid thead tr:last-child th{top:24px;background:#e2efda;color:#1b3d27;font-weight:600;text-align:left}
-.xl-grid .rn{background:#f3f3f3;color:#666;text-align:center}
+.xl-grid thead tr:last-child th{top:24px;background:var(--block-bg);color:var(--block-fg);font-weight:600;text-align:left;font-family:var(--font-text)}
+.xl-grid .rn{background:var(--surface-2);color:var(--muted);text-align:center;font-family:var(--font-mono)}
 .xl-grid .n{text-align:right;font-variant-numeric:tabular-nums}
 .xl-grid tbody tr{cursor:cell}
-.xl-grid tbody tr:hover td{background:#f1f8f3}
-.xl-grid tbody tr.active-row td{background:#cfe8d8 !important;box-shadow:inset 0 2px 0 #107c41,inset 0 -2px 0 #107c41}
-.xl-grid tbody tr.active-row td.rn{background:#107c41;color:#fff}
-.xl-grid .empty{padding:28px;text-align:center;color:#777;white-space:normal}
+.xl-grid tbody tr:hover td{background:color-mix(in srgb, var(--ok) 14%, transparent)}
+.xl-grid tbody tr.active-row td{background:var(--ok) !important;color:#fff;box-shadow:none}
+.xl-grid tbody tr.active-row td.rn{background:color-mix(in srgb, var(--ok) 65%, #000) !important;color:#fff}
+.xl-grid .empty{padding:28px;text-align:center;color:var(--muted);white-space:normal}
 
-.xl-status{display:flex;gap:18px;align-items:center;background:#f3f3f3;border-top:1px solid #d1d1d1;padding:4px 10px;color:#444;font-size:11.5px;flex-shrink:0}
+.xl-status{display:flex;gap:18px;align-items:center;background:var(--surface-2);border-top:var(--bw) solid var(--line-strong);padding:4px 10px;color:var(--muted);font-family:var(--font-mono);font-size:11px;flex-shrink:0}
 .xl-status .sp{flex:1}
-.xl-pane{background:#0f172a;color:#f8fafc;display:flex;flex-direction:column;min-width:0;min-height:0}
-.pane-h{display:flex;align-items:center;padding:10px 14px;font-weight:600;border-bottom:1px solid #334155;height:38px}
-.pane-h small{margin-left:auto;font-weight:400;color:#94a3b8}
+.xl-pane{background:var(--surface);color:var(--text);display:flex;flex-direction:column;min-width:0;min-height:0}
+.pane-h{display:flex;align-items:center;padding:10px 14px;border-bottom:var(--bw) solid var(--line-strong);font:600 .7rem var(--font-mono);letter-spacing:.1em;text-transform:uppercase;height:38px}
+.pane-h small{margin-left:auto;font-weight:400;color:var(--muted)}
 
-.xl-pane button{background:#1e293b;border:1px solid #475569;color:#38bdf8;padding:5px 10px;border-radius:4px;cursor:pointer;font:600 11px "Segoe UI",system-ui,sans-serif;transition:all 0.15s ease}
-.xl-pane button:hover{background:#2563eb;color:#fff;border-color:#2563eb}
-.xl-pane button.sec{background:#334155}
-.xl-cv{position:relative;flex:1;min-height:260px;background:#0b1120}
+.xl-pane button{background:transparent;border:var(--bw-rule) solid var(--rule);color:var(--text);border-radius:0;padding:5px 10px;cursor:pointer;font:500 11px var(--font-mono);letter-spacing:.04em;transition:all 0.15s ease}
+.xl-pane button:hover{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.xl-pane button.sec{background:var(--surface-2)}
+.xl-cv{position:relative;flex:1;min-height:260px;background:var(--surface-2)}
 .xl-cv canvas{display:block;width:100%;height:100%}
-#xl-badge{position:absolute;left:8px;top:8px;font-size:10px;padding:3px 7px;border-radius:4px;background:rgba(15,23,42,.88);border:1px solid #334155;color:#94a3b8;max-width:70%}
-#xl-wire{position:absolute;right:8px;top:8px;width:32px;height:32px;padding:0;display:flex;align-items:center;justify-content:center;background:rgba(15,23,42,.88);border:1px solid #334155;color:#38bdf8}
-#xl-wire.on{background:#2563eb;color:#fff}
-#xl-msg{position:absolute;inset:0;display:none;align-items:center;justify-content:center;text-align:center;padding:28px;color:#94a3b8;font-size:12px;line-height:1.6;background:radial-gradient(circle at center,#111c33,#0b1120)}
+#xl-badge{position:absolute;left:8px;top:8px;font-size:10px;padding:3px 7px;border-radius:0;background:var(--bg);border:var(--bw) solid var(--line-strong);color:var(--muted);font-family:var(--font-mono);max-width:70%}
+#xl-wire{position:absolute;right:8px;top:8px;width:32px;height:32px;padding:0;display:flex;align-items:center;justify-content:center;background:var(--bg);border:var(--bw-rule) solid var(--rule);color:var(--text)}
+#xl-wire.on{background:var(--text);color:var(--bg)}
+#xl-msg{position:absolute;inset:0;display:none;align-items:center;justify-content:center;text-align:center;padding:28px;color:var(--muted);font-size:12px;line-height:1.6;background:var(--surface-2)}
 
-.pane-nav{display:flex;flex-direction:column;gap:8px;padding:10px 12px;border-top:1px solid #334155;background:#0f172a}
+.pane-nav{display:flex;flex-direction:column;gap:8px;padding:10px 12px;border-top:var(--bw) solid var(--line-strong);background:var(--surface)}
 .pane-nav .r{display:flex;gap:6px;align-items:center}
 .pane-nav .r button{flex:1;height:28px}
-#pane-row{font-size:11px;color:#cbd5e1;font-weight:600}
+#pane-row{font-size:11px;color:var(--text);font-family:var(--font-mono);letter-spacing:.08em}
 
-#nav-el{display:none;align-items:center;justify-content:space-between;background:#1e293b;border:1px solid #334155;padding:4px 8px;border-radius:6px}
-#nav-el span{font-size:11px;font-weight:700;color:#f8fafc}
+#nav-el{display:none;align-items:center;justify-content:space-between;background:var(--surface-2);border:var(--bw) solid var(--line-strong);padding:4px 8px;border-radius:0}
+#nav-el span{font-size:11px;font-weight:700;color:var(--text);font-family:var(--font-mono)}
 #nav-el button{width:28px;height:26px;padding:0;display:flex;align-items:center;justify-content:center;font-size:12px}
 
-#xl-card{border-top:1px solid #334155;padding:10px 14px;max-height:190px;overflow-y:auto;font-size:11px;color:#cbd5e1;line-height:1.5}
-#xl-card .cls{display:inline-block;background:rgba(56,189,248,.15);color:#38bdf8;border:1px solid rgba(56,189,248,.3);border-radius:4px;padding:1px 7px;font-size:10px;font-weight:700}
-#xl-card .nm{color:#fff;font-weight:600;font-size:13px;margin:4px 0}
-#xl-card .mut{color:#94a3b8}
-#xl-card .pr{display:flex;justify-content:space-between;gap:10px;padding:2px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
-#xl-card .pr span{color:#94a3b8}
-#xl-card .pr b{color:#f8fafc;font-weight:500;text-align:right}
+#xl-card{border-top:var(--bw) solid var(--line-strong);padding:10px 14px;max-height:190px;overflow-y:auto;font-size:11px;color:var(--muted);line-height:1.5}
+#xl-card .cls{display:inline-block;background:none;color:var(--ok-text);border:var(--bw) solid var(--ok);border-radius:0;padding:1px 7px;font-size:10px;font-weight:700;font-family:var(--font-mono)}
+#xl-card .nm{color:var(--text);font-weight:600;font-size:13px;margin:4px 0}
+#xl-card .mut{color:var(--muted)}
+#xl-card .pr{display:flex;justify-content:space-between;gap:10px;padding:2px 0;border-bottom:1px solid var(--line)}
+#xl-card .pr span{color:var(--muted)}
+#xl-card .pr b{color:var(--text);font-weight:500;text-align:right}
 @media(max-width:980px){
   .xl{height:auto}
   .xl-body{grid-template-columns:1fr}
-  .xl-sheet{border-right:0;border-bottom:1px solid #d1d1d1}
+  .xl-sheet{border-right:0;border-bottom:var(--bw-rule) solid var(--rule)}
   .xl-grid{flex:none;height:340px}
   .xl-cv{flex:none;height:360px}
 }
@@ -77,11 +76,11 @@
     <div class="eng-hero-grid" style="padding-bottom:clamp(40px,6vw,76px)">
       <div>
         <span class="eng-lbl">{% if lang == 'en' %}Quantity takeoffs{% else %}Przedmiary instalacji{% endif %}</span>
-        <h1>{% if lang == 'en' %}Takeoffs from IFC models and DWG drawings.{% else %}Przedmiary z modeli IFC i rysunków DWG.{% endif %}</h1>
+        <h1>{% if lang == 'en' %}Takeoffs from IFC models and DWG drawings<i class="dot">.</i>{% else %}Przedmiary z modeli IFC i rysunków DWG<i class="dot">.</i>{% endif %}</h1>
         <p class="lead">{% if lang == 'en' %}Ducts, pipework and fittings measured into a workbook with live formulas. Every line is tied to a model element, and the total matches the 3D geometry.{% else %}Kanały, rurociągi i armatura obmierzone w arkuszu z aktywnymi formułami. Każda pozycja jest powiązana z elementem modelu, a suma zgadza się z geometrią 3D.{% endif %}</p>
         <div class="eng-cta">
           <a class="btn btn-primary" href="#contact">{% if lang == 'en' %}Send files for analysis{% else %}Prześlij pliki do analizy{% endif %} &rarr;</a>
-          <a class="btn btn-ghost" href="#demo">{% if lang == 'en' %}Try the add-in{% else %}Wypróbuj dodatek{% endif %}</a>
+          <a class="btn btn-ghost" href="#procedury">{% if lang == 'en' %}Catalogue of procedures{% else %}Katalog procedur{% endif %}</a>
         </div>
       </div>
       <aside class="eng-panel">
@@ -93,6 +92,36 @@
         </dl>
       </aside>
     </div>
+  </div>
+</section>
+
+<section class="eng-s" id="procedury">
+  <div class="container">
+    <header class="sec-head">
+      <div class="row lbl"><span><b>01</b> {% if lang == 'en' %}Catalog of procedures{% else %}Katalog procedur{% endif %}</span><span>P-01 — P-05</span></div>
+      <h2>{% if lang == 'en' %}Standard takeoff routines and deliverables.{% else %}Standardowe procedury obmiarowe i pakiety wynikowe.{% endif %}</h2>
+    </header>
+
+    <table class="xtbl">
+      <thead><tr>
+        <th>ID</th><th>{% if lang == 'en' %}Procedure{% else %}Procedura{% endif %}</th>
+        <th class="io-col">IN</th><th class="io-col">OUT</th><th style="text-align:right">PLN</th>
+      </tr></thead>
+      <tbody>
+      {% for g in procedure_groups %}
+        <tr class="grp"><th colspan="5"><span class="id">{{ g.id }}</span><span class="gname">{{ g.name }}</span><span class="sub">{{ g.volume }}</span></th></tr>
+        {% for p in g.items %}
+        <tr id="{{ p.id|lower }}">
+          <th scope="row" class="id">{{ p.id }}</th>
+          <td><span class="name">{{ p.name }}</span><span class="sub">{{ p.desc }}</span></td>
+          <td class="io io-col">{{ p.inp }}</td>
+          <td class="io io-col">{{ p.out }}</td>
+          <td class="pr">{% if p.price_from %}{{ p.price_from }}{% else %}—{% endif %}</td>
+        </tr>
+        {% endfor %}
+      {% endfor %}
+      </tbody>
+    </table>
   </div>
 </section>
 
@@ -129,7 +158,7 @@
               <tbody id="xl-tb"></tbody>
             </table>
           </div>
-          <div class="xl-status"><span>Gotowe</span><span id="xl-row">RZĄD: – / –</span><span class="sp"></span><span id="xl-sum"></span></div>
+          <div class="xl-status"><span>Gotowe</span><span id="xl-row">WIERSZ: – / –</span><span class="sp"></span><span id="xl-sum"></span></div>
         </section>
 
         <aside class="xl-pane">
@@ -142,7 +171,7 @@
             <div id="xl-msg"></div>
           </div>
           <div class="pane-nav">
-            <div id="pane-row">RZĄD: – / –</div>
+            <div id="pane-row">WIERSZ: – / –</div>
             <div class="r"><button type="button" id="b-prev">▲ Poprzedni wiersz</button><button type="button" id="b-next">▼ Następny wiersz</button></div>
             <div id="nav-el">
               <button type="button" id="e-prev" title="Poprzedni odcinek w grupie (←)">❮</button>
@@ -161,14 +190,14 @@
   <div class="container">
     <div class="eng-two" style="align-items:start">
       <div>
-        <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);line-height:1.12;margin-bottom:14px">Pobierz ViewIs MEP Link</h2>
-        <p class="lead" style="margin-bottom:24px">Darmowy dodatek do Excela integrujący arkusz z modelem przestrzennym. Modele są przetwarzane w 100% w lokalnej pamięci RAM komputera.</p>
-        <a href="{% url 'mep_download_zip' %}" class="btn btn-primary">Pobierz dodatek (.zip)</a>
+        <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);line-height:1.12;margin-bottom:14px">{% if lang == 'en' %}Download ViewIs MEP Link{% else %}Pobierz ViewIs MEP Link{% endif %}</h2>
+        <p class="lead" style="margin-bottom:24px">{% if lang == 'en' %}Free Excel add-in integrating your spreadsheet with the spatial 3D model. Models are processed 100% in local computer RAM.{% else %}Darmowy dodatek do Excela integrujący arkusz z modelem przestrzennym. Modele są przetwarzane w 100% w lokalnej pamięci RAM komputera.{% endif %}</p>
+        <a href="{% url 'mep_download_zip' %}" class="btn btn-primary">{% if lang == 'en' %}Download add-in (.zip){% else %}Pobierz dodatek (.zip){% endif %}</a>
       </div>
       <aside class="eng-panel">
         <dl class="eng-kv">
-          <dt>Silnik</dt><dd>WebAssembly / Web-IFC (offline)</dd>
-          <dt>Instalacja</dt><dd>Skrypt .bat rejestruje manifest w zaufanych katalogach użytkownika</dd>
+          <dt>{% if lang == 'en' %}Engine{% else %}Silnik{% endif %}</dt><dd>WebAssembly / Web-IFC (offline)</dd>
+          <dt>{% if lang == 'en' %}Setup{% else %}Instalacja{% endif %}</dt><dd>{% if lang == 'en' %}Script registers manifest in trusted folders{% else %}Skrypt rejestruje manifest w zaufanych katalogach użytkownika{% endif %}</dd>
         </dl>
       </aside>
     </div>
@@ -189,7 +218,7 @@
   if (!root) return;
   var $ = function (id) { return document.getElementById(id); };
   var fmt = function (n) { return Number(n || 0).toLocaleString('pl-PL', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); };
-  function setBadge(t, c) { var b = $('xl-badge'); if(b){ b.textContent = t; b.style.color = c || '#94a3b8'; } }
+  function setBadge(t, c) { var b = $('xl-badge'); if(b){ b.textContent = t; b.style.color = c || 'var(--muted)'; } }
 
   var GLB = root.dataset.glb, META = root.dataset.meta;
   var rows = [], detailsMap = {};
@@ -199,10 +228,24 @@
   var allMeshes = [], elems = {};
   var activeHighlightMat, groupMat, ghostSolidMat, ghostWireMat;
 
+  function brandColors() {
+    var cs = getComputedStyle(document.documentElement);
+    return function (v) { return new THREE.Color(cs.getPropertyValue(v).trim()); };
+  }
+
+  function applyBrand() {
+    var c = brandColors();
+    if (scene) scene.background = c('--surface-2');
+    activeHighlightMat = new THREE.MeshLambertMaterial({ color: c('--sage'), emissive: c('--sage').clone().multiplyScalar(0.25), side: THREE.DoubleSide });
+    groupMat      = new THREE.MeshLambertMaterial({ color: c('--sage').clone().lerp(c('--paper'), 0.45), transparent: true, opacity: 0.7, side: THREE.DoubleSide });
+    ghostSolidMat = new THREE.MeshLambertMaterial({ color: c('--paper'), transparent: true, opacity: 0.55, depthWrite: false });
+    ghostWireMat  = new THREE.MeshBasicMaterial({ color: c('--ink'), wireframe: true, transparent: true, opacity: 0.22 });
+    if (boxHelper) boxHelper.material.color = c('--signal');
+  }
+
   function init3D() {
     var host = $('xl-cv');
     scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x0b1120);
     camera = new THREE.PerspectiveCamera(40, 1, 0.05, 5000);
     camera.position.set(30, 35, 45);
     renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -218,10 +261,12 @@
     var d1 = new THREE.DirectionalLight(0xffffff, 0.95); d1.position.set(60, 100, 60); scene.add(d1);
     var d2 = new THREE.DirectionalLight(0xffffff, 0.4); d2.position.set(-60, -80, -60); scene.add(d2);
 
-    activeHighlightMat = new THREE.MeshLambertMaterial({ color: 0xff4500, emissive: 0xd63000, side: THREE.DoubleSide });
-    groupMat = new THREE.MeshLambertMaterial({ color: 0xffd700, emissive: 0x5a4a00, transparent: true, opacity: 0.35, side: THREE.DoubleSide });
-    ghostWireMat = new THREE.MeshBasicMaterial({ color: 0x64748b, wireframe: true, transparent: true, opacity: 0.18 });
-    ghostSolidMat = new THREE.MeshLambertMaterial({ color: 0x475569, transparent: true, opacity: 0.08, depthWrite: false });
+    applyBrand();
+
+    new MutationObserver(function () {
+      applyBrand();
+      if (ready3d) render3D();
+    }).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
 
     function rs() {
       var w = host.clientWidth, h = host.clientHeight;
@@ -277,12 +322,13 @@
 
     Object.keys(elems).forEach(function (g) { elems[g].box = new THREE.Box3().setFromObject(elems[g].node); });
 
-    boxHelper = new THREE.BoxHelper(modelRoot, 0xff4500);
+    boxHelper = new THREE.BoxHelper(modelRoot, 0xff4f00);
     boxHelper.material.depthTest = false;
     boxHelper.renderOrder = 9999;
     boxHelper.frustumCulled = false;
     boxHelper.visible = false;
     scene.add(boxHelper);
+    applyBrand();
 
     fullBox = new THREE.Box3().setFromObject(modelRoot);
     var diag = fullBox.getSize(new THREE.Vector3()).length() || 100;
@@ -343,7 +389,7 @@
 
   function labelRow() {
     var n = rows.length;
-    var t = 'RZĄD: ' + (sel.row >= 0 ? sel.row + 1 : '–') + ' / ' + n;
+    var t = 'WIERSZ: ' + (sel.row >= 0 ? sel.row + 1 : '–') + ' / ' + n;
     $('xl-row').textContent = t;
     $('pane-row').textContent = t;
   }
@@ -401,7 +447,7 @@
     h += '<div class="pr"><span>Liczba odcinków w pozycji</span><b>' + row.count + ' szt.</b></div>';
     h += '<div class="pr"><span>Długość łączna</span><b>' + fmt(row.len) + ' m</b></div>';
     h += '<div class="pr"><span>Powierzchnia blachy</span><b>' + fmt(row.area) + ' m²</b></div>';
-    h += '<div class="pr"><span>Zapotrzebowanie (+10%)</span><b style="color:var(--pos)">' + fmt(row.order_area) + ' m²</b></div>';
+    h += '<div class="pr"><span>Zapotrzebowanie (+10%)</span><b style="color:var(--ok-text)">' + fmt(row.order_area) + ' m²</b></div>';
     if (det.length) {
       det.forEach(function(p) {
         if (!/Identyfikator|GlobalId/i.test(p[0])) {
@@ -436,10 +482,10 @@
       boxHelper.setFromObject(e.node);
       boxHelper.visible = true;
       zoomToFit(e.box);
-      setBadge('Wyizolowano: ' + (row.sec || '') + ' mm (' + (sel.idx + 1) + '/' + row.guids.length + ')', '#4ade80');
+      setBadge('Wyizolowano: ' + (row.sec || '') + ' mm (' + (sel.idx + 1) + '/' + row.guids.length + ')', 'var(--ok-text)');
     } else {
       boxHelper.visible = false;
-      setBadge('Element poza modelem', '#fbbf24');
+      setBadge('Element poza modelem', 'var(--alert)');
     }
   }
 
@@ -454,7 +500,6 @@
     return false;
   }
 
-  // Zdarzenia
   $('xl-tb').addEventListener('click', function (e) {
     var tr = e.target.closest('tr');
     if (tr && tr.dataset.i != null) selectRow(+tr.dataset.i, 0);
@@ -472,7 +517,6 @@
     else if (e.key === 'ArrowDown') { e.preventDefault(); if (sel.row < rows.length - 1) selectRow(sel.row + 1, 0); }
   });
 
-  // Inicjalizacja
   init3D();
 
   var metaP = fetch(META).then(r => r.json()).catch(() => null);
@@ -517,7 +561,7 @@
     if (gltf) {
       indexModel(gltf);
       ready3d = true;
-      setBadge('Model 3D gotowy', '#4ade80');
+      setBadge('Model 3D gotowy', 'var(--ok-text)');
     }
     renderTable();
     sums();

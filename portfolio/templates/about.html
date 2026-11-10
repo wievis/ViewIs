@@ -3,13 +3,18 @@
 {% block content %}
 <section class="page-hero container">
     <span class="eyebrow">{% if lang == 'en' %}About me{% else %}O mnie{% endif %}</span>
-    <h1 class="display">{% if lang == 'en' %}Let's work together.{% else %}Zapraszam do nawiązania współpracy.{% endif %}</h1>
+    <h1 class="display">{% if lang == 'en' %}BIM/CAD data engineer with a deep background in 3D<i class="dot">.</i>{% else %}Inżynier danych BIM/CAD, który zna też stronę 3D<i class="dot">.</i>{% endif %}</h1>
 </section>
 
 <section class="container" style="padding-bottom:90px">
     <div class="about-grid">
         <div class="reveal">
-            <div class="portrait"><img src="{% static 'image/viewis-portrait.jpeg' %}" alt="Maciej Wielgosz" loading="lazy"></div>
+            <div class="portrait marks"><img src="{% static 'image/viewis-portrait.jpeg' %}" alt="Maciej Wielgosz" loading="lazy"></div>
+            <dl class="eng-kv" style="margin-top:20px;border:1.5px solid var(--rule)">
+              <dt>{% if lang == 'en' %}Contractor{% else %}Wykonawca{% endif %}</dt><dd>Maciej Wielgosz</dd>
+              <dt>{% if lang == 'en' %}Mode{% else %}Tryb{% endif %}</dt><dd>{% if lang == 'en' %}100% remote · Łódź{% else %}Usługi w 100% zdalne · Łódź{% endif %}</dd>
+              <dt>{% if lang == 'en' %}Reply{% else %}Odpowiedź{% endif %}</dt><dd>1–2 h</dd>
+            </dl>
             <p class="quote" style="margin-top:34px;font-size:clamp(1.4rem,2.2vw,1.85rem)">
                 {% if lang == 'en' %}
                 I build functional, clear projects that deliver real value.

@@ -2,15 +2,20 @@
 <header class="site-header" id="site-header">
     <div class="header-inner">
         <a class="brand" href="{% if lang == 'en' %}{% url 'home_en' %}{% else %}{% url 'home' %}{% endif %}">
-            <span class="brand-name">VIEWIS</span>
-            <span class="brand-sep">/</span>
-            <span class="brand-badge">BIM/CAD DATA</span>
+            <svg class="brand-mark" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6"/>
+                <path d="M12 1v7M12 16v7M1 12h7M16 12h7" stroke="currentColor" stroke-width="1.6" fill="none"/>
+                <circle cx="12" cy="12" r="1.7" fill="var(--signal)"/>
+            </svg>
+            <span class="brand-name">ViewIs</span>
+            <span class="brand-sep" aria-hidden="true"></span>
+            <span class="brand-badge">{% if lang == 'en' %}BIM/CAD data engineering{% else %}Inżynieria danych BIM/CAD{% endif %}</span>
         </a>
 
         <nav class="site-nav" id="site-nav" aria-label="Menu">
-            <a href="{% if lang == 'en' %}{% url 'portfolio_en' %}{% else %}{% url 'portfolio' %}{% endif %}" class="{% if section == 'portfolio' %}active{% endif %}">Portfolio</a>
-            <a href="{% if lang == 'en' %}{% url 'articles_en' %}{% else %}{% url 'articles' %}{% endif %}" class="{% if section == 'articles' %}active{% endif %}">{% if lang == 'en' %}Articles{% else %}Artykuły{% endif %}</a>
             <a href="{% if lang == 'en' %}{% url 'mep_landing_en' %}{% else %}{% url 'mep_landing' %}{% endif %}" class="{% if section == 'mep' %}active{% endif %}">{% if lang == 'en' %}Quantity Takeoffs{% else %}Przedmiary{% endif %}</a>
+            <a href="{% if lang == 'en' %}{% url 'articles_en' %}{% else %}{% url 'articles' %}{% endif %}" class="{% if section == 'articles' %}active{% endif %}">{% if lang == 'en' %}Articles{% else %}Artykuły{% endif %}</a>
+            <a href="{% if lang == 'en' %}{% url 'portfolio_en' %}{% else %}{% url 'portfolio' %}{% endif %}" class="{% if section == 'portfolio' %}active{% endif %}">Portfolio</a>
             <a href="{% if lang == 'en' %}{% url 'about_en' %}{% else %}{% url 'about' %}{% endif %}" class="{% if section == 'about' %}active{% endif %}">{% if lang == 'en' %}About{% else %}O mnie{% endif %}</a>
             <a href="{% if lang == 'en' %}{% url 'kontakt_en' %}{% else %}{% url 'kontakt' %}{% endif %}" class="{% if section == 'kontakt' %}active{% endif %}">{% if lang == 'en' %}Contact{% else %}Kontakt{% endif %}</a>
         </nav>
