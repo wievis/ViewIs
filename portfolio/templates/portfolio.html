@@ -52,7 +52,7 @@
           </div>
           <div class="card-info">
             <span class="id">R-{{ item.id|stringformat:"03d" }}</span>
-            <span class="card-title">{{ item.name|default:"—" }}</span>
+            
             <span class="card-meta">
               {% for k, l in categories %}{% if k == item.category %}{{ l }}{% endif %}{% endfor %}
             </span>
@@ -77,7 +77,7 @@
           </div>
           <div class="card-info">
             <span class="id">R-{{ item.id|stringformat:"03d" }}</span>
-            <span class="card-title">{{ item.name|default:"—" }}</span>
+            
             <span class="card-meta">
               {% for k, l in categories %}{% if k == item.category %}{{ l }}{% endif %}{% endfor %}
             </span>
