@@ -8,4 +8,4 @@ class Command(BaseCommand):
             User.objects.create_superuser("nastusia", "", "P4lmtmczs")
             self.stdout.write("Superuser created.")
         else:
-            self.stdout.write("Superuser already exists.")
+            self.stdout.write("Superuser already exists.") 
