@@ -41,15 +41,15 @@ SEO = {
     },
     'about': {
         'pl': ('O mnie: Maciej Wielgosz, BIM/CAD, 3D i Automatyzacja | ViewIs',
-               'Łączę metodykę BIM, grafikę 3D i programowanie narzędzi: przedmiary z IFC, Unreal Engine, Python, AutoLISP, Web 3D. Łódź, praca zdalna.'),
+               'Łączę metodykę BIM, grafikę 3D i programowanie narzędzi: przedmiary z IFC, Unreal Engine, Python, AutoLISP, Web 3D. Polska, praca zdalna.'),
         'en': ('About: Maciej Wielgosz, BIM/CAD, 3D & Automation | ViewIs',
-               'I combine BIM, 3D graphics and custom tool development: IFC takeoffs, Unreal Engine, Python, AutoLISP, Web 3D. Based in Łódź, working remotely.'),
+               'I combine BIM, 3D graphics and custom tool development: IFC takeoffs, Unreal Engine, Python, AutoLISP, Web 3D. Based in Polska, working remotely.'),
     },
     'kontakt': {
         'pl': ('Kontakt i Wycena Przedmiaru z IFC/DWG w 1–2 h | ViewIs',
-               'Prześlij pliki IFC, DWG lub XLSX i opisz zadanie. Odpowiedź i wycena w 1–2 godziny, wynik w 24–48 h. NDA na życzenie. Łódź, praca zdalna.'),
+               'Prześlij pliki IFC, DWG lub XLSX i opisz zadanie. Odpowiedź i wycena w 1–2 godziny, wynik w 24–48 h. NDA na życzenie. Polska, praca zdalna.'),
         'en': ('Contact & IFC/DWG Takeoff Quote in 1–2 h | ViewIs',
-               'Send your IFC, DWG or XLSX files and describe the task. Reply and quote within 1–2 hours, results in 24–48 h. NDA on request. Łódź, remote work.'),
+               'Send your IFC, DWG or XLSX files and describe the task. Reply and quote within 1–2 hours, results in 24–48 h. NDA on request. Polska, remote work.'),
     },
     'mep_landing': {
         'pl': ('Przedmiary z IFC i DWG, Delta Rewizji, Excel | ViewIs',
