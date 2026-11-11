@@ -133,7 +133,7 @@ body:not(.page-home) .site-header,
 .eng .eng-panel .eng-kv { border-top: var(--bw) solid var(--line-strong); }
 
 .eng .eng-sla {
-  background: var(--block-bg); color: var(--block-fg);
+  background: var(--block-bg); color: var(--block-fg); 
   border: 0; margin-top: var(--s-8);
 }
 .eng .eng-sla::after {
