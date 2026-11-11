@@ -11,7 +11,7 @@
             <ul class="contact-list">
                 <li><span>E-mail</span><a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a></li>
                 {% if CONTACT_PHONE %}<li><span>{% if lang == 'en' %}Phone{% else %}Telefon{% endif %}</span><a href="tel:{{ CONTACT_PHONE|cut:' ' }}">{{ CONTACT_PHONE }}</a></li>{% endif %}
-                <li><span>{% if lang == 'en' %}Location{% else %}Lokalizacja{% endif %}</span>{% if CONTACT_LOCATION %}{{ CONTACT_LOCATION }}{% elif lang == 'en' %}Łódź, Poland &middot; working remotely{% else %}Łódź, Polska &middot; praca zdalna{% endif %}</li>
+                <li><span>{% if lang == 'en' %}Location{% else %}Lokalizacja{% endif %}</span>{% if CONTACT_LOCATION %}{{ CONTACT_LOCATION }}{% elif lang == 'en' %}Poland &middot; working remotely{% else %}Polska &middot; praca zdalna{% endif %}</li>
             </ul>
         </div>
 
