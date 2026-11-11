@@ -4,8 +4,8 @@ html.light-mode .eng{--pos:#15803d;--neg:#b91c1c}
 .eng h1,.eng h2,.eng h3{font-family:var(--sans);font-weight:500;letter-spacing:-.02em}
 .eng-lbl{font:500 .72rem var(--mono);letter-spacing:.1em;color:var(--accent)}
 
-.eng-hero{padding:clamp(40px,6vw,76px) 0 0;border-bottom:1px solid var(--line);background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:44px 44px}
-.eng-hero-grid{display:grid;grid-template-columns:1.3fr .9fr;gap:44px;align-items:center}
+.eng-hero{padding:0 0 0;border-bottom:1px solid var(--line);background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:44px 44px}
+.eng-hero-grid{padding-top:clamp(32px,5vw,56px);display:grid;grid-template-columns:1.3fr .9fr;gap:44px;align-items:center}
 .eng-hero h1{font-size:clamp(2rem,4.2vw,3.5rem);line-height:1.08;margin:14px 0 18px;max-width:20ch}
 .eng-hero .lead{margin-bottom:28px}
 .eng-cta{display:flex;gap:12px;flex-wrap:wrap}
