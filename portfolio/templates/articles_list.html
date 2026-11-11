@@ -3,28 +3,25 @@
 {% load static %}
 
 {% block content %}
-<section class="art">
-  <div class="container">
-    <div class="sec-head">
-      <div class="row lbl"><span><b>01</b> {% if lang == 'en' %}Knowledge Base{% else %}Baza wiedzy{% endif %}</span><span>REF. A-01 — A-03</span></div>
-      <h2>{% if lang == 'en' %}Knowledge Base &amp; Tools<i class="dot">.</i>{% else %}Baza wiedzy &amp; Narzędzia<i class="dot">.</i>{% endif %}</h2>
-      <p class="lead">{% if lang == 'en' %}Practical scripts, CAD/BIM automation and technical solutions from everyday engineering work.{% else %}Praktyczne skrypty, automatyzacje CAD/BIM oraz techniczne rozwiązania z codziennej praktyki inżynierskiej.{% endif %}</p>
-    </div>
+<section class="page-hero container">
+  <h1 class="display">{% if lang == 'en' %}Knowledge Base &amp; Tools<i class="dot">.</i>{% else %}Baza wiedzy &amp; Narzędzia<i class="dot">.</i>{% endif %}</h1>
+  <p class="lead" style="margin-top:14px">{% if lang == 'en' %}Practical scripts, CAD/BIM automation and technical solutions from everyday engineering work.{% else %}Praktyczne skrypty, automatyzacje CAD/BIM oraz techniczne rozwiązania z codziennej praktyki inżynierskiej.{% endif %}</p>
+</section>
 
-    <table class="xtbl">
-      <thead><tr><th>ID</th><th>{% if lang == 'en' %}Article{% else %}Artykuł{% endif %}</th><th class="io-col">{% if lang == 'en' %}Tags{% else %}Tagi{% endif %}</th></tr></thead>
-      <tbody>
-      {% for art in articles %}
-        <tr>
-          <th scope="row" class="id">A-{{ forloop.counter|stringformat:"02d" }}</th>
-          <td><a href="{{ art_base }}{{ art.slug }}/"><span class="name">{{ art.title }}</span><span class="sub">{{ art.lead }}</span></a></td>
-          <td class="io io-col">{{ art.tags|join:" · " }}</td>
-        </tr>
-      {% empty %}
-        <tr><td colspan="3" class="sub">{% if lang == 'en' %}No published articles yet.{% else %}Brak opublikowanych artykułów.{% endif %}</td></tr>
-      {% endfor %}
-      </tbody>
-    </table>
-  </div>
+<section class="container" style="padding-bottom:100px">
+  <table class="xtbl">
+    <thead><tr><th>ID</th><th>{% if lang == 'en' %}Article{% else %}Artykuł{% endif %}</th><th class="io-col">{% if lang == 'en' %}Tags{% else %}Tagi{% endif %}</th></tr></thead>
+    <tbody>
+    {% for art in articles %}
+      <tr>
+        <th scope="row" class="id">A-{{ forloop.counter|stringformat:"02d" }}</th>
+        <td><a href="{{ art_base }}{{ art.slug }}/"><span class="name">{{ art.title }}</span><span class="sub">{{ art.lead }}</span></a></td>
+        <td class="io io-col">{{ art.tags|join:" · " }}</td>
+      </tr>
+    {% empty %}
+      <tr><td colspan="3" class="sub">{% if lang == 'en' %}No published articles yet.{% else %}Brak opublikowanych artykułów.{% endif %}</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
 </section>
 {% endblock %}
