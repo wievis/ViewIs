@@ -2,7 +2,7 @@
 <html lang="{{ lang|default:'pl' }}">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>{% block title %}{{ seo.title|default:"ViewIs | Computer Designer" }}{% endblock %}</title>
     <script>
       document.documentElement.classList.add('js');
@@ -54,6 +54,7 @@
     <link rel="stylesheet" href="{% static 'blueprint.css' %}">
     <link rel="stylesheet" href="{% static 'eng.css' %}">
     <link rel="stylesheet" href="{% static 'engineering.css' %}">
+    <link rel="stylesheet" href="{% static 'mobile.css' %}">
 
     {% block extra_head %}{% endblock %}
 </head>
@@ -88,11 +89,14 @@
         </div>
     </footer>
 
+    {% include 'mobile_bar.html' %}
+
     <script src="{% static 'theme-lang.js' %}"></script>
     <script src="{% static 'lightbox.js' %}"></script>
     <script src="{% static 'site.js' %}"></script>
     <script src="{% static 'kontakt.js' %}"></script>
     <script src="{% static 'article-code.js' %}"></script>
+    <script src="{% static 'mobile.js' %}"></script>
     {% block extra_js %}{% endblock %}
 </body>
 </html>

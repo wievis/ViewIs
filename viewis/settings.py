@@ -92,6 +92,7 @@ AWS_STORAGE_BUCKET_NAME = os.environ.get('R2_BUCKET_NAME')
 AWS_S3_ENDPOINT_URL = os.environ.get('R2_ENDPOINT_URL')
 AWS_S3_CUSTOM_DOMAIN = os.environ.get('R2_CUSTOM_DOMAIN')
 AWS_QUERYSTRING_AUTH = False
+USE_CF_IMAGES = os.environ.get('USE_CF_IMAGES') == '1'   # miniatury przez Cloudflare Image Transformations (opcjonalne)
 
 PREPEND_WWW = os.environ.get("PREPEND_WWW", "False") == "True"
 

@@ -2,7 +2,16 @@
 {% load static %}
 
 {% block extra_head %}
-<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+<script>
+  (function () {
+    if (matchMedia('(max-width:768px)').matches) return;   // mobile: ładowany dopiero przy pierwszym modelu 3D (mobile.js)
+    window.__mv = true;
+    var s = document.createElement('script');
+    s.type = 'module';
+    s.src = 'https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js';
+    document.head.appendChild(s);
+  })();
+</script>
 {% endblock %}
 
 {% block content %}
@@ -203,7 +212,7 @@
       <span class="eng-lbl">{% if lang == 'en' %}A. Ventilation duct schedule (takeoff from IFC){% else %}A. Zestawienie kanałów wentylacyjnych (przedmiar z IFC){% endif %}</span>
       <div class="eng-tw">
         <div class="eng-fx"><b>H7</b><b>fx</b><span>={% if lang == 'en' %}SUM{% else %}SUMA{% endif %}(H2:H6)</span></div>
-        <table class="eng-tbl">
+        <table class="eng-tbl m-cards m-cards--swipe">
           <thead><tr>
             <th>{% if lang == 'en' %}Floor{% else %}Kondygnacja{% endif %}</th><th>{% if lang == 'en' %}System{% else %}System{% endif %}</th><th>{% if lang == 'en' %}Section [mm]{% else %}Przekrój [mm]{% endif %}</th>
             <th class="n">{% if lang == 'en' %}Qty{% else %}Ilość{% endif %}</th><th class="n">{% if lang == 'en' %}Length [m]{% else %}Długość [m]{% endif %}</th><th class="n">{% if lang == 'en' %}Area [m²]{% else %}Powierzchnia [m²]{% endif %}</th>
@@ -227,7 +236,7 @@
     <div class="eng-ex">
       <span class="eng-lbl">{% if lang == 'en' %}B. Change register: version 1 &rarr; version 2{% else %}B. Rejestr zmian: wersja 1 &rarr; wersja 2{% endif %}</span>
       <div class="eng-tw">
-        <table class="eng-tbl">
+        <table class="eng-tbl m-cards m-cards--delta">
           <thead><tr>
             <th>{% if lang == 'en' %}Element / Section{% else %}Element / Przekrój{% endif %}</th><th>{% if lang == 'en' %}Floor{% else %}Kondygnacja{% endif %}</th>
             <th class="n">{% if lang == 'en' %}Version 1 (previous){% else %}Wersja 1 (poprzednia){% endif %}</th><th class="n">{% if lang == 'en' %}Version 2 (current){% else %}Wersja 2 (aktualna){% endif %}</th><th class="n">{% if lang == 'en' %}Difference (delta){% else %}Różnica (Delta){% endif %}</th>

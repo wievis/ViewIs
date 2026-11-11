@@ -180,6 +180,7 @@ function renderActiveItem() {
         video.oncanplay = () => completeLoader();
         content.appendChild(video);
     } else if (item.type === 'model3d') {
+        if (window.loadModelViewer) window.loadModelViewer();
         const wf = document.createElement('div');
         wf.className = 'lb-wireframe-loader';
         wf.id = 'lb-wireframe-loader';

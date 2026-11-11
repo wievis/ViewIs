@@ -352,6 +352,10 @@
         '<td class="n"><b>' + fmt(r.order_area) + '</b></td>' +
         '</tr>';
     }).join('');
+    var XL = ['', 'Lp.', 'Kondyg.', 'System', 'Przekrój', 'Szt.', 'Dł. [m]', 'Pow. [m²]', 'Nadd.', 'Razem [m²]'];
+    [].forEach.call(tb.querySelectorAll('tr'), function (tr) {
+      [].forEach.call(tr.cells, function (td, i) { if (XL[i]) td.setAttribute('data-label', XL[i]); });
+    });
   }
 
   function curRow() { return sel.row >= 0 ? rows[sel.row] : null; }
@@ -390,8 +394,12 @@
       if (tr) {
         tr.classList.add('active-row');
         var gr = $('xl-grid'), t = tr.offsetTop, h = tr.offsetHeight;
-        if (t - 48 < gr.scrollTop) gr.scrollTop = t - 48;
-        else if (t + h > gr.scrollTop + gr.clientHeight) gr.scrollTop = t + h - gr.clientHeight;
+        if (gr.scrollHeight > gr.clientHeight + 1) {
+          if (t - 48 < gr.scrollTop) gr.scrollTop = t - 48;
+          else if (t + h > gr.scrollTop + gr.clientHeight) gr.scrollTop = t + h - gr.clientHeight;
+        } else if (matchMedia('(max-width:768px)').matches) {
+          tr.scrollIntoView({ block: 'nearest', behavior: 'smooth' });   // scroll-margin-top z CSS omija sticky canvas
+        }
       }
     }
     labelRow();
@@ -486,16 +494,25 @@
     else if (e.key === 'ArrowDown') { e.preventDefault(); if (sel.row < rows.length - 1) selectRow(sel.row + 1, 0); }
   });
 
-  init3D();
+  var LITE = matchMedia('(max-width:768px)').matches ||
+    (navigator.connection && (navigator.connection.saveData || /2g|3g/.test(navigator.connection.effectiveType || '')));
+  var started = false;
 
-  var metaP = fetch(META).then(r => r.json()).catch(() => null);
-  var glbP = new Promise(resolve => {
-    var l = new THREE.GLTFLoader();
-    l.load(GLB, resolve, null, () => resolve(null));
-  });
+  function start3D() {
+    if (started) return;
+    started = true;
+    init3D();
+    new THREE.GLTFLoader().load(GLB, function (gltf) {
+      indexModel(gltf);
+      ready3d = true;
+      setBadge('Model 3D gotowy', 'var(--ok-text)');
+      render3D();
+    }, null, function () {
+      setBadge('Nie udało się wczytać modelu 3D', 'var(--alert)');
+    });
+  }
 
-  Promise.all([metaP, glbP]).then(function (res) {
-    var json = res[0], gltf = res[1];
+  fetch(META).then(function (r) { return r.json(); }).catch(function () { return null; }).then(function (json) {
     if (json) {
       var sourceRows = [];
       if (json.sheets && json.sheets.length) {
@@ -527,15 +544,26 @@
 
       detailsMap = json.details || {};
     }
-    if (gltf) {
-      indexModel(gltf);
-      ready3d = true;
-      setBadge('Model 3D gotowy', 'var(--ok-text)');
-    }
     renderTable();
     sums();
     labelRow();
   });
+
+  if (!LITE) {
+    start3D();
+  } else {
+    var m = $('xl-msg');
+    root.classList.add('m-3d-off');
+    m.style.display = 'flex';
+    m.innerHTML = '<div>Podgląd 3D ładuje się na żądanie, by oszczędzić transfer.<br><br>' +
+                  '<button type="button" id="xl-load">Załaduj model 3D</button></div>';
+    $('xl-load').addEventListener('click', function () {
+      m.style.display = 'none';
+      root.classList.remove('m-3d-off');
+      setBadge('Ładowanie modelu 3D...');
+      start3D();
+    });
+  }
 })();
 </script>
 {% endblock %}

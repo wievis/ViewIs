@@ -1,0 +1,41 @@
+<nav class="m-bar" id="m-bar" aria-label="{% if lang == 'en' %}Quick navigation{% else %}Szybka nawigacja{% endif %}">
+  <a class="m-bar__i{% if section == 'mep' %} active{% endif %}" href="{% if lang == 'en' %}{% url 'mep_landing_en' %}{% else %}{% url 'mep_landing' %}{% endif %}">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4zM4 10h16M10 5v14"/></svg>
+    <span>{% if lang == 'en' %}Takeoffs{% else %}Przedmiary{% endif %}</span>
+  </a>
+  <a class="m-bar__i{% if section == 'portfolio' %} active{% endif %}" href="{% if lang == 'en' %}{% url 'portfolio_en' %}{% else %}{% url 'portfolio' %}{% endif %}">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="7" height="7"/><rect x="13" y="4" width="7" height="7"/><rect x="4" y="13" width="7" height="7"/><rect x="13" y="13" width="7" height="7"/></svg>
+    <span>Portfolio</span>
+  </a>
+  <a class="m-bar__cta" id="m-cta" href="{% if lang == 'en' %}{% url 'kontakt_en' %}{% else %}{% url 'kontakt' %}{% endif %}#contact">
+    <b>{% if lang == 'en' %}Get a quote{% else %}Wycena{% endif %}</b><small>1–2 h</small>
+  </a>
+  <a class="m-bar__i{% if section == 'articles' %} active{% endif %}" href="{% if lang == 'en' %}{% url 'articles_en' %}{% else %}{% url 'articles' %}{% endif %}">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6zM9 12h7M9 16h5"/></svg>
+    <span>{% if lang == 'en' %}Articles{% else %}Artykuły{% endif %}</span>
+  </a>
+  <button type="button" class="m-bar__i" id="m-more" aria-expanded="false" aria-controls="m-sheet">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14M5 12h14M5 16h14"/></svg>
+    <span>{% if lang == 'en' %}More{% else %}Więcej{% endif %}</span>
+  </button>
+</nav>
+
+<div class="m-scrim" id="m-scrim"></div>
+<aside class="m-sheet" id="m-sheet" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Menu">
+  <div class="m-sheet__grab"></div>
+  <nav class="m-sheet__nav">
+    <a href="{% if lang == 'en' %}{% url 'home_en' %}{% else %}{% url 'home' %}{% endif %}"><span class="id">00</span>{% if lang == 'en' %}Home{% else %}Start{% endif %}</a>
+    <a href="{% if lang == 'en' %}{% url 'about_en' %}{% else %}{% url 'about' %}{% endif %}"><span class="id">01</span>{% if lang == 'en' %}About{% else %}O mnie{% endif %}</a>
+    <a href="{% if lang == 'en' %}{% url 'kontakt_en' %}{% else %}{% url 'kontakt' %}{% endif %}"><span class="id">02</span>{% if lang == 'en' %}Contact{% else %}Kontakt{% endif %}</a>
+  </nav>
+  <label class="m-row">
+    <span>{% if lang == 'en' %}Light mode{% else %}Tryb jasny{% endif %}</span>
+    <input type="checkbox" class="checkbox theme-toggle" role="switch" id="m-theme-toggle" aria-label="Theme">
+  </label>
+  <div class="m-sheet__cta">
+    <a class="btn btn-primary" href="mailto:{{ CONTACT_EMAIL }}">E-mail</a>
+    {% with phone=CONTACT_PHONE|default:"+48 519 133 055" %}
+    <a class="btn btn-ghost" href="tel:{{ phone|cut:' ' }}">{% if lang == 'en' %}Call{% else %}Zadzwoń{% endif %}</a>
+    {% endwith %}
+  </div>
+</aside>
