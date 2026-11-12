@@ -430,3 +430,12 @@ pre.code, pre.vscode-lisp { margin: 0; padding: 16px 18px; overflow: auto; max-h
 .tb > div { border-right-color: var(--line-strong); }
 .tb dt { color: var(--accent-text); }
 .site-footer { position: relative; z-index: 30; border-top: var(--bw-heavy) solid var(--rule); background: var(--bg); }
+
+
+/* Ujednolicenie pozycji linii pod navbarem dla strony glownej i przedmiarow */
+.page-home .eng-hero {
+  padding-top: var(--header-h);
+}
+.eng-hero .page-hero {
+  margin-top: var(--s-5);
+}
