@@ -110,7 +110,7 @@ body:not(.page-home) .site-header,
   font-weight: 600; letter-spacing: var(--tracking-display); line-height: .98;
   font-size: clamp(2.3rem, 5vw, 4.2rem); max-width: 17ch;
 }
-.eng .eng-hero-grid { align-items: end; }
+.eng .eng-hero-grid { align-items: center; }
 
 .sect { display: block; width: 100%; height: auto; color: var(--text); }
 .sect .t   { font: 500 15px var(--font-mono); fill: var(--text); }
