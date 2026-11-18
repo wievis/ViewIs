@@ -6,7 +6,7 @@
             <div class="eng-chips">
                 <span class="eng-chip">{% if lang == 'en' %}Response{% else %}Odpowiedź{% endif %}: <b>1–2 h</b></span>
                 <span class="eng-chip">{% if lang == 'en' %}Result package{% else %}Pakiet wynikowy{% endif %}: <b>24–48 h</b></span>
-                <span class="eng-chip">{% if lang == 'en' %}Confidentiality{% else %}Poufność{% endif %}: <b>{% if lang == 'en' %}100% local · NDA on request · deletion after 14 days{% else %}100% lokalnie · NDA na życzenie · usunięcie po 14 dniach{% endif %}</b></span>
+                <span class="eng-chip">{% if lang == 'en' %}{% else %}{% endif %}: <b>{% if lang == 'en' %}NDA on request · deletion after 14 days{% else %}NDA na życzenie · usunięcie po 14 dniach{% endif %}</b></span>
             </div>
             <ul class="contact-list">
                 <li><span>E-mail</span><a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a></li>
