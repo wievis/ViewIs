@@ -43,14 +43,13 @@ TEMPLATES = [{
             'django.template.context_processors.request',
             'django.contrib.auth.context_processors.auth',
             'django.contrib.messages.context_processors.messages',
-            'portfolio.context.site_info',
         ],
     },
 }]
 
 DATABASES = {
     'default': dj_database_url.config(
-        default=os.environ.get('DATABASE_URL'),
+        default=os.environ.get('DATABASE_URL', f'sqlite:///{BASE_DIR / "db.sqlite3"}'),
         conn_max_age=600
     )
 }
@@ -92,20 +91,7 @@ AWS_STORAGE_BUCKET_NAME = os.environ.get('R2_BUCKET_NAME')
 AWS_S3_ENDPOINT_URL = os.environ.get('R2_ENDPOINT_URL')
 AWS_S3_CUSTOM_DOMAIN = os.environ.get('R2_CUSTOM_DOMAIN')
 AWS_QUERYSTRING_AUTH = False
-USE_CF_IMAGES = os.environ.get('USE_CF_IMAGES') == '1'   # miniatury przez Cloudflare Image Transformations (opcjonalne)
 
-PREPEND_WWW = os.environ.get("PREPEND_WWW", "False") == "True"
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.hostinger.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_USE_SSL = False
-EMAIL_TIMEOUT = 10
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', 'kontakt@viewis.pl')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
 DEFAULT_FROM_EMAIL = 'kontakt@viewis.pl'
 CONTACT_EMAIL = 'kontakt@viewis.pl'
-
-CONTACT_PHONE = os.environ.get('CONTACT_PHONE', '')
-CONTACT_LOCATION = os.environ.get('CONTACT_LOCATION', '')
+CONTACT_PHONE = os.environ.get('CONTACT_PHONE', '+48 519 133 055')

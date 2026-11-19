@@ -1,112 +1,93 @@
-from django.db.models import Q
 import os
 import json
 import logging
 import urllib.request
+import boto3
+from botocore.config import Config
 from django.conf import settings
-from django.shortcuts import render, get_object_or_404
-from django.http import JsonResponse, HttpResponse, FileResponse, Http404
-from django.core.mail import EmailMessage
+from django.shortcuts import render
+from django.http import JsonResponse
 from django.core.validators import validate_email
-from django.core.exceptions import ValidationError
-from django.urls import reverse
-from django.views.decorators.clickjacking import xframe_options_exempt
-from .models import Media, Article
-from .articles_data import get_articles, get_article_by_slug
-from .procedures_data import PROCEDURE_GROUPS
+from .models import Media
 
 logger = logging.getLogger(__name__)
 
-CATEGORY_EN = {
-    'viz': 'Visualizations', 'anim': 'Animations', 'env': 'Environments & mockups',
-    'model': '3D models', 'other': 'Other',
-}
+def home(request):
+    return render(request, 'home.html')
 
-def _localize(a, lang):
-    en = lang == 'en'
-    a.d_title = (a.title_en if en and a.title_en else a.title)
-    a.d_lead = (a.lead_en if en and a.lead_en else a.lead)
-    a.d_content = (a.content_en if en and a.content_en else a.content)
-    return a
-
-def _cat_label(m, lang):
-    if not m.category:
-        return ''
-    if lang == 'en':
-        return CATEGORY_EN.get(m.category, m.category)
-    return m.get_category_display()
-
-def home(request, lang='pl'):
-    featured = []
-    media_items = []
-    try:
-        qs = Media.objects.filter(parent_album__isnull=True, featured=True).order_by('order', '-created')
-        featured = list(qs[:6])
-        if not featured:
-            featured = list(Media.objects.filter(parent_album__isnull=True).order_by('order', '-created')[:6])
-        f_ids = [m.id for m in featured]
-        media_items = list(Media.objects.filter(
-            Q(id__in=f_ids) | Q(parent_album_id__in=f_ids),
-            file__isnull=False
-        ).exclude(file='').select_related('hdr_setting').order_by('parent_album__order', 'order'))
-        for m in featured + media_items:
-            m.cat_label = _cat_label(m, lang)
-    except Exception:
-        logger.exception('home: nie udalo sie pobrac realizacji')
-    return render(request, 'home.html', {
-        'featured': featured,
-        'media_items': media_items,
-        'lang': lang,
-        'section': 'home'
-    })
-
-def portfolio(request, lang='pl'):
+def portfolio(request):
     top_level_media = list(Media.objects.filter(parent_album__isnull=True).order_by('order').prefetch_related('children'))
-    media_items = Media.objects.filter(file__isnull=False).exclude(file='').select_related('hdr_setting').order_by('parent_album__order', 'order')
-    present = {m.category for m in top_level_media if m.category}
-    categories = []
-    for key, label in Media.CATEGORIES:
-        if key in present:
-            categories.append((key, CATEGORY_EN[key] if lang == 'en' else label))
+    media_items = Media.objects.filter(file__isnull=False).exclude(file='').order_by('parent_album__order', 'order')
     return render(request, 'portfolio.html', {
-        'top_level_media': top_level_media, 'media_items': media_items,
-        'categories': categories, 'lang': lang, 'section': 'portfolio',
+        'top_level_media': top_level_media,
+        'media_items': media_items
     })
 
-def about(request, lang='pl'):
-    return render(request, 'about.html', {'lang': lang, 'section': 'about'})
+def get_upload_url(request):
+    if request.method != 'POST':
+        return JsonResponse({'status': 'error', 'message': 'Niedozwolona metoda'}, status=405)
+    
+    filename = request.POST.get('filename')
+    if not filename:
+        return JsonResponse({'status': 'error', 'message': 'Brak nazwy pliku'}, status=400)
+    
+    s3_client = boto3.client(
+        's3',
+        endpoint_url=settings.AWS_S3_ENDPOINT_URL,
+        aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
+        aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
+        config=Config(signature_version='s3v4')
+    )
+    
+    key = f"uploads/{os.urandom(8).hex()}_{filename}"
+    presigned_url = s3_client.generate_presigned_url(
+        'put_object',
+        Params={'Bucket': settings.AWS_STORAGE_BUCKET_NAME, 'Key': key},
+        ExpiresIn=3600
+    )
+    
+    file_url = f"https://{settings.AWS_S3_CUSTOM_DOMAIN}/{key}" if settings.AWS_S3_CUSTOM_DOMAIN else key
+    return JsonResponse({'status': 'ok', 'upload_url': presigned_url, 'file_url': file_url})
 
-def _clean(s, n=100):
-    return ' '.join((s or '').split())[:n]
-
-def kontakt(request, lang='pl'):
+def kontakt(request):
     if request.method == 'POST':
-        first_name = request.POST.get('first_name', '').strip()
-        last_name = request.POST.get('last_name', '').strip()
         email = request.POST.get('email', '').strip()
+        phone = request.POST.get('phone', '').strip()
         message = request.POST.get('message', '').strip()
+        tender_deadline = request.POST.get('tender_deadline', '').strip()
+        files_link = request.POST.get('files_link', '').strip()
+        uploaded_file_url = request.POST.get('uploaded_file_url', '').strip()
+        services = request.POST.getlist('services')
 
-        if not email or not message:
-            return JsonResponse({'status': 'error', 'message': 'Wypełnij email i treść.'})
+        if not email or (not message and not files_link and not uploaded_file_url):
+            return JsonResponse({'status': 'error', 'message': 'Podaj adres e-mail oraz opisz zadanie lub dodaj pliki.'})
 
         try:
             validate_email(email)
         except Exception:
-            return JsonResponse({'status': 'error', 'message': 'Niepoprawny adres email.'})
+            return JsonResponse({'status': 'error', 'message': 'Niepoprawny adres e-mail.'})
 
-        resend_api_key = os.environ.get('RESEND_API_KEY')
+        resend_api_key = os.environ.get('RESEND_API_KEY', '')
         if not resend_api_key:
             return JsonResponse({'status': 'error', 'message': 'Błąd konfiguracji poczty.'})
 
-        target_email = os.environ.get('CONTACT_EMAIL', 'kontakt@viewis.pl')
-        topic = request.POST.get("topic", "").strip()
-        full_body = f"Temat: {topic}\nImię i nazwisko: {first_name} {last_name}\nEmail kontaktowy: {email}\n\nWiadomość:\n{message}"
+        services_str = ", ".join(services) if services else "Nie określono"
+        full_body = (
+            f"Nowe zapytanie ofertowe ViewIs:\n"
+            f"E-mail: {email}\n"
+            f"Telefon: {phone}\n"
+            f"Termin składania ofert: {tender_deadline}\n"
+            f"Wybrane usługi: {services_str}\n"
+            f"Link do dokumentacji: {files_link}\n"
+            f"Plik w R2: {uploaded_file_url}\n\n"
+            f"Opis zadania:\n{message}"
+        )
 
         payload = {
-            "from": "ViewIs <kontakt@viewis.pl>",
-            "to": [target_email],
+            "from": "ViewIs Zapytania <kontakt@viewis.pl>",
+            "to": [getattr(settings, 'CONTACT_EMAIL', 'kontakt@viewis.pl')],
             "reply_to": email,
-            "subject": f"Wiadomość z formularza: {first_name} {last_name}".strip(),
+            "subject": f"Zapytanie ofertowe: {email}",
             "text": full_body
         }
 
@@ -122,117 +103,10 @@ def kontakt(request, lang='pl'):
         )
 
         try:
-            with urllib.request.urlopen(req, timeout=8) as resp:
-                return JsonResponse({'status': 'ok', 'message': 'Wiadomość została wysłana!'})
+            with urllib.request.urlopen(req, timeout=10) as resp:
+                return JsonResponse({'status': 'ok', 'message': 'Zapytanie zostało przesłane. Wycenę otrzymasz w ciągu 3 godzin.'})
         except Exception as err:
             logger.error(f"Błąd wysyłki e-mail: {err}")
-            return JsonResponse({'status': 'error', 'message': 'Błąd serwera. Spróbuj ponownie później.'})
+            return JsonResponse({'status': 'error', 'message': 'Błąd serwera. Spróbuj ponownie lub napisz bezpośrednio na e-mail.'})
 
-    return render(request, 'kontakt.html', {'lang': lang, 'section': 'kontakt'})
-
-def mep_landing(request, lang='pl'):
-    groups = []
-    for g in PROCEDURE_GROUPS:
-        grp = dict(g)
-        if lang == 'en':
-            grp['name'] = grp.get('name_en', grp['name'])
-            grp['volume'] = grp.get('volume_en', grp['volume'])
-        items = []
-        for p in g['items']:
-            item = dict(p)
-            if lang == 'en':
-                item['name'] = item.get('name_en', item['name'])
-                item['desc'] = item.get('desc_en', item['desc'])
-            items.append(item)
-        grp['items'] = items
-        groups.append(grp)
-
-    return render(request, 'mep.html', {
-        'lang': lang,
-        'section': 'mep',
-        'procedure_groups': groups
-    })
-
-@xframe_options_exempt
-def mep_panel(request):
-    return render(request, 'mep_panel.html')
-
-@xframe_options_exempt
-def mep_viewer(request):
-    return render(request, 'mep_viewer.html')
-
-def mep_manifest(request):
-    manifest_path = os.path.join(os.path.dirname(__file__), 'templates', 'mep_manifest.xml')
-    with open(manifest_path, 'r', encoding='utf-8') as f:
-        content = f.read()
-    response = HttpResponse(content, content_type='application/xml')
-    response['Content-Disposition'] = 'attachment; filename="viewis-mep-manifest.xml"'
-    return response
-
-def mep_download_zip(request):
-    zip_path = os.path.join(os.path.dirname(__file__), 'static', 'viewis-mep-link.zip')
-    return FileResponse(open(zip_path, 'rb'), as_attachment=True, filename='viewis-mep-link.zip')
-
-def sitemap(request):
-    names = ['home', 'home_en', 'portfolio', 'portfolio_en', 'articles', 'articles_en',
-             'about', 'about_en', 'mep_landing', 'mep_landing_en', 'kontakt', 'kontakt_en']
-    urls = [request.build_absolute_uri(reverse(n)) for n in names]
-    for a in get_articles():
-        urls.append(request.build_absolute_uri(reverse('article_detail', args=[a['slug']])))
-        urls.append(request.build_absolute_uri(reverse('article_detail_en', args=[a['slug']])))
-    try:
-        for a in Article.objects.filter(published=True):
-            urls.append(request.build_absolute_uri(reverse('article_detail', args=[a.slug])))
-            urls.append(request.build_absolute_uri(reverse('article_detail_en', args=[a.slug])))
-    except Exception:
-        pass
-    xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-    xml += ''.join(f'  <url><loc>{u}</loc></url>\n' for u in urls) + '</urlset>\n'
-    return HttpResponse(xml, content_type='application/xml')
-
-def custom_404(request, exception):
-    lang = 'en' if '/en/' in request.path else 'pl'
-    return render(request, '404.html', {'lang': lang}, status=404)
-
-def _art_ctx(lang):
-    return {
-        'lang': lang,
-        'section': 'articles',
-        'art_base': '/en/articles/' if lang == 'en' else '/artykuly/',
-    }
-
-def article_list(request, lang='pl'):
-    ctx = _art_ctx(lang)
-    ctx['articles'] = get_articles(lang)
-    return render(request, 'articles_list.html', ctx)
-
-def articles_list(request, lang='pl'):
-    return article_list(request, lang)
-
-def article_detail(request, slug, lang='pl'):
-    article = get_article_by_slug(slug, lang)
-    if not article:
-        raise Http404("Artykuł nie został odnaleziony")
-
-    ctx = _art_ctx(lang)
-    ctx['article'] = article
-    static_lsp = os.path.join(os.path.abspath(os.getcwd()), "portfolio", "static", "lsp")
-    static_ms = os.path.join(os.path.abspath(os.getcwd()), "portfolio", "static", "ms")
-
-    if slug == "maxscript-hot-reload-automatyczne-ladowanie":
-        p = os.path.join(static_ms, "viewis-regen-scripts.ms")
-        if os.path.exists(p):
-            with open(p, "r", encoding="utf-8") as f:
-                ctx['ms_code'] = f.read()
-    elif slug == "autocad-lisp-narzedzia-przyspieszajace-prace":
-        p = os.path.join(static_lsp, "viewis-cad-tools.lsp")
-        if os.path.exists(p):
-            with open(p, "r", encoding="utf-8") as f:
-                ctx['unified_code'] = f.read()
-    elif slug == "autolisp-pierwsze-kroki-automatyczne-ladowanie":
-        p = os.path.join(static_lsp, "viewis-autolisp-loader.lsp")
-        if os.path.exists(p):
-            with open(p, "r", encoding="utf-8") as f:
-                ctx['loader_code'] = f.read()
-
-    return render(request, article['template'], ctx)
+    return JsonResponse({'status': 'error', 'message': 'Niedozwolona metoda'}, status=405)
