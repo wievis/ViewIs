@@ -1,15 +1,40 @@
-{% extends 'base.html' %}
-{% block title %}404{% endblock %}
-{% block footer_contact %}{% endblock %}
-{% block robots %}noindex, nofollow{% endblock %}
-{% block content %}
-<div class="container err-wrap">
-  <div class="err-code">404</div>
-  <h1 class="display" style="font-size:clamp(2rem,4vw,3rem)">{% if lang == 'en' %}No such element<i class="dot">.</i>{% else %}Nie ma takiego elementu<i class="dot">.</i>{% endif %}</h1>
-  <dl class="rb" style="margin:28px 0 30px">
-    <dt>{% if lang == 'en' %}Path{% else %}Ścieżka{% endif %}</dt><dd>{{ request.path }}</dd>
-    <dt>{% if lang == 'en' %}Status{% else %}Status{% endif %}</dt><dd class="st">{% if lang == 'en' %}TO BE COMPLETED{% else %}DO UZUPEŁNIENIA{% endif %}</dd>
-  </dl>
-  <p><a class="btn btn-primary" href="{% if lang == 'en' %}{% url 'home_en' %}{% else %}{% url 'home' %}{% endif %}">{% if lang == 'en' %}Back to home{% else %}Strona główna{% endif %}</a></p>
+{% load static %}<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>404 — Nie znaleziono strony | ViewIs</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/x-icon" href="{% static 'image/viewis_logo.ico' %}">
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+<body>
+<header class="top">
+<div class="wrap">
+<a class="logo" href="/">ViewIs<span class="dot">.</span></a>
+<nav class="nav" aria-label="Główna">
+<a class="btn" href="/">Strona główna</a>
+</nav>
 </div>
-{% endblock %}
+</header>
+<main>
+<section class="hero" style="min-height: calc(100vh - 160px); display: flex; align-items: center;">
+<div class="wrap">
+<p class="label" style="color: var(--brick); font-size: 1.1rem; margin-bottom: 12px;">BŁĄD 404</p>
+<h1>Nie znaleziono żądanego adresu<span class="dot">.</span></h1>
+<p class="lead">Strona, której szukasz, została przeniesiona, zarchiwizowana lub adres zawiera błąd.</p>
+<div class="actions" style="margin-top: 32px;">
+<a class="btn" href="/">Wróć do strony głównej</a>
+<a class="btn btn--line" href="/#kontakt">Kontakt i wycena</a>
+</div>
+</div>
+</section>
+</main>
+<footer class="foot">
+<div class="wrap">
+<span>ViewIs Maciej Wielgosz</span>
+<span><a href="mailto:kontakt@viewis.pl">kontakt@viewis.pl</a>, <a href="tel:+48519133055">+48 519 133 055</a></span>
+</div>
+</footer>
+</body>
+</html>

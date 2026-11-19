@@ -5,7 +5,7 @@ import urllib.request
 import boto3
 from botocore.config import Config
 from django.conf import settings
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.core.validators import validate_email
 from .models import Media
@@ -22,6 +22,9 @@ def portfolio(request):
         'top_level_media': top_level_media,
         'media_items': media_items
     })
+
+def custom_404(request, exception=None):
+    return render(request, '404.html', status=404)
 
 def get_upload_url(request):
     if request.method != 'POST':
@@ -109,4 +112,4 @@ def kontakt(request):
             logger.error(f"Błąd wysyłki e-mail: {err}")
             return JsonResponse({'status': 'error', 'message': 'Błąd serwera. Spróbuj ponownie lub napisz bezpośrednio na e-mail.'})
 
-    return JsonResponse({'status': 'error', 'message': 'Niedozwolona metoda'}, status=405)
+    return redirect('/#kontakt')

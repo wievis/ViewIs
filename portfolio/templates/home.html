@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ViewIs: ochrona marży wykonawcy w przetargach i na budowie</title>
-<meta name="description" content="Przedmiary do formatu .ath, zestawienia materiałowe, audyt SWZ i STWiORB oraz koordynacja 3D. Wycena ryczałtowa do 3 godzin, realizacja w 72 godziny.">
+<meta name="description" content="Projekt, przedmiar i STWiORB bywają sprzeczne. Weryfikacja SWZ, baza .ath, zestawienia materiałowe i koordynacja 3D. Wycena w 3 h.">
 <link rel="icon" type="image/x-icon" href="{% static 'image/viewis_logo.ico' %}">
 <link rel="stylesheet" href="{% static 'css/main.css' %}">
 </head>
 <body>
 <header class="top">
 <div class="wrap">
-<a class="logo" href="#top">View<span>Is</span></a>
+<a class="logo" href="#top">ViewIs<span class="dot">.</span></a>
 <nav class="nav" aria-label="Główna">
 <a href="#zakres">Zakres</a>
 <a href="#radar">Radar ryzyka</a>
@@ -24,11 +24,12 @@
 <main id="top">
 <section class="hero">
 <div class="wrap">
-<h1>Chronimy marżę wykonawcy, zanim projekt zderzy się ze STWiORB.</h1>
-<p class="lead">Odtwarzamy przedmiary, liczymy materiały i znajdujemy w dokumentacji próby, badania oraz braki, których nie ma w ofercie. Dla wykonawców startujących w przetargach PZP i prowadzących budowy.</p>
+<p class="kicker">PZP / KNR / KNNR / STWiORB &middot; .ath / .xlsx / PDF / 3D Web</p>
+<h1>Ochrona marży wykonawcy<span class="dot">.</span></h1>
+<p class="lead">Projekt, przedmiar i STWiORB bywają sprzeczne. Różnicę płaci wykonawca — chyba że zauważy ją pierwszy.</p>
 <div class="actions">
 <a class="btn" href="#kontakt">Wyślij dokumentację</a>
-<a class="btn btn--line" href="#radar">Zobacz radar ryzyka</a>
+<a class="btn btn--line" href="#zakres">Zobacz zakres operacyjny</a>
 </div>
 <ul class="facts">
 <li><strong>3 h</strong><span>wycena ryczałtowa</span></li>
@@ -39,16 +40,45 @@
 </div>
 </section>
 
+<section class="section" id="zakres">
+<div class="wrap">
+<h2>Zakres operacyjny</h2>
+<p class="lead">Cztery kluczowe procedury eliminujące ryzyka na etapie ofertowania, zakupów i realizacji.</p>
+<div class="pillars">
+<article class="pillar">
+<h3>Baza kosztorysowa .ath</h3>
+<p>Kompletne odtworzenie przedmiaru ze skanów PDF, zablokowanych plików i rysunków DWG do formatu Norma Standard / PRO, Zuzia lub Rodos, z zachowaniem pełnej hierarchii KNR i KNNR.</p>
+<p class="for">Dla kosztorysantów i działów ofertowania pod wycenę przetargową.</p>
+</article>
+<article class="pillar">
+<h3>Czyste zestawienia materiałowe (ZMO)</h3>
+<p>Kable Cu i Al per przekrój, rurociągi per DN, armatura, tonaż stali zbrojeniowej i kubatury betonu pod zapytania do hurtowni i dostawców bez narzutów robocizny.</p>
+<p class="for">Dla działów zakupów i kierowników budów pod rabaty pakietowe.</p>
+</article>
+<article class="pillar">
+<h3>Audyt SWZ i operaty roszczeniowe</h3>
+<p>Zderzenie geometrii z opisami, badaniami i STWiORB. Identyfikacja nieujętych prac, ukrytych prób technologicznych, zaniżonych obmiarów i podstawa pod pytania do SWZ lub aneks.</p>
+<p class="for">Dla zarządów i kierowników kontraktów chroniących ryczałt.</p>
+</article>
+<article class="pillar">
+<h3>Koordynacja 3D i bezkolizyjność</h3>
+<p>Weryfikacja kolizji przejść instalacji przez ustrój nośny przed szalowaniem i zbrojeniem. Raport kolizji oraz lekki model 3D w linku do otwarcia w przeglądarce bez licencji CAD.</p>
+<p class="for">Dla inżynierów i koordynatorów robót instalacyjno-konstrukcyjnych.</p>
+</article>
+</div>
+</div>
+</section>
+
 <section class="section" id="radar">
 <div class="wrap">
-<h2>Radar ryzyka: co zwykle ukrywa dokumentacja</h2>
-<p class="lead">Rozbieżności między projektem, przedmiarem i STWiORB, które znajdujemy w pakietach przetargowych.</p>
+<h2>Radar ryzyka: rozbieżności z dokumentacji</h2>
+<p class="lead">Rzeczywiste niezgodności między projektem, przedmiarem a STWiORB wykrywane przed złożeniem oferty lub betonowaniem.</p>
 <div class="radar" id="radar-card" aria-live="polite">
 <div class="radar-head"><span id="r-count"></span><span id="r-branch"></span></div>
 <div class="radar-body">
 <div class="radar-main"><h3 id="r-title"></h3><p id="r-desc"></p></div>
 <div class="radar-side">
-<span class="label">Kwota ryzyka</span>
+<span class="label">Wartość zabezpieczona</span>
 <p class="risk" id="r-risk"></p>
 <span class="label label--gap">Działanie naprawcze</span>
 <p id="r-action"></p>
@@ -59,35 +89,7 @@
 <button class="btn btn--line" id="r-next" type="button">Następny przypadek</button>
 </div>
 </div>
-<p class="note">Scenariusze są zanonimizowane i oparte na typowych sytuacjach z przetargów. Kwoty mają charakter orientacyjny.</p>
-</div>
-</section>
-
-<section class="section" id="zakres">
-<div class="wrap">
-<h2>Co robimy i dla kogo</h2>
-<div class="pillars">
-<article class="pillar">
-<h3>Baza kosztorysowa .ath</h3>
-<p>Odtwarzamy przedmiary ze skanów PDF, zablokowanych plików i rysunków DWG do formatu Norma, Zuzia lub Rodos, z zachowaniem hierarchii KNR i KNNR.</p>
-<p class="for">Dla kosztorysantów, którzy mają dokumentację, ale nie mają przedmiaru do edycji.</p>
-</article>
-<article class="pillar">
-<h3>Czyste zestawienia materiałowe</h3>
-<p>Kable Cu i Al per przekrój, rurociągi per DN, stal zbrojeniowa i kubatury betonu, gotowe do wysłania w zapytaniach ofertowych do hurtowni.</p>
-<p class="for">Dla działów zakupów i kierowników robót.</p>
-</article>
-<article class="pillar">
-<h3>Audyt SWZ i STWiORB</h3>
-<p>Zderzamy dokumentację i wykrywamy ukryte próby, badania oraz braki. Przed ofertą dostajesz pytania do SWZ, po podpisaniu umowy podstawę roszczenia o aneks.</p>
-<p class="for">Dla zespołów ofertowych i kierowników kontraktów.</p>
-</article>
-<article class="pillar">
-<h3>Koordynacja międzybranżowa 3D</h3>
-<p>Sprawdzamy kolizje tras instalacji z ustrojem nośnym, zanim ruszy szalowanie i betonowanie. Lekki model 3D otwierasz linkiem w przeglądarce, bez licencji CAD.</p>
-<p class="for">Dla kierowników budowy i koordynatorów branż.</p>
-</article>
-</div>
+<p class="note">Scenariusze zanonimizowane na podstawie zrealizowanych audytów dokumentacji wykonawczej i przetargowej.</p>
 </div>
 </section>
 
@@ -95,12 +97,12 @@
 <div class="wrap">
 <h2>Warunki współpracy bez ryzyka po Twojej stronie</h2>
 <ul class="terms">
-<li><h3>Wycena do 3 h</h3><p>Ryczałt ustalany indywidualnie na podstawie nadesłanych metadanych i plików.</p></li>
-<li><h3>Realizacja 72 h</h3><p>Tryb ekspresowy 36 h, gdy termin składania ofert jest blisko.</p></li>
-<li><h3>Przelew 14 dni</h3><p>Płacisz po wydaniu pakietu i sprawdzeniu go przez zespół wykonawcy.</p></li>
-<li><h3>Korekta w 24 h</h3><p>Rozbieżności z projektem poprawiamy bezpłatnie w ciągu 24 godzin.</p></li>
-<li><h3>Faktury w KSeF</h3><p>Faktury VAT wystawiamy w Krajowym Systemie e-Faktur.</p></li>
-<li><h3>Pełna poufność</h3><p>NDA na życzenie, przetwarzanie On-Premise, usuwanie danych po 14 dniach.</p></li>
+<li><h3>Wycena do 3 h</h3><p>Wiążąca wycena ryczałtowa przygotowywana do 3 godzin na podstawie nadesłanych metadanych i plików.</p></li>
+<li><h3>Realizacja 72 h</h3><p>Tryb standardowy 72 h. Dostępny tryb ekspresowy 36 h (+50%) przy presji terminu składania ofert.</p></li>
+<li><h3>Przelew 14 dni</h3><p>Płatność przelewem 14 dni po wydaniu i zweryfikowaniu kompletnego pakietu przez Twój zespół.</p></li>
+<li><h3>Korekta w 24 h</h3><p>Ewentualne rozbieżności z wytycznymi projektowymi korygowane bezpłatnie w ciągu 24 godzin.</p></li>
+<li><h3>Faktury w KSeF</h3><p>Pełne rozliczenie B2B z fakturami VAT wystawianymi w Krajowym Systemie e-Faktur.</p></li>
+<li><h3>Poufność On-Premise</h3><p>Umowa NDA na życzenie, przetwarzanie danych na lokalnej stacji roboczej i trwałe usuwanie po 14 dniach.</p></li>
 </ul>
 </div>
 </section>
@@ -108,16 +110,16 @@
 <section class="section" id="kontakt">
 <div class="wrap">
 <h2>Wyślij dokumentację, wycenę dostaniesz w 3 godziny</h2>
-<p class="lead">Wklej link albo przeciągnij plik. Na wycenę wystarczą metadane: zakres, liczba arkuszy i termin.</p>
+<p class="lead">Wklej link do chmury albo przeciągnij pliki. Do kalkulacji wystarczą metadane: branże, liczba arkuszy i termin przetargu.</p>
 <form class="form" id="lead" method="post" action="{% url 'kontakt' %}">
 {% csrf_token %}
 <fieldset>
-<legend>Czego potrzebujesz</legend>
+<legend>Zakres zapytania</legend>
 <div class="checks">
 <label class="check"><input type="checkbox" name="services" value="Baza kosztorysowa (.ath)">Baza kosztorysowa .ath</label>
-<label class="check"><input type="checkbox" name="services" value="Zestawienia materiałowe (ZMO)">Zestawienia materiałowe</label>
+<label class="check"><input type="checkbox" name="services" value="Zestawienia materiałowe (ZMO)">Zestawienia materiałowe (ZMO)</label>
 <label class="check"><input type="checkbox" name="services" value="Audyt SWZ i STWiORB">Audyt SWZ i STWiORB</label>
-<label class="check"><input type="checkbox" name="services" value="Koordynacja międzybranżowa 3D">Koordynacja 3D</label>
+<label class="check"><input type="checkbox" name="services" value="Koordynacja 3D i bezkolizyjność">Koordynacja 3D</label>
 </div>
 </fieldset>
 <div class="row">
@@ -126,10 +128,10 @@
 </div>
 <div class="row">
 <div class="field"><label for="deadline">Termin składania ofert</label><input type="date" id="deadline" name="tender_deadline"></div>
-<div class="field"><label for="link">Link do plików (WeTransfer, Dysk, OneDrive)</label><input type="url" id="link" name="files_link" placeholder="https://"></div>
+<div class="field"><label for="link">Link do plików (WeTransfer, Google Drive, OneDrive)</label><input type="url" id="link" name="files_link" placeholder="https://"></div>
 </div>
 <div class="field">
-<span id="drop-label" class="fine">Albo prześlij plik bezpośrednio</span>
+<span id="drop-label" class="fine">Albo dołącz pliki bezpośrednio</span>
 <label class="drop" id="drop" data-endpoint="{% url 'get_upload_url' %}">
 <input class="sr" type="file" id="file" accept=".pdf,.zip,.dwg" aria-describedby="drop-label">
 <strong>Przeciągnij plik tutaj lub kliknij, aby wybrać</strong>
@@ -139,8 +141,8 @@
 <div class="bar" id="bar" hidden><i id="fill"></i></div>
 <input type="hidden" name="uploaded_file_url" id="uploaded">
 </div>
-<div class="field"><label for="message">Opis zadania</label><textarea id="message" name="message" placeholder="Branże, zakres, uwagi o dokumentacji"></textarea></div>
-<p class="fine">Wysyłając formularz, zgadzasz się na przetwarzanie danych w celu przygotowania wyceny. Dane usuwamy po 14 dniach.</p>
+<div class="field"><label for="message">Opis zadania</label><textarea id="message" name="message" placeholder="Branże, zakres weryfikacji, uwagi o dokumentacji"></textarea></div>
+<p class="fine">Wysyłając formularz, wyrażasz zgodę na kontakt w celu przedstawienia oferty. Materiały podlegają procedurze niszczenia po 14 dniach.</p>
 <div class="submit">
 <button class="btn" id="submit" type="submit">Wyślij do wyceny</button>
 <p class="status" id="status" role="status"></p>
@@ -160,16 +162,16 @@
 <script>
 (function(){
 const cases=[
-{b:"Instalacje wentylacyjne",t:"Pominięte pomiary i regulacja TAB",d:"STWiORB wymaga pomiarów, regulacji i protokołów TAB dla 14 central wentylacyjnych. W przedmiarze nie ma ani jednej pozycji na te prace.",r:"38 000 zł",a:"Pytanie do SWZ przed terminem ofert albo doliczenie pozycji do wyceny z odwołaniem do punktu STWiORB."},
-{b:"Konstrukcja i wentylacja",t:"Brak otworów w stropodachu",d:"Model 3D pokazuje 6 przejść kanałów i wpustów przez płytę, których nie ma na rysunkach konstrukcyjnych. Wykrycie po zalaniu oznacza kucie i wzmocnienia.",r:"27 500 zł",a:"Zgłoszenie kolizji projektantowi przed szalowaniem i uzyskanie rysunku zamiennego z wymiarami otworów."},
-{b:"Konstrukcje żelbetowe",t:"Niezgodność klas betonu",d:"Rysunki podają C30/37, opis techniczny C25/30, a STWiORB wymaga dla ścian zewnętrznych klasy ekspozycji XF1. Przedmiar wycenia tańszy beton na 420 m³.",r:"46 000 zł",a:"Ustalenie obowiązującej klasy na piśmie i korekta kubatur oraz cen w kosztorysie ofertowym."},
-{b:"Instalacje elektryczne",t:"Niedoszacowane koryta kablowe",d:"Przedmiar ujmuje 180 m koryt, a projekt trasuje 640 m w trzech szerokościach, bez łączników, kształtek i wsporników.",r:"41 000 zł",a:"Zestawienie koryt per szerokość z osprzętem i uzupełnienie przedmiaru przed złożeniem oferty."},
-{b:"Instalacje sanitarne",t:"Brakujące próby ciśnieniowe",d:"STWiORB wymaga prób szczelności, płukania i dezynfekcji instalacji wody oraz hydrantowej. W przedmiarze nie ma tych prac ani protokołów.",r:"18 500 zł",a:"Dodanie pozycji do oferty albo pytanie w SWZ, czy koszty mają wejść do cen jednostkowych."},
-{b:"Stal zbrojeniowa",t:"Rozbieżność tonażu stali",d:"Zestawienie w projekcie wykonawczym daje 86 t, przedmiar 71 t. Różnica to zakłady, pręty montażowe i dystanse.",r:"52 500 zł",a:"Przeliczenie stali per średnica i klasa oraz zapytanie do hurtowni na poprawione zestawienie."},
-{b:"Instalacje elektryczne",t:"Miedź zamiast aluminium w liniach zasilających",d:"Przedmiar przewiduje kable aluminiowe, a projekt wykonawczy wymaga miedzi na 1 200 m linii zasilających.",r:"33 000 zł",a:"Wyciąg kabli Cu i Al per przekrój oraz zapytanie ofertowe na właściwy materiał."},
-{b:"Sieci zewnętrzne",t:"Inna średnica rurociągu niż w przedmiarze",d:"Przedmiar ujmuje kanalizację w DN 200 na całym odcinku, a profil podłużny pokazuje DN 250 na 310 m.",r:"24 000 zł",a:"Zestawienie rurociągów per DN i korekta pozycji KNNR przed wyceną."},
-{b:"Roboty ziemne",t:"Badania zagęszczenia bez pozycji w przedmiarze",d:"STWiORB wymaga badań zagęszczenia i modułów odkształcenia co 500 m² warstwy. Przedmiar nie zawiera kosztów laboratorium.",r:"29 000 zł",a:"Doliczenie badań do oferty albo potwierdzenie w SWZ, kto ponosi koszt badań kontrolnych."},
-{b:"Fundamentowanie",t:"Pominięte odwodnienie wykopu",d:"Opinia geotechniczna wskazuje wodę gruntową powyżej dna wykopu, a przedmiar nie ma odwodnienia ani jego utrzymania w czasie robót.",r:"64 000 zł",a:"Pytanie do SWZ z odwołaniem do opinii geotechnicznej, a po podpisaniu umowy podstawa roszczenia o aneks."}
+{b:"Instalacje wentylacyjne",t:"Pominięte pomiary i regulacja TAB",d:"STWiORB wymaga procedury pomiarów, regulacji i cyfrowych protokołów TAB dla 14 central. W przedmiarze inwestora brak pozycji kosztorysowej na te prace.",r:"~75 000 zł",a:"Wykrycie luki w SWZ przed złożeniem oferty, dodanie pozycji do budżetu ofertowego i zabezpieczenie marży."},
+{b:"Konstrukcja i wentylacja",t:"Brak otworów instalacyjnych w stropodachu",d:"Model trasowania instalacji wykazuje 10 przejść przez dach żelbetowy. Przedmiary KB i IS nie ujęły otworów ani kołnierzy uszczelniających.",r:"~15 000 zł",a:"Zgłoszenie kolizji przed zalaniem stropu, eliminacja wiercenia diamentowego i uszczelnień awaryjnych."},
+{b:"Konstrukcje żelbetowe",t:"Niezgodność klas ekspozycji betonu",d:"Rysunki wskazują C30/37, opis C25/30, a STWiORB stawia rygor XF1 dla ścian zewnętrznych. Przedmiar wycenia tańszą mieszankę bez napowietrzenia.",r:"~46 000 zł",a:"Wiążące zapytanie do SWZ, korekta kubatur oraz uniknięcie zakwestionowania badań wytrzymałościowych przez Nadzór."},
+{b:"Instalacje elektryczne",t:"Niedoszacowanie tras koryt kablowych",d:"Przedmiar ujmuje 180 m koryt, podczas gdy trasy zasilające w projekcie wykonawczym sumują 640 m w trzech przekrojach bez kształtek i zawiesi.",r:"~41 000 zł",a:"Pełny wyciąg koryt per szerokość z uwzględnieniem osprzętu montażowego i korekta nakładów w ofercie."},
+{b:"Instalacje sanitarne",t:"Próby szczelności i płukanie bez pokrycia w KNR",d:"STWiORB nakłada rygorystyczne płukanie chemiczne i próby ciśnieniowe z rejestracją cyfrową, pominięte w pozycjach przedmiarowych.",r:"~18 500 zł",a:"Wprowadzenie nakładów technologicznych bezpośrednio do kosztorysu ofertowego lub formalne pytanie do SWZ."},
+{b:"Stal zbrojeniowa",t:"Rozbieżność bilansu tonażu stali",d:"Zestawienie w projekcie wykonawczym zamyka się w 86 t, a ślepy przedmiar podaje 71 t (brak zakładek, prętów montażowych i kozłów).",r:"~52 500 zł",a:"Niezależna weryfikacja tonażu per średnica i zapytanie do hurtowni na realne zapotrzebowanie materiałowe."},
+{b:"Instalacje elektryczne",t:"Rozbieżność materiałowa: miedź vs aluminium",d:"Przedmiar kalkuluje kable aluminiowe, natomiast specyfikacja techniczna projektu narzuca miedź na 1 200 m głównych linii zasilających.",r:"~33 000 zł",a:"Wyciąg kabli Cu/Al per przekrój i uniknięcie straty wynikającej z konieczności zakupu droższego surowca."},
+{b:"Sieci zewnętrzne",t:"Błędna średnica rurociągu w przedmiarze",d:"Przedmiar ujął rury kanalizacji grawitacyjnej DN 200, podczas gdy profil podłużny i bilans hydrauliczny wymagają DN 250 na odcinku 310 m.",r:"~24 000 zł",a:"Weryfikacja rurociągów per DN i korekta pozycji KNNR przed wysłaniem zapytań do dostawców rur."},
+{b:"Roboty ziemne",t:"Badania płytą dynamiczną bez pozycji kosztorysowej",d:"Wymóg odbiorowy w STWiORB: badania nośności i wskaźnika zagęszczenia co 500 m² nasypu. Przedmiar nie uwzględnia obsługi laboratoryjnej.",r:"~29 000 zł",a:"Ujęcie kosztów badań laboratoryjnych w kosztach bezpośrednich oferty przetargowej."},
+{b:"Fundamentowanie",t:"Pominięcie igłofiltrów i odwodnienia wykopu",d:"Badania geotechniczne wykazują zwierciadło wody gruntowej powyżej poziomu posadowienia. Brak pozycji na odwodnienie w przedmiarze inwestora.",r:"~64 000 zł",a:"Pytanie do SWZ z powołaniem na dokumentację geologiczną, zabezpieczające roszczenie o roboty dodatkowe."}
 ];
 const card=document.getElementById("radar-card");
 const el=id=>document.getElementById(id);

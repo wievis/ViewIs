@@ -1,144 +1,73 @@
-{% extends 'base.html' %}
-{% load static media_extras %}
-
-{% block extra_head %}
-<script>
-  (function () {
-    if (matchMedia('(max-width:768px)').matches) return;   // mobile: ładowany dopiero przy pierwszym modelu 3D (mobile.js)
-    window.__mv = true;
-    var s = document.createElement('script');
-    s.type = 'module';
-    s.src = 'https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js';
-    document.head.appendChild(s);
-  })();
-</script>
-{% endblock %}
-
-{% block content %}
-<section class="page-hero container portfolio-header">
-  <span class="eyebrow">Portfolio</span>
-  <h1 class="display">{% if lang == 'en' %}Selected Work &amp; 3D Projects<i class="dot">.</i>{% else %}Wybrane realizacje i projekty 3D<i class="dot">.</i>{% endif %}</h1>
-  <p class="lead">
-    {% if lang == 'en' %}
-    Architectural visualizations, real-time virtual environments, product models and custom automation tools.
-    {% else %}
-    Wizualizacje architektoniczne, środowiska wirtualne w czasie rzeczywistym, modele produktów oraz narzędzia automatyzacji.
-    {% endif %}
-  </p>
-</section>
-
-<div class="container">
-  {% if categories %}
-  <div class="filters-bar">
-    <div class="filters">
-      <button class="filter-btn active" data-filter="all">
-        {% if lang == 'en' %}All Projects{% else %}Wszystkie realizacje{% endif %}
-      </button>
-      {% for key, label in categories %}
-      <button class="filter-btn" data-filter="{{ key }}">{{ label }}</button>
-      {% endfor %}
-    </div>
-    <div class="portfolio-stats">
-      <span id="visible-count">{{ top_level_media|length }}</span> / {{ top_level_media|length }}
-    </div>
-  </div>
-  {% endif %}
-
-  <div class="portfolio-grid">
-    {% for item in top_level_media %}
-      {% if item.media_type == 'album' %}
-        {% with first_child=item.children.first %}
-        <div class="portfolio-card" data-cat="{{ item.category }}" data-lb-id="{{ item.id }}" data-lb-kind="album" data-lb-title="{{ item.name }}" data-lb-count="{{ item.children.count }}" data-lb-type="{{ first_child.media_type|default:'image' }}" data-lb-thumb="{% if first_child.media_type == 'image' %}{{ first_child.display_url }}{% elif first_child.thumbnail %}{{ first_child.thumbnail.url }}{% endif %}" data-lb-meta="{% for k, l in categories %}{% if k == item.category %}{{ l }}{% endif %}{% endfor %}" onclick="openAlbumPreview({{ item.id }})">
-          <div class="card-media-wrapper">
-            <span class="card-badge card-badge-id id">R-{{ item.id|stringformat:"03d" }}</span>
-            <span class="card-badge badge-album">
-              {% if lang == 'en' %}Series &middot; {{ item.children.count }}{% else %}Seria &middot; {{ item.children.count }}{% endif %}
-            </span>
-            {% if first_child and first_child.file %}
-              {% if first_child.media_type == 'image' %}
-                {% cf_img first_child.display_url 480 as a480 %}{% cf_img first_child.display_url 800 as a800 %}
-                <picture style="display:contents">
-                  {% if a480 != first_child.display_url %}<source media="(max-width:768px)" srcset="{{ a480 }} 480w, {{ a800 }} 800w" sizes="50vw">{% endif %}
-                  <img src="{{ first_child.display_url }}" alt="" loading="lazy">
-                </picture>
-              {% else %}
-                <img src="{{ first_child.file.url }}" alt="" loading="lazy">
-              {% endif %}
-            {% else %}
-              <div style="width:100%; height:100%; background:var(--surface-2);"></div>
-            {% endif %}
-          </div>
-        </div>
-        {% endwith %}
-      {% else %}
-        {% if item.file %}
-        <div class="portfolio-card" data-cat="{{ item.category }}" data-lb-id="{{ item.id }}" data-lb-kind="item" data-lb-title="{{ item.name }}" data-lb-count="1" data-lb-type="{{ item.media_type }}" data-lb-thumb="{% if item.media_type == 'image' %}{{ item.display_url }}{% elif item.thumbnail %}{{ item.thumbnail.url }}{% endif %}" data-lb-meta="{% for k, l in categories %}{% if k == item.category %}{{ l }}{% endif %}{% endfor %}" onclick="openItemPreview({{ item.id }})">
-          <div class="card-media-wrapper">
-            <span class="card-badge card-badge-id id">R-{{ item.id|stringformat:"03d" }}</span>
-            <span class="card-badge">
-              {% if item.media_type == 'video' %}Video{% elif item.media_type == 'model3d' %}3D{% else %}Render{% endif %}
-            </span>
-            {% if item.media_type == 'image' %}
-              {% cf_img item.display_url 480 as i480 %}{% cf_img item.display_url 800 as i800 %}
-              <picture style="display:contents">
-                {% if i480 != item.display_url %}<source media="(max-width:768px)" srcset="{{ i480 }} 480w, {{ i800 }} 800w" sizes="50vw">{% endif %}
-                <img src="{{ item.display_url }}" alt="" loading="lazy">
-              </picture>
-            {% elif item.media_type == 'video' %}
-              <video data-src="{{ item.file.url }}" {% if item.thumbnail %}poster="{{ item.thumbnail.url }}"{% endif %} preload="none" loop muted playsinline></video>
-            {% elif item.media_type == 'model3d' %}
-              {% if item.thumbnail %}<img class="m-poster" src="{{ item.thumbnail.url }}" alt="" loading="lazy">{% endif %}
-              <model-viewer src="{{ item.file.url }}" {% if item.hdr_setting %}environment-image="{{ item.hdr_setting.file.url }}"{% endif %} camera-controls auto-rotate shadow-intensity="1" style="width:100%; height:100%;">
-              </model-viewer>
-            {% endif %}
-          </div>
-        </div>
-        {% endif %}
-      {% endif %}
-    {% endfor %}
-  </div>
+{% load static %}<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portfolio 3D & Prezentacje Przestrzenne | ViewIs</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/x-icon" href="{% static 'image/viewis_logo.ico' %}">
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+<style>
+.p-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px;margin-top:40px}
+.p-card{border:1px solid var(--line);background:#fff;display:flex;flex-direction:column}
+.p-thumb{position:relative;aspect-ratio:16/10;background:var(--soft);overflow:hidden}
+.p-thumb img,.p-thumb video{width:100%;height:100%;object-fit:cover;display:block}
+.p-info{padding:16px 20px;border-top:1px solid var(--line)}
+.p-info h3{font-size:1.05rem}
+.p-info span{display:block;margin-top:4px;font-size:.85rem;color:var(--muted)}
+</style>
+</head>
+<body>
+<header class="top">
+<div class="wrap">
+<a class="logo" href="/">ViewIs<span class="dot">.</span></a>
+<nav class="nav" aria-label="Główna">
+<a class="btn btn--line" href="/">← Strona główna</a>
+<a class="btn" href="/#kontakt">Zapytaj o projekt</a>
+</nav>
 </div>
-
-<script>
-window.mediaItems = [
-{% for item in media_items %}{% if item.file %}
-  {
-    id: {{ item.id }},
-    url: "{% if item.media_type == 'image' %}{{ item.display_url }}{% else %}{{ item.file.url }}{% endif %}",
-    thumb: "{% if item.media_type == 'image' %}{{ item.display_url }}{% elif item.thumbnail %}{{ item.thumbnail.url }}{% else %}{{ item.file.url }}{% endif %}",
-    type: "{{ item.media_type }}",
-    category: "{% for k, l in categories %}{% if k == item.category %}{{ l }}{% endif %}{% endfor %}",
-    hdr: "{% if item.hdr_setting %}{{ item.hdr_setting.file.url }}{% endif %}",
-    parentId: {{ item.parent_album_id|default:"null" }}
-  }{% if not forloop.last %},{% endif %}
-{% endif %}{% endfor %}
-];
-
-document.addEventListener('DOMContentLoaded', () => {
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const cards = document.querySelectorAll('.portfolio-card');
-  const countEl = document.getElementById('visible-count');
-
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const cat = btn.dataset.filter;
-      let visible = 0;
-
-      cards.forEach(card => {
-        if (cat === 'all' || card.dataset.cat === cat) {
-          card.style.display = 'flex';
-          visible++;
-        } else {
-          card.style.display = 'none';
-        }
-      });
-
-      document.dispatchEvent(new CustomEvent('portfolio:filtered'));
-      if (countEl) countEl.textContent = visible;
-    });
-  });
-});
-</script>
-{% endblock %}
+</header>
+<main>
+<section class="section" style="border-top:0;padding-top:64px">
+<div class="wrap">
+<p class="label" style="color:var(--brick)">MATERIAŁ POGLĄDOWY DLA KLIENTA</p>
+<h1>Wizualizacje architektoniczne, modele i makiety 3D<span class="dot">.</span></h1>
+<p class="lead">Wybrane opracowania przestrzenne, silniki czasu rzeczywistego i optymalizacja geometrii.</p>
+<div class="p-grid">
+{% for item in top_level_media %}
+<article class="p-card">
+<div class="p-thumb">
+{% if item.media_type == 'album' %}
+  {% with first_child=item.children.first %}
+    {% if first_child and first_child.file %}
+      <img src="{{ first_child.display_url }}" alt="{{ item.name }}" loading="lazy">
+    {% endif %}
+  {% endwith %}
+{% elif item.file %}
+  {% if item.media_type == 'image' %}
+    <img src="{{ item.display_url }}" alt="{{ item.name }}" loading="lazy">
+  {% elif item.media_type == 'video' %}
+    <video src="{{ item.file.url }}" controls preload="metadata"></video>
+  {% endif %}
+{% endif %}
+</div>
+<div class="p-info">
+<h3>{{ item.name|default:"Projekt 3D" }}</h3>
+<span>{{ item.get_category_display|default:"Geometria i przestrzeń" }}</span>
+</div>
+</article>
+{% empty %}
+<p class="note">Brak aktywnych pozycji w bazie mediów.</p>
+{% endfor %}
+</div>
+</div>
+</section>
+</main>
+<footer class="foot">
+<div class="wrap">
+<span>ViewIs Maciej Wielgosz</span>
+<span><a href="mailto:kontakt@viewis.pl">kontakt@viewis.pl</a>, <a href="tel:+48519133055">+48 519 133 055</a></span>
+</div>
+</footer>
+</body>
+</html>

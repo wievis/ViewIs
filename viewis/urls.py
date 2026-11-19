@@ -3,6 +3,8 @@ from django.urls import path, re_path
 from django.views.generic import RedirectView
 from portfolio import views
 
+handler404 = 'portfolio.views.custom_404'
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
