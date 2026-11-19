@@ -8,20 +8,11 @@ from django.conf import settings
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.core.validators import validate_email
-from .models import Media
 
 logger = logging.getLogger(__name__)
 
 def home(request):
     return render(request, 'home.html')
-
-def portfolio(request):
-    top_level_media = list(Media.objects.filter(parent_album__isnull=True).order_by('order').prefetch_related('children'))
-    media_items = Media.objects.filter(file__isnull=False).exclude(file='').order_by('parent_album__order', 'order')
-    return render(request, 'portfolio.html', {
-        'top_level_media': top_level_media,
-        'media_items': media_items
-    })
 
 def custom_404(request, exception=None):
     return render(request, '404.html', status=404)
