@@ -24,6 +24,7 @@ main::before{content:"";position:absolute;inset:var(--siatka);z-index:-1;pointer
 .naglowek .kontener{display:flex;align-items:center;justify-content:space-between;height:var(--pasek)}
 .logo{font-size:1.4rem;font-weight:800;letter-spacing:-.03em}
 .logo-w{letter-spacing:.075em}
+.marka{letter-spacing:-.03em}
 .menu{display:flex;gap:var(--m5)}
 .menu a{font:500 .78rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--szary)}
 .menu a:hover{color:var(--tusz)}
