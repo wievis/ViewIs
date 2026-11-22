@@ -3,275 +3,136 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>ViewIs: ochrona marży wykonawcy w przetargach i na budowie</title>
-<meta name="description" content="Projekt, przedmiar i STWiORB bywają sprzeczne. Weryfikacja SWZ, baza .ath, zestawienia materiałowe i koordynacja 3D. Wycena w 3 h.">
+<title>ViewIs: ochrona marży wykonawcy</title>
+<meta name="description" content="Odtworzenie przedmiaru do formatu .ath, zestawienia materiałowe, audyt SWZ i STWiORB, koordynacja 3D. Kalkulacja ryczałtowa wg harmonogramu PZP.">
 <link rel="icon" type="image/x-icon" href="{% static 'image/viewis_logo.ico' %}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{% static 'css/main.css' %}">
 </head>
 <body>
-<header class="naglowek">
-<div class="kontener">
-<a class="logo" href="#gora">Vie<span class="logo-w">w</span>Is<span class="kropka">.</span></a>
-<nav class="menu" aria-label="Główna">
-<a href="#zakres">Zakres</a>
-<a href="#radar">Radar ryzyka</a>
-<a href="#warunki">Warunki</a>
-<a href="#wycena">Wycena</a>
+<header class="g">
+<div class="k">
+<a class="logo" href="#gora">ViewIs<i>.</i></a>
+<nav aria-label="Sekcje">
+<a href="#procedury">A Procedury</a>
+<a href="#kontrola">B Kontrola</a>
+<a href="#standard">C Standard</a>
+<a href="#wycena">D Wycena</a>
 </nav>
 </div>
-<nav class="zakladki" aria-label="Sekcje">
-<a href="#zakres">Zakres</a>
-<a href="#radar">Radar</a>
-<a href="#warunki">Warunki</a>
-<a href="#wycena">Wycena</a>
-</nav>
 </header>
 
 <main id="gora">
-<section class="wprowadzenie">
-<div class="kontener">
-<p class="kolofon">PZP / KNR / KNNR / STWiORB</p>
-<h1>Ochrona marży<br>wykonawcy<span class="kropka">.</span></h1>
-<p class="zapowiedz">Projekt, przedmiar i STWiORB bywają sprzeczne. Różnicę płaci wykonawca, chyba że zauważy ją pierwszy.</p>
-<div class="dzialania">
-<a class="przycisk" href="#wycena">Wyślij dokumentację</a>
-<a class="przycisk przycisk--obrys" href="#radar">Rejestr ryzyka</a>
-</div>
-<ul class="metryki">
-<li><strong>3 h</strong><span>stała wycena ryczałtowa</span></li>
-<li><strong>72 h</strong><span>realizacja (ekspres 36 h)</span></li>
-<li><strong>14 dni</strong><span>przelew B2B po weryfikacji</span></li>
-<li><strong>Weryfikacja</strong><span>autorska korekta projektu</span></li>
+<section class="h">
+<div class="k">
+<p class="kolofon"><span>PZP / KNR / KNNR / STWiORB</span><span>.ath / .xlsx / IFC / WebGL</span></p>
+<h1>Ochrona marży<br>wykonawcy<i>.</i></h1>
+<p class="lead">Projekt, przedmiar i STWiORB bywają sprzeczne. Różnicę płaci wykonawca — chyba że zauważy ją pierwszy.</p>
+<ul class="m">
+<li><b>P-01–04</b><span>Kody procedur operacyjnych</span></li>
+<li><b>.ath .xlsx IFC</b><span>Formaty danych wejściowych i wynikowych</span></li>
+<li><b>3 dni</b><span>robocze na odbiór, 1 runda korekt</span></li>
+<li><b>NDA</b><span>Poufność na życzenie</span></li>
 </ul>
 </div>
 </section>
 
-<section class="sekcja" id="zakres">
-<div class="kontener sekcja-siatka">
-<div class="sekcja-glowa"><span class="etykieta etykieta--akcent">01</span><h2>Zakres operacyjny</h2></div>
-<div class="sekcja-tresc">
-<p class="zapowiedz">Cztery procedury eliminujące ryzyka na etapie wyceny, zapytań do hurtowni i koordynacji budowy.</p>
-<div class="zakres">
-<article class="zakres-wiersz">
-<div>
-<h3>Baza Kosztorysowa (.ath) &amp; Obsługa PZP</h3>
-<p>Odtworzenie przedmiaru do edytowalnego formatu Norma Standard / PRO, Zuzia, Rodos. Pełna hierarchia KNR/KNNR. Kompleksowe składanie ofert na platformach e-Zamówienia, platformazakupowa.pl i miniPortal.</p>
-</div>
-<dl class="zakres-dane">
-<div><dt>Formaty</dt><dd>PDF · DWG · ATH</dd></div>
-<div><dt>Czas</dt><dd>SLA 72 h (ekspres 36 h)</dd></div>
-<div><dt>Model</dt><dd>Wycena z pozycji / ryczałt PZP</dd></div>
-</dl>
-</article>
-<article class="zakres-wiersz">
-<div>
-<h3>Zestawienia Materiałowe (ZMO)</h3>
-<p>Kable Cu i Al per przekrój, rurociągi per DN, armatura, tonaż stali zbrojeniowej i kubatury betonu. Czysty arkusz Excel gotowy pod zapytania do dostawców i hurtowni.</p>
-</div>
-<dl class="zakres-dane">
-<div><dt>Geometria</dt><dd>DWG · DXF · IFC</dd></div>
-<div><dt>Wynik</dt><dd>Arkusz Excel (.xlsx)</dd></div>
-<div><dt>Model</dt><dd>Wycena per branża</dd></div>
-</dl>
-</article>
-<article class="zakres-wiersz">
-<div>
-<h3>Audyt SWZ i Ryzyka Ryczałtu</h3>
-<p>Zderzenie geometrii z opisami, badaniami i STWiORB. Identyfikacja nieujętych prac, ukrytych badań technologicznych i podstawa pod pytania do SWZ lub aneks.</p>
-</div>
-<dl class="zakres-dane">
-<div><dt>Zakres</dt><dd>SWZ · STWiORB · PFU</dd></div>
-<div><dt>Cel</dt><dd>Ochrona ryczałtu</dd></div>
-<div><dt>Model</dt><dd>Wycena z metadanych</dd></div>
-</dl>
-</article>
-<article class="zakres-wiersz">
-<div>
-<h3>Koordynacja 3D i Bezkolizyjność</h3>
-<p>Weryfikacja kolizji przejść instalacji przez ustrój nośny przed zbrojeniem i szalowaniem. Raport techniczny oraz lekki model 3D udostępniony przez odnośnik, bez wymogu licencji CAD.</p>
-</div>
-<dl class="zakres-dane">
-<div><dt>Środowisko</dt><dd>BIM / CAD 2D / IFC</dd></div>
-<div><dt>Dostęp</dt><dd>Model 3D w linku (WebGL)</dd></div>
-<div><dt>Model</dt><dd>Wycena z kubatury</dd></div>
-</dl>
-</article>
-</div>
+<section class="s" id="procedury">
+<div class="k">
+<header class="sg"><h2>Procedury operacyjne.</h2><span class="mn">Sekcja A / P-01–P-04</span></header>
+<div class="t a">
+<div class="th" aria-hidden="true"><span>Kod</span><span>Tytuł</span><span>Zakres inżynierski</span><span>Pliki wejściowe / wynikowe</span><span>Podstawa kalkulacji</span></div>
+<ol>
+<li class="r"><b class="c">P-01</b><h3>Baza .ath &amp; PZP</h3>
+<p data-l="Zakres">Odtworzenie przedmiaru ze skanów PDF i CAD do edytowalnego formatu Norma Standard / PRO, Zuzia, Rodos. Pełna hierarchia KNR/KNNR. Weryfikacja brakujących pozycji w ślepym przedmiarze. Pliki ofertowe pod e-Zamówienia, platformazakupowa.pl, miniPortal.</p>
+<p class="f" data-l="Pliki">Wejście: PDF, skany, DWG<br>Wynik: .ath</p>
+<p class="f" data-l="Podstawa">Z pozycji przedmiaru</p></li>
+<li class="r"><b class="c">P-02</b><h3>Zestawienia ZMO</h3>
+<p data-l="Zakres">Kable Cu/Al per przekrój, rurociągi per DN, armatura, tonaż stali zbrojeniowej, kubatura betonu. Arkusz pod zapytania do dostawców i hurtowni.</p>
+<p class="f" data-l="Pliki">Wejście: DWG, DXF, PDF, IFC<br>Wynik: .xlsx</p>
+<p class="f" data-l="Podstawa">Z powierzchni / arkuszy</p></li>
+<li class="r"><b class="c">P-03</b><h3>Audyt SWZ &amp; Rewizji</h3>
+<p data-l="Zakres">Zderzenie geometrii z opisami, badaniami i STWiORB. Wykaz prac nieujętych, prób technologicznych, zaniżonych obmiarów. Podstawa pod pytania do SWZ lub aneks.</p>
+<p class="f" data-l="Pliki">Wejście: projekt, przedmiar, STWiORB<br>Wynik: wykaz rozbieżności</p>
+<p class="f" data-l="Podstawa">Ze stron / modułów SST</p></li>
+<li class="r"><b class="c">P-04</b><h3>Koordynacja 3D &amp; WebGL</h3>
+<p data-l="Zakres">Naprawa geometrii modeli. Weryfikacja przejść instalacji przez ustrój nośny przed zbrojeniem i szalowaniem.</p>
+<p class="f" data-l="Pliki">Wejście: CAD 2D, IFC wielobranżowe<br>Wynik: raport kolizji, model WebGL w linku</p>
+<p class="f" data-l="Podstawa">Z kubatury</p></li>
+</ol>
 </div>
 </div>
 </section>
 
-<section class="sekcja" id="radar">
-<div class="kontener sekcja-siatka">
-<div class="sekcja-glowa"><span class="etykieta etykieta--akcent">02</span><h2>Radar ryzyka kontraktowego</h2></div>
-<div class="sekcja-tresc">
-<p class="zapowiedz">Rzeczywiste niezgodności między projektem, przedmiarem a STWiORB. Scenariusze zanonimizowane na podstawie zrealizowanych audytów.</p>
-<div class="rejestr" aria-live="polite">
-<div class="rejestr-glowa"><span class="etykieta" id="licznik"></span><span class="etykieta etykieta--akcent" id="suma"></span></div>
-<div class="postep"><i id="postep"></i></div>
-<div class="tor" id="tor"></div>
-</div>
-</div>
-</div>
-</section>
-
-<section class="sekcja" id="warunki">
-<div class="kontener sekcja-siatka">
-<div class="sekcja-glowa"><span class="etykieta etykieta--akcent">03</span><h2>Warunki współpracy</h2></div>
-<div class="sekcja-tresc">
-<ul class="warunki">
-<li><h3>Wycena do 3 h</h3><p>Wiążąca wycena ryczałtowa na podstawie przesłanych plików lub metadanych.</p></li>
-<li><h3>Realizacja 72 h</h3><p>Tryb ekspresowy 36 h przy presji terminu składania ofert.</p></li>
-<li><h3>Przelew 14 dni</h3><p>Płatność po wydaniu i sprawdzeniu pakietu danych przez Twój zespół.</p></li>
-<li><h3>Poufność</h3><p>Umowa o poufności na życzenie. Dokumentacja analizowana wyłącznie na lokalnej stacji roboczej, bez wysyłania do chmur publicznych.</p></li>
-<li><h3>Faktury w KSeF</h3><p>Rozliczenie z fakturami VAT w Krajowym Systemie e-Faktur.</p></li>
-<li><h3>Niszczenie danych</h3><p>Dane i dokumentacja usuwane po 14 dniach od zamknięcia zlecenia.</p></li>
-</ul>
+<section class="s" id="kontrola">
+<div class="k">
+<header class="sg"><h2>Zderzenia i kontrola danych.</h2><span class="mn">Sekcja B</span></header>
+<div class="t b">
+<div class="th" aria-hidden="true"><span>Zderzane dokumenty</span><span>Punkt kontroli</span><span>Dokument wynikowy</span></div>
+<ol>
+<li class="r"><h3>Rysunki konstrukcyjne ↔ STWiORB ↔ Przedmiar</h3><p data-l="Punkt kontroli">Klasy wytrzymałości i ekspozycji betonu (np. C30/37 w rysunkach, C25/30 w opisie, XF1 w STWiORB).</p><p class="f" data-l="Wynik">Wykaz rozbieżności klas ekspozycji betonu</p></li>
+<li class="r"><h3>Zestawienie stali ↔ Przedmiar</h3><p data-l="Punkt kontroli">Tonaż per średnica, zakłady, pręty montażowe, kozły.</p><p class="f" data-l="Wynik">Bilans stali zbrojeniowej per średnica (.xlsx)</p></li>
+<li class="r"><h3>Rysunki instalacyjne ↔ Przedmiar</h3><p data-l="Punkt kontroli">Długości koryt kablowych per szerokość, kable per przekrój, rurociągi per DN, osprzęt.</p><p class="f" data-l="Wynik">Zestawienie ZMO (.xlsx)</p></li>
+<li class="r"><h3>STWiORB ↔ Przedmiar</h3><p data-l="Punkt kontroli">Próby szczelności, płukanie, pomiary i regulacja TAB bez pozycji w KNR.</p><p class="f" data-l="Wynik">Wykaz wymagań bez pokrycia w pozycjach</p></li>
+<li class="r"><h3>Model instalacji ↔ Ustrój nośny</h3><p data-l="Punkt kontroli">Przejścia przez stropy, ściany i stropodach przed szalowaniem.</p><p class="f" data-l="Wynik">Raport kolizji, bezkolizyjne trasy instalacji, model WebGL</p></li>
+</ol>
 </div>
 </div>
 </section>
 
-<section class="sekcja" id="wycena">
-<div class="kontener sekcja-siatka">
-<div class="sekcja-glowa"><span class="etykieta etykieta--akcent">04</span><h2>Wycena w 3 godziny</h2></div>
-<div class="sekcja-tresc">
-<p class="zapowiedz">Wklej odnośnik do dysku sieciowego albo dołącz pliki. Do kalkulacji wystarczą metadane: branże, liczba stron i termin.</p>
-<form class="formularz" id="formularz" method="post" action="{% url 'kontakt' %}">
+<section class="s" id="standard">
+<div class="k">
+<header class="sg"><h2>Standard proceduralny i rozliczenie.</h2><span class="mn">Sekcja C</span></header>
+<dl class="z">
+<div><dt>Kalkulacja ryczałtowa</dt><dd>Wiążąca wycena po analizie przekazanych plików. Podstawa: pozycje, powierzchnia, kubatura lub moduły STWiORB.</dd></div>
+<div><dt>Harmonogram wg PZP</dt><dd>Termin realizacji wynika z terminu otwarcia ofert lub z kamienia milowego budowy.</dd></div>
+<div><dt>Odbiór w 3 dni robocze</dt><dd>Odbiór techniczny pakietu danych. 1 runda korekt w cenie.</dd></div>
+<div><dt>Rozliczenie 14 dni B2B</dt><dd>Przelew 14 dni od wydania pakietu danych. Faktury w KSeF.</dd></div>
+<div><dt>NDA</dt><dd>Umowa o poufności na życzenie, przed przekazaniem dokumentacji.</dd></div>
+<div><dt>Odpowiedzialność analityczna</dt><dd>Zakres analizy ogranicza się do przekazanych plików. Decyzje ofertowe i cenowe pozostają po stronie wykonawcy.</dd></div>
+</dl>
+</div>
+</section>
+
+<section class="s" id="wycena">
+<div class="k">
+<header class="sg"><h2>Dokumentacja do wyceny.</h2><span class="mn">Sekcja D</span></header>
+<form class="f2" id="f" method="post" action="{% url 'kontakt' %}">
 {% csrf_token %}
-<fieldset>
-<legend>Zakres weryfikacji</legend>
-<div class="wybory">
-<label class="wybor"><input type="checkbox" name="services" value="Baza kosztorysowa (.ath)">Baza kosztorysowa .ath</label>
-<label class="wybor"><input type="checkbox" name="services" value="Zestawienia materiałowe (ZMO)">Zestawienia materiałowe (ZMO)</label>
-<label class="wybor"><input type="checkbox" name="services" value="Audyt SWZ i STWiORB">Audyt SWZ i STWiORB</label>
-<label class="wybor"><input type="checkbox" name="services" value="Koordynacja 3D i bezkolizyjność">Koordynacja 3D</label>
-</div>
-</fieldset>
-<div class="dwie-kolumny">
-<div class="pole"><label for="email">E-mail służbowy</label><input type="email" id="email" name="email" autocomplete="email" required></div>
-<div class="pole"><label for="telefon">Telefon kontaktowy</label><input type="tel" id="telefon" name="phone" autocomplete="tel"></div>
-</div>
-<div class="dwie-kolumny">
-<div class="pole"><label for="termin">Termin składania ofert</label><input type="date" id="termin" name="tender_deadline"></div>
-<div class="pole"><label for="odnosnik">Odnośnik do dokumentacji</label><input type="url" id="odnosnik" name="files_link" placeholder="https://"></div>
-</div>
-<div class="pole">
-<span id="opis-strefy" class="drobny">Lub dołącz pliki bezpośrednio</span>
-<label class="strefa" id="strefa" data-adres="{% url 'get_upload_url' %}">
-<input class="ukryty" type="file" id="plik" accept=".pdf,.zip,.dwg" aria-describedby="opis-strefy">
-<strong>Przeciągnij plik tutaj lub kliknij</strong>
-<span>PDF, ZIP lub DWG do 500 MB. Większe pakiety spakuj do ZIP.</span>
-<span id="nazwa-pliku"></span>
-</label>
-<div class="pasek-wgrywania" id="pasek" hidden><i id="wypelnienie"></i></div>
-<input type="hidden" name="uploaded_file_url" id="wgrany">
-</div>
-<div class="pole"><label for="opis">Zakres i specyfika zadania</label><textarea id="opis" name="message" placeholder="Branże, kondygnacje, uwagi do dokumentacji"></textarea></div>
-<p class="drobny">Wysyłając formularz, akceptujesz kontakt w celu przygotowania wyceny. Materiały podlegają procedurze niszczenia po 14 dniach.</p>
-<div class="wysylka">
-<button class="przycisk" id="wyslij" type="submit">Wyślij do wyceny</button>
-<p class="komunikat" id="komunikat" role="status"></p>
-</div>
+<div><label for="zakres">Zakres / procedura</label>
+<select id="zakres" name="services"><option value="P-01 Baza .ath &amp; PZP">P-01 Baza .ath &amp; PZP</option><option value="P-02 Zestawienia ZMO">P-02 Zestawienia ZMO</option><option value="P-03 Audyt SWZ &amp; Rewizji">P-03 Audyt SWZ &amp; Rewizji</option><option value="P-04 Koordynacja 3D &amp; WebGL">P-04 Koordynacja 3D &amp; WebGL</option><option value="Zakres łączony">Zakres łączony</option></select></div>
+<div><label for="termin">Termin otwarcia ofert / kamień milowy budowy</label>
+<input type="text" id="termin" name="tender_deadline"></div>
+<div><label for="email">E-mail służbowy</label>
+<input type="email" id="email" name="email" autocomplete="email" required></div>
+<div><label for="link">Link do dokumentacji (PZP / chmura / dysk zamawiającego)</label>
+<input type="url" id="link" name="files_link" placeholder="https://"></div>
+<div><label for="meta">Metadane (liczba stron / branże / szacowana kubatura)</label>
+<textarea id="meta" name="message" rows="2"></textarea></div>
+<div class="wys"><button class="btn" type="submit">Przekaż dokumentację</button><p class="msg" id="msg" role="status"></p></div>
 </form>
-</div>
 </div>
 </section>
 </main>
 
-<footer class="stopka">
-<div class="kontener">
-    <span><span class="marka">Vie<span class="logo-w">w</span>Is</span> Maciej Wielgosz</span>
-<span><a href="mailto:kontakt@viewis.pl">kontakt@viewis.pl</a>, <a href="tel:+48519133055">+48 519 133 055</a></span>
+<footer class="st">
+<div class="k">
+<span>ViewIs · Maciej Wielgosz</span>
+<span><a href="mailto:kontakt@viewis.pl">kontakt@viewis.pl</a> · <a href="tel:+48519133055">+48 519 133 055</a> · www.viewis.pl</span>
 </div>
 </footer>
 
-<div class="pasek-dolny" aria-label="Szybki kontakt">
-<a class="przycisk" href="#wycena">Wycena do 3 h</a>
-<a class="telefon" href="tel:+48519133055" aria-label="Zadzwoń">
-<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-</a>
-</div>
-
 <script>
 (function(){
-var przypadki=[
-{b:"Instalacje wentylacyjne",t:"Pominięte pomiary i regulacja TAB",d:"STWiORB wymaga procedury pomiarów, regulacji i cyfrowych protokołów TAB dla 14 central. W przedmiarze inwestora brak pozycji kosztorysowej na te prace.",r:"~75 000 zł",a:"Wykrycie luki w SWZ przed złożeniem oferty, dodanie pozycji do budżetu ofertowego i zabezpieczenie marży."},
-{b:"Konstrukcja i wentylacja",t:"Brak otworów instalacyjnych w stropodachu",d:"Model trasowania instalacji wykazuje 10 przejść przez dach żelbetowy. Przedmiary KB i IS nie ujęły otworów ani kołnierzy uszczelniających.",r:"~15 000 zł",a:"Zgłoszenie kolizji przed zalaniem stropu, eliminacja wiercenia diamentowego i uszczelnień awaryjnych."},
-{b:"Konstrukcje żelbetowe",t:"Niezgodność klas ekspozycji betonu",d:"Rysunki wskazują C30/37, opis C25/30, a STWiORB stawia rygor XF1 dla ścian zewnętrznych. Przedmiar wycenia tańszą mieszankę bez napowietrzenia.",r:"~46 000 zł",a:"Wiążące zapytanie do SWZ, korekta kubatur oraz uniknięcie zakwestionowania badań wytrzymałościowych przez Nadzór."},
-{b:"Instalacje elektryczne",t:"Niedoszacowanie tras koryt kablowych",d:"Przedmiar ujmuje 180 m koryt, podczas gdy trasy zasilające w projekcie wykonawczym sumują 640 m w trzech przekrojach bez kształtek i zawiesi.",r:"~41 000 zł",a:"Pełny wyciąg koryt per szerokość z uwzględnieniem osprzętu montażowego i korekta nakładów w ofercie."},
-{b:"Instalacje sanitarne",t:"Próby szczelności i płukanie bez pokrycia w KNR",d:"STWiORB nakłada rygorystyczne płukanie chemiczne i próby ciśnieniowe z rejestracją cyfrową, pominięte w pozycjach przedmiarowych.",r:"~18 500 zł",a:"Wprowadzenie nakładów technologicznych bezpośrednio do kosztorysu ofertowego lub formalne pytanie do SWZ."},
-{b:"Stal zbrojeniowa",t:"Rozbieżność bilansu tonażu stali",d:"Zestawienie w projekcie wykonawczym zamyka się w 86 t, a ślepy przedmiar podaje 71 t (brak zakładek, prętów montażowych i kozłów).",r:"~52 500 zł",a:"Niezależna weryfikacja tonażu per średnica i zapytanie do hurtowni na realne zapotrzebowanie materiałowe."}
-];
-var el=function(i){return document.getElementById(i)};
-var tor=el("tor"),licznik=el("licznik"),postep=el("postep"),ile=przypadki.length,biezacy=0,waski=matchMedia("(max-width:820px)");
-var suma=przypadki.reduce(function(s,c){return s+Number(c.r.replace(/\D/g,""))},0);
-el("suma").textContent="Σ "+suma.toLocaleString("pl-PL")+" zł";
-tor.innerHTML=przypadki.map(function(c,i){
-return '<article class="przypadek'+(i?'':' aktywny')+'"><button class="przypadek-glowa" type="button" aria-expanded="'+(i?'false':'true')+'"><i>'+("0"+(i+1)).slice(-2)+'</i><em>'+c.b+'</em><strong>'+c.t+'</strong><b>'+c.r+'</b></button><div class="przypadek-tresc"><div><span class="etykieta">Niezgodność</span><p>'+c.d+'</p></div><div><span class="etykieta">Działanie naprawcze</span><p>'+c.a+'</p></div></div></article>';
-}).join("");
-var pozycje=[].slice.call(tor.children);
-function odswiez(){
-licznik.textContent=waski.matches?"Przypadek "+(biezacy+1)+" / "+ile:"Rejestr, "+ile+" przypadków";
-postep.style.width=((biezacy+1)/ile*100)+"%";
-}
-function wybierz(i){
-biezacy=i;
-pozycje.forEach(function(e,k){e.classList.toggle("aktywny",k===i);e.firstChild.setAttribute("aria-expanded",k===i?"true":"false")});
-odswiez();
-}
-pozycje.forEach(function(e,k){e.firstChild.addEventListener("click",function(){if(!waski.matches)wybierz(k)})});
-tor.addEventListener("scroll",function(){
-if(!waski.matches)return;
-var k=Math.min(ile-1,Math.max(0,Math.round(tor.scrollLeft/(pozycje[0].offsetWidth+12))));
-if(k!==biezacy){biezacy=k;odswiez()}
-},{passive:true});
-waski.addEventListener("change",odswiez);
-odswiez();
-
-var formularz=el("formularz"),strefa=el("strefa"),plik=el("plik"),wgrany=el("wgrany"),pasek=el("pasek"),wypelnienie=el("wypelnienie"),nazwa=el("nazwa-pliku"),komunikat=el("komunikat"),wyslij=el("wyslij");
-var csrf=formularz.elements.csrfmiddlewaretoken.value,MAKS=500*1024*1024,zajety=false;
-function powiedz(t,s){komunikat.textContent=t;komunikat.dataset.stan=s||""}
-function wyczysc(){wgrany.value="";nazwa.textContent="";pasek.hidden=true;wypelnienie.style.width="0";plik.value=""}
-async function wgraj(f){
-if(!/\.(pdf|zip|dwg)$/i.test(f.name)){powiedz("Dozwolone formaty: PDF, ZIP, DWG.","blad");return}
-if(f.size>MAKS){powiedz("Plik przekracza 500 MB. Spakuj go lub wklej odnośnik.","blad");return}
-zajety=true;wyslij.disabled=true;wgrany.value="";nazwa.textContent=f.name;wypelnienie.style.width="0";pasek.hidden=false;powiedz("Przesyłanie pliku...");
-try{
-var dane=new FormData();
-dane.append("filename",f.name);
-var odp=await fetch(strefa.dataset.adres,{method:"POST",body:dane,headers:{"X-CSRFToken":csrf}});
-var j=await odp.json();
-if(j.status!=="ok")throw new Error(j.message);
-await new Promise(function(ok,blad){
-var x=new XMLHttpRequest();
-x.open("PUT",j.upload_url);
-x.upload.onprogress=function(e){if(e.lengthComputable)wypelnienie.style.width=(e.loaded/e.total*100)+"%"};
-x.onload=function(){x.status>=200&&x.status<300?ok():blad(new Error("put"))};
-x.onerror=function(){blad(new Error("put"))};
-x.send(f);
-});
-wgrany.value=j.file_url;powiedz("Plik dodany.","ok");
-}catch(e){wyczysc();powiedz("Nie udało się przesłać pliku. Spróbuj ponownie albo wklej odnośnik do dysku.","blad")}
-zajety=false;wyslij.disabled=false;
-}
-["dragenter","dragover"].forEach(function(t){strefa.addEventListener(t,function(e){e.preventDefault();strefa.classList.add("nad")})});
-["dragleave","drop"].forEach(function(t){strefa.addEventListener(t,function(e){e.preventDefault();strefa.classList.remove("nad")})});
-strefa.addEventListener("drop",function(e){var f=e.dataTransfer.files[0];if(f)wgraj(f)});
-plik.addEventListener("change",function(){if(plik.files[0])wgraj(plik.files[0])});
-formularz.addEventListener("submit",async function(e){
-e.preventDefault();
-if(zajety)return;
-wyslij.disabled=true;powiedz("Wysyłanie...");
-try{
-var odp=await fetch(formularz.action,{method:"POST",body:new FormData(formularz),headers:{"X-CSRFToken":csrf}});
-var j=await odp.json();
-if(j.status==="ok"){formularz.reset();wyczysc()}
-powiedz(j.message,j.status==="ok"?"ok":"blad");
-}catch(err){powiedz("Błąd połączenia. Spróbuj ponownie albo napisz na e-mail.","blad")}
-wyslij.disabled=false;
+var f=document.getElementById("f"),b=f.querySelector("button"),m=document.getElementById("msg");
+f.addEventListener("submit",function(e){
+e.preventDefault();b.disabled=true;m.textContent="Przekazywanie danych.";
+fetch(f.action,{method:"POST",body:new FormData(f)}).then(function(r){return r.json()}).then(function(j){
+if(j.status==="ok"){f.reset();m.textContent="Dane przyjęte. Wycena zostanie przekazana na wskazany adres e-mail."}
+else{m.textContent="Dane nieprzekazane. Wymagane: e-mail służbowy oraz link do dokumentacji lub metadane."}
+}).catch(function(){m.textContent="Błąd połączenia. Dane można przekazać na adres kontakt@viewis.pl."}).then(function(){b.disabled=false});
 });
 })();
 </script>
