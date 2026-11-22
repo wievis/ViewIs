@@ -18,7 +18,7 @@
 <a class="logo" href="#gora">ViewIs<i>.</i></a>
 <nav aria-label="Sekcje">
 <a href="#procedury">A Procedury</a>
-<a href="#kontrola">B Kontrola</a>
+<a href="#dowod">B Dowód</a>
 <a href="#standard">C Standard</a>
 <a href="#wycena">D Wycena</a>
 </nav>
@@ -67,19 +67,50 @@
 </div>
 </section>
 
-<section class="s" id="kontrola">
+<section class="s" id="dowod">
 <div class="k">
-<header class="sg"><h2>Zderzenia i kontrola danych.</h2><span class="mn">Sekcja B</span></header>
-<div class="t b">
-<div class="th" aria-hidden="true"><span>Zderzane dokumenty</span><span>Punkt kontroli</span><span>Dokument wynikowy</span></div>
-<ol>
-<li class="r"><h3>Rysunki konstrukcyjne ↔ STWiORB ↔ Przedmiar</h3><p data-l="Punkt kontroli">Klasy wytrzymałości i ekspozycji betonu (np. C30/37 w rysunkach, C25/30 w opisie, XF1 w STWiORB).</p><p class="f" data-l="Wynik">Wykaz rozbieżności klas ekspozycji betonu</p></li>
-<li class="r"><h3>Zestawienie stali ↔ Przedmiar</h3><p data-l="Punkt kontroli">Tonaż per średnica, zakłady, pręty montażowe, kozły.</p><p class="f" data-l="Wynik">Bilans stali zbrojeniowej per średnica (.xlsx)</p></li>
-<li class="r"><h3>Rysunki instalacyjne ↔ Przedmiar</h3><p data-l="Punkt kontroli">Długości koryt kablowych per szerokość, kable per przekrój, rurociągi per DN, osprzęt.</p><p class="f" data-l="Wynik">Zestawienie ZMO (.xlsx)</p></li>
-<li class="r"><h3>STWiORB ↔ Przedmiar</h3><p data-l="Punkt kontroli">Próby szczelności, płukanie, pomiary i regulacja TAB bez pozycji w KNR.</p><p class="f" data-l="Wynik">Wykaz wymagań bez pokrycia w pozycjach</p></li>
-<li class="r"><h3>Model instalacji ↔ Ustrój nośny</h3><p data-l="Punkt kontroli">Przejścia przez stropy, ściany i stropodach przed szalowaniem.</p><p class="f" data-l="Wynik">Raport kolizji, bezkolizyjne trasy instalacji, model WebGL</p></li>
-</ol>
-</div>
+<header class="sg"><h2>Anatomia rozbieżności.</h2><span class="mn">Sekcja B / Przykład modelowy</span></header>
+<p class="wst">Przed podpisaniem umowy rozbieżność kosztuje jedno pytanie do SWZ. Po podpisaniu — tonaż po stronie wykonawcy.</p>
+<p class="wn">Wartości ilustracyjne. Mechanizm rozbieżności typowy dla dokumentacji przetargowej.</p>
+
+<article class="w">
+<header><b class="c">B-01</b><h3>Stal zbrojeniowa: przedmiar a rysunki</h3><span class="mn">P-02 / P-03</span></header>
+<dl class="v">
+<div><dt>Przedmiar</dt><dd>100 t</dd></div>
+<div><dt>Zestawienie stali w rysunkach</dt><dd>160 t</dd></div>
+<div class="x"><dt>Różnica</dt><dd>+60 t</dd></div>
+</dl>
+<dl class="o">
+<dt>Skutek bez kontroli</dt><dd>Ryczałt obejmuje 100 t, wbudowane zostaje 160 t. Różnicę pokrywa wykonawca.</dd>
+<dt>Dokument wynikowy</dt><dd class="f">Bilans stali zbrojeniowej per średnica (.xlsx). Podstawa pod pytanie do SWZ.</dd>
+</dl>
+</article>
+
+<article class="w">
+<header><b class="c">B-02</b><h3>Beton: klasa wytrzymałości i ekspozycji</h3><span class="mn">P-03</span></header>
+<dl class="v">
+<div><dt>Rysunki konstrukcyjne</dt><dd>C30/37</dd></div>
+<div class="x"><dt>Opis techniczny</dt><dd>C25/30</dd></div>
+<div><dt>STWiORB</dt><dd>XF1</dd></div>
+</dl>
+<dl class="o">
+<dt>Skutek bez kontroli</dt><dd>Klasa wyceniona w przedmiarze może odbiegać od klasy wymaganej w rysunkach i STWiORB.</dd>
+<dt>Dokument wynikowy</dt><dd class="f">Wykaz rozbieżności klas wytrzymałości i ekspozycji betonu.</dd>
+</dl>
+</article>
+
+<article class="w">
+<header><b class="c">B-03</b><h3>Instalacja a ustrój nośny</h3><span class="mn">P-04</span></header>
+<dl class="v tx">
+<div><dt>Model instalacji</dt><dd>Kanał wentylacyjny</dd></div>
+<div><dt>Ustrój nośny</dt><dd>Podciąg żelbetowy</dd></div>
+<div class="x"><dt>Status</dt><dd>Kolizja przed zbrojeniem</dd></div>
+</dl>
+<dl class="o">
+<dt>Skutek bez kontroli</dt><dd>Kolizja wykryta po betonowaniu oznacza kucie. Wykryta w modelu oznacza zmianę trasy.</dd>
+<dt>Dokument wynikowy</dt><dd class="f">Raport kolizji, bezkolizyjne trasy instalacji, model WebGL w linku.</dd>
+</dl>
+</article>
 </div>
 </section>
 
@@ -108,7 +139,7 @@
 <input type="text" id="termin" name="tender_deadline"></div>
 <div><label for="email">E-mail służbowy</label>
 <input type="email" id="email" name="email" autocomplete="email" required></div>
-<div><label for="link">Link do dokumentacji (PZP / chmura / dysk zamawiającego)</label>
+<div><label for="link">Link do dokumentacji (platforma przetargowa / dysk zamawiającego)</label>
 <input type="url" id="link" name="files_link" placeholder="https://"></div>
 <div><label for="meta">Metadane (liczba stron / branże / szacowana kubatura)</label>
 <textarea id="meta" name="message" rows="2"></textarea></div>
@@ -127,7 +158,7 @@
 
 <nav class="bar" aria-label="Nawigacja mobilna">
 <a href="#procedury"><b>A</b>Procedury</a>
-<a href="#kontrola"><b>B</b>Kontrola</a>
+<a href="#dowod"><b>B</b>Dowód</a>
 <a href="#standard"><b>C</b>Standard</a>
 <a href="#wycena"><b>D</b>Wycena</a>
 <a class="tel" href="tel:+48519133055" aria-label="Zadzwoń: +48 519 133 055"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></a>
