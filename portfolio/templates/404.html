@@ -3,29 +3,96 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>404 — Nie znaleziono strony | ViewIs</title>
+<title>404 — Błąd adresu | ViewIs</title>
 <meta name="robots" content="noindex, nofollow">
 <link rel="icon" type="image/x-icon" href="{% static 'image/viewis_logo.ico' %}">
 <link rel="stylesheet" href="{% static 'css/main.css' %}">
+<style>
+.error-view {
+  min-height: calc(100vh - 180px);
+  display: flex;
+  align-items: center;
+  padding: 80px 0;
+}
+.error-grid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 48px;
+  align-items: baseline;
+}
+.error-code {
+  font-family: var(--font-mono, monospace);
+  font-size: clamp(4rem, 10vw, 7.5rem);
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  color: var(--brick, #c2410c);
+  border-right: 1px solid var(--line, #e2e8f0);
+  padding-right: 48px;
+  user-select: none;
+}
+.error-meta {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted, #64748b);
+  margin-bottom: 8px;
+}
+.error-title {
+  margin: 0 0 16px 0;
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+.error-desc {
+  max-width: 540px;
+  margin: 0 0 32px 0;
+  line-height: 1.6;
+  color: var(--text-muted, #475569);
+}
+.error-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+@media (max-width: 768px) {
+  .error-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .error-code {
+    border-right: none;
+    border-bottom: 1px solid var(--line, #e2e8f0);
+    padding-right: 0;
+    padding-bottom: 20px;
+  }
+}
+</style>
 </head>
 <body>
 <header class="top">
 <div class="wrap">
 <a class="logo" href="/">Vie<span class="logo-w">w</span>Is<span class="dot">.</span></a>
 <nav class="nav" aria-label="Główna">
-<a class="btn" href="/">Strona główna</a>
+<a class="btn btn--line" href="/">Strona główna</a>
 </nav>
 </div>
 </header>
 <main>
-<section class="hero" style="min-height: calc(100vh - 160px); display: flex; align-items: center;">
+<section class="error-view">
 <div class="wrap">
-<p class="label" style="color: var(--brick); font-size: 1.1rem; margin-bottom: 12px;">BŁĄD 404</p>
-<h1>Nie znaleziono żądanego adresu<span class="dot">.</span></h1>
-<p class="lead">Strona, której szukasz, została przeniesiona, zarchiwizowana lub adres zawiera błąd.</p>
-<div class="actions" style="margin-top: 32px;">
-<a class="btn" href="/">Wróć do strony głównej</a>
-<a class="btn btn--line" href="/#kontakt">Kontakt i wycena</a>
+<div class="error-grid">
+<div class="error-code">404</div>
+<div class="error-content">
+<p class="error-meta">STATUS_NOT_FOUND // BŁĄD TRASY</p>
+<h1 class="error-title">Nie znaleziono żądanego adresu<span class="dot">.</span></h1>
+<p class="error-desc">Wskazany zasób nie istnieje, został przeniesiony pod inną ścieżkę lub wprowadzony adres URL zawiera błąd struktury.</p>
+<div class="error-actions">
+<a class="btn" href="/">Powrót do strony głównej</a>
+<a class="btn btn--line" href="/#kontakt">Kontakt bezpośredni</a>
+</div>
+</div>
 </div>
 </div>
 </section>
