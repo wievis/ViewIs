@@ -81,14 +81,48 @@
     <div class="k">
       <header class="sg">
         <h2>Kontakt i wycena.</h2>
-        <span class="mn">Termin odpowiedzi: 3h</span>
+        <span class="mn">Czas odpowiedzi: do 3h</span>
       </header>
-      <div class="t">
-        <p class="lead" style="margin-top:0;">Prześlij dokumentację SWZ, skany PDF lub pliki CAD/IFC do bezpłatnej wyceny zakresu prac.</p>
-        <p style="margin-top: 24px; font: 700 1.25rem var(--mono);">
-          <a href="mailto:kontakt@viewis.pl">kontakt@viewis.pl</a> · <a href="tel:+48519133055">+48 519 133 055</a>
-        </p>
-      </div>
+
+      <form id="contactForm" class="f2" method="post" action="/kontakt/">
+        {% csrf_token %}
+        <div>
+          <label for="email">Adres e-mail firmowy *</label>
+          <input type="email" id="email" name="email" required placeholder="np. inzynier@firma.pl">
+        </div>
+
+        <div>
+          <label for="phone">Telefon kontaktowy</label>
+          <input type="tel" id="phone" name="phone" placeholder="+48 000 000 000">
+        </div>
+
+        <div>
+          <label for="tender_deadline">Termin składania ofert (PZP)</label>
+          <input type="text" id="tender_deadline" name="tender_deadline" placeholder="np. 2026-12-05, godz. 10:00">
+        </div>
+
+        <div>
+          <label for="files_link">Link do dokumentacji / SWZ (opcjonalnie)</label>
+          <input type="url" id="files_link" name="files_link" placeholder="Link do chmury, przetargu lub dysku">
+        </div>
+
+        <div>
+          <label for="file_direct">Lub dołącz plik bezpośrednio (PDF, DWG, ZIP)</label>
+          <input type="file" id="file_direct" style="margin-top:12px;">
+          <input type="hidden" id="uploaded_file_url" name="uploaded_file_url">
+          <p id="upload_status" class="mn" style="margin-top:8px; display:none;"></p>
+        </div>
+
+        <div>
+          <label for="message">Zakres zapytania / uwagi techniczne</label>
+          <textarea id="message" name="message" placeholder="Podaj branżę, format danych wyjściowych lub wklej bezpośredni numer postępowania..."></textarea>
+        </div>
+
+        <div class="wys">
+          <button type="submit" id="submitBtn" class="btn">Wyślij do wyceny</button>
+          <span id="formMsg" class="msg"></span>
+        </div>
+      </form>
     </div>
   </section>
 </main>
@@ -101,5 +135,75 @@
 </footer>
 
 <script src="{% static 'js/lens.js' %}"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const fileInput = document.getElementById('file_direct');
+  const uploadStatus = document.getElementById('upload_status');
+  const hiddenUrlInput = document.getElementById('uploaded_file_url');
+  const form = document.getElementById('contactForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const formMsg = document.getElementById('formMsg');
+
+  fileInput.addEventListener('change', async function () {
+    if (!fileInput.files.length) return;
+    const file = fileInput.files[0];
+    uploadStatus.style.display = 'block';
+    uploadStatus.textContent = 'Generowanie adresu przesyłania...';
+
+    const formData = new FormData();
+    formData.append('filename', file.name);
+
+    try {
+      const res = await fetch('/upload-url/', {
+        method: 'POST',
+        headers: { 'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value },
+        body: formData
+      });
+      const data = await res.json();
+      if (data.status !== 'ok') throw new Error(data.message || 'Błąd uploadu');
+
+      uploadStatus.textContent = 'Przesyłanie pliku...';
+      const uploadRes = await fetch(data.upload_url, {
+        method: 'PUT',
+        body: file
+      });
+
+      if (!uploadRes.ok) throw new Error('Błąd zapisu w magazynie R2');
+
+      hiddenUrlInput.value = data.file_url;
+      uploadStatus.textContent = 'Plik dołączony pomyślnie: ' + file.name;
+    } catch (err) {
+      uploadStatus.textContent = 'Błąd przesyłania: ' + err.message;
+    }
+  });
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    submitBtn.disabled = true;
+    formMsg.textContent = 'Wysyłanie zapytania...';
+
+    const postData = new FormData(form);
+    try {
+      const res = await fetch('/kontakt/', {
+        method: 'POST',
+        headers: { 'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value },
+        body: postData
+      });
+      const data = await res.json();
+      if (data.status === 'ok') {
+        formMsg.textContent = data.message;
+        form.reset();
+        uploadStatus.style.display = 'none';
+      } else {
+        formMsg.textContent = data.message || 'Wystąpił błąd.';
+        submitBtn.disabled = false;
+      }
+    } catch (err) {
+      formMsg.textContent = 'Błąd połączenia. Napisz bezpośrednio na kontakt@viewis.pl';
+      submitBtn.disabled = false;
+    }
+  });
+});
+</script>
 </body>
 </html>
