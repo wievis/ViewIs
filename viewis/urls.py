@@ -11,6 +11,7 @@ urlpatterns = [
     path('ows/', views.ows, name='ows'),
     path('kontakt/', views.kontakt, name='kontakt'),
     path('upload-url/', views.get_upload_url, name='get_upload_url'),
+    re_path(r'^wycena(?:/.*)?$', RedirectView.as_view(url='/#kontakt', permanent=True)),
     re_path(
         r'^(?:portfolio|artykuly|mep|procedury|o-mnie|en)(?:/.*)?$',
         RedirectView.as_view(pattern_name='home', permanent=True),

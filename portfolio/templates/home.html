@@ -1,188 +1,105 @@
-<!DOCTYPE html>
+{% load static %}<!DOCTYPE html>
 <html lang="pl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>ViewIs: nawigacja jako szklana linijka</title>
+<meta name="theme-color" content="#f7f6f2">
+<title>ViewIs · Inżynieria Danych Kontraktowych</title>
+<link rel="icon" type="image/x-icon" href="{% static 'image/viewis_logo.ico' %}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
-<style>
-/* =====================================================================
-   0. DEMO: tokeny i siatka CAD (te same co w Twoim main.css)
-   ===================================================================== */
-:root{--tusz:#0d0e10;--szary:#555a62;--l1:rgba(13,14,16,.28);--l2:rgba(13,14,16,.8);--papier:#F4F0EC;--cegla:#d9480f;--pole:clamp(24px,6vw,120px);--font:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"JetBrains Mono",ui-monospace,Menlo,monospace}
-*,*::before,*::after{box-sizing:border-box}
-html{scroll-padding-top:72px}
-body{margin:0;font:400 1rem/1.6 var(--font);color:var(--tusz);background:var(--papier);-webkit-font-smoothing:antialiased}
-.k{max-width:1340px;margin:0 auto;padding:0 var(--pole)}
-main{max-width:1340px;margin:0 auto;padding-bottom:160px;background-image:url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 36v8M36 40h8' stroke='%23EAE0D8' stroke-width='1' stroke-linecap='square'/%3E%3C/svg%3E");background-repeat:repeat;background-position:top center}
-h1,h2,p,ol{margin:0}
-ol{padding:0;list-style:none}
-a{color:inherit;text-decoration:none}
-.logo{font-size:1.4rem;font-weight:800;letter-spacing:-.03em}
-.logo i,h1 i{font-style:normal;color:var(--cegla)}
-.g>.k>nav{display:flex;gap:clamp(16px,3vw,40px)}
-.g>.k>nav a{font:500 .75rem var(--mono);letter-spacing:.06em;color:var(--szary)}
-.h{padding:clamp(64px,9vw,140px) 0 24px}
-h1{font-size:clamp(3rem,10.5vw,8.5rem);line-height:.92;font-weight:700;letter-spacing:-.05em}
-.lead{max-width:34ch;margin-top:40px;font-size:clamp(1.15rem,1.8vw,1.5rem);line-height:1.45;color:var(--szary)}
-.s{padding-top:96px}
-h2{padding-top:20px;border-top:2px solid var(--l2);font-size:clamp(1.8rem,3.4vw,3rem);line-height:1.05;font-weight:700;letter-spacing:-.04em}
-.rows{margin-top:32px}
-.rows li{display:grid;grid-template-columns:5rem minmax(0,1fr);gap:24px;padding:28px 0;border-bottom:1px solid var(--l1)}
-.rows b{font:700 .95rem/1.6 var(--mono);color:var(--cegla)}
-.rows span{max-width:60ch;color:var(--szary)}
-footer{padding:32px 0;border-top:2px solid var(--l2);font:500 .75rem var(--mono);color:var(--szary)}
-
-/* =====================================================================
-   1. SZKŁO: WKLEJ DO main.css (ZASTĘPUJE STARY BLOK .g, BEZ backdrop-filter)
-   ===================================================================== */
-.g{
-  position:sticky;top:0;z-index:5;
-  background:var(--papier);                    /* fallback bez JS: pełne krycie, zero blura */
-  border-bottom:2px solid var(--l2);
-  padding-top:env(safe-area-inset-top);
-
-  /* ---- PARAMETRY SOCZEWKI (czyta je JS; fazę rysuje też CSS) ---- */
-  --lens-mag:1.32;        /* M_c: powiększenie pionowe w środku belki (1 = brak) */
-  --lens-barrel:.18;      /* beczka: o tyle % mocniej powiększają „ramiona” niż środek */
-  --lens-shoulder:10px;   /* wysokość strefy ramion (px, góra i dół) */
-  --lens-bevel:6px;       /* grubość fazy szlifu (px, góra i dół) */
-  --lens-bevel-mag:0;     /* M_b: 0 = auto (bez skoku obrazu na krawędziach); <1 ściska, 1 = samo przesunięcie */
-}
-/* UWAGA: tylko dziecko bezpośrednie (>). Kopie <main> leżą wewnątrz .g, więc `.g .k` psułoby ich układ. */
-.g>.k{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;height:56px}
-
-/* warstwa optyczna: N pasków, w każdym lustrzana kopia <main> w innej skali Y */
-.lens{position:absolute;inset:0;z-index:0;overflow:hidden;contain:paint;background:var(--papier);pointer-events:none;user-select:none;-webkit-user-select:none}
-.lens__s{position:absolute;left:0;right:0;overflow:hidden}
-.lens__m{position:absolute;top:0;transform-origin:0 0}
-.lens__m main{margin:0;max-width:none}
-
-/* fazy szlifu: tylko odbicia światła na krawędziach, zero rozmycia i zero mleka */
-.g::before,.g::after{content:"";position:absolute;left:0;right:0;z-index:1;height:var(--lens-bevel);pointer-events:none}
-.g::before{top:0;background:linear-gradient(rgba(255,255,255,.6),rgba(255,255,255,.1));box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 1px 0 rgba(13,14,16,.12)}
-.g::after{bottom:0;background:linear-gradient(rgba(13,14,16,.02),rgba(13,14,16,.14));box-shadow:0 -1px 0 rgba(255,255,255,.75)}
-@media print{.lens{display:none}}
-</style>
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
 </head>
 <body>
 
 <header class="g">
   <div class="k">
     <a class="logo" href="#gora">ViewIs<i>.</i></a>
-    <nav aria-label="Sekcje"><a href="#a">A Procedury</a><a href="#b">B Wsparcie</a><a href="#c">C Standard</a></nav>
+    <nav aria-label="Nawigacja">
+      <a href="#procedury">A Procedury</a>
+      <a href="#wsparcie">B Wsparcie</a>
+      <a href="#standard">C Standard</a>
+      <a href="/ows/">OWŚ</a>
+    </nav>
   </div>
 </header>
 
 <main id="gora">
-  <section class="h"><div class="k">
-    <h1>Ochrona marży<br>wykonawcy<i>.</i></h1>
-    <p class="lead">Projekt, przedmiar i STWiORB bywają sprzeczne. Różnicę płaci wykonawca, chyba że zauważy ją pierwszy.</p>
-  </div></section>
+  <section class="h">
+    <div class="k">
+      <p class="kolofon"><span>AUDYT PZP / NORMA / IFC / CAD</span><span>ŁÓDŹ</span></p>
+      <h1>Ochrona marży<br>wykonawcy<i>.</i></h1>
+      <p class="lead">Projekt, przedmiar i STWiORB bywają sprzeczne. Różnicę płaci wykonawca, chyba że zauważy ją pierwszy.</p>
+    </div>
+  </section>
 
-  <section class="s" id="a"><div class="k"><h2>Procedury bazowe.</h2>
-    <ol class="rows">
-      <li><b>P-01</b><span>Odtworzenie przedmiaru ze skanów PDF i rysunków CAD do edytowalnego formatu Norma, Zuzia, Rodos. Pełna struktura KNR/KNNR.</span></li>
-      <li><b>P-02</b><span>Czysty arkusz pod zapytania do hurtowni: metry kabli per przekrój, rurociągi per DN, tonaż stali, kubatura betonu.</span></li>
-      <li><b>P-03</b><span>Zderzenie geometrii z opisami, badaniami geologicznymi i STWiORB. Identyfikacja nieujętych prac i zaniżonych obmiarów.</span></li>
-      <li><b>P-04</b><span>Naprawa geometrii modeli i weryfikacja przejść instalacji przez ustrój nośny przed zbrojeniem i szalowaniem.</span></li>
-    </ol></div></section>
+  <section class="s" id="procedury">
+    <div class="k">
+      <header class="sg">
+        <h2>Procedury bazowe.</h2>
+        <span class="mn">P-01 — P-04</span>
+      </header>
+      <ol class="rows">
+        <li><b>P-01</b><span>Odtworzenie przedmiaru ze skanów PDF i rysunków CAD do edytowalnego formatu Norma, Zuzia, Rodos. Pełna struktura KNR/KNNR.</span></li>
+        <li><b>P-02</b><span>Czysty arkusz pod zapytania do hurtowni: metry kabli per przekrój, rurociągi per DN, tonaż stali, kubatura betonu.</span></li>
+        <li><b>P-03</b><span>Zderzenie geometrii z opisami, badaniami geologicznymi i STWiORB. Identyfikacja nieujętych prac i zaniżonych obmiarów.</span></li>
+        <li><b>P-04</b><span>Naprawa geometrii modeli i weryfikacja przejść instalacji przez ustrój nośny przed zbrojeniem i szalowaniem.</span></li>
+      </ol>
+    </div>
+  </section>
 
-  <section class="s" id="b"><div class="k"><h2>Procedury wspierające.</h2>
-    <ol class="rows">
-      <li><b>P-05</b><span>Weryfikacja podpisów cyfrowych, szyfrowanie ofert i składanie pakietów na platformach przetargowych.</span></li>
-      <li><b>P-06</b><span>Kalkulacja różnicowa zamienników pod kątem Value Engineering oraz ochrony marży ryczałtowej.</span></li>
-      <li><b>P-07</b><span>Czyszczenie geometrii, usuwanie zdublowanych wektorów, naprawa skali, izolacja warstw branżowych.</span></li>
-    </ol></div></section>
+  <section class="s" id="wsparcie">
+    <div class="k">
+      <header class="sg">
+        <h2>Procedury wspierające.</h2>
+        <span class="mn">P-05 — P-07</span>
+      </header>
+      <ol class="rows">
+        <li><b>P-05</b><span>Weryfikacja podpisów cyfrowych, szyfrowanie ofert i składanie pakietów na platformach przetargowych.</span></li>
+        <li><b>P-06</b><span>Kalkulacja różnicowa zamienników pod kątem Value Engineering oraz ochrony marży ryczałtowej.</span></li>
+        <li><b>P-07</b><span>Czyszczenie geometrii, usuwanie zdublowanych wektorów, naprawa skali, izolacja warstw branżowych.</span></li>
+      </ol>
+    </div>
+  </section>
 
-  <section class="s" id="c"><div class="k"><h2>Standard i warunki.</h2>
-    <ol class="rows">
-      <li><b>C-01</b><span>Kalkulacja ryczałtowa ustalana przed przystąpieniem do prac, na podstawie parametrów dokumentacji.</span></li>
-      <li><b>C-02</b><span>Odbiór w 5 dniach roboczych, w ramach wynagrodzenia przysługuje 1 runda korekt.</span></li>
-      <li><b>C-03</b><span>Poufność na życzenie: odrębna umowa NDA przed udostępnieniem dokumentacji.</span></li>
-    </ol></div></section>
+  <section class="s" id="standard">
+    <div class="k">
+      <header class="sg">
+        <h2>Standard i warunki.</h2>
+        <span class="mn">Zasady współpracy</span>
+      </header>
+      <ol class="rows">
+        <li><b>C-01</b><span>Kalkulacja ryczałtowa ustalana przed przystąpieniem do prac, na podstawie parametrów dokumentacji.</span></li>
+        <li><b>C-02</b><span>Odbiór w 5 dniach roboczych, w ramach wynagrodzenia przysługuje 1 runda korekt.</span></li>
+        <li><b>C-03</b><span>Poufność na życzenie: odrębna umowa NDA przed udostępnieniem dokumentacji.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="s" id="kontakt">
+    <div class="k">
+      <header class="sg">
+        <h2>Kontakt i wycena.</h2>
+        <span class="mn">Termin odpowiedzi: 3h</span>
+      </header>
+      <div class="t">
+        <p class="lead" style="margin-top:0;">Prześlij dokumentację SWZ, skany PDF lub pliki CAD/IFC do bezpłatnej wyceny zakresu prac.</p>
+        <p style="margin-top: 24px; font: 700 1.25rem var(--mono);">
+          <a href="mailto:kontakt@viewis.pl">kontakt@viewis.pl</a> · <a href="tel:+48519133055">+48 519 133 055</a>
+        </p>
+      </div>
+    </div>
+  </section>
 </main>
 
-<footer><div class="k">ViewIs · kontakt@viewis.pl</div></footer>
+<footer class="st">
+  <div class="k">
+    <span>ViewIs · Maciej Wielgosz</span>
+    <span><a href="mailto:kontakt@viewis.pl">kontakt@viewis.pl</a> · <a href="tel:+48519133055">+48 519 133 055</a> · www.viewis.pl</span>
+  </div>
+</footer>
 
-<script>
-/* =====================================================================
-   2. SOCZEWKA: WKLEJ DO SWOJEGO <script> (nie wymaga zmian w HTML)
-   Model: źródłowy y_src = F(y). F jest odcinkowo liniowa, więc belkę dzielimy
-   na 5 pasków (faza, ramię, środek, ramię, faza). W każdym pasku leży lustrzana
-   kopia <main> przeskalowana w osi Y o M = 1/F'. Tekst jest przerysowywany
-   wektorowo (nie skalowany bitmapą), więc krawędzie zostają ostre.
-   ===================================================================== */
-(function(){
-  var hd=document.querySelector('.g'), src=document.querySelector('main');
-  if(!hd||!src||!window.ResizeObserver) return;          // brak wsparcia → zostaje pełne krycie
-
-  var stage=document.createElement('div'), strips=[], docTop=0, raf=0, timer=0;
-  stage.className='lens';
-  stage.setAttribute('aria-hidden','true');
-  hd.insertBefore(stage,hd.firstChild);
-
-  function num(n){ return parseFloat(getComputedStyle(hd).getPropertyValue(n)); }
-
-  /* Profil: 5 stref od góry. F(y) to współrzędna źródła (w px viewportu) dla wysokości y belki. */
-  function profile(H){
-    var Mc=num('--lens-mag')||1.3,
-        Ms=Mc*(1+(num('--lens-barrel')||0)),
-        B=Math.round(num('--lens-bevel')||0),
-        S=Math.round(num('--lens-shoulder')||0),
-        C=Math.max(0,H-2*(B+S)),
-        Mb=num('--lens-bevel-mag'),
-        rest=H/2-S/Ms-C/2/Mc;
-    if(!Mb) Mb=(B&&rest>0)?B/rest:1;                      // auto: F(0)=0 i F(H)=H, brak skoku na krawędziach
-    var F=H/2-(B/Mb+S/Ms+C/2/Mc), y=0, M=[Mb,Ms,Mc,Ms,Mb];  // symetria: F(H/2)=H/2
-    return [B,S,C,S,B].map(function(h,i){
-      var z={y:y,h:h,M:M[i],F:F}; y+=h; F+=h/M[i]; return z;
-    }).filter(function(z){return z.h>0;});
-  }
-
-  function build(){
-    var H=hd.clientHeight, r=src.getBoundingClientRect();
-    docTop=r.top+window.scrollY;                          // Y początku <main> w dokumencie
-    stage.textContent='';
-    strips=profile(H).map(function(p){
-      var s=document.createElement('div'), m=document.createElement('div'), c=src.cloneNode(true);
-      c.removeAttribute('id');
-      c.querySelectorAll('[id],[name]').forEach(function(n){n.removeAttribute('id');n.removeAttribute('name');});
-      var a=src.querySelectorAll('input,textarea,select'), z=c.querySelectorAll('input,textarea,select');
-      a.forEach(function(n,i){z[i].value=n.value;});      // wartości pól nie kopiują się z cloneNode
-      s.className='lens__s'; s.style.cssText='top:'+p.y+'px;height:'+p.h+'px';
-      m.className='lens__m'; m.style.cssText='left:'+r.left+'px;width:'+r.width+'px';
-      m.inert=true;
-      m.appendChild(c); s.appendChild(m); stage.appendChild(s);
-      return {m:m,p:p};
-    });
-    paint();
-  }
-
-  /* y' = M·(c − c0), c0 = scroll − docTop + F0  →  translateY(−M·c0) scaleY(M) */
-  function paint(){
-    var s=window.scrollY-docTop;
-    strips.forEach(function(e){
-      e.m.style.transform='translate3d(0,'+(-e.p.M*(s+e.p.F)).toFixed(2)+'px,0) scaleY('+e.p.M+')';
-    });
-  }
-
-  function later(){ clearTimeout(timer); timer=setTimeout(build,120); }
-
-  addEventListener('scroll',function(){
-    if(!raf) raf=requestAnimationFrame(function(){raf=0;paint();});
-  },{passive:true});
-  new ResizeObserver(later).observe(src);
-  new ResizeObserver(later).observe(hd);
-  new MutationObserver(later).observe(src,{childList:true,subtree:true,characterData:true});
-  src.addEventListener('input',later);
-  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(later);
-
-  window.ViewIsLens={rebuild:build};                      // ręczne odświeżenie po zmianach DOM
-  build();
-})();
-</script>
+<script src="{% static 'js/lens.js' %}"></script>
 </body>
 </html>
