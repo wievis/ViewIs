@@ -17,10 +17,11 @@
   <div class="k">
     <a class="logo" href="#gora">ViewIs<i>.</i></a>
     <nav aria-label="Nawigacja">
-        <a href="/#procedury">A Procedury</a>
-        <a href="/#wsparcie">B Wsparcie</a>
-        <a href="/#standard">C Standard</a>
-      </nav>
+      <a href="#procedury">A Procedury</a>
+      <a href="#wsparcie">B Wsparcie</a>
+      <a href="#standard">C Standard</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
   </div>
 </header>
 
@@ -85,34 +86,39 @@
 
       <form id="contactForm" class="f2" method="post" action="/kontakt/">
         {% csrf_token %}
-        <div>
+
+        <div class="f2-pole">
           <label for="email">Adres e-mail firmowy *</label>
-          <input type="email" id="email" name="email" required placeholder="np. inzynier@firma.pl">
+          <input type="email" id="email" name="email" required placeholder="np. inzynier@generalny.pl">
         </div>
 
-        <div>
+        <div class="f2-pole">
           <label for="phone">Telefon kontaktowy</label>
           <input type="tel" id="phone" name="phone" placeholder="+48 000 000 000">
         </div>
 
-        <div>
+        <div class="f2-pole">
           <label for="tender_deadline">Termin składania ofert (PZP)</label>
           <input type="text" id="tender_deadline" name="tender_deadline" placeholder="np. 2026-12-05, godz. 10:00">
         </div>
 
-        <div>
-          <label for="files_link">Link do dokumentacji / SWZ (opcjonalnie)</label>
-          <input type="url" id="files_link" name="files_link" placeholder="Link do chmury, przetargu lub dysku">
+        <div class="f2-pole">
+          <label for="files_link">Link do dokumentacji / SWZ (chmura, przetarg)</label>
+          <input type="url" id="files_link" name="files_link" placeholder="https://...">
         </div>
 
-        <div>
-          <label for="file_direct">Lub dołącz plik bezpośrednio (PDF, DWG, ZIP)</label>
-          <input type="file" id="file_direct" style="margin-top:12px;">
+        <div class="f2-pole">
+          <label>Lub dołącz plik bezpośrednio (PDF, DWG, ZIP)</label>
+          <div class="f2-file">
+            <input type="file" id="file_direct">
+            <span class="f2-file-name" id="fileNameLabel">Wybierz plik z dysku lub przeciągnij...</span>
+            <span class="f2-file-btn">Przeglądaj</span>
+          </div>
           <input type="hidden" id="uploaded_file_url" name="uploaded_file_url">
-          <p id="upload_status" class="mn" style="margin-top:8px; display:none;"></p>
+          <p id="upload_status" class="mn" style="margin-top: 8px; color: var(--cegla); display: none;"></p>
         </div>
 
-        <div>
+        <div class="f2-pole">
           <label for="message">Zakres zapytania / uwagi techniczne</label>
           <textarea id="message" name="message" placeholder="Podaj branżę, format danych wyjściowych lub wklej bezpośredni numer postępowania..."></textarea>
         </div>
@@ -137,6 +143,7 @@
 <script>
 document.addEventListener('DOMContentLoaded', function () {
   const fileInput = document.getElementById('file_direct');
+  const fileNameLabel = document.getElementById('fileNameLabel');
   const uploadStatus = document.getElementById('upload_status');
   const hiddenUrlInput = document.getElementById('uploaded_file_url');
   const form = document.getElementById('contactForm');
@@ -144,8 +151,12 @@ document.addEventListener('DOMContentLoaded', function () {
   const formMsg = document.getElementById('formMsg');
 
   fileInput.addEventListener('change', async function () {
-    if (!fileInput.files.length) return;
+    if (!fileInput.files.length) {
+      fileNameLabel.textContent = 'Wybierz plik z dysku lub przeciągnij...';
+      return;
+    }
     const file = fileInput.files[0];
+    fileNameLabel.textContent = file.name;
     uploadStatus.style.display = 'block';
     uploadStatus.textContent = 'Generowanie adresu przesyłania...';
 
@@ -170,7 +181,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (!uploadRes.ok) throw new Error('Błąd zapisu w magazynie R2');
 
       hiddenUrlInput.value = data.file_url;
-      uploadStatus.textContent = 'Plik dołączony pomyślnie: ' + file.name;
+      uploadStatus.textContent = 'Plik dołączony pomyślnie.';
     } catch (err) {
       uploadStatus.textContent = 'Błąd przesyłania: ' + err.message;
     }
@@ -192,6 +203,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (data.status === 'ok') {
         formMsg.textContent = data.message;
         form.reset();
+        fileNameLabel.textContent = 'Wybierz plik z dysku lub przeciągnij...';
         uploadStatus.style.display = 'none';
       } else {
         formMsg.textContent = data.message || 'Wystąpił błąd.';
