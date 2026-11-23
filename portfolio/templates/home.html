@@ -108,77 +108,81 @@ footer{padding:32px 0;border-top:2px solid var(--l2);font:500 .75rem var(--mono)
 <footer><div class="k">ViewIs · kontakt@viewis.pl</div></footer>
 
 <script>
-    (function(){
-      if(window.innerWidth<=900) return;
-      var hd=document.querySelector('.g'), src=document.querySelector('main');
-      if(!hd||!src||!window.ResizeObserver) return;
-    
-      var stage=document.createElement('div'), strips=[], docTop=0, raf=0, timer=0;
-      stage.className='lens';
-      stage.setAttribute('aria-hidden','true');
-      hd.insertBefore(stage,hd.firstChild);
-    
-      function num(n){ return parseFloat(getComputedStyle(hd).getPropertyValue(n)); }
-    
-      function profile(H){
-        var Mc=num('--lens-mag')||1.3,
-            Ms=Mc*(1+(num('--lens-barrel')||0)),
-            B=Math.round(num('--lens-bevel')||0),
-            S=Math.round(num('--lens-shoulder')||0),
-            C=Math.max(0,H-2*(B+S)),
-            Mb=num('--lens-bevel-mag'),
-            rest=H/2-S/Ms-C/2/Mc;
-        if(!Mb) Mb=(B&&rest>0)?B/rest:1;
-        var F=H/2-(B/Mb+S/Ms+C/2/Mc), y=0, M=[Mb,Ms,Mc,Ms,Mb];
-        return [B,S,C,S,B].map(function(h,i){
-          var z={y:y,h:h,M:M[i],F:F}; y+=h; F+=h/M[i]; return z;
-        }).filter(function(z){return z.h>0;});
-      }
-    
-      function build(){
-        if(window.innerWidth<=900){ stage.textContent=''; return; }
-        var H=hd.clientHeight, r=src.getBoundingClientRect();
-        docTop=r.top+window.scrollY;
-        stage.textContent='';
-        strips=profile(H).map(function(p){
-          var s=document.createElement('div'), m=document.createElement('div'), c=src.cloneNode(true);
-          c.removeAttribute('id');
-          c.querySelectorAll('[id],[name]').forEach(function(n){n.removeAttribute('id');n.removeAttribute('name');});
-          var a=src.querySelectorAll('input,textarea,select'), z=c.querySelectorAll('input,textarea,select');
-          a.forEach(function(n,i){z[i].value=n.value;});
-          s.className='lens__s'; s.style.cssText='top:'+p.y+'px;height:'+p.h+'px';
-          m.className='lens__m'; m.style.cssText='left:'+r.left+'px;width:'+r.width+'px';
-          m.inert=true;
-          m.appendChild(c); s.appendChild(m); stage.appendChild(s);
-          return {m:m,p:p};
-        });
-        paint();
-      }
-    
-      function paint(){
-        var s=window.scrollY-docTop;
-        strips.forEach(function(e){
-          e.m.style.transform='translate3d(0,'+(-e.p.M*(s+e.p.F)).toFixed(2)+'px,0) scaleY('+e.p.M+')';
-        });
-      }
-    
-      function later(){ clearTimeout(timer); timer=setTimeout(build,120); }
-    
-      addEventListener('scroll',function(){
-        if(!raf) raf=requestAnimationFrame(function(){raf=0;paint();});
-      },{passive:true});
-      addEventListener('resize',function(){
-        if(window.innerWidth<=900){ stage.textContent=''; } else if(!stage.firstChild){ build(); } else { later(); }
-      });
-      new ResizeObserver(later).observe(src);
-      new ResizeObserver(later).observe(hd);
-      new MutationObserver(later).observe(src,{childList:true,subtree:true,characterData:true});
-      src.addEventListener('input',later);
-      if(document.fonts&&document.fonts.ready) document.fonts.ready.then(later);
-    
-      window.ViewIsLens={rebuild:build};
-      build();
-    })();
-    </script>
+/* =====================================================================
+   2. SOCZEWKA: WKLEJ DO SWOJEGO <script> (nie wymaga zmian w HTML)
+   Model: źródłowy y_src = F(y). F jest odcinkowo liniowa, więc belkę dzielimy
+   na 5 pasków (faza, ramię, środek, ramię, faza). W każdym pasku leży lustrzana
+   kopia <main> przeskalowana w osi Y o M = 1/F'. Tekst jest przerysowywany
+   wektorowo (nie skalowany bitmapą), więc krawędzie zostają ostre.
+   ===================================================================== */
+(function(){
+  var hd=document.querySelector('.g'), src=document.querySelector('main');
+  if(!hd||!src||!window.ResizeObserver) return;          // brak wsparcia → zostaje pełne krycie
+
+  var stage=document.createElement('div'), strips=[], docTop=0, raf=0, timer=0;
+  stage.className='lens';
+  stage.setAttribute('aria-hidden','true');
+  hd.insertBefore(stage,hd.firstChild);
+
+  function num(n){ return parseFloat(getComputedStyle(hd).getPropertyValue(n)); }
+
+  /* Profil: 5 stref od góry. F(y) to współrzędna źródła (w px viewportu) dla wysokości y belki. */
+  function profile(H){
+    var Mc=num('--lens-mag')||1.3,
+        Ms=Mc*(1+(num('--lens-barrel')||0)),
+        B=Math.round(num('--lens-bevel')||0),
+        S=Math.round(num('--lens-shoulder')||0),
+        C=Math.max(0,H-2*(B+S)),
+        Mb=num('--lens-bevel-mag'),
+        rest=H/2-S/Ms-C/2/Mc;
+    if(!Mb) Mb=(B&&rest>0)?B/rest:1;                      // auto: F(0)=0 i F(H)=H, brak skoku na krawędziach
+    var F=H/2-(B/Mb+S/Ms+C/2/Mc), y=0, M=[Mb,Ms,Mc,Ms,Mb];  // symetria: F(H/2)=H/2
+    return [B,S,C,S,B].map(function(h,i){
+      var z={y:y,h:h,M:M[i],F:F}; y+=h; F+=h/M[i]; return z;
+    }).filter(function(z){return z.h>0;});
+  }
+
+  function build(){
+    var H=hd.clientHeight, r=src.getBoundingClientRect();
+    docTop=r.top+window.scrollY;                          // Y początku <main> w dokumencie
+    stage.textContent='';
+    strips=profile(H).map(function(p){
+      var s=document.createElement('div'), m=document.createElement('div'), c=src.cloneNode(true);
+      c.removeAttribute('id');
+      c.querySelectorAll('[id],[name]').forEach(function(n){n.removeAttribute('id');n.removeAttribute('name');});
+      var a=src.querySelectorAll('input,textarea,select'), z=c.querySelectorAll('input,textarea,select');
+      a.forEach(function(n,i){z[i].value=n.value;});      // wartości pól nie kopiują się z cloneNode
+      s.className='lens__s'; s.style.cssText='top:'+p.y+'px;height:'+p.h+'px';
+      m.className='lens__m'; m.style.cssText='left:'+r.left+'px;width:'+r.width+'px';
+      m.inert=true;
+      m.appendChild(c); s.appendChild(m); stage.appendChild(s);
+      return {m:m,p:p};
+    });
+    paint();
+  }
+
+  /* y' = M·(c − c0), c0 = scroll − docTop + F0  →  translateY(−M·c0) scaleY(M) */
+  function paint(){
+    var s=window.scrollY-docTop;
+    strips.forEach(function(e){
+      e.m.style.transform='translate3d(0,'+(-e.p.M*(s+e.p.F)).toFixed(2)+'px,0) scaleY('+e.p.M+')';
+    });
+  }
+
+  function later(){ clearTimeout(timer); timer=setTimeout(build,120); }
+
+  addEventListener('scroll',function(){
+    if(!raf) raf=requestAnimationFrame(function(){raf=0;paint();});
+  },{passive:true});
+  new ResizeObserver(later).observe(src);
+  new ResizeObserver(later).observe(hd);
+  new MutationObserver(later).observe(src,{childList:true,subtree:true,characterData:true});
+  src.addEventListener('input',later);
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(later);
+
+  window.ViewIsLens={rebuild:build};                      // ręczne odświeżenie po zmianach DOM
+  build();
+})();
+</script>
 </body>
 </html>
