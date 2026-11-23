@@ -2,105 +2,61 @@
 <html lang="pl">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>404 — Błąd adresu | ViewIs</title>
-<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f6f2">
+<title>404 · Nie znaleziono strony · ViewIs</title>
+<meta name="robots" content="noindex, follow">
 <link rel="icon" type="image/x-icon" href="{% static 'image/viewis_logo.ico' %}">
 <link rel="stylesheet" href="{% static 'css/main.css' %}">
 <style>
-.error-view {
-  min-height: calc(100vh - 180px);
+.page-404 {
+  min-height: calc(100vh - 120px);
   display: flex;
-  align-items: center;
-  padding: 80px 0;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px 0 80px 0;
 }
-.error-grid {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 48px;
-  align-items: baseline;
+.page-404 .lead {
+  max-width: 52ch;
+  margin-top: 24px;
 }
-.error-code {
-  font-family: var(--font-mono, monospace);
-  font-size: clamp(4rem, 10vw, 7.5rem);
-  font-weight: 700;
-  line-height: 0.9;
-  letter-spacing: -0.04em;
-  color: var(--brick, #c2410c);
-  border-right: 1px solid var(--line, #e2e8f0);
-  padding-right: 48px;
-  user-select: none;
-}
-.error-meta {
-  font-family: var(--font-mono, monospace);
-  font-size: 0.75rem;
+.page-404 .kod-statusu {
+  font-family: var(--mono, "JetBrains Mono", monospace);
+  font-size: 0.8rem;
   letter-spacing: 0.08em;
-  text-transform: uppercase;
   color: var(--muted, #64748b);
-  margin-bottom: 8px;
+  margin-top: 36px;
 }
-.error-title {
-  margin: 0 0 16px 0;
-  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
-  letter-spacing: -0.02em;
-  line-height: 1.15;
-}
-.error-desc {
-  max-width: 540px;
-  margin: 0 0 32px 0;
-  line-height: 1.6;
-  color: var(--text-muted, #475569);
-}
-.error-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-@media (max-width: 768px) {
-  .error-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-  .error-code {
-    border-right: none;
-    border-bottom: 1px solid var(--line, #e2e8f0);
-    padding-right: 0;
-    padding-bottom: 20px;
-  }
+.dot-orange {
+  color: #c2410c;
 }
 </style>
 </head>
 <body>
 <header class="top">
 <div class="wrap">
-<a class="logo" href="/">Vie<span class="logo-w">w</span>Is<span class="dot">.</span></a>
-<nav class="nav" aria-label="Główna">
-<a class="btn btn--line" href="/">Strona główna</a>
+<a class="logo" href="/">ViewIs<span class="dot-orange">.</span></a>
+<nav class="nav" aria-label="Nawigacja">
+<a href="/#procedury">A Procedury</a>
+<a href="/#wsparcie">B Wsparcie</a>
+<a href="/#standard">C Standard</a>
 </nav>
 </div>
 </header>
+
 <main>
-<section class="error-view">
+<section class="page-404">
 <div class="wrap">
-<div class="error-grid">
-<div class="error-code">404</div>
-<div class="error-content">
-<p class="error-meta">STATUS_NOT_FOUND // BŁĄD TRASY</p>
-<h1 class="error-title">Nie znaleziono żądanego adresu<span class="dot">.</span></h1>
-<p class="error-desc">Wskazany zasób nie istnieje, został przeniesiony pod inną ścieżkę lub wprowadzony adres URL zawiera błąd struktury.</p>
-<div class="error-actions">
-<a class="btn" href="/">Powrót do strony głównej</a>
-<a class="btn btn--line" href="/#kontakt">Kontakt bezpośredni</a>
-</div>
-</div>
-</div>
+<h1>Nie znaleziono<br>strony<span class="dot-orange">.</span></h1>
+<p class="lead">Wskazany adres nie istnieje, został zarchiwizowany lub przeniesiony pod inną ścieżkę dokumentacji.</p>
+<p class="kod-statusu">STATUS_404 // BŁĄD TRASY ZASOBU</p>
 </div>
 </section>
 </main>
+
 <footer class="foot">
 <div class="wrap">
-<span><span class="marka">Vie<span class="logo-w">w</span>Is</span> Maciej Wielgosz</span>
-<span><a href="mailto:kontakt@viewis.pl">kontakt@viewis.pl</a>, <a href="tel:+48519133055">+48 519 133 055</a></span>
+<span class="foot-text">ViewIs · kontakt@viewis.pl</span>
 </div>
 </footer>
 </body>

@@ -8,6 +8,7 @@ handler404 = 'portfolio.views.custom_404'
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
+    path('ows/', views.ows, name='ows'),
     path('kontakt/', views.kontakt, name='kontakt'),
     path('upload-url/', views.get_upload_url, name='get_upload_url'),
     re_path(
