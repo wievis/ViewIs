@@ -17,9 +17,6 @@ def home(request):
 def custom_404(request, exception=None):
     return render(request, '404.html', status=404)
 
-def ows(request):
-    return render(request, 'ows.html')
-
 def get_upload_url(request):
     if request.method != 'POST':
         return JsonResponse({'status': 'error', 'message': 'Niedozwolona metoda'}, status=405)
