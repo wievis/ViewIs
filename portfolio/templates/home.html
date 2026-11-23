@@ -17,8 +17,8 @@
 <div class="k">
 <a class="logo" href="#gora">ViewIs<i>.</i></a>
 <nav aria-label="Sekcje">
-<a href="#procedury">A Procedury</a>
-<a href="#kontrola">B Kontrola</a>
+<a href="#procedury">A Procedury bazowe</a>
+<a href="#wspierajace">B Procedury wspierające</a>
 <a href="#standard">C Standard</a>
 <a href="#wycena">D Wycena</a>
 </nav>
@@ -28,56 +28,63 @@
 <main id="gora">
 <section class="h">
 <div class="k">
-<p class="kolofon"><span>PZP / KNR / KNNR / STWiORB</span><span>.ath / .xlsx / IFC / WebGL</span></p>
+<p class="kolofon"><span>PZP / KNR / KNNR / STWiORB</span><span>.ath / .xlsx / IFC / WebGL / DWG / PDF</span></p>
 <h1>Ochrona marży<br>wykonawcy<i>.</i></h1>
 <p class="lead">Projekt, przedmiar i STWiORB bywają sprzeczne. Różnicę płaci wykonawca — chyba że zauważy ją pierwszy.</p>
 <ul class="m">
-<li><b>P-01–04</b><span>Kody procedur operacyjnych</span></li>
-<li><b>.ath .xlsx IFC</b><span>Formaty danych wejściowych i wynikowych</span></li>
-<li><b>3 dni</b><span>robocze na odbiór, 1 runda korekt</span></li>
-<li><b>NDA</b><span>Poufność na życzenie</span></li>
+<li><b>P-01–07</b><span>Kody procedur operacyjnych</span></li>
+<li><b>Baza danych</b><span>Formaty CAD, BIM, Norma, Excel</span></li>
+<li><b>5 dni</b><span>Roboczych na odbiór danych, 1 runda korekt</span></li>
+<li><b>B2B &amp; NDA</b><span>Rozliczenie fakturą, poufność na życzenie</span></li>
 </ul>
 </div>
 </section>
 
 <section class="s" id="procedury">
 <div class="k">
-<header class="sg"><h2>Procedury operacyjne.</h2><span class="mn">Sekcja A / P-01–P-04</span></header>
+<header class="sg"><h2>Procedury bazowe.</h2><span class="mn">Sekcja A / P-01–P-04</span></header>
 <div class="t a">
 <div class="th" aria-hidden="true"><span>Kod</span><span>Tytuł</span><span>Zakres inżynierski</span><span>Pliki wejściowe / wynikowe</span><span>Podstawa kalkulacji</span></div>
 <ol>
 <li class="r"><b class="c">P-01</b><h3>Baza .ath &amp; PZP</h3>
-<p data-l="Zakres">Odtworzenie przedmiaru ze skanów PDF i CAD do edytowalnego formatu Norma Standard / PRO, Zuzia, Rodos. Pełna hierarchia KNR/KNNR. Weryfikacja brakujących pozycji w ślepym przedmiarze. Pliki ofertowe pod e-Zamówienia, platformazakupowa.pl, miniPortal.</p>
+<p data-l="Zakres">Odtworzenie przedmiaru ze skanów PDF i rysunków CAD do edytowalnego formatu Norma Standard / PRO, Zuzia, Rodos. Pełna struktura KNR/KNNR. Weryfikacja pozycji brakujących w ślepym przedmiarze inwestora.</p>
 <p class="f" data-l="Pliki">Wejście: PDF, skany, DWG<br>Wynik: .ath</p>
-<p class="f" data-l="Podstawa">Z pozycji przedmiaru</p></li>
+<p class="f" data-l="Podstawa">Liczba pozycji przedmiaru</p></li>
 <li class="r"><b class="c">P-02</b><h3>Zestawienia ZMO</h3>
-<p data-l="Zakres">Kable Cu/Al per przekrój, rurociągi per DN, armatura, tonaż stali zbrojeniowej, kubatura betonu. Arkusz pod zapytania do dostawców i hurtowni.</p>
+<p data-l="Zakres">Czysty arkusz kalkulacyjny pod zapytania do dostawców i hurtowni: metry kabli Cu/Al per przekrój, rurociągi per DN, armatura, tonaż stali zbrojeniowej, kubatura betonu.</p>
 <p class="f" data-l="Pliki">Wejście: DWG, DXF, PDF, IFC<br>Wynik: .xlsx</p>
-<p class="f" data-l="Podstawa">Z powierzchni / arkuszy</p></li>
+<p class="f" data-l="Podstawa">Powierzchnia m² / arkusze DWG</p></li>
 <li class="r"><b class="c">P-03</b><h3>Audyt SWZ &amp; Rewizji</h3>
-<p data-l="Zakres">Zderzenie geometrii z opisami, badaniami i STWiORB. Wykaz prac nieujętych, prób technologicznych, zaniżonych obmiarów. Podstawa pod pytania do SWZ lub aneks.</p>
-<p class="f" data-l="Pliki">Wejście: projekt, przedmiar, STWiORB<br>Wynik: wykaz rozbieżności</p>
-<p class="f" data-l="Podstawa">Ze stron / modułów SST</p></li>
+<p data-l="Zakres">Zderzenie geometrii z opisami, badaniami geologicznymi i STWiORB. Identyfikacja nieujętych prac, ukrytych prób technologicznych, zaniżonych obmiarów. Podstawa pod pytania do SWZ lub aneks.</p>
+<p class="f" data-l="Pliki">Wejście: projekt, przedmiar, STWiORB<br>Wynik: wykaz rozbieżności (.xlsx / .pdf)</p>
+<p class="f" data-l="Podstawa">Strony STWiORB / moduły SST</p></li>
 <li class="r"><b class="c">P-04</b><h3>Koordynacja 3D &amp; WebGL</h3>
-<p data-l="Zakres">Naprawa geometrii modeli. Weryfikacja przejść instalacji przez ustrój nośny przed zbrojeniem i szalowaniem.</p>
-<p class="f" data-l="Pliki">Wejście: CAD 2D, IFC wielobranżowe<br>Wynik: raport kolizji, model WebGL w linku</p>
-<p class="f" data-l="Podstawa">Z kubatury</p></li>
+<p data-l="Zakres">Naprawa geometrii modeli. Weryfikacja przejść instalacji przez ustrój nośny przed zbrojeniem i szalowaniem. Raport bezkolizyjnych tras wraz z interaktywnym podglądem 3D w linku.</p>
+<p class="f" data-l="Pliki">Wejście: CAD 2D, IFC wielobranżowe<br>Wynik: raport kolizji, model WebGL</p>
+<p class="f" data-l="Podstawa">Kubatura m³</p></li>
 </ol>
 </div>
 </div>
 </section>
 
-<section class="s" id="kontrola">
+<section class="s" id="wspierajace">
 <div class="k">
-<header class="sg"><h2>Zderzenia i kontrola danych.</h2><span class="mn">Sekcja B</span></header>
-<div class="t b">
-<div class="th" aria-hidden="true"><span>Zderzane dokumenty</span><span>Punkt kontroli</span><span>Dokument wynikowy</span></div>
+<header class="sg"><h2>Procedury wspierające.</h2><span class="mn">Sekcja B / P-05–P-07</span></header>
+<div class="t a">
+<div class="th" aria-hidden="true"><span>Kod</span><span>Tytuł</span><span>Zakres inżynierski</span><span>Platformy / Narzędzia</span><span>Podstawa kalkulacji</span></div>
 <ol>
-<li class="r"><h3>Rysunki konstrukcyjne ↔ STWiORB ↔ Przedmiar</h3><p data-l="Punkt kontroli">Klasy wytrzymałości i ekspozycji betonu (np. C30/37 w rysunkach, C25/30 w opisie, XF1 w STWiORB).</p><p class="f" data-l="Wynik">Wykaz rozbieżności klas ekspozycji betonu</p></li>
-<li class="r"><h3>Zestawienie stali ↔ Przedmiar</h3><p data-l="Punkt kontroli">Tonaż per średnica, zakłady, pręty montażowe, kozły.</p><p class="f" data-l="Wynik">Bilans stali zbrojeniowej per średnica (.xlsx)</p></li>
-<li class="r"><h3>Rysunki instalacyjne ↔ Przedmiar</h3><p data-l="Punkt kontroli">Długości koryt kablowych per szerokość, kable per przekrój, rurociągi per DN, osprzęt.</p><p class="f" data-l="Wynik">Zestawienie ZMO (.xlsx)</p></li>
-<li class="r"><h3>STWiORB ↔ Przedmiar</h3><p data-l="Punkt kontroli">Próby szczelności, płukanie, pomiary i regulacja TAB bez pozycji w KNR.</p><p class="f" data-l="Wynik">Wykaz wymagań bez pokrycia w pozycjach</p></li>
-<li class="r"><h3>Model instalacji ↔ Ustrój nośny</h3><p data-l="Punkt kontroli">Przejścia przez stropy, ściany i stropodach przed szalowaniem.</p><p class="f" data-l="Wynik">Raport kolizji, bezkolizyjne trasy instalacji, model WebGL</p></li>
+<li class="r"><b class="c">P-05</b><h3>Obsługa platform PZP</h3>
+<p data-l="Zakres">Weryfikacja formalna podpisów cyfrowych, szyfrowanie ofert oraz składanie pakietów na platformach przetargowych. Dostępny również stały abonament miesięczny obejmujący codzienny monitoring postępowań oraz składanie ofert.</p>
+<p class="f" data-l="Platformy">e-Zamówienia, platformazakupowa.pl, miniPortal</p>
+<p class="f" data-l="Podstawa">Za złożoną ofertę lub ryczałt miesięczny</p></li>
+<li class="r"><b class="c">P-06</b><h3>Optymalizacje materiałowe</h3>
+<p data-l="Zakres">Kalkulacja różnicowa zamienników (np. miedź/aluminium, zamiana systemów rurociągów, modyfikacje prefabrykacji) pod kątem Value Engineering oraz ochrony marży ryczałtowej.</p>
+<p class="f" data-l="Platformy">KNR, cenniki hurtowe, arkusze .xlsx</p>
+<p class="f" data-l="Podstawa">Wycena indywidualna / zakres pozycji</p></li>
+<li class="r"><b class="c">P-07</b><h3>Standaryzacja DWG / CAD</h3>
+<p data-l="Zakres">Czyszczenie geometrii, usuwanie zdublowanych wektorów, naprawa skali, izolacja warstw branżowych i przygotowanie podkładów pod automatyczne obmiary z plików nieczytelnych lub uszkodzonych.</p>
+<p class="f" data-l="Platformy">AutoCAD, skrypty AutoLISP, DXF</p>
+<p class="f" data-l="Podstawa">Liczba arkuszy DWG</p></li>
 </ol>
 </div>
 </div>
@@ -85,14 +92,14 @@
 
 <section class="s" id="standard">
 <div class="k">
-<header class="sg"><h2>Standard proceduralny i rozliczenie.</h2><span class="mn">Sekcja C</span></header>
+<header class="sg"><h2>Standard proceduralny i warunki.</h2><span class="mn">Sekcja C</span></header>
 <dl class="z">
-<div><dt>Kalkulacja ryczałtowa</dt><dd>Wiążąca wycena po analizie przekazanych plików. Podstawa: pozycje, powierzchnia, kubatura lub moduły STWiORB.</dd></div>
-<div><dt>Harmonogram wg PZP</dt><dd>Termin realizacji wynika z terminu otwarcia ofert lub z kamienia milowego budowy.</dd></div>
-<div><dt>Odbiór w 3 dni robocze</dt><dd>Odbiór techniczny pakietu danych. 1 runda korekt w cenie.</dd></div>
-<div><dt>Rozliczenie 14 dni B2B</dt><dd>Przelew 14 dni od wydania pakietu danych. Faktury w KSeF.</dd></div>
-<div><dt>NDA</dt><dd>Umowa o poufności na życzenie, przed przekazaniem dokumentacji.</dd></div>
-<div><dt>Odpowiedzialność analityczna</dt><dd>Zakres analizy ogranicza się do przekazanych plików. Decyzje ofertowe i cenowe pozostają po stronie wykonawcy.</dd></div>
+<div><dt>Kalkulacja ryczałtowa</dt><dd>Wiążąca wycena ustalana przed przystąpieniem do prac na podstawie parametrów dokumentacji: liczby pozycji, powierzchni, kubatury lub stron SST. Brak bezpłatnych próbek.</dd></div>
+<div><dt>Harmonogram wg PZP</dt><dd>Termin realizacji dostosowany do terminu otwarcia ofert w postępowaniu lub do kamienia milowego na budowie.</dd></div>
+<div><dt>Odbiór w 5 dni roboczych</dt><dd>Czas na weryfikację merytoryczną przekazanych danych. W ramach wynagrodzenia ryczałtowego przysługuje 1 runda korekt.</dd></div>
+<div><dt>Warunki rozliczeń B2B</dt><dd>Przy nowych zleceniach obowiązuje płatność wstępna (proforma) przed wydaniem danych. Przy stałej współpracy przelew 14 dni na podstawie faktury w KSeF.</dd></div>
+<div><dt>Poufność informacji (NDA)</dt><dd>Pełna ochrona przekazywanych materiałów projektowych i handlowych. Na życzenie zawierana jest odrębna umowa NDA przed udostępnieniem dokumentacji.</dd></div>
+<div><dt>Odpowiedzialność analityczna</dt><dd>Wykonawca odpowiada za należytą staranność i zgodność opracowania z przekazaną dokumentacją. Łączna odpowiedzialność ograniczona jest do wartości zlecenia netto. Ostateczne decyzje cenowe i wykonawcze podejmuje Klient.</dd></div>
 </dl>
 </div>
 </section>
@@ -103,7 +110,17 @@
 <form class="f2" id="f" method="post" action="{% url 'kontakt' %}">
 {% csrf_token %}
 <div><label for="zakres">Zakres / procedura</label>
-<select id="zakres" name="services"><option value="P-01 Baza .ath &amp; PZP">P-01 Baza .ath &amp; PZP</option><option value="P-02 Zestawienia ZMO">P-02 Zestawienia ZMO</option><option value="P-03 Audyt SWZ &amp; Rewizji">P-03 Audyt SWZ &amp; Rewizji</option><option value="P-04 Koordynacja 3D &amp; WebGL">P-04 Koordynacja 3D &amp; WebGL</option><option value="Zakres łączony">Zakres łączony</option></select></div>
+<select id="zakres" name="services">
+<option value="P-01 Baza .ath &amp; PZP">P-01 Baza .ath &amp; PZP</option>
+<option value="P-02 Zestawienia ZMO">P-02 Zestawienia ZMO</option>
+<option value="P-03 Audyt SWZ &amp; Rewizji">P-03 Audyt SWZ &amp; Rewizji</option>
+<option value="P-04 Koordynacja 3D &amp; WebGL">P-04 Koordynacja 3D &amp; WebGL</option>
+<option value="P-05 Obsługa platform PZP">P-05 Obsługa platform PZP</option>
+<option value="P-06 Optymalizacje materiałowe">P-06 Optymalizacje materiałowe</option>
+<option value="P-07 Standaryzacja DWG / CAD">P-07 Standaryzacja DWG / CAD</option>
+<option value="Pakiet abonamentowy">Pakiet abonamentowy (monitoring + platformy)</option>
+<option value="Zakres łączony">Zakres łączony</option>
+</select></div>
 <div><label for="termin">Termin otwarcia ofert / kamień milowy budowy</label>
 <input type="text" id="termin" name="tender_deadline"></div>
 <div><label for="email">E-mail służbowy</label>
@@ -126,8 +143,8 @@
 </footer>
 
 <nav class="bar" aria-label="Nawigacja mobilna">
-<a href="#procedury"><b>A</b>Procedury</a>
-<a href="#kontrola"><b>B</b>Kontrola</a>
+<a href="#procedury"><b>A</b>Bazowe</a>
+<a href="#wspierajace"><b>B</b>Wsparcie</a>
 <a href="#standard"><b>C</b>Standard</a>
 <a href="#wycena"><b>D</b>Wycena</a>
 <a class="tel" href="tel:+48519133055" aria-label="Zadzwoń: +48 519 133 055"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></a>
